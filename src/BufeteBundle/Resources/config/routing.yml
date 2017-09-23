@@ -1,3 +1,35 @@
+bufete_tipocaso:
+    resource: "@BufeteBundle/Resources/config/routing/tipocaso.yml"
+    prefix:   /tipocaso
+
 bufete_homepage:
     path:     /
     defaults: { _controller: BufeteBundle:Default:index }
+
+bufete_personas:
+        resource: "@BufeteBundle/Resources/config/routing/personas.yml"
+        prefix:   /personas
+
+bufete_demandantes:
+        resource: "@BufeteBundle/Resources/config/routing/demandantes.yml"
+        prefix:   /demandantes
+
+bufete_laborales:
+        resource: "@BufeteBundle/Resources/config/routing/laborales.yml"
+        prefix:   /laborales
+
+bufete_civiles:
+        resource: "@BufeteBundle/Resources/config/routing/civiles.yml"
+        prefix:   /civiles
+
+bufete_tipoparcticante:
+        resource: "@BufeteBundle/Resources/config/routing/tipoparcticante.yml"
+        prefix:   /tipoparcticante
+
+bufete_clinicas:
+        resource: "@BufeteBundle/Resources/config/routing/clinicas.yml"
+        prefix:   /clinicas
+
+bufete_casos:
+        resource: "@BufeteBundle/Resources/config/routing/casos.yml"
+        prefix:   /casos

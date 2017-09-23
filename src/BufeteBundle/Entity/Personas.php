@@ -399,5 +399,9 @@ class Personas
     {
         return $this->idBufete;
     }
-}
 
+    public function __toString()
+    {
+        return $this->nombrePersona;
+    }
+}

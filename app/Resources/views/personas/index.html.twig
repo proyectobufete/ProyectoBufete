@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Personas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idpersona</th>
+                <th>Nombrepersona</th>
+                <th>Telefonopersona</th>
+                <th>Tel2persona</th>
+                <th>Dpipersona</th>
+                <th>Direccionpersona</th>
+                <th>Dir2persona</th>
+                <th>Emailpersona</th>
+                <th>Usuariopersona</th>
+                <th>Passpersona</th>
+                <th>Foto</th>
+                <th>Estadopersona</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona in personas %}
+            <tr>
+                <td><a href="{{ path('personas_show', { 'idPersona': persona.idPersona }) }}">{{ persona.idPersona }}</a></td>
+                <td>{{ persona.nombrePersona }}</td>
+                <td>{{ persona.telefonoPersona }}</td>
+                <td>{{ persona.tel2Persona }}</td>
+                <td>{{ persona.dpiPersona }}</td>
+                <td>{{ persona.direccionPersona }}</td>
+                <td>{{ persona.dir2Persona }}</td>
+                <td>{{ persona.emailPersona }}</td>
+                <td>{{ persona.usuarioPersona }}</td>
+                <td>{{ persona.passPersona }}</td>
+                <td>{{ persona.foto }}</td>
+                <td>{% if persona.estadoPersona %}Yes{% else %}No{% endif %}</td>
+                <td>{{ persona.role }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('personas_show', { 'idPersona': persona.idPersona }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('personas_edit', { 'idPersona': persona.idPersona }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('personas_new') }}">Create a new persona</a>
+        </li>
+    </ul>
+{% endblock %}

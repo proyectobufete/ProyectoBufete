@@ -1,0 +1,24 @@
+clinicas_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Clinicas:index" }
+    methods:  GET
+
+clinicas_show:
+    path:     /{idClinica}/show
+    defaults: { _controller: "BufeteBundle:Clinicas:show" }
+    methods:  GET
+
+clinicas_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Clinicas:new" }
+    methods:  [GET, POST]
+
+clinicas_edit:
+    path:     /{idClinica}/edit
+    defaults: { _controller: "BufeteBundle:Clinicas:edit" }
+    methods:  [GET, POST]
+
+clinicas_delete:
+    path:     /{idClinica}/delete
+    defaults: { _controller: "BufeteBundle:Clinicas:delete" }
+    methods:  DELETE

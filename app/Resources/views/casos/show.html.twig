@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Caso</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idcaso</th>
+                <td>{{ caso.idCaso }}</td>
+            </tr>
+            <tr>
+                <th>Nocaso</th>
+                <td>{{ caso.noCaso }}</td>
+            </tr>
+            <tr>
+                <th>Fechacaso</th>
+                <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Pruebascaso</th>
+                <td>{{ caso.pruebasCaso }}</td>
+            </tr>
+            <tr>
+                <th>Asignatariocaso</th>
+                <td>{{ caso.asignatarioCaso }}</td>
+            </tr>
+            <tr>
+                <th>Estadocaso</th>
+                <td>{{ caso.estadoCaso }}</td>
+            </tr>
+            <tr>
+                <th>Nombredemandado</th>
+                <td>{{ caso.nombreDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Dirdemandado</th>
+                <td>{{ caso.dirDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Dirnotificaciondemandado</th>
+                <td>{{ caso.dirnotificacionDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Telefonodemandado</th>
+                <td>{{ caso.telefonoDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Otrodemandado</th>
+                <td>{{ caso.otroDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ caso.observaciones }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('casos_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('casos_edit', { 'idCaso': caso.idCaso }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
