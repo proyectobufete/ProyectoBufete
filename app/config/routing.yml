@@ -1,0 +1,7 @@
+bufete:
+    resource: "@BufeteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

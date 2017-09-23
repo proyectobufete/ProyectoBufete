@@ -1,0 +1,26 @@
+BufeteBundle\Entity\Estadosciviles:
+    type: entity
+    table: estadosciviles
+    id:
+        idEstadocivil:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_EstadoCivil
+            generator:
+                strategy: IDENTITY
+    fields:
+        estadocivil:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+            column: EstadoCivil
+        estadoEstadocivil:
+            type: boolean
+            nullable: false
+            column: Estado_EstadoCivil
+    lifecycleCallbacks: {  }

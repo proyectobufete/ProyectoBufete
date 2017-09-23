@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ciudad" table="ciudad">
+    <indexes>
+      <index name="IX_Relationship2" columns="Id_Departamento"/>
+    </indexes>
+    <id name="idCiudad" type="integer" column="Id_Ciudad">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="postalCiudad" type="integer" column="Postal_Ciudad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ciudad" type="string" column="Ciudad" length="75" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estadoCiudad" type="boolean" column="Estado_Ciudad" nullable="false"/>
+    <many-to-one field="idDepartamento" target-entity="Departamentos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Departamento" referenced-column-name="Id_Departamento"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

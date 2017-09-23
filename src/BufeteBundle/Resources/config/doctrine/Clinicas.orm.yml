@@ -1,0 +1,71 @@
+BufeteBundle\Entity\Clinicas:
+    type: entity
+    table: clinicas
+    indexes:
+        IX_Relationship25:
+            columns:
+                - Id_Tipo
+        IX_Relationship36:
+            columns:
+                - Id_Persona
+    id:
+        idClinica:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Clinica
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombreClinica:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: nombre_clinica
+        fechaAsignacion:
+            type: date
+            nullable: false
+            column: Fecha_Asignacion
+        fechaFin:
+            type: date
+            nullable: true
+            column: Fecha_Fin
+        observaciones:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: Observaciones
+        estadoClinica:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Estado_Clinica
+    manyToOne:
+        idTipo:
+            targetEntity: Tipocaso
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Tipo:
+                    referencedColumnName: Id_Tipo
+            orphanRemoval: false
+        idPersona:
+            targetEntity: Personas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Persona:
+                    referencedColumnName: Id_Persona
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

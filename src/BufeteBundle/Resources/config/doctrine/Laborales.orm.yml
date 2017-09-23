@@ -1,0 +1,99 @@
+BufeteBundle\Entity\Laborales:
+    type: entity
+    table: laborales
+    indexes:
+        IX_Relationship9:
+            columns:
+                - Id_Trabajo
+        IX_Relationship21:
+            columns:
+                - Id_Caso
+    id:
+        idTipolaboral:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_TipoLaboral
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaInicio:
+            type: date
+            nullable: false
+            column: Fecha_Inicio
+        fechaFin:
+            type: date
+            nullable: false
+            column: Fecha_Fin
+        salario:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            column: Salario
+        vaciones:
+            type: boolean
+            nullable: false
+        indemnizacion:
+            type: boolean
+            nullable: false
+        diaseptimos:
+            type: boolean
+            nullable: false
+        bonoanual:
+            type: boolean
+            nullable: false
+        horasextra:
+            type: boolean
+            nullable: false
+        bonoincentivo:
+            type: boolean
+            nullable: false
+        diasasueto:
+            type: boolean
+            nullable: false
+        aguinaldo:
+            type: boolean
+            nullable: false
+        reajustesalarial:
+            type: boolean
+            nullable: false
+        salariosretenidos:
+            type: boolean
+            nullable: false
+        otros:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+        otros2:
+            type: string
+            nullable: true
+            length: 80
+            options:
+                fixed: false
+    manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
+        idTrabajo:
+            targetEntity: Trabajos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Trabajo:
+                    referencedColumnName: Id_Trabajo
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

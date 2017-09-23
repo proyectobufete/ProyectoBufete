@@ -1,0 +1,47 @@
+BufeteBundle\Entity\Ciudad:
+    type: entity
+    table: ciudad
+    indexes:
+        IX_Relationship2:
+            columns:
+                - Id_Departamento
+    id:
+        idCiudad:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Ciudad
+            generator:
+                strategy: IDENTITY
+    fields:
+        postalCiudad:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: Postal_Ciudad
+        ciudad:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: Ciudad
+        estadoCiudad:
+            type: boolean
+            nullable: false
+            column: Estado_Ciudad
+    manyToOne:
+        idDepartamento:
+            targetEntity: Departamentos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Departamento:
+                    referencedColumnName: Id_Departamento
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

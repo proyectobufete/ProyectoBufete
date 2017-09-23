@@ -1,0 +1,102 @@
+BufeteBundle\Entity\Demandantes:
+    type: entity
+    table: demandantes
+    indexes:
+        IX_Relationship3:
+            columns:
+                - Id_EstadoCivil
+        IX_Relationship4:
+            columns:
+                - Id_Trabajo
+        IX_Relationship6:
+            columns:
+                - Id_Ciudad
+    id:
+        idDemandante:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Demandante
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombreDemandante:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: Nombre_Demandante
+        edadDemandante:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Edad_Demandante
+        dpiDemandante:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: Dpi_Demandante
+        cedulaDemandante:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+            column: Cedula_Demandante
+        direccionDemandante:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: Direccion_Demandante
+        dirtrabajoDemandante:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: DirTrabajo_Demandante
+        telefonoDemandante:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: Telefono_Demandante
+    manyToOne:
+        idEstadocivil:
+            targetEntity: Estadosciviles
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_EstadoCivil:
+                    referencedColumnName: Id_EstadoCivil
+            orphanRemoval: false
+        idTrabajo:
+            targetEntity: Trabajos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Trabajo:
+                    referencedColumnName: Id_Trabajo
+            orphanRemoval: false
+        idCiudad:
+            targetEntity: Ciudad
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Ciudad:
+                    referencedColumnName: Id_Ciudad
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

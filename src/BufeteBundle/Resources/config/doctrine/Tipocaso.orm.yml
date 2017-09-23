@@ -1,0 +1,26 @@
+BufeteBundle\Entity\Tipocaso:
+    type: entity
+    table: tipocaso
+    id:
+        idTipo:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Tipo
+            generator:
+                strategy: IDENTITY
+    fields:
+        tipo:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: Tipo
+        estadoTipo:
+            type: boolean
+            nullable: false
+            column: Estado_Tipo
+    lifecycleCallbacks: {  }

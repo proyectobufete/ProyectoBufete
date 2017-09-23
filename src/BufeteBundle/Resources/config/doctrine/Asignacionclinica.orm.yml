@@ -1,0 +1,60 @@
+BufeteBundle\Entity\Asignacionclinica:
+    type: entity
+    table: AsignacionClinica
+    indexes:
+        IX_Relationship34:
+            columns:
+                - Id_Estudiante
+        IX_Relationship35:
+            columns:
+                - Id_Clinica
+    id:
+        idAsignacion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_asignacion
+            generator:
+                strategy: IDENTITY
+    fields:
+        notaClinica:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: nota_clinica
+        observacionesClinica:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: Observaciones_clinica
+        estadoAsignacionest:
+            type: boolean
+            nullable: false
+            column: estado_asignacionest
+    manyToOne:
+        idEstudiante:
+            targetEntity: Estudiantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Estudiante:
+                    referencedColumnName: Id_Estudiante
+            orphanRemoval: false
+        idClinica:
+            targetEntity: Clinicas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Clinica:
+                    referencedColumnName: Id_Clinica
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

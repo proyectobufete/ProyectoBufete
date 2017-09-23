@@ -1,0 +1,60 @@
+BufeteBundle\Entity\Estudiantes:
+    type: entity
+    table: estudiantes
+    indexes:
+        IX_Relationship31:
+            columns:
+                - Id_Persona
+        IX_Relationship37:
+            columns:
+                - idtipoPracticante
+    id:
+        idEstudiante:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Estudiante
+            generator:
+                strategy: IDENTITY
+    fields:
+        carneEstudiante:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: false
+            column: Carne_Estudiante
+        cierrePensum:
+            type: boolean
+            nullable: false
+            column: Cierre_Pensum
+        estadoEstudiante:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Estado_Estudiante
+    manyToOne:
+        idPersona:
+            targetEntity: Personas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Persona:
+                    referencedColumnName: Id_Persona
+            orphanRemoval: false
+        idtipopracticante:
+            targetEntity: Tipoparcticante
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idtipoPracticante:
+                    referencedColumnName: idtipoPracticante
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

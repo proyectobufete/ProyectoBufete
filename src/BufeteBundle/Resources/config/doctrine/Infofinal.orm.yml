@@ -1,0 +1,47 @@
+BufeteBundle\Entity\Infofinal:
+    type: entity
+    table: infoFinal
+    indexes:
+        IX_Relationship33:
+            columns:
+                - Id_Caso
+    id:
+        idIfno:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_ifno
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaInfo:
+            type: date
+            nullable: false
+            column: fecha_info
+        observaciones:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        rutaInfo:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: ruta_info
+    manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

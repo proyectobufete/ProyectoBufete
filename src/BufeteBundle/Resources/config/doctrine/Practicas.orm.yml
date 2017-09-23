@@ -1,0 +1,48 @@
+BufeteBundle\Entity\Practicas:
+    type: entity
+    table: practicas
+    indexes:
+        IX_Relationship27:
+            columns:
+                - Id_Estudiante
+    id:
+        idPractica:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Practica
+            generator:
+                strategy: IDENTITY
+    fields:
+        inicioPractica:
+            type: date
+            nullable: false
+            column: Inicio_Practica
+        fechaFin:
+            type: date
+            nullable: false
+            column: Fecha_Fin
+        estadoPractica:
+            type: boolean
+            nullable: false
+            column: Estado_Practica
+        observaciones:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    manyToOne:
+        idEstudiante:
+            targetEntity: Estudiantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Estudiante:
+                    referencedColumnName: Id_Estudiante
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

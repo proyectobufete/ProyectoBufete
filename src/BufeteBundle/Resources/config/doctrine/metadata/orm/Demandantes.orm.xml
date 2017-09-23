@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Demandantes" table="demandantes">
+    <indexes>
+      <index name="IX_Relationship3" columns="Id_EstadoCivil"/>
+      <index name="IX_Relationship4" columns="Id_Trabajo"/>
+      <index name="IX_Relationship6" columns="Id_Ciudad"/>
+    </indexes>
+    <id name="idDemandante" type="integer" column="Id_Demandante">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombreDemandante" type="string" column="Nombre_Demandante" length="75" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="edadDemandante" type="integer" column="Edad_Demandante" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dpiDemandante" type="bigint" column="Dpi_Demandante" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cedulaDemandante" type="string" column="Cedula_Demandante" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="direccionDemandante" type="string" column="Direccion_Demandante" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dirtrabajoDemandante" type="string" column="DirTrabajo_Demandante" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonoDemandante" type="bigint" column="Telefono_Demandante" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idEstadocivil" target-entity="Estadosciviles" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_EstadoCivil" referenced-column-name="Id_EstadoCivil"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTrabajo" target-entity="Trabajos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Trabajo" referenced-column-name="Id_Trabajo"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCiudad" target-entity="Ciudad" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Ciudad" referenced-column-name="Id_Ciudad"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

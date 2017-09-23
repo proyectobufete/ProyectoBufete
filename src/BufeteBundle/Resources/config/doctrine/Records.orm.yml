@@ -1,0 +1,38 @@
+BufeteBundle\Entity\Records:
+    type: entity
+    table: records
+    indexes:
+        IX_Relationship20:
+            columns:
+                - Id_Caso
+    id:
+        idRecord:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Record
+            generator:
+                strategy: IDENTITY
+    fields:
+        inscripcionRecord:
+            type: date
+            nullable: false
+            column: Inscripcion_Record
+        solvenciaRecord:
+            type: date
+            nullable: true
+            column: Solvencia_Record
+    manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Revisiones" table="revisiones">
+    <indexes>
+      <index name="IX_Relationship23" columns="Id_Caso"/>
+    </indexes>
+    <id name="idRevision" type="integer" column="Id_Revision">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="observaciones" type="text" column="Observaciones" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaEnvio" type="date" column="fecha_envio" nullable="true"/>
+    <field name="fechaRevision" type="date" column="Fecha_Revision" nullable="true"/>
+    <field name="ruta" type="text" column="Ruta" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idCaso" target-entity="Casos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Caso" referenced-column-name="Id_Caso"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

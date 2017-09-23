@@ -1,0 +1,36 @@
+BufeteBundle\Entity\Civiles:
+    type: entity
+    table: civiles
+    indexes:
+        IX_Relationship22:
+            columns:
+                - Id_Caso
+    id:
+        idCivil:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Civil
+            generator:
+                strategy: IDENTITY
+    fields:
+        pretencion:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+    manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

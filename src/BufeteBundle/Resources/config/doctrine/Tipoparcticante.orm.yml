@@ -1,0 +1,21 @@
+BufeteBundle\Entity\Tipoparcticante:
+    type: entity
+    table: tipoParcticante
+    id:
+        idtipopracticante:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idtipoPracticante
+            generator:
+                strategy: IDENTITY
+    fields:
+        tipopracticante:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,3 @@
+bufete_homepage:
+    path:     /
+    defaults: { _controller: BufeteBundle:Default:index }

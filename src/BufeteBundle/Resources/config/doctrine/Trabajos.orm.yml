@@ -1,0 +1,26 @@
+BufeteBundle\Entity\Trabajos:
+    type: entity
+    table: trabajos
+    id:
+        idTrabajo:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Trabajo
+            generator:
+                strategy: IDENTITY
+    fields:
+        trabajo:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: Trabajo
+        estadoTrabajo:
+            type: boolean
+            nullable: false
+            column: Estado_Trabajo
+    lifecycleCallbacks: {  }

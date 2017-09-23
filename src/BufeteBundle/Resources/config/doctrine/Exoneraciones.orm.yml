@@ -1,0 +1,56 @@
+BufeteBundle\Entity\Exoneraciones:
+    type: entity
+    table: exoneraciones
+    indexes:
+        IX_Relationship28:
+            columns:
+                - Id_Estudiante
+        IX_Relationship32:
+            columns:
+                - Id_Tipo
+    id:
+        idExoneracion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Exoneracion
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaExamen:
+            type: date
+            nullable: false
+            column: Fecha_Examen
+        observaciones:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        fechasolvencias:
+            type: date
+            nullable: true
+    manyToOne:
+        idEstudiante:
+            targetEntity: Estudiantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Estudiante:
+                    referencedColumnName: Id_Estudiante
+            orphanRemoval: false
+        idTipo:
+            targetEntity: Tipocaso
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Tipo:
+                    referencedColumnName: Id_Tipo
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

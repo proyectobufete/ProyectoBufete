@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Bufetes" table="bufetes">
+    <indexes>
+      <index name="IX_Relationship10" columns="Id_Ciudad"/>
+    </indexes>
+    <id name="idBufete" type="integer" column="Id_Bufete">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombreBufete" type="string" column="Nombre_Bufete" length="75" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono1Bufete" type="bigint" column="Telefono1_Bufete" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="telefono2" type="bigint" column="Telefono2" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="emailBufete" type="string" column="Email_Bufete" length="75" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="direccionBufete" type="string" column="Direccion_Bufete" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estadoBufete" type="boolean" column="Estado_Bufete" nullable="false"/>
+    <many-to-one field="idCiudad" target-entity="Ciudad" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Ciudad" referenced-column-name="Id_Ciudad"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

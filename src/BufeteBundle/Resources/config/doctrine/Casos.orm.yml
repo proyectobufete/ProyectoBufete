@@ -1,0 +1,164 @@
+BufeteBundle\Entity\Casos:
+    type: entity
+    table: casos
+    indexes:
+        IX_Relationship15:
+            columns:
+                - Id_Demandante
+        IX_Relationship17:
+            columns:
+                - Id_Estudiante
+        IX_Relationship18:
+            columns:
+                - Id_Tribunal
+        IX_Relationship19:
+            columns:
+                - Id_Persona
+        IX_Relationship24:
+            columns:
+                - Id_Tipo
+        IX_Relationship38:
+            columns:
+                - id_tipoAsunto
+    id:
+        idCaso:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Caso
+            generator:
+                strategy: IDENTITY
+    fields:
+        noCaso:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: No_Caso
+        fechaCaso:
+            type: date
+            nullable: false
+            column: Fecha_Caso
+        pruebasCaso:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: Pruebas_Caso
+        asignatarioCaso:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Asignatario_Caso
+        estadoCaso:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Estado_Caso
+        nombreDemandado:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: nombre_demandado
+        dirDemandado:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: dir_demandado
+        dirnotificacionDemandado:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: dirNotificacion_demandado
+        telefonoDemandado:
+            type: bigint
+            nullable: true
+            options:
+                unsigned: false
+            column: telefono_demandado
+        otroDemandado:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: otro_demandado
+        observaciones:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    manyToOne:
+        idDemandante:
+            targetEntity: Demandantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Demandante:
+                    referencedColumnName: Id_Demandante
+            orphanRemoval: false
+        idEstudiante:
+            targetEntity: Estudiantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Estudiante:
+                    referencedColumnName: Id_Estudiante
+            orphanRemoval: false
+        idTribunal:
+            targetEntity: Tribunales
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Tribunal:
+                    referencedColumnName: Id_Tribunal
+            orphanRemoval: false
+        idPersona:
+            targetEntity: Personas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Persona:
+                    referencedColumnName: Id_Persona
+            orphanRemoval: false
+        idTipo:
+            targetEntity: Tipocaso
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Tipo:
+                    referencedColumnName: Id_Tipo
+            orphanRemoval: false
+        idTipoasunto:
+            targetEntity: Tipoasunto
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_tipoAsunto:
+                    referencedColumnName: id_tipoAsunto
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

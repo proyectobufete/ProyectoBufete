@@ -1,0 +1,106 @@
+BufeteBundle\Entity\Personas:
+    type: entity
+    table: personas
+    indexes:
+        IX_Relationship13:
+            columns:
+                - Id_Bufete
+    id:
+        idPersona:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Persona
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombrePersona:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: Nombre_Persona
+        telefonoPersona:
+            type: bigint
+            nullable: true
+            options:
+                unsigned: false
+            column: Telefono_Persona
+        tel2Persona:
+            type: bigint
+            nullable: true
+            options:
+                unsigned: false
+            column: tel2_persona
+        dpiPersona:
+            type: bigint
+            nullable: true
+            options:
+                unsigned: false
+            column: dpi_persona
+        direccionPersona:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: Direccion_Persona
+        dir2Persona:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: dir2_persona
+        emailPersona:
+            type: string
+            nullable: true
+            length: 75
+            options:
+                fixed: false
+            column: Email_Persona
+        usuarioPersona:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            column: Usuario_Persona
+        passPersona:
+            type: string
+            nullable: false
+            length: 254
+            options:
+                fixed: false
+            column: pass_Persona
+        foto:
+            type: string
+            nullable: true
+            length: 220
+            options:
+                fixed: false
+        estadoPersona:
+            type: boolean
+            nullable: false
+            column: Estado_Persona
+        role:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+    manyToOne:
+        idBufete:
+            targetEntity: Bufetes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Bufete:
+                    referencedColumnName: Id_Bufete
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,67 @@
+BufeteBundle\Entity\Bufetes:
+    type: entity
+    table: bufetes
+    indexes:
+        IX_Relationship10:
+            columns:
+                - Id_Ciudad
+    id:
+        idBufete:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Bufete
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombreBufete:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: Nombre_Bufete
+        telefono1Bufete:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: Telefono1_Bufete
+        telefono2:
+            type: bigint
+            nullable: true
+            options:
+                unsigned: false
+            column: Telefono2
+        emailBufete:
+            type: string
+            nullable: true
+            length: 75
+            options:
+                fixed: false
+            column: Email_Bufete
+        direccionBufete:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: Direccion_Bufete
+        estadoBufete:
+            type: boolean
+            nullable: false
+            column: Estado_Bufete
+    manyToOne:
+        idCiudad:
+            targetEntity: Ciudad
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Ciudad:
+                    referencedColumnName: Id_Ciudad
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

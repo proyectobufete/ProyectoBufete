@@ -1,0 +1,26 @@
+BufeteBundle\Entity\Paises:
+    type: entity
+    table: paises
+    id:
+        idPais:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Pais
+            generator:
+                strategy: IDENTITY
+    fields:
+        pais:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: Pais
+        estadoPais:
+            type: boolean
+            nullable: false
+            column: Estado_Pais
+    lifecycleCallbacks: {  }

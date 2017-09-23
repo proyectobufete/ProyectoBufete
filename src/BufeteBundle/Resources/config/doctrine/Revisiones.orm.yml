@@ -1,0 +1,52 @@
+BufeteBundle\Entity\Revisiones:
+    type: entity
+    table: revisiones
+    indexes:
+        IX_Relationship23:
+            columns:
+                - Id_Caso
+    id:
+        idRevision:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Revision
+            generator:
+                strategy: IDENTITY
+    fields:
+        observaciones:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: Observaciones
+        fechaEnvio:
+            type: date
+            nullable: true
+            column: fecha_envio
+        fechaRevision:
+            type: date
+            nullable: true
+            column: Fecha_Revision
+        ruta:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: Ruta
+    manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

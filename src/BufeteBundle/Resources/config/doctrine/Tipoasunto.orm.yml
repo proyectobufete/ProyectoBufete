@@ -1,0 +1,21 @@
+BufeteBundle\Entity\Tipoasunto:
+    type: entity
+    table: TipoAsunto
+    id:
+        idTipoasunto:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_tipoAsunto
+            generator:
+                strategy: IDENTITY
+    fields:
+        asunto:
+            type: string
+            nullable: false
+            length: 230
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

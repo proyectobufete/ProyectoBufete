@@ -1,0 +1,37 @@
+BufeteBundle\Entity\Departamentos:
+    type: entity
+    table: departamentos
+    indexes:
+        IX_Relationship1:
+            columns:
+                - Id_Pais
+    id:
+        idDepartamento:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id_Departamento
+            generator:
+                strategy: IDENTITY
+    fields:
+        departamento:
+            type: string
+            nullable: false
+            length: 75
+            options:
+                fixed: false
+            column: Departamento
+    manyToOne:
+        idPais:
+            targetEntity: Paises
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Pais:
+                    referencedColumnName: Id_Pais
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
