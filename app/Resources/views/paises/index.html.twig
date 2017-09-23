@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Paises list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idpais</th>
+                <th>Pais</th>
+                <th>Estadopais</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paise in paises %}
+            <tr>
+                <td><a href="{{ path('paises_show', { 'idPais': paise.idPais }) }}">{{ paise.idPais }}</a></td>
+                <td>{{ paise.pais }}</td>
+                <td>{% if paise.estadoPais %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('paises_show', { 'idPais': paise.idPais }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('paises_edit', { 'idPais': paise.idPais }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('paises_new') }}">Create a new paise</a>
+        </li>
+    </ul>
+{% endblock %}

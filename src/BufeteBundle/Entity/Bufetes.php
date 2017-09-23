@@ -225,5 +225,9 @@ class Bufetes
     {
         return $this->idCiudad;
     }
-}
 
+    public function __toString()
+  {
+    return $this->nombreBufete;
+  }
+}

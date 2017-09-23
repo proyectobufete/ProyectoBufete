@@ -80,5 +80,9 @@ class Departamentos
     {
         return $this->idPais;
     }
-}
 
+    public function __toString()
+ {
+   return $this->departamento;
+ }
+}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bufete</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idbufete</th>
+                <td>{{ bufete.idBufete }}</td>
+            </tr>
+            <tr>
+                <th>Nombrebufete</th>
+                <td>{{ bufete.nombreBufete }}</td>
+            </tr>
+            <tr>
+                <th>Telefono1bufete</th>
+                <td>{{ bufete.telefono1Bufete }}</td>
+            </tr>
+            <tr>
+                <th>Telefono2</th>
+                <td>{{ bufete.telefono2 }}</td>
+            </tr>
+            <tr>
+                <th>Emailbufete</th>
+                <td>{{ bufete.emailBufete }}</td>
+            </tr>
+            <tr>
+                <th>Direccionbufete</th>
+                <td>{{ bufete.direccionBufete }}</td>
+            </tr>
+            <tr>
+                <th>Estadobufete</th>
+                <td>{% if bufete.estadoBufete %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('bufetes_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

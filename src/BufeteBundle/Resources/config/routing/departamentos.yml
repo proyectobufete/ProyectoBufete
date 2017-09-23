@@ -1,0 +1,24 @@
+departamentos_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Departamentos:index" }
+    methods:  GET
+
+departamentos_show:
+    path:     /{idDepartamento}/show
+    defaults: { _controller: "BufeteBundle:Departamentos:show" }
+    methods:  GET
+
+departamentos_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Departamentos:new" }
+    methods:  [GET, POST]
+
+departamentos_edit:
+    path:     /{idDepartamento}/edit
+    defaults: { _controller: "BufeteBundle:Departamentos:edit" }
+    methods:  [GET, POST]
+
+departamentos_delete:
+    path:     /{idDepartamento}/delete
+    defaults: { _controller: "BufeteBundle:Departamentos:delete" }
+    methods:  DELETE

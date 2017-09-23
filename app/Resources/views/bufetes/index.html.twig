@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bufetes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idbufete</th>
+                <th>Nombrebufete</th>
+                <th>Telefono1bufete</th>
+                <th>Telefono2</th>
+                <th>Emailbufete</th>
+                <th>Direccionbufete</th>
+                <th>Estadobufete</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bufete in bufetes %}
+            <tr>
+                <td><a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}">{{ bufete.idBufete }}</a></td>
+                <td>{{ bufete.nombreBufete }}</td>
+                <td>{{ bufete.telefono1Bufete }}</td>
+                <td>{{ bufete.telefono2 }}</td>
+                <td>{{ bufete.emailBufete }}</td>
+                <td>{{ bufete.direccionBufete }}</td>
+                <td>{% if bufete.estadoBufete %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('bufetes_new') }}">Create a new bufete</a>
+        </li>
+    </ul>
+{% endblock %}

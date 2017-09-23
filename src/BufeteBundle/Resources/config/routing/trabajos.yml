@@ -1,0 +1,24 @@
+trabajos_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Trabajos:index" }
+    methods:  GET
+
+trabajos_show:
+    path:     /{idTrabajo}/show
+    defaults: { _controller: "BufeteBundle:Trabajos:show" }
+    methods:  GET
+
+trabajos_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Trabajos:new" }
+    methods:  [GET, POST]
+
+trabajos_edit:
+    path:     /{idTrabajo}/edit
+    defaults: { _controller: "BufeteBundle:Trabajos:edit" }
+    methods:  [GET, POST]
+
+trabajos_delete:
+    path:     /{idTrabajo}/delete
+    defaults: { _controller: "BufeteBundle:Trabajos:delete" }
+    methods:  DELETE

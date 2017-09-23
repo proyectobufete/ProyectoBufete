@@ -138,5 +138,9 @@ class Ciudad
     {
         return $this->idDepartamento;
     }
-}
 
+    public function __toString()
+  {
+    return $this->ciudad;
+  }
+}
