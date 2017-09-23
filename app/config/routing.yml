@@ -71,3 +71,6 @@ Tribunales:
     resource: "@BufeteBundle/Resources/config/routing/tribunales.yml"
     prefix:     /tribunales
 
+Estudiantes:
+    resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
+    prefix:     /estudiantes
