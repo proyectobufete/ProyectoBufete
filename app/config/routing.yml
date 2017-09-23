@@ -6,6 +6,7 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+
 Tipocaso:
     resource: "@BufeteBundle/Resources/config/routing/tipocaso.yml"
     prefix:     /tipocaso
@@ -37,3 +38,36 @@ Clinicas:
 Casos:
     resource: "@BufeteBundle/Resources/config/routing/casos.yml"
     prefix:     /casos
+
+Paises:
+    resource: "@BufeteBundle/Resources/config/routing/paises.yml"
+    prefix:     /paises
+
+Departamentos:
+    resource: "@BufeteBundle/Resources/config/routing/departamentos.yml"
+    prefix:     /departamentos
+
+Ciudades:
+    resource: "@BufeteBundle/Resources/config/routing/ciudad.yml"
+    prefix:     /ciudad
+
+EstadosCiviles:
+    resource: "@BufeteBundle/Resources/config/routing/estadosciviles.yml"
+    prefix:     /estadosciviles
+
+Bufetes:
+    resource: "@BufeteBundle/Resources/config/routing/bufetes.yml"
+    prefix:     /bufetes
+
+Trabajos:
+    resource: "@BufeteBundle/Resources/config/routing/trabajos.yml"
+    prefix:     /trabajos
+
+TipoAsunto:
+    resource: "@BufeteBundle/Resources/config/routing/tipoasunto.yml"
+    prefix:     /tipoasunto
+
+Tribunales:
+    resource: "@BufeteBundle/Resources/config/routing/tribunales.yml"
+    prefix:     /tribunales
+

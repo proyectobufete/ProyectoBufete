@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Estadosciviles list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idestadocivil</th>
+                <th>Estadocivil</th>
+                <th>Estadoestadocivil</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for estadoscivile in estadosciviles %}
+            <tr>
+                <td><a href="{{ path('estadosciviles_show', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}">{{ estadoscivile.idEstadocivil }}</a></td>
+                <td>{{ estadoscivile.estadocivil }}</td>
+                <td>{% if estadoscivile.estadoEstadocivil %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('estadosciviles_show', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('estadosciviles_edit', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('estadosciviles_new') }}">Create a new estadoscivile</a>
+        </li>
+    </ul>
+{% endblock %}

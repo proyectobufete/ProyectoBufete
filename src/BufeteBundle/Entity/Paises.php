@@ -80,5 +80,9 @@ class Paises
     {
         return $this->estadoPais;
     }
-}
 
+    public function __toString()
+ {
+   return $this->pais;
+ }
+}

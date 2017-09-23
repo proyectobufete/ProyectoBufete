@@ -1,0 +1,24 @@
+ciudad_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Ciudad:index" }
+    methods:  GET
+
+ciudad_show:
+    path:     /{idCiudad}/show
+    defaults: { _controller: "BufeteBundle:Ciudad:show" }
+    methods:  GET
+
+ciudad_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Ciudad:new" }
+    methods:  [GET, POST]
+
+ciudad_edit:
+    path:     /{idCiudad}/edit
+    defaults: { _controller: "BufeteBundle:Ciudad:edit" }
+    methods:  [GET, POST]
+
+ciudad_delete:
+    path:     /{idCiudad}/delete
+    defaults: { _controller: "BufeteBundle:Ciudad:delete" }
+    methods:  DELETE

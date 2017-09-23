@@ -51,5 +51,10 @@ class Tipoasunto
     {
         return $this->asunto;
     }
-}
 
+    public function __toString()
+  {
+    return $this->asunto;
+  }
+
+}

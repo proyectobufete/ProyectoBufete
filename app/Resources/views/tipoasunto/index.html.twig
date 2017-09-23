@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tipoasuntos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idtipoasunto</th>
+                <th>Asunto</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipoasunto in tipoasuntos %}
+            <tr>
+                <td><a href="{{ path('tipoasunto_show', { 'idTipoasunto': tipoasunto.idTipoasunto }) }}">{{ tipoasunto.idTipoasunto }}</a></td>
+                <td>{{ tipoasunto.asunto }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tipoasunto_show', { 'idTipoasunto': tipoasunto.idTipoasunto }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tipoasunto_edit', { 'idTipoasunto': tipoasunto.idTipoasunto }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tipoasunto_new') }}">Create a new tipoasunto</a>
+        </li>
+    </ul>
+{% endblock %}

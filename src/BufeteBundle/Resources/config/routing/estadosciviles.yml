@@ -1,0 +1,24 @@
+estadosciviles_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Estadosciviles:index" }
+    methods:  GET
+
+estadosciviles_show:
+    path:     /{idEstadocivil}/show
+    defaults: { _controller: "BufeteBundle:Estadosciviles:show" }
+    methods:  GET
+
+estadosciviles_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Estadosciviles:new" }
+    methods:  [GET, POST]
+
+estadosciviles_edit:
+    path:     /{idEstadocivil}/edit
+    defaults: { _controller: "BufeteBundle:Estadosciviles:edit" }
+    methods:  [GET, POST]
+
+estadosciviles_delete:
+    path:     /{idEstadocivil}/delete
+    defaults: { _controller: "BufeteBundle:Estadosciviles:delete" }
+    methods:  DELETE
