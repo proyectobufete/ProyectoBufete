@@ -1,0 +1,24 @@
+tipoparcticante_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Tipoparcticante:index" }
+    methods:  GET
+
+tipoparcticante_show:
+    path:     /{idtipopracticante}/show
+    defaults: { _controller: "BufeteBundle:Tipoparcticante:show" }
+    methods:  GET
+
+tipoparcticante_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Tipoparcticante:new" }
+    methods:  [GET, POST]
+
+tipoparcticante_edit:
+    path:     /{idtipopracticante}/edit
+    defaults: { _controller: "BufeteBundle:Tipoparcticante:edit" }
+    methods:  [GET, POST]
+
+tipoparcticante_delete:
+    path:     /{idtipopracticante}/delete
+    defaults: { _controller: "BufeteBundle:Tipoparcticante:delete" }
+    methods:  DELETE

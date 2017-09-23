@@ -80,5 +80,9 @@ class Civiles
     {
         return $this->idCaso;
     }
-}
 
+    public function __toString()
+    {
+        return $this->idCivil;
+    }
+}

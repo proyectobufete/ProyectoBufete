@@ -1,0 +1,24 @@
+casos_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Casos:index" }
+    methods:  GET
+
+casos_show:
+    path:     /{idCaso}/show
+    defaults: { _controller: "BufeteBundle:Casos:show" }
+    methods:  GET
+
+casos_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Casos:new" }
+    methods:  [GET, POST]
+
+casos_edit:
+    path:     /{idCaso}/edit
+    defaults: { _controller: "BufeteBundle:Casos:edit" }
+    methods:  [GET, POST]
+
+casos_delete:
+    path:     /{idCaso}/delete
+    defaults: { _controller: "BufeteBundle:Casos:delete" }
+    methods:  DELETE

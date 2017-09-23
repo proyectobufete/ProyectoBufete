@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Civiles list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idcivil</th>
+                <th>Pretencion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for civile in civiles %}
+            <tr>
+                <td><a href="{{ path('civiles_show', { 'idCivil': civile.idCivil }) }}">{{ civile.idCivil }}</a></td>
+                <td>{{ civile.pretencion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('civiles_show', { 'idCivil': civile.idCivil }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('civiles_edit', { 'idCivil': civile.idCivil }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('civiles_new') }}">Create a new civile</a>
+        </li>
+    </ul>
+{% endblock %}

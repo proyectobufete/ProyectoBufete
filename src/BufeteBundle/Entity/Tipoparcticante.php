@@ -51,5 +51,9 @@ class Tipoparcticante
     {
         return $this->tipopracticante;
     }
-}
 
+    public function __toString()
+    {
+        return $this->tipopracticante;
+    }
+}
