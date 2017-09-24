@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Revisione</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idrevision</th>
+                <td>{{ revisione.idRevision }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ revisione.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>Fechaenvio</th>
+                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fecharevision</th>
+                <td>{% if revisione.fechaRevision %}{{ revisione.fechaRevision|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ruta</th>
+                <td>{{ revisione.ruta }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('revisiones_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('revisiones_edit', { 'idRevision': revisione.idRevision }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

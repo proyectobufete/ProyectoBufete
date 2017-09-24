@@ -78,3 +78,7 @@ Estudiantes:
 InfoFinal:
     resource: "@BufeteBundle/Resources/config/routing/infofinal.yml"
     prefix:     /infofinal
+
+Revisiones:
+    resource: "@BufeteBundle/Resources/config/routing/revisiones.yml"
+    prefix:     /revisiones
