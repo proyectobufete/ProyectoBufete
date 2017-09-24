@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Personas
  */
-class Personas
+class Personas implements UserInterface
 {
 
   /**

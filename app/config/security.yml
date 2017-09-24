@@ -29,9 +29,13 @@ security:
                 path: /logout
                 target: /login
 
+<<<<<<< HEAD
     access_control:
 
     role_hierarchy:
+=======
+    
+>>>>>>> 53960f4d6fd95e5e4761c0a712bc0cdb7c7345ae
             # activate different ways to authenticate
 
             # http_basic: ~
