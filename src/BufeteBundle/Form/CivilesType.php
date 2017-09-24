@@ -14,10 +14,8 @@ class CivilesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('pretencion',TextareaType::class, array("label"=>"Pretención Procesal",  "attr" =>array(
-          "class" => "form-control",
-        )))
-        //->add('idCaso')
+        $builder->add('pretencion',TextareaType::class)
+
         ;
     }
 

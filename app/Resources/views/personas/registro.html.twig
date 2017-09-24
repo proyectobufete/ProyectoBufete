@@ -51,7 +51,7 @@
           <div class="row">
             <div class="col-md-4">
               {{form_label(form.nombrePersona,'Nombre Estudiante')}}
-              {{form_widget(form.nombrePersona,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(form.nombrePersona,{'attr':{'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-2">
               {{form_label(form.telefonoPersona,'Número de Teléfono 1')}}
@@ -63,14 +63,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
-              {{form_label(form.direccionPersona,'Dirección')}}
-              {{form_widget(form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
+            <div class="col-md-2">
+              {{form_label(form.dpiPersona,'DPI')}}
+              {{form_widget(form.dpiPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-2">
               {{form_label(form.emailPersona,'Correo Electrónico')}}
               {{form_widget(form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
+            <div class="col-md-4">
+              {{form_label(form.direccionPersona,'Dirección')}}
+              {{form_widget(form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+
           </div>
           <div class="row">
             <div class="col-md-3">
@@ -79,7 +84,7 @@
             </div>
             <div class="col-md-2">
               {{form_label(form.passPersona,'Contraseña')}}
-              {{form_widget(form.passPersona,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(form.passPersona,{'attr':{ 'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
           </div>
           <div class="row">
@@ -88,7 +93,6 @@
               {{form_widget(form.estadoPersona) }}
             </div>
             <div class="col-md-2">
-              {{form_label(form.role,'Tipo')}}
               {{form_widget(form.role) }}
             </div>
           </div>
@@ -105,9 +109,14 @@
           <div class="row">
             <div class="col-md-3">
               {{form_label(form.estudiantes.carneEstudiante,'No. Carné')}}
-              {{form_widget(form.estudiantes.carneEstudiante,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(form.estudiantes.carneEstudiante,{'attr':{ 'readonly':'readonly', 'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-3">
+              {{form_label(form.estudiantes.idtipopracticante,'Tipo de Practica')}}
+              {{form_widget(form.estudiantes.idtipopracticante,{'attr':{'class' : 'form-control'}}) }}
             </div>
           </div>
+          <br>
           <div class="row">
             <div class="col-md-3">
               <label class="cr-styled">

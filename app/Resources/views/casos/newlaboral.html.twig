@@ -37,8 +37,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
-              {{form_label(form.idTipoasunto,'Tipo asunto')}}
+            <div class="col-md-6">
+              <div class="col-md-offset-4">
+                <label for=""><h4><b>Asunto</b></h4></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
               {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
           </div>
@@ -52,7 +58,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
               {{form_widget(form.idDemandante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
             <div class="col-md-3">
@@ -180,9 +186,16 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-2">
                 {{form_label(form.laborales.otros,'Otros')}}
                 {{ form_widget(form.laborales.otros,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-1">
+
+              </div>
+              <div class="col-md-2">
+                {{form_label(form.laborales.otros2,'Otros 2')}}
+                {{ form_widget(form.laborales.otros2,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
           </div>
@@ -196,7 +209,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               {{form_label(form.pruebasCaso,' ')}}
               {{ form_widget(form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
             </div>
@@ -211,19 +224,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               {{form_label(form.nombreDemandado,'Patrono o Empresa')}}
               {{ form_widget(form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
             </div>
           </div>
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               {{form_label(form.dirDemandado,'Dirección')}}
               {{ form_widget(form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
             </div>
           </div>
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               {{form_label(form.dirnotificacionDemandado,'Dirección de Notificación')}}
               {{ form_widget(form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
             </div>
@@ -233,7 +246,7 @@
               {{form_label(form.telefonoDemandado,'Teléfono')}}
               {{ form_widget(form.telefonoDemandado,{'attr':{'class' : 'form-control'}}) }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               {{form_label(form.otroDemandado,'Otros')}}
               {{ form_widget(form.otroDemandado,{'attr':{'class' : 'form-control'}}) }}
             </div>
@@ -261,7 +274,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-6">
               {{form_label(form.observaciones,'Observaciones')}}
               {{form_widget(form.observaciones,{'attr':{'class' : 'form-control'}}) }}
             </div>

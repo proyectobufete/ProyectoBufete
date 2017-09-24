@@ -36,31 +36,33 @@
       <br>
       <br>
 
-      <div class="col-md-12 col-sm-12 col-xs-6">
-        <table class="table table-bordered ">
-          <thead>
-            <tr role="row" class="">
-              <th>Tipo</th>
-              <th>Estado
-              </th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for tipocaso in tipocasos %}
-              <tr>
-                <td>{{ tipocaso.tipo }}</td>
-                <td>
-                  {% if tipocaso.estadoTipo %}Activo{% else %}No{% endif %}
-                </td>
-                <td>
-                  <a href="{{ path('tipocaso_show', { 'idTipo': tipocaso.idTipo }) }}" class="btn yellow">Ver</a>
-                  <a href="{{ path('tipocaso_edit', { 'idTipo': tipocaso.idTipo }) }}" class="btn blue ">Editar</a>
-                </td>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+              <tr role="row" class="">
+                <th>Tipo</th>
+                <th>Estado
+                </th>
+                <th>Opciones</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for tipocaso in tipocasos %}
+                <tr>
+                  <td>{{ tipocaso.tipo }}</td>
+                  <td>
+                    {% if tipocaso.estadoTipo %}Activo{% else %}No{% endif %}
+                  </td>
+                  <td>
+                    <a href="{{ path('tipocaso_show', { 'idTipo': tipocaso.idTipo }) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('tipocaso_edit', { 'idTipo': tipocaso.idTipo }) }}" class="btn blue ">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

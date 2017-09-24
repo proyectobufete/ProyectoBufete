@@ -1,4 +1,6 @@
 {% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac23 %} active {% endblock %}
 {% block title %}
   <h1>Listado de Asuntos</h1>
 {% endblock %}
@@ -29,7 +31,8 @@
       </div>
       <br>
       <br>
-  <div class="col-md-12 col-sm-12 col-xs-6" >
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
       <table class="table table-bordered ">
         <thead>
           <tr role="row" class="">
@@ -50,6 +53,7 @@
 
         </tbody>
       </table>
+    </div>
   </div>
  </div>
 </div>

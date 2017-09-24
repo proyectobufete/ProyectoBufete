@@ -37,29 +37,31 @@
       <br>
       <br>
 
-      <div class="col-md-12 col-sm-12 col-xs-6">
-        <table class="table table-bordered ">
-          <thead>
-            <tr role="row" class="">
-              <th>Nombre</th>
-              <th>Pais</th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for departamento in departamentos %}
-              <tr>
-                <td>{{ departamento.departamento }}</td>
-                <td>{{ departamento.idPais.pais }}</td>
-                <td>
-                  <a href="{{ path('departamentos_show', { 'idDepartamento': departamento.idDepartamento }) }}" class="btn yellow ">Ver</a>
-                  <a href="{{ path('departamentos_edit', { 'idDepartamento': departamento.idDepartamento }) }}" class="btn blue">Editar</a>
-                </td>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+              <tr role="row" class="">
+                <th>Nombre</th>
+                <th>Pais</th>
+                <th>Opciones</th>
               </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+              {% for departamento in departamentos %}
+                <tr>
+                  <td>{{ departamento.departamento }}</td>
+                  <td>{{ departamento.idPais.pais }}</td>
+                  <td>
+                    <a href="{{ path('departamentos_show', { 'idDepartamento': departamento.idDepartamento }) }}" class="btn yellow ">Ver</a>
+                    <a href="{{ path('departamentos_edit', { 'idDepartamento': departamento.idDepartamento }) }}" class="btn blue">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
