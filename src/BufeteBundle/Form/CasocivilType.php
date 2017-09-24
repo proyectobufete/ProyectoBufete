@@ -25,7 +25,7 @@ class CasoscivilType extends AbstractType
           "data" => new \DateTime("now"),
           'widget' => 'single_text'
         ))
-        ->add('pruebasCaso')}
+        ->add('pruebasCaso')
         //->add('asignatarioCaso')
         ->add('estadoCaso', ChoiceType::class,array(
           "label" => "Estado del caso: ",
