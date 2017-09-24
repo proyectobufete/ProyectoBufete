@@ -1,50 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Personas list</h1>
+    <h1>Lista General de Personas</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Idpersona</th>
-                <th>Nombrepersona</th>
-                <th>Telefonopersona</th>
-                <th>Tel2persona</th>
-                <th>Dpipersona</th>
-                <th>Direccionpersona</th>
-                <th>Dir2persona</th>
-                <th>Emailpersona</th>
-                <th>Usuariopersona</th>
-                <th>Passpersona</th>
-                <th>Foto</th>
-                <th>Estadopersona</th>
-                <th>Role</th>
-                <th>Actions</th>
+
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Email</th>
+                <th>Tipo de Usuario</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
         {% for persona in personas %}
             <tr>
-                <td><a href="{{ path('personas_show', { 'idPersona': persona.idPersona }) }}">{{ persona.idPersona }}</a></td>
+
                 <td>{{ persona.nombrePersona }}</td>
                 <td>{{ persona.telefonoPersona }}</td>
-                <td>{{ persona.tel2Persona }}</td>
-                <td>{{ persona.dpiPersona }}</td>
                 <td>{{ persona.direccionPersona }}</td>
-                <td>{{ persona.dir2Persona }}</td>
                 <td>{{ persona.emailPersona }}</td>
-                <td>{{ persona.usuarioPersona }}</td>
-                <td>{{ persona.passPersona }}</td>
-                <td>{{ persona.foto }}</td>
-                <td>{% if persona.estadoPersona %}Yes{% else %}No{% endif %}</td>
                 <td>{{ persona.role }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('personas_show', { 'idPersona': persona.idPersona }) }}">show</a>
+                            <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}">Más Detalles</a>
                         </li>
                         <li>
-                            <a href="{{ path('personas_edit', { 'idPersona': persona.idPersona }) }}">edit</a>
+                          {% if persona.role == "ROLE_ESTUDIANTE" %}
+                              <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}">Editar</a>
+
+                          {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+                              <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}">Editar</a>
+                          {% endif %}
+
                         </li>
                     </ul>
                 </td>
@@ -55,7 +47,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('personas_new') }}">Create a new persona</a>
+            <a href="{{ path('personas_registro') }}">Agregar nuevo Alumno</a>
+        </li>
+        <li>
+            <a href="{{ path('personas_new') }}">Agregar nuevo Personal</a>
         </li>
     </ul>
 {% endblock %}
