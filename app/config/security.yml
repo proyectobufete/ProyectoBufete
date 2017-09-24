@@ -30,6 +30,7 @@ security:
                 target: /login
 
     access_control:
+
         - { path: ^/paises, roles: ROLE_ADMIN}
         - { path: ^/departamentos, roles: ROLE_ADMIN}
         - { path: ^/ciudad, roles: ROLE_ADMIN}
@@ -48,6 +49,7 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_SECRETARIO
+
             # activate different ways to authenticate
 
             # http_basic: ~
