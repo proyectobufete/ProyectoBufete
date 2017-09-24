@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Demandante</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Iddemandante</th>
+                <td>{{ demandante.idDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Nombredemandante</th>
+                <td>{{ demandante.nombreDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Edaddemandante</th>
+                <td>{{ demandante.edadDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Dpidemandante</th>
+                <td>{{ demandante.dpiDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Cedulademandante</th>
+                <td>{{ demandante.cedulaDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Direcciondemandante</th>
+                <td>{{ demandante.direccionDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Dirtrabajodemandante</th>
+                <td>{{ demandante.dirtrabajoDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Telefonodemandante</th>
+                <td>{{ demandante.telefonoDemandante }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('demandantes_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('demandantes_edit', { 'idDemandante': demandante.idDemandante }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

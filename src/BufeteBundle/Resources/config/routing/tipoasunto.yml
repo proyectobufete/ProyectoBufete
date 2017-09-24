@@ -1,0 +1,24 @@
+tipoasunto_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Tipoasunto:index" }
+    methods:  GET
+
+tipoasunto_show:
+    path:     /{idTipoasunto}/show
+    defaults: { _controller: "BufeteBundle:Tipoasunto:show" }
+    methods:  GET
+
+tipoasunto_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Tipoasunto:new" }
+    methods:  [GET, POST]
+
+tipoasunto_edit:
+    path:     /{idTipoasunto}/edit
+    defaults: { _controller: "BufeteBundle:Tipoasunto:edit" }
+    methods:  [GET, POST]
+
+tipoasunto_delete:
+    path:     /{idTipoasunto}/delete
+    defaults: { _controller: "BufeteBundle:Tipoasunto:delete" }
+    methods:  DELETE

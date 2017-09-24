@@ -5,3 +5,72 @@ bufete:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+
+Tipocaso:
+    resource: "@BufeteBundle/Resources/config/routing/tipocaso.yml"
+    prefix:     /tipocaso
+
+Personas:
+    resource: "@BufeteBundle/Resources/config/routing/personas.yml"
+    prefix:     /personas
+
+Demandantes:
+    resource: "@BufeteBundle/Resources/config/routing/demandantes.yml"
+    prefix:     /demandantes
+
+Laborales:
+    resource: "@BufeteBundle/Resources/config/routing/laborales.yml"
+    prefix:     /laborales
+
+Civiles:
+    resource: "@BufeteBundle/Resources/config/routing/civiles.yml"
+    prefix:     /civiles
+
+Tipoparcticante:
+    resource: "@BufeteBundle/Resources/config/routing/tipoparcticante.yml"
+    prefix:     /tipopracticante
+
+Clinicas:
+    resource: "@BufeteBundle/Resources/config/routing/clinicas.yml"
+    prefix:     /clinicas
+
+Casos:
+    resource: "@BufeteBundle/Resources/config/routing/casos.yml"
+    prefix:     /casos
+
+Paises:
+    resource: "@BufeteBundle/Resources/config/routing/paises.yml"
+    prefix:     /paises
+
+Departamentos:
+    resource: "@BufeteBundle/Resources/config/routing/departamentos.yml"
+    prefix:     /departamentos
+
+Ciudades:
+    resource: "@BufeteBundle/Resources/config/routing/ciudad.yml"
+    prefix:     /ciudad
+
+EstadosCiviles:
+    resource: "@BufeteBundle/Resources/config/routing/estadosciviles.yml"
+    prefix:     /estadosciviles
+
+Bufetes:
+    resource: "@BufeteBundle/Resources/config/routing/bufetes.yml"
+    prefix:     /bufetes
+
+Trabajos:
+    resource: "@BufeteBundle/Resources/config/routing/trabajos.yml"
+    prefix:     /trabajos
+
+TipoAsunto:
+    resource: "@BufeteBundle/Resources/config/routing/tipoasunto.yml"
+    prefix:     /tipoasunto
+
+Tribunales:
+    resource: "@BufeteBundle/Resources/config/routing/tribunales.yml"
+    prefix:     /tribunales
+
+Estudiantes:
+    resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
+    prefix:     /estudiantes

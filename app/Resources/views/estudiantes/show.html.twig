@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Estudiante</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idestudiante</th>
+                <td>{{ estudiante.idEstudiante }}</td>
+            </tr>
+            <tr>
+                <th>Carneestudiante</th>
+                <td>{{ estudiante.carneEstudiante }}</td>
+            </tr>
+            <tr>
+                <th>Cierrepensum</th>
+                <td>{% if estudiante.cierrePensum %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Estadoestudiante</th>
+                <td>{{ estudiante.estadoEstudiante }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('estudiantes_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('estudiantes_edit', { 'idEstudiante': estudiante.idEstudiante }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

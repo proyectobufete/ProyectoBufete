@@ -515,5 +515,9 @@ class Laborales
     {
         return $this->idTrabajo;
     }
-}
 
+    public function __toString()
+    {
+        return $this->idTipolaboral;
+    }
+}

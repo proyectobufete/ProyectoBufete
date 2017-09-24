@@ -1,0 +1,44 @@
+personas_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Personas:index" }
+    methods:  GET
+
+personas_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Personas:new" }
+    methods:  [GET, POST]
+
+personas_editEstudiante:
+    path:     /{idPersona}/editEstudiante
+    defaults: { _controller: "BufeteBundle:Personas:editEstudiante" }
+    methods:  [GET, POST]
+
+personas_editPersonal:
+    path:     /{idPersona}/editPersonal
+    defaults: { _controller: "BufeteBundle:Personas:editPersonal" }
+    methods:  [GET, POST]
+
+personas_delete:
+    path:     /{idPersona}/delete
+    defaults: { _controller: "BufeteBundle:Personas:delete" }
+    methods:  DELETE
+
+personas_registro:
+    path: /registro
+    defaults: {_controller: "BufeteBundle:Personas:registro"}
+    methods: [GET, POST]
+
+personas_detalle:
+    path:     /{idPersona}/detalle
+    defaults: { _controller: "BufeteBundle:Personas:detalle" }
+    methods:  GET
+
+personas_indexAsesores:
+    path:     /indexAsesores
+    defaults: { _controller: "BufeteBundle:Personas:indexAsesores" }
+    methods:  GET
+
+personas_indexEstudiantes:
+    path:     /indexEstudiantes
+    defaults: { _controller: "BufeteBundle:Personas:indexEstudiantes" }
+    methods:  GET

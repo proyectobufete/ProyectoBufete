@@ -1,0 +1,24 @@
+civiles_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Civiles:index" }
+    methods:  GET
+
+civiles_show:
+    path:     /{idCivil}/show
+    defaults: { _controller: "BufeteBundle:Civiles:show" }
+    methods:  GET
+
+civiles_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Civiles:new" }
+    methods:  [GET, POST]
+
+civiles_edit:
+    path:     /{idCivil}/edit
+    defaults: { _controller: "BufeteBundle:Civiles:edit" }
+    methods:  [GET, POST]
+
+civiles_delete:
+    path:     /{idCivil}/delete
+    defaults: { _controller: "BufeteBundle:Civiles:delete" }
+    methods:  DELETE

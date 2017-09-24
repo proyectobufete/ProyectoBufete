@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tipoparcticantes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idtipopracticante</th>
+                <th>Tipopracticante</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipoparcticante in tipoparcticantes %}
+            <tr>
+                <td><a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">{{ tipoparcticante.idtipopracticante }}</a></td>
+                <td>{{ tipoparcticante.tipopracticante }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tipoparcticante_new') }}">Create a new tipoparcticante</a>
+        </li>
+    </ul>
+{% endblock %}

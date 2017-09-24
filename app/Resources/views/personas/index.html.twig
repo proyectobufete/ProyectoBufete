@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lista General de Personas</h1>
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Email</th>
+                <th>Tipo de Usuario</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona in personas %}
+            <tr>
+
+                <td>{{ persona.nombrePersona }}</td>
+                <td>{{ persona.telefonoPersona }}</td>
+                <td>{{ persona.direccionPersona }}</td>
+                <td>{{ persona.emailPersona }}</td>
+                <td>{{ persona.role }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}">Más Detalles</a>
+                        </li>
+                        <li>
+                          {% if persona.role == "ROLE_ESTUDIANTE" %}
+                              <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}">Editar</a>
+
+                          {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+                              <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}">Editar</a>
+                          {% endif %}
+
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('personas_registro') }}">Agregar nuevo Alumno</a>
+        </li>
+        <li>
+            <a href="{{ path('personas_new') }}">Agregar nuevo Personal</a>
+        </li>
+    </ul>
+{% endblock %}

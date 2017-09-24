@@ -1,0 +1,24 @@
+paises_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Paises:index" }
+    methods:  GET
+
+paises_show:
+    path:     /{idPais}/show
+    defaults: { _controller: "BufeteBundle:Paises:show" }
+    methods:  GET
+
+paises_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Paises:new" }
+    methods:  [GET, POST]
+
+paises_edit:
+    path:     /{idPais}/edit
+    defaults: { _controller: "BufeteBundle:Paises:edit" }
+    methods:  [GET, POST]
+
+paises_delete:
+    path:     /{idPais}/delete
+    defaults: { _controller: "BufeteBundle:Paises:delete" }
+    methods:  DELETE

@@ -80,5 +80,10 @@ class Trabajos
     {
         return $this->estadoTrabajo;
     }
-}
 
+    public function __toString()
+ {
+   return $this->trabajo;
+ }
+
+}

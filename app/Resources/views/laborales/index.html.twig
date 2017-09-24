@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Laborales list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idtipolaboral</th>
+                <th>Fechainicio</th>
+                <th>Fechafin</th>
+                <th>Salario</th>
+                <th>Vaciones</th>
+                <th>Indemnizacion</th>
+                <th>Diaseptimos</th>
+                <th>Bonoanual</th>
+                <th>Horasextra</th>
+                <th>Bonoincentivo</th>
+                <th>Diasasueto</th>
+                <th>Aguinaldo</th>
+                <th>Reajustesalarial</th>
+                <th>Salariosretenidos</th>
+                <th>Otros</th>
+                <th>Otros2</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for laborale in laborales %}
+            <tr>
+                <td><a href="{{ path('laborales_show', { 'idTipolaboral': laborale.idTipolaboral }) }}">{{ laborale.idTipolaboral }}</a></td>
+                <td>{% if laborale.fechaInicio %}{{ laborale.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if laborale.fechaFin %}{{ laborale.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ laborale.salario }}</td>
+                <td>{% if laborale.vaciones %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.indemnizacion %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.diaseptimos %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.bonoanual %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.horasextra %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.bonoincentivo %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.diasasueto %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.aguinaldo %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.reajustesalarial %}Yes{% else %}No{% endif %}</td>
+                <td>{% if laborale.salariosretenidos %}Yes{% else %}No{% endif %}</td>
+                <td>{{ laborale.otros }}</td>
+                <td>{{ laborale.otros2 }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('laborales_show', { 'idTipolaboral': laborale.idTipolaboral }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('laborales_edit', { 'idTipolaboral': laborale.idTipolaboral }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('laborales_new') }}">Create a new laborale</a>
+        </li>
+    </ul>
+{% endblock %}

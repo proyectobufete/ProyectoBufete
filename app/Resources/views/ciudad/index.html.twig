@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ciudads list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idciudad</th>
+                <th>Postalciudad</th>
+                <th>Ciudad</th>
+                <th>Estadociudad</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ciudad in ciudads %}
+            <tr>
+                <td><a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">{{ ciudad.idCiudad }}</a></td>
+                <td>{{ ciudad.postalCiudad }}</td>
+                <td>{{ ciudad.ciudad }}</td>
+                <td>{% if ciudad.estadoCiudad %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ciudad_new') }}">Create a new ciudad</a>
+        </li>
+    </ul>
+{% endblock %}

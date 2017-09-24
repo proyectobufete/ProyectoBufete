@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Clinicas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idclinica</th>
+                <th>Nombreclinica</th>
+                <th>Fechaasignacion</th>
+                <th>Fechafin</th>
+                <th>Observaciones</th>
+                <th>Estadoclinica</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for clinica in clinicas %}
+            <tr>
+                <td><a href="{{ path('clinicas_show', { 'idClinica': clinica.idClinica }) }}">{{ clinica.idClinica }}</a></td>
+                <td>{{ clinica.nombreClinica }}</td>
+                <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ clinica.observaciones }}</td>
+                <td>{{ clinica.estadoClinica }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('clinicas_show', { 'idClinica': clinica.idClinica }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('clinicas_edit', { 'idClinica': clinica.idClinica }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('clinicas_new') }}">Create a new clinica</a>
+        </li>
+    </ul>
+{% endblock %}
