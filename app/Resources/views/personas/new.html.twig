@@ -1,16 +1,89 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act5 %} active {% endblock %}
+{% block ac13 %} active {% endblock %}
+      {% block title %}
+        <h1>Crear Persona</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Persona creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(form.nombrePersona,'Nombre')}}
+                {{form_errors(form) }}
+                {{form_widget(form.nombrePersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                  {{form_label(form.telefonoPersona,'Teléfono')}}
+                  {{form_errors(form) }}
+                  {{form_widget(form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(form.direccionPersona,'Dirección')}}
+                {{form_widget(form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(form.idBufete,'Bufete')}}
+                {{form_widget(form.idBufete,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(form.emailPersona,'Correo Electrónico')}}
+                {{form_widget(form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(form.usuarioPersona,'Nombre de Usuario')}}
+                {{form_widget(form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(form.passPersona,'Contraseña')}}
+                {{form_widget(form.passPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(form.role,'Rol')}}
+                {{form_widget(form.role)}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="">
+                  {{form_label(form.estadoPersona,'Estado')}}
+                  {{form_widget(form.estadoPersona)}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <a href="{{ path('personas_indexAsesores') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {% for message in app.session.flashbag().get('status') %}
+              <div class="alert alert-danger text-center">
+                  <strong>¡Error! </strong>{{message}}
+              </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('personas_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
 {% endblock %}
