@@ -80,3 +80,11 @@ bufete_tribunales:
 bufete_estudiantes:
         resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
         prefix:   /estudiantes
+
+bufete_infofinal:
+        resource: "@BufeteBundle/Resources/config/routing/infofinal.yml"
+        prefix:   /infofinal
+
+bufete_revisiones:
+        resource: "@BufeteBundle/Resources/config/routing/revisiones.yml"
+        prefix:   /revisiones

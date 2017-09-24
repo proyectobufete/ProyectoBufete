@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Infofinal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idifno</th>
+                <td>{{ infofinal.idIfno }}</td>
+            </tr>
+            <tr>
+                <th>Fechainfo</th>
+                <td>{% if infofinal.fechaInfo %}{{ infofinal.fechaInfo|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ infofinal.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>Rutainfo</th>
+                <td>{{ infofinal.rutaInfo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('infofinal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('infofinal_edit', { 'idIfno': infofinal.idIfno }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

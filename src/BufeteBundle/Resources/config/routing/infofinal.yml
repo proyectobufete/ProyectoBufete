@@ -1,0 +1,24 @@
+infofinal_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Infofinal:index" }
+    methods:  GET
+
+infofinal_show:
+    path:     /{idIfno}/show
+    defaults: { _controller: "BufeteBundle:Infofinal:show" }
+    methods:  GET
+
+infofinal_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Infofinal:new" }
+    methods:  [GET, POST]
+
+infofinal_edit:
+    path:     /{idIfno}/edit
+    defaults: { _controller: "BufeteBundle:Infofinal:edit" }
+    methods:  [GET, POST]
+
+infofinal_delete:
+    path:     /{idIfno}/delete
+    defaults: { _controller: "BufeteBundle:Infofinal:delete" }
+    methods:  DELETE

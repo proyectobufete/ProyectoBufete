@@ -1,0 +1,24 @@
+revisiones_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Revisiones:index" }
+    methods:  GET
+
+revisiones_show:
+    path:     /{idRevision}/show
+    defaults: { _controller: "BufeteBundle:Revisiones:show" }
+    methods:  GET
+
+revisiones_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Revisiones:new" }
+    methods:  [GET, POST]
+
+revisiones_edit:
+    path:     /{idRevision}/edit
+    defaults: { _controller: "BufeteBundle:Revisiones:edit" }
+    methods:  [GET, POST]
+
+revisiones_delete:
+    path:     /{idRevision}/delete
+    defaults: { _controller: "BufeteBundle:Revisiones:delete" }
+    methods:  DELETE
