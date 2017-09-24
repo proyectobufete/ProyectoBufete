@@ -103,4 +103,9 @@ BufeteBundle\Entity\Personas:
                 Id_Bufete:
                     referencedColumnName: Id_Bufete
             orphanRemoval: false
+    oneToOne:
+        estudiantes:
+            targetEntity: Estudiantes
+            mappedBy: idPersona
+            cascade: [persist]
     lifecycleCallbacks: {  }

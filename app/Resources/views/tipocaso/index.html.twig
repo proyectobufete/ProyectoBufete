@@ -1,41 +1,67 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act2 %}
+  active
+{% endblock %}
+{% block ac6 %}
+  active
+{% endblock %}
+{% block title %}
+  <h1>Listado de Tipo de casos</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tipocasos list</h1>
+  <div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('tipocaso_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Agregar Tipo de Caso
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <br>
+      <br>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Idtipo</th>
-                <th>Tipo</th>
-                <th>Estadotipo</th>
-                <th>Actions</th>
+      <div class="col-md-12 col-sm-12 col-xs-6">
+        <table class="table table-bordered ">
+          <thead>
+            <tr role="row" class="">
+              <th>Tipo</th>
+              <th>Estado
+              </th>
+              <th>Opciones</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for tipocaso in tipocasos %}
-            <tr>
-                <td><a href="{{ path('tipocaso_show', { 'idTipo': tipocaso.idTipo }) }}">{{ tipocaso.idTipo }}</a></td>
+          </thead>
+          <tbody>
+            {% for tipocaso in tipocasos %}
+              <tr>
                 <td>{{ tipocaso.tipo }}</td>
-                <td>{% if tipocaso.estadoTipo %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('tipocaso_show', { 'idTipo': tipocaso.idTipo }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('tipocaso_edit', { 'idTipo': tipocaso.idTipo }) }}">edit</a>
-                        </li>
-                    </ul>
+                  {% if tipocaso.estadoTipo %}Activo{% else %}No{% endif %}
                 </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('tipocaso_new') }}">Create a new tipocaso</a>
-        </li>
-    </ul>
+                <td>
+                  <a href="{{ path('tipocaso_show', { 'idTipo': tipocaso.idTipo }) }}" class="btn yellow">Ver</a>
+                  <a href="{{ path('tipocaso_edit', { 'idTipo': tipocaso.idTipo }) }}" class="btn blue ">Editar</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 {% endblock %}

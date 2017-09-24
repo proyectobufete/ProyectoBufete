@@ -1,36 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac5 %} active {% endblock %}
 
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tribunale</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                    <th>Id tribunal</th>
+                    <td>{{ tribunale.idTribunal }}</td>
+                </tr>
+                <tr>
+                    <th>Tribunal</th>
+                    <td>{{ tribunale.tribunal }}</td>
+                </tr>
+                <tr>
+                    <th>Estado </th>
+                    <td>{% if tribunale.estadoTribunal %}Activo{% else %}No{% endif %}</td>
+                </tr>
+              </tbody>
+          </table>
 
-    <table>
-        <tbody>
+          <table>
             <tr>
-                <th>Idtribunal</th>
-                <td>{{ tribunale.idTribunal }}</td>
+              <a href="{{ path('tribunales_index') }}" class="btn grey-cascade">Regresar</a>
             </tr>
             <tr>
-                <th>Tribunal</th>
-                <td>{{ tribunale.tribunal }}</td>
+              <a href="{{ path('tribunales_edit', { 'idTribunal': tribunale.idTribunal }) }}" class="btn blue">Editar</a>
             </tr>
             <tr>
-                <th>Estadotribunal</th>
-                <td>{% if tribunale.estadoTribunal %}Yes{% else %}No{% endif %}</td>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('tribunales_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('tribunales_edit', { 'idTribunal': tribunale.idTribunal }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}

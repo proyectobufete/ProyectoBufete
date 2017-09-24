@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+{% block act20 %} active {% endblock %}
+{% block ac22 %} active {% endblock %}
+
+{% block title %}
+  <h1>Casos Civiles</h1>
+{% endblock %}
+{% block body %}
+<div class="portlet-body">
+
+    <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-6" >
+      <table class="table table-bordered ">
+        <thead>
+          <tr role="row" class="">
+            <th>No de caso</th>
+            <th>Fecha </th>
+            <th>Demandante</th>
+            <th>Dorección Demandante</th>
+            <th>Nombre de demandado</th>
+            <th>Direccion Demandado</th>
+            <th>Nombre Estudiante</th>
+            <th>Carné Estudiante</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for caso in casos %}
+          <tr>
+            <td>{{ caso.noCaso }}</td>
+            <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+            <td>{{ caso.idDemandante.nombreDemandante }}</td>
+            <td>{{ caso.idDemandante.direccionDemandante  }}</td>
+            <td>{{ caso.nombreDemandado }}</td>
+            <td>{{ caso.dirDemandado }}</td>
+            <td>{{ caso.idEstudiante.idPersona.nombrePersona }}</td>
+            <td>{{ caso.idEstudiante.carneEstudiante }}</td>
+            <td>{{ caso.estadoCaso }}</td>
+              <td>
+                  <a href="{{ path('casos_showcivil', { 'idCaso': caso.idCaso }) }}" class="btn yellow" >Ver</a>
+              </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+  </div>
+ </div>
+</div>
+{% endblock %}

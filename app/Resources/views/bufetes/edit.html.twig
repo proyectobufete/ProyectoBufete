@@ -1,21 +1,74 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac14 %} active {% endblock %}
+      {% block title %}
+        <h1>Editar Bufete</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Bufete edit</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+          <div class="form-group ">
+            <div class="col-md-4">
+              {{form_label(edit_form.nombreBufete,'Nombre:')}}
+              {{ form_widget(edit_form.nombreBufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-4">
+              {{form_label(edit_form.telefono1Bufete,'Teléfono 1:')}}
+              {{ form_widget(edit_form.telefono1Bufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-4">
+              {{form_label(edit_form.telefono2,'Teléfono 2:')}}
+              {{ form_widget(edit_form.telefono2,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-4">
+              {{form_label(edit_form.emailBufete,'Correo Electrónico:')}}
+              {{ form_widget(edit_form.emailBufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-4">
+              {{form_label(edit_form.direccionBufete,'Dirección:')}}
+              {{ form_widget(edit_form.direccionBufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-4">
+              {{form_label(edit_form.idCiudad,'Ciudad:')}}
+              {{ form_widget(edit_form.idCiudad,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-4">
+              <label class="cr-styled">
+                  {{ form_widget(edit_form.estadoBufete)}}
+                  <i class="fa"></i>
+                  {{form_label(edit_form.estadoBufete,'Estado')}}
+              </label>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+              <input type="submit" value="Edit" class="btn blue" />
+              <a href="{{ path('bufetes_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('bufetes_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}
