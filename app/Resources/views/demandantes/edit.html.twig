@@ -1,21 +1,92 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act5 %}
+  active
+{% endblock %}
+{% block ac16 %}
+  active
+{% endblock %}
+      {% block title %}
+        <h1>Editar Demandante</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Demandante edit</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.nombreDemandante,'Nombre')}}
+                {{form_errors(edit_form) }}
+                {{form_widget(edit_form.nombreDemandante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-1">
+                  {{form_label(edit_form.edadDemandante,'Edad')}}
+                  {{form_errors(edit_form) }}
+                  {{form_widget(edit_form.edadDemandante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(edit_form.telefonoDemandante,'Teléfono')}}
+                {{ form_errors(edit_form) }}
+                {{ form_widget(edit_form.telefonoDemandante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+                <div class="col-md-2">
+                    {{form_label(edit_form.dpiDemandante,'DPI')}}
+                    {{ form_errors(edit_form) }}
+                    {{ form_widget(edit_form.dpiDemandante,{'attr':{'class' : 'form-control'}})}}
+                </div>
+                <div class="col-md-2">
+                  {{form_label(edit_form.cedulaDemandante,'Cedula')}}
+                  {{ form_errors(edit_form) }}
+                  {{ form_widget(edit_form.cedulaDemandante,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                {{form_label(edit_form.direccionDemandante,'Dirección')}}
+                {{ form_errors(edit_form) }}
+                {{ form_widget(edit_form.direccionDemandante,{'attr':{'class':'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                {{form_label(edit_form.dirtrabajoDemandante,'Direccion de Trabajo')}}
+                {{ form_errors(edit_form) }}
+                {{ form_widget(edit_form.dirtrabajoDemandante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(edit_form.idCiudad,'Ciudad')}}
+                {{ form_errors(edit_form) }}
+                {{ form_widget(edit_form.idCiudad,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.idEstadocivil,'Estado Civil')}}
+                {{ form_errors(edit_form) }}
+                {{ form_widget(edit_form.idEstadocivil,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.idTrabajo,'Profesión u Oficio')}}
+                {{ form_errors(edit_form) }}
+                {{ form_widget(edit_form.idTrabajo,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
+              <input type="submit" value="Edit" class="btn blue" />
+              <a href="{{ path('demandantes_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('demandantes_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

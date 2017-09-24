@@ -1,56 +1,70 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act5 %}
+  active
+{% endblock %}
+{% block ac16 %}
+  active
+{% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 
 {% block body %}
-    <h1>Demandante</h1>
 
-    <table>
+<div class="portlet-body">
+  <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+    <div class="col-md-4">
+    <table class="table table-striped table-bordered table-hover dataTable no-footer">
         <tbody>
-            <tr>
-                <th>Iddemandante</th>
-                <td>{{ demandante.idDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Nombredemandante</th>
-                <td>{{ demandante.nombreDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Edaddemandante</th>
-                <td>{{ demandante.edadDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Dpidemandante</th>
-                <td>{{ demandante.dpiDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Cedulademandante</th>
-                <td>{{ demandante.cedulaDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Direcciondemandante</th>
-                <td>{{ demandante.direccionDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Dirtrabajodemandante</th>
-                <td>{{ demandante.dirtrabajoDemandante }}</td>
-            </tr>
-            <tr>
-                <th>Telefonodemandante</th>
-                <td>{{ demandante.telefonoDemandante }}</td>
-            </tr>
+          <tr>
+              <th>Id Demandante</th>
+              <td>{{ demandante.idDemandante }}</td>
+          </tr>
+          <tr>
+              <th>Nombre</th>
+              <td>{{ demandante.nombreDemandante }}</td>
+          </tr>
+          <tr>
+              <th>Edad</th>
+              <td>{{ demandante.edadDemandante }}</td>
+          </tr>
+          <tr>
+              <th>DPI</th>
+              <td>{{ demandante.dpiDemandante }}</td>
+          </tr>
+          <tr>
+              <th>Cedula</th>
+              <td>{{ demandante.cedulaDemandante }}</td>
+          </tr>
+          <tr>
+              <th>Dirección</th>
+              <td>{{ demandante.direccionDemandante }}</td>
+          </tr>
+          <tr>
+              <th>Dirección de Trabajo</th>
+              <td>{{ demandante.dirtrabajoDemandante }}</td>
+          </tr>
+          <tr>
+              <th>Teléfono</th>
+              <td>{{ demandante.telefonoDemandante }}</td>
+          </tr>
         </tbody>
     </table>
+    <table>
+      <tr>
+        <a href="{{ path('demandantes_index') }}" class="btn default">Regresar</a>
+      </tr>
+      <tr>
+        <a href="{{ path('demandantes_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
+      </tr>
+      <tr>
+        {{ form_start(delete_form) }}
+            <button type="submit" class="btn red" name="Delete">Eliminar</button>
+        {{ form_end(delete_form) }}
+      </tr>
+    </table>
+    </div>
+  </div>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('demandantes_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('demandantes_edit', { 'idDemandante': demandante.idDemandante }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

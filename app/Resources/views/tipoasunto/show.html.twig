@@ -1,32 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tipoasunto</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+            <tbody>
+                <tr>
+                    <th>Idtipoasunto</th>
+                    <td>{{ tipoasunto.idTipoasunto }}</td>
+                </tr>
+                <tr>
+                    <th>Asunto</th>
+                    <td>{{ tipoasunto.asunto }}</td>
+                </tr>
+            </tbody>
+          </table>
 
-    <table>
-        <tbody>
+          <table>
             <tr>
-                <th>Idtipoasunto</th>
-                <td>{{ tipoasunto.idTipoasunto }}</td>
+              <a href="{{ path('tipoasunto_index') }}" class="btn default">Regresar</a>
             </tr>
             <tr>
-                <th>Asunto</th>
-                <td>{{ tipoasunto.asunto }}</td>
+              <a href="{{ path('tipoasunto_edit', { 'idTipoasunto': tipoasunto.idTipoasunto }) }}" class="btn blue">Editar</a>
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('tipoasunto_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('tipoasunto_edit', { 'idTipoasunto': tipoasunto.idTipoasunto }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <tr>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
+            </tr>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}
