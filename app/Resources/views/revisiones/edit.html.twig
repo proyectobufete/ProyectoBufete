@@ -3,8 +3,15 @@
 {% block body %}
     <h1>Revisione edit</h1>
 
-    {{ form_start(edit_form) }}
+        <a href="{{ asset ('uploads/final/'~revisione.ruta) }}" download>
+            <img src="{{ asset ('uploads/final/pdf.png')}}" width="28" height="30">
+            {{ asset (revisione.ruta) }}
+        </a>
+
+    {{ form_start(edit_form, {'enctype':'multipart/form-data'}) }}
         {{ form_widget(edit_form) }}
+
+
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 

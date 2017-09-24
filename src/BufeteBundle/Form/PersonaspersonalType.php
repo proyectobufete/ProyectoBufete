@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class PersonasnuevasType extends AbstractType
+class PersonaspersonalType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -40,9 +40,6 @@ class PersonasnuevasType extends AbstractType
             ->add('role', ChoiceType::class,array(
                 "label" => "Roles",
                     "choices"=> array(
-                        "Administrador" =>"ROLE_ADMIN",
-
-                        "Asesor" =>"ROLE_ASESOR",
                         "Secretario" =>"ROLE_SECRETARIO",
                         "Director" =>"ROLE_DIRECTOR",
               ),
