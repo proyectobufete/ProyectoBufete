@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Estudiantes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idestudiante</th>
+                <th>Carneestudiante</th>
+                <th>Cierrepensum</th>
+                <th>Estadoestudiante</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for estudiante in estudiantes %}
+            <tr>
+                <td><a href="{{ path('estudiantes_show', { 'idEstudiante': estudiante.idEstudiante }) }}">{{ estudiante.idEstudiante }}</a></td>
+                <td>{{ estudiante.carneEstudiante }}</td>
+                <td>{% if estudiante.cierrePensum %}Yes{% else %}No{% endif %}</td>
+                <td>{{ estudiante.estadoEstudiante }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('estudiantes_show', { 'idEstudiante': estudiante.idEstudiante }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('estudiantes_edit', { 'idEstudiante': estudiante.idEstudiante }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('estudiantes_new') }}">Create a new estudiante</a>
+        </li>
+    </ul>
+{% endblock %}

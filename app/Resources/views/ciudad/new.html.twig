@@ -1,16 +1,59 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac %} active {% endblock %}
+      {% block title %}
+        <h1>Crear Ciudad</h1>
+      {% endblock %}
 {% block body %}
-    <h1>Ciudad creation</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-4">
+          <div class="form-group ">
+            <div class="col-md-5">
+              {{form_label(form.postalCiudad,'Código Postal')}}
+              {{ form_widget(form.postalCiudad,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-5">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+              {{form_label(form.ciudad,'Nombre Ciudad')}}
+              {{ form_widget(form.ciudad,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-5">
 
-    <ul>
-        <li>
-            <a href="{{ path('ciudad_index') }}">Back to the list</a>
-        </li>
-    </ul>
+              {{form_label(form.idDepartamento,'Departamento')}}
+              {{ form_widget(form.idDepartamento,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-5">
+              <label class="cr-styled">
+                  {{ form_widget(form.estadoCiudad)}}
+                  <i class="fa"></i>
+                  {{form_label(form.estadoCiudad,'Estado')}}
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </div>
+        </div>
+        <div class="colorformpie">
+        <div class="form-actions ">
+          <div class="row ">
+            <div class="col-md-offset-4 col-md-9 ">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <a href="{{ path('ciudad_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
 {% endblock %}
