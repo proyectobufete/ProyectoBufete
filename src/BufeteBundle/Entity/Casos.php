@@ -515,5 +515,9 @@ class Casos
     {
         return $this->idTipoasunto;
     }
-}
 
+    public function __toString()
+    {
+        return $this->pruebasCaso;
+    }
+}

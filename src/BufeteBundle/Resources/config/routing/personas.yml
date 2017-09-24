@@ -1,0 +1,24 @@
+personas_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Personas:index" }
+    methods:  GET
+
+personas_show:
+    path:     /{idPersona}/show
+    defaults: { _controller: "BufeteBundle:Personas:show" }
+    methods:  GET
+
+personas_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Personas:new" }
+    methods:  [GET, POST]
+
+personas_edit:
+    path:     /{idPersona}/edit
+    defaults: { _controller: "BufeteBundle:Personas:edit" }
+    methods:  [GET, POST]
+
+personas_delete:
+    path:     /{idPersona}/delete
+    defaults: { _controller: "BufeteBundle:Personas:delete" }
+    methods:  DELETE
