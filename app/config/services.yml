@@ -4,6 +4,13 @@ parameters:
 #    parameter_name: value
 
 services:
+    app.autocont:
+        class: BufeteBundle\Services\Autocont
+        arguments: ["null"]
+
+    app.registrocunoc:
+        class: BufeteBundle\Services\Registrocunoc
+        arguments: ['carne']
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
