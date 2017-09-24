@@ -1,21 +1,51 @@
-casos_index:
-    path:     /
-    defaults: { _controller: "BufeteBundle:Casos:index" }
+casos_casoslaborales:
+    path:     /casoslaborales
+    defaults: { _controller: "BufeteBundle:Casos:laboralesEstudiante" }
     methods:  GET
 
-casos_show:
-    path:     /{idCaso}/show
-    defaults: { _controller: "BufeteBundle:Casos:show" }
+casos_casosciviles:
+    path:     /casosciviles
+    defaults: { _controller: "BufeteBundle:Casos:civilesEstudiante" }
     methods:  GET
 
-casos_new:
-    path:     /new
-    defaults: { _controller: "BufeteBundle:Casos:new" }
+casos_indexlaborales:
+    path:     /laborales
+    defaults: { _controller: "BufeteBundle:Casos:indexLaborales" }
+    methods:  GET
+
+casos_indexciviles:
+    path:     /civiles
+    defaults: { _controller: "BufeteBundle:Casos:indexCiviles" }
+    methods:  GET
+
+casos_showlaboral:
+    path:     /{idCaso}/showlaboral
+    defaults: { _controller: "BufeteBundle:Casos:showLaboral" }
+    methods:  GET
+
+casos_showcivil:
+    path:     /{idCaso}/showcivil
+    defaults: { _controller: "BufeteBundle:Casos:showCivil" }
+    methods:  GET
+
+casos_newlaboral:
+    path:     /newlaboral
+    defaults: { _controller: "BufeteBundle:Casos:newLaboral" }
     methods:  [GET, POST]
 
-casos_edit:
-    path:     /{idCaso}/edit
-    defaults: { _controller: "BufeteBundle:Casos:edit" }
+casos_newcivil:
+    path:     /newcivil
+    defaults: { _controller: "BufeteBundle:Casos:newCivil" }
+    methods:  [GET, POST]
+
+casos_editlaboral:
+    path:     /{idCaso}/editlaboral
+    defaults: { _controller: "BufeteBundle:Casos:editLaboral" }
+    methods:  [GET, POST]
+
+casos_editcivil:
+    path:     /{idCaso}/editcivil
+    defaults: { _controller: "BufeteBundle:Casos:editCivil" }
     methods:  [GET, POST]
 
 casos_delete:

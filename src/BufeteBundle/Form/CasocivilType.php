@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
-class CasosType extends AbstractType
+class CasoscivilType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -67,8 +67,8 @@ class CasosType extends AbstractType
         ))
         //->add('idTipo')
         ->add('idTipoasunto')
-        ->add('laborales', 'BufeteBundle\Form\LaboralesType', array(
-            'label' => 'Laborales',
+        ->add('civiles', 'BufeteBundle\Form\CivilesType', array(
+            'label' => 'Civiles',
         ))
         ;
     }

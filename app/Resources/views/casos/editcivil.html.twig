@@ -1,0 +1,116 @@
+{% extends 'layout.html.twig' %}
+{% block act3 %} active {% endblock %}
+{% block ac8 %} active {% endblock %}
+      {% block title %}
+        <h1>Ficha de Adjudicación de Casos Ramo Civil</h1>
+      {% endblock %}
+
+{% block body %}
+
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.fechaCaso,'Fecha')}}
+                {{form_widget(edit_form.fechaCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.noCaso,'No. Caso')}}
+                {{form_widget(edit_form.noCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.idDemandante,'Nombre del Demandante')}}
+                {{form_widget(edit_form.idDemandante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.asunto,'Asunto')}}
+                {{form_widget(edit_form.asunto,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_widget(edit_form.civiles)}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.pruebasCaso,'Pruebas')}}
+                {{form_widget(edit_form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for=""><h3><b>Datos del Demandado</b></h3></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.nombreDemandado,'Nombre Completo')}}
+                {{form_widget(edit_form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-1">
+                {{form_label(edit_form.otroDemandado,'Edad')}}
+                {{form_widget(edit_form.otroDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-3">
+                {{form_label(edit_form.telefonoDemandado,'Teléfono')}}
+                {{form_widget(edit_form.telefonoDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.dirDemandado,'Dirección')}}
+                {{form_widget(edit_form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.dirnotificacionDemandado,'Dirección de Notificación')}}
+                {{form_widget(edit_form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <hr style="color:black;" />
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.idEstudiante,'Estudiante')}}
+                {{form_widget(edit_form.idEstudiante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.idPersona,'Asesor')}}
+                {{form_widget(edit_form.idPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.idTribunal,'Tribunal')}}
+                {{form_widget(edit_form.idTribunal,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.estadoCaso,'Estado del Caso')}}
+                {{form_widget(edit_form.estadoCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
+              <button type="submit" name="Create" class="btn green">Editar</button>
+              <a href="{{ path('casos_indexciviles') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
+{% endblock %}

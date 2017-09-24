@@ -1,0 +1,236 @@
+{% extends 'layout.html.twig' %}
+{% block act3 %} active {% endblock %}
+{% block ac9 %} active {% endblock %}
+
+      {% block title %}
+        <h1>Editar Caso Laboral</h1>
+      {% endblock %}
+
+{% block body %}
+
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.fechaCaso,'Fecha')}}
+                {{form_widget(edit_form.fechaCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                <b>Número de caso</b>
+                {{form_widget(edit_form.noCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.asunto,'Asunto')}}
+                {{form_widget(edit_form.asunto,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-2">
+                <label for=""><h4><b>Demandante</b></h4></label>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                  {{form_widget(edit_form.idDemandante,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-2">
+                <label for=""><h4><b>Datos del Proceso</b></h4></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(edit_form.laborales.fechaInicio,'Inicio de la Relación')}}
+                {{form_widget(edit_form.laborales.fechaInicio,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-1"></div>
+              <div class="col-md-2">
+                {{form_label(edit_form.laborales.fechaFin,'Fin de la Relación')}}
+                {{form_widget(edit_form.laborales.fechaFin,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(edit_form.laborales.salario,'Salario Devengado')}}
+                {{form_widget(edit_form.laborales.salario,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-3">
+                {{form_label(edit_form.laborales.idTrabajo,' Tabajo Desempeñado')}}
+                {{form_widget(edit_form.laborales.idTrabajo,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-1">
+                <label for=""><h4><b>Prestaciones que reclama</b></h4></label>
+              </div>
+            </div>
+            <div class="col-md-offset-1">
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="cr-styled">
+                      {{ form_widget(edit_form.laborales.vaciones)}}
+                      <i class="fa"></i>
+                      {{form_label(edit_form.laborales.vaciones,'Vacaciones')}}
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="cr-styled">
+                        {{ form_widget(edit_form.laborales.diasasueto)}}
+                        <i class="fa"></i>
+                        {{form_label(edit_form.laborales.diasasueto,'Dias de Asueto')}}
+                    </label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="cr-styled">
+                      {{ form_widget(edit_form.laborales.indemnizacion)}}
+                      <i class="fa"></i>
+                      {{form_label(edit_form.laborales.indemnizacion,'Indemnización')}}
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="cr-styled">
+                        {{ form_widget(edit_form.laborales.aguinaldo)}}
+                        <i class="fa"></i>
+                        {{form_label(edit_form.laborales.aguinaldo,'Aguinaldo')}}
+                    </label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="cr-styled">
+                      {{ form_widget(edit_form.laborales.diaseptimos)}}
+                      <i class="fa"></i>
+                      {{form_label(edit_form.laborales.diaseptimos,'Dias Septimos')}}
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="cr-styled">
+                        {{ form_widget(edit_form.laborales.reajustesalarial)}}
+                        <i class="fa"></i>
+                        {{form_label(edit_form.laborales.reajustesalarial,'Reajuste Salarial')}}
+                    </label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="cr-styled">
+                      {{ form_widget(edit_form.laborales.bonoanual)}}
+                      <i class="fa"></i>
+                      {{form_label(edit_form.laborales.bonoanual,'Bono Anual')}}
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="cr-styled">
+                        {{ form_widget(edit_form.laborales.salariosretenidos)}}
+                        <i class="fa"></i>
+                        {{form_label(edit_form.laborales.salariosretenidos,'Salarios Retenidos')}}
+                    </label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="cr-styled">
+                      {{ form_widget(edit_form.laborales.horasextra)}}
+                      <i class="fa"></i>
+                      {{form_label(edit_form.laborales.horasextra,'Horas Extraordinarias')}}
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="cr-styled">
+                        {{ form_widget(edit_form.laborales.bonoincentivo)}}
+                        <i class="fa"></i>
+                        {{form_label(edit_form.laborales.bonoincentivo,'Bono Incentivo')}}
+                    </label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  {{form_label(edit_form.laborales.otros,'Otros')}}
+                  {{ form_widget(edit_form.laborales.otros,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.pruebasCaso,'Pruebas')}}
+                {{ form_widget(edit_form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-2">
+                <label for=""><h4><b>Datos del Demandado</b></h4></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.nombreDemandado,'Patrono o Empresa')}}
+                {{ form_widget(edit_form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.dirDemandado,'Dirección')}}
+                {{ form_widget(edit_form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                {{form_label(edit_form.dirnotificacionDemandado,'Dirección de Notificación')}}
+                {{ form_widget(edit_form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(edit_form.telefonoDemandado,'Teléfono')}}
+                {{ form_widget(edit_form.telefonoDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-3">
+                {{form_label(edit_form.otroDemandado,'Otros')}}
+                {{ form_widget(edit_form.otroDemandado,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+           <hr>
+           <div class="row">
+             <div class="col-md-3">
+               {{form_label(edit_form.idEstudiante,'Nombre del Estudiante')}}
+               {{ form_widget(edit_form.idEstudiante,{'attr':{'class' : 'form-control'}}) }}
+             </div>
+             <div class="col-md-2">
+               {{form_label(edit_form.idPersona,'Nombre del Estudiante')}}
+               {{ form_widget(edit_form.idPersona,{'attr':{'class' : 'form-control'}}) }}
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-md-3">
+               {{form_label(edit_form.idTribunal,'Tribunal')}}
+               {{ form_widget(edit_form.idTribunal,{'attr':{'class' : 'form-control'}}) }}
+             </div>
+             <div class="col-md-2">
+               {{form_label(edit_form.estadoCaso,'Estado del caso')}}
+               {{ form_widget(edit_form.estadoCaso,{'attr':{'class' : 'form-control'}}) }}
+             </div>
+           </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
+              <button type="submit" name="Create" class="btn green">Editar</button>
+              <a href="{{ path('casos_indexlaborales') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
+
+{% endblock %}
