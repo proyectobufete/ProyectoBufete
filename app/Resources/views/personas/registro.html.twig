@@ -49,13 +49,17 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               {{form_label(form.nombrePersona,'Nombre Estudiante')}}
               {{form_widget(form.nombrePersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-2">
-              {{form_label(form.telefonoPersona,'Número de Teléfono')}}
+              {{form_label(form.telefonoPersona,'Número de Teléfono 1')}}
               {{form_widget(form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-2">
+              {{form_label(form.tel2Persona,'Número de Teléfono 2')}}
+              {{form_widget(form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
             </div>
           </div>
           <div class="row">
