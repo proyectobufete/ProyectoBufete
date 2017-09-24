@@ -573,5 +573,4 @@ class Casos
       return $this->civiles;
     }
 
-
 }
