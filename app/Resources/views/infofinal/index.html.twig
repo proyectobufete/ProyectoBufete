@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Infofinals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idifno</th>
+                <th>Fechainfo</th>
+                <th>Observaciones</th>
+                <th>Rutainfo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for infofinal in infofinals %}
+            <tr>
+                <td><a href="{{ path('infofinal_show', { 'idIfno': infofinal.idIfno }) }}">{{ infofinal.idIfno }}</a></td>
+                <td>{% if infofinal.fechaInfo %}{{ infofinal.fechaInfo|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ infofinal.observaciones }}</td>
+                <td>{{ infofinal.rutaInfo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('infofinal_show', { 'idIfno': infofinal.idIfno }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('infofinal_edit', { 'idIfno': infofinal.idIfno }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('infofinal_new') }}">Create a new infofinal</a>
+        </li>
+    </ul>
+{% endblock %}
