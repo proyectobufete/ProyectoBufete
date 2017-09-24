@@ -200,7 +200,10 @@
                     <a href="{{ path('casos_casosciviles') }}" class="btn default">Regresar</a>
                   </tr>
                   <tr>
-                    <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso}) }}" class="btn btn-purple">Agregar Revision</a>
+                    <a href="{{ path('revisiones_new', { 'idCaso': caso.idCaso}) }}" class="btn btn-purple">Agregar Revision</a>
+                  </tr>
+                  <tr>
+                    <a href="{{ path('revisiones_revisonestudiante', { 'idCaso': caso.idCaso}) }}" class="btn btn-Black">Ver Revision</a>
                   </tr>
                 {% endif %}
                 {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
