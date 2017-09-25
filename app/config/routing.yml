@@ -82,3 +82,7 @@ InfoFinal:
 Revisiones:
     resource: "@BufeteBundle/Resources/config/routing/revisiones.yml"
     prefix:     /revisiones
+
+AsignarClinica:
+    resource: "@BufeteBundle/Resources/config/routing/asignacionclinica.yml"
+    prefix:     /asignacionclinica

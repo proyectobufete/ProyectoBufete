@@ -88,3 +88,7 @@ bufete_infofinal:
 bufete_revisiones:
         resource: "@BufeteBundle/Resources/config/routing/revisiones.yml"
         prefix:   /revisiones
+
+bufete_asignacionclinica:
+        resource: "@BufeteBundle/Resources/config/routing/asignacionclinica.yml"
+        prefix:   /asignacionclinica
