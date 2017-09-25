@@ -28,11 +28,14 @@ class CasosController extends Controller
     public function indexLaboralesAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso"
-        );
-        $casos = $query->getResult();
+          $bufete = $this->getUser()->getIdBufete();
+          $query = $em->createQuery(
+            "SELECT c FROM BufeteBundle:Casos c
+            INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+            ORDER BY c.fechaCaso DESC"
+          );
+          $casos = $query->getResult();
+
 
         return $this->render('casos/indexlaborales.html.twig', array(
             'casos' => $casos,
@@ -46,9 +49,11 @@ class CasosController extends Controller
     public function indexCivilesAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $bufete = $this->getUser()->getIdBufete();
         $query = $em->createQuery(
           "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso"
+          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+          ORDER BY c.fechaCaso DESC"
         );
         $casos = $query->getResult();
 
@@ -112,7 +117,7 @@ class CasosController extends Controller
         $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $idasignatario = $this->getUser()->getIdPersona();
 
-        $id_estudiante = null; $cantidad = null; $laborales = null; $flush = null; $mensaje = null; $confirm = false;
+        $tipopractica = null; $flush = null; $mensaje = null; $confirm = false;
 
         $form = $this->createForm('BufeteBundle\Form\CasosType', $caso, array('idciudad'=> $idciudad));
         $form->handleRequest($request);
@@ -123,36 +128,35 @@ class CasosController extends Controller
             $tipo = $tipocaso_repo->find(2);
             $caso->setIdTipo($tipo);
             $caso->setAsignatarioCaso($idasignatario);
-            $id_estudiante = $form->get('idEstudiante')->getData()->getIdEstudiante();
 
-            $db = $em->getConnection();
-            $query = "SELECT count(laborales.Id_Caso) as Laborales
-              FROM casos
-              	INNER JOIN laborales
-              			ON casos.Id_Caso = laborales.Id_Caso
-              where casos.Id_Estudiante = ? and casos.Estado_Caso = 1
-              group by casos.Id_Estudiante";
-            $stmt = $db->prepare($query);
-            $params = array($id_estudiante);
-            $stmt->execute($params);
-            $cantidad = $stmt->fetchAll();
-
-            foreach ($cantidad as $cant) {
-                $laborales = $cant["Laborales"];
-            }
-
-            if ($laborales < 2) {
+            $tipopractica = $form->get('idEstudiante')->getData();
+            if($tipopractica == null)
+            {
               $em->persist($caso);
               $flush = $em->flush();
-                if($flush == false){
-                    $mensaje = "Se registro correctamente el caso";
-                    $confirm = true;
-                } else{
-                    $mensaje = "No se pudo registrar correctamente el caso";
-                }
+              if($flush == false){
+                 $mensaje = "Se registro correctamente el caso";
+                 $confirm = true;
+              } else{
+                 $mensaje = "No se pudo registrar correctamente el caso";
+              }
             } else {
-              $mensaje = "Ha llegado al limite de casos laborales";
+                 $tipopractica = $form->get('idEstudiante')->getData()->getidtipopracticante()->getidtipopracticante();
+                 if($tipopractica != 3)
+                 {
+                     $em->persist($caso);
+                     $flush = $em->flush();
+                     if($flush == false){
+                        $mensaje = "Se registro correctamente el caso";
+                        $confirm = true;
+                     } else{
+                        $mensaje = "No se pudo registrar correctamente el caso";
+                     }
+                 } else {
+                   $mensaje = "El estudiante esta realizando practicas externas";
+                 }
             }
+
             if ($confirm) {
               return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdCaso()));
             }else {
@@ -178,7 +182,7 @@ class CasosController extends Controller
         $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $idasignatario = $this->getUser()->getIdPersona();
 
-        $id_estudiante = null; $cantidad = null; $civiles = null; $flush = null; $mensaje = null; $confirm = false;
+        $tipopractica = null; $flush = null; $mensaje = null; $confirm = false;
 
         $form = $this->createForm('BufeteBundle\Form\CasocivilType', $caso, array('idciudad'=> $idciudad));
         $form->handleRequest($request);
@@ -191,36 +195,35 @@ class CasosController extends Controller
             $caso->setIdTipo($tipo);
             $caso->setAsignatarioCaso($idasignatario);
 
-/*            $id_estudiante = $form->get('idEstudiante')->getData()->getIdEstudiante();
 
-            $db = $em->getConnection();
-            $query = "SELECT count(civiles.Id_Caso) as Civiles
-              FROM casos
-              	INNER JOIN civiles
-              			ON casos.Id_Caso = civiles.Id_Caso
-              where casos.Id_Estudiante = ? and casos.Estado_Caso = 1
-              group by casos.Id_Estudiante";
-            $stmt = $db->prepare($query);
-            $params = array($id_estudiante);
-            $stmt->execute($params);
-            $cantidad = $stmt->fetchAll();
-
-            foreach ($cantidad as $cant) {
-                $civiles = $cant["Civiles"];
-            }
-*/
-    //        if ($civiles < 1) {
-            $em->persist($caso);
+            $tipopractica = $form->get('idEstudiante')->getData();
+            if($tipopractica == null)
+            {
+              $em->persist($caso);
               $flush = $em->flush();
-                if($flush == false){
-                    $mensaje = "Se registro correctamente el caso";
-                    $confirm = true;
-                } else{
-                    $mensaje = "No se pudo registrar correctamente el caso";
+              if($flush == false){
+                $mensaje = "Se registro correctamente el caso";
+                $confirm = true;
+              } else{
+                $mensaje = "No se pudo registrar correctamente el caso";
+              }
+            } else {
+                $tipopractica = $form->get('idEstudiante')->getData()->getidtipopracticante()->getidtipopracticante();
+                if($tipopractica != 3)
+                {
+                      $em->persist($caso);
+                      $flush = $em->flush();
+                      if($flush == false){
+                        $mensaje = "Se registro correctamente el caso";
+                        $confirm = true;
+                      } else{
+                        $mensaje = "No se pudo registrar correctamente el caso";
+                      }
+                } else {
+                  $mensaje = "El estudiante esta realizando practicas externas";
                 }
-    /*        } else {
-              $mensaje = "Ha llegado al limite de casos civiles";
-            }*/
+            }
+
             if ($confirm) {
               return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
             }else {
@@ -231,6 +234,7 @@ class CasosController extends Controller
         return $this->render('casos/newcivil.html.twig', array(
             'caso' => $caso,
             'form' => $form->createView(),
+            'tipo' => $tipopractica,
         ));
     }
 
@@ -267,21 +271,41 @@ class CasosController extends Controller
      */
     public function editLaboralAction(Request $request, Casos $caso)
     {
-        $deleteForm = $this->createDeleteForm($caso);
         $idciudad = $caso->getIdDemandante()->getIdCiudad()->getIdCiudad();
         $editForm = $this->createForm('BufeteBundle\Form\CasosType', $caso, array('idciudad'=> $idciudad));
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $tipopractica = null; $flush = null; $mensaje = null; $confirm = false;
 
-            return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $tipopractica = $editForm->get('idEstudiante')->getData();
+            if($tipopractica == null)
+            {
+                $this->getDoctrine()->getManager()->flush();
+                $confirm = true;
+            } else {
+                 $tipopractica = $editForm->get('idEstudiante')->getData()->getidtipopracticante()->getidtipopracticante();
+                 if($tipopractica != 3)
+                 {
+                     $this->getDoctrine()->getManager()->flush();
+                     $confirm = true;
+                 } else {
+                   $mensaje = "El estudiante esta realizando practicas externas";
+                 }
+            }
+            if ($confirm) {
+              return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
+            }else {
+              $this->session->getFlashBag()->add("status", $mensaje);
+            }
+            //$this->session->getFlashBag()->add("status", $mensaje);
+            //return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
         }
 
         return $this->render('casos/editlaboral.html.twig', array(
             'caso' => $caso,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

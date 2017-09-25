@@ -20,7 +20,17 @@ class DemandantesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $demandantes = $em->getRepository('BufeteBundle:Demandantes')->findAll();
+        $rol = $this->getUser()->getRole();
+        if ($rol == "ROLE_ADMIN") {
+            $demandantes = $em->getRepository('BufeteBundle:Demandantes')->findAll();
+        } elseif ($rol == "ROLE_SECRETARIO") {
+          $ciudad = $this->getUser()->getIdBufete()->getIdCiudad();
+          $query = $em->createQuery(
+            "SELECT d FROM BufeteBundle:Demandantes d
+            WHERE d.idCiudad = :id"
+          )->setParameter('id', $ciudad);
+          $demandantes = $query->getResult();
+        }
 
         return $this->render('demandantes/index.html.twig', array(
             'demandantes' => $demandantes,

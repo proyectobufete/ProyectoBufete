@@ -1,10 +1,18 @@
 {% extends 'layout.html.twig' %}
-{% block act20 %} active {% endblock %}
-{% block ac21 %} active {% endblock %}
+
+{% if is_granted('ROLE_ESTUDIANTE')%}
+  {% block act20 %} active {% endblock %}
+  {% block ac21 %} active {% endblock %}
+{% endif %}
+{% if is_granted('ROLE_ASESOR')%}
+  {% block act23 %} active {% endblock %}
+  {% block ac24 %} active {% endblock %}
+{% endif %}
 
 {% block title %}
   <h1>Casos Laborales</h1>
 {% endblock %}
+
 {% block body %}
 <div class="portlet-body">
     <div class="row">

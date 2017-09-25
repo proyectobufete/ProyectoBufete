@@ -6,7 +6,6 @@
       {% endblock %}
 
 {% block body %}
-
     <div class="portlet-body form">
       <div id="form_sample_1" class="form-horizontal" >
 
@@ -35,7 +34,7 @@
             <div class="row">
               <div class="col-md-3">
                 {{form_label(form.idTipoasunto,'Tipo asunto')}}
-                {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+                {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
               </div>
             </div>
             <div class="row">
@@ -116,7 +115,7 @@
             <div class="row">
               <div class="col-md-3">
                 {{form_label(form.idEstudiante,'Estudiante')}}
-                {{form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+                {{form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'false'}) }}
               </div>
               <div class="col-md-2">
                 {{form_label(form.idPersona,'Asesor')}}
@@ -126,7 +125,7 @@
             <div class="row">
               <div class="col-md-3">
                 {{form_label(form.idTribunal,'Tribunal')}}
-                {{form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+                {{form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'false'}) }}
               </div>
               <div class="col-md-2">
                 {{form_label(form.estadoCaso,'Estado del Caso')}}

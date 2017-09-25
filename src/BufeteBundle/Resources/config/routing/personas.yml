@@ -42,3 +42,13 @@ personas_indexEstudiantes:
     path:     /indexEstudiantes
     defaults: { _controller: "BufeteBundle:Personas:indexEstudiantes" }
     methods:  GET
+
+personas_laboralesAsesor:
+    path:     /laboralesasesor
+    defaults: { _controller: "BufeteBundle:Personas:laboralesAsesor" }
+    methods:  GET
+
+personas_civilesAsesor:
+    path:     /civilesasesor
+    defaults: { _controller: "BufeteBundle:Personas:civilesAsesor" }
+    methods:  GET
