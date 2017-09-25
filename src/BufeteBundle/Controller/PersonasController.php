@@ -29,17 +29,29 @@ class PersonasController extends Controller
     $this->session = new Session();
   }
 
+  /**
+   * Lista de asesores
+   *
+   */
   public function indexAsesoresAction()
   {
-
       $em = $this->getDoctrine()->getManager();
 
-      $query = $em->CreateQuery(
-          "SELECT p FROM BufeteBundle:Personas p
-          WHERE p.role LIKE 'ROLE_ASESOR'"
-        );
-
+      $rol = $this->getUser()->getRole();
+      if ($rol == "ROLE_ADMIN") {
+        $query = $em->CreateQuery(
+            "SELECT p FROM BufeteBundle:Personas p
+            WHERE p.role LIKE 'ROLE_ASESOR'"
+          );
         $asesores = $query->getResult();
+      } elseif ($rol == "ROLE_SECRETARIO") {
+        $bufete = $this->getUser()->getIdBufete();
+        $query = $em->CreateQuery(
+            "SELECT p FROM BufeteBundle:Personas p
+            WHERE p.role LIKE 'ROLE_ASESOR' and p.idBufete = :id"
+          )->setParameter('id', $bufete);
+        $asesores = $query->getResult();
+      }
 
         return $this->render('personas/indexAsesores.html.twig', array(
           'asesores' => $asesores,
