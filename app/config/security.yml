@@ -1,11 +1,16 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
-
+    encoders:
+        BufeteBundle\Entity\Personas:
+            algorithm: bcrypt
+            cost: 4
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        our_db_provider:
+            entity:
+                class: BufeteBundle:Personas
+                property: usuarioPersona
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,6 +20,36 @@ security:
 
         main:
             anonymous: ~
+            provider: our_db_provider
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                #success_handler: login_success_handler
+            logout:
+                path: /logout
+                target: /login
+
+    access_control:
+
+        - { path: ^/paises, roles: ROLE_ADMIN}
+        - { path: ^/departamentos, roles: ROLE_ADMIN}
+        - { path: ^/ciudad, roles: ROLE_ADMIN}
+
+
+        - { path: ^/bufetes, roles: ROLE_SECRETARIO}
+        - { path: ^/trabajos, roles: ROLE_SECRETARIO}
+        - { path: ^/tribunales, roles: ROLE_SECRETARIO}
+
+        - { path: ^/casos/laborales, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/civiles, roles: ROLE_SECRETARIO}
+
+        - { path: ^/casos/casoslaborales, roles: ROLE_ESTUDIANTE}
+        - { path: ^/casos/casosciviles, roles: ROLE_ESTUDIANTE}
+        - { path: ^/home, roles: [ROLE_DIRECTOR, ROLE_SECRETARIO, ROLE_ESTUDIANTE]}
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_SECRETARIO
+
             # activate different ways to authenticate
 
             # http_basic: ~

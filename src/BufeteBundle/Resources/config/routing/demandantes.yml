@@ -1,0 +1,24 @@
+demandantes_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Demandantes:index" }
+    methods:  GET
+
+demandantes_show:
+    path:     /{idDemandante}/show
+    defaults: { _controller: "BufeteBundle:Demandantes:show" }
+    methods:  GET
+
+demandantes_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Demandantes:new" }
+    methods:  [GET, POST]
+
+demandantes_edit:
+    path:     /{idDemandante}/edit
+    defaults: { _controller: "BufeteBundle:Demandantes:edit" }
+    methods:  [GET, POST]
+
+demandantes_delete:
+    path:     /{idDemandante}/delete
+    defaults: { _controller: "BufeteBundle:Demandantes:delete" }
+    methods:  DELETE

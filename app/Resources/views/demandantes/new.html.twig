@@ -1,0 +1,214 @@
+{% extends 'layout.html.twig' %}
+{% block act5 %}
+  active
+{% endblock %}
+{% block ac16 %}
+  active
+{% endblock %}
+{% block title %}
+  <h1>Crear Demandante</h1>
+{% endblock %}
+
+{% block body %}
+
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js' type='text/javascript'/></script>
+
+<div class="portlet-body form">
+  <div id="form_sample_1" class="form-horizontal">
+
+
+    {{ form_start(form,{'attr':{'role':'form'}}) }}
+    <div class="form-body colorform">
+      <div class="col-md-offset-2">
+        <div class="row">
+          <div class="col-md-5">
+            {{form_label(form.nombreDemandante,'Nombre')}}
+            {{form_errors(form) }}
+            {{form_widget(form.nombreDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+          <div class="col-md-1">
+            {{form_label(form.edadDemandante,'Edad')}}
+            {{form_errors(form) }}
+            {{form_widget(form.edadDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            {{form_label(form.telefonoDemandante,'Teléfono')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.telefonoDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.dpiDemandante,'DPI')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.dpiDemandante,{'attr':{'class' : 'form-control'}})}}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.cedulaDemandante,'Cedula')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.cedulaDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            {{form_label(form.direccionDemandante,'Dirección')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.direccionDemandante,{'attr':{'class':'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            {{form_label(form.dirtrabajoDemandante,'Direccion de Trabajo')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.dirtrabajoDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            {{form_label(form.idCiudad,'Ciudad')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.idCiudad,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.idEstadocivil,'Estado Civil')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.idEstadocivil,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.idTrabajo,'Profesión u Oficio')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.idTrabajo,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-9">
+          <button type="submit" name="Create" class="btn green">Crear</button>
+          <a href="{{ path('demandantes_index') }}">
+            <button type="button" name="cancelar" class="btn default">Cancelar</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+
+    <script type="text/javascript">
+    function cuiIsValid(cui) {
+        var console = window.console;
+        if (!cui) {
+            console.log("CUI vacío");
+            return true;
+        }
+
+        var cuiRegExp = /^[0-9]{4}\s?[0-9]{5}\s?[0-9]{4}$/;
+
+        if (!cuiRegExp.test(cui)) {
+            console.log("CUI con formato inválido");
+            return false;
+        }
+
+        cui = cui.replace(/\s/, '');
+        var depto = parseInt(cui.substring(9, 11), 10);
+        var muni = parseInt(cui.substring(11, 13));
+        var numero = cui.substring(0, 8);
+        var verificador = parseInt(cui.substring(8, 9));
+
+        // Se asume que la codificación de Municipios y
+        // departamentos es la misma que esta publicada en
+        // http://goo.gl/EsxN1a
+
+        // Listado de municipios actualizado segun:
+        // http://goo.gl/QLNglm
+
+        // Este listado contiene la cantidad de municipios
+        // existentes en cada departamento para poder
+        // determinar el código máximo aceptado por cada
+        // uno de los departamentos.
+        var munisPorDepto = [
+            /* 01 - Guatemala tiene:      */ 17 /* municipios. */,
+            /* 02 - El Progreso tiene:    */  8 /* municipios. */,
+            /* 03 - Sacatepéquez tiene:   */ 16 /* municipios. */,
+            /* 04 - Chimaltenango tiene:  */ 16 /* municipios. */,
+            /* 05 - Escuintla tiene:      */ 13 /* municipios. */,
+            /* 06 - Santa Rosa tiene:     */ 14 /* municipios. */,
+            /* 07 - Sololá tiene:         */ 19 /* municipios. */,
+            /* 08 - Totonicapán tiene:    */  8 /* municipios. */,
+            /* 09 - Quetzaltenango tiene: */ 24 /* municipios. */,
+            /* 10 - Suchitepéquez tiene:  */ 21 /* municipios. */,
+            /* 11 - Retalhuleu tiene:     */  9 /* municipios. */,
+            /* 12 - San Marcos tiene:     */ 30 /* municipios. */,
+            /* 13 - Huehuetenango tiene:  */ 32 /* municipios. */,
+            /* 14 - Quiché tiene:         */ 21 /* municipios. */,
+            /* 15 - Baja Verapaz tiene:   */  8 /* municipios. */,
+            /* 16 - Alta Verapaz tiene:   */ 17 /* municipios. */,
+            /* 17 - Petén tiene:          */ 14 /* municipios. */,
+            /* 18 - Izabal tiene:         */  5 /* municipios. */,
+            /* 19 - Zacapa tiene:         */ 11 /* municipios. */,
+            /* 20 - Chiquimula tiene:     */ 11 /* municipios. */,
+            /* 21 - Jalapa tiene:         */  7 /* municipios. */,
+            /* 22 - Jutiapa tiene:        */ 17 /* municipios. */
+        ];
+
+        if (depto === 0 || muni === 0)
+        {
+            console.log("CUI con código de municipio o departamento inválido.");
+            return false;
+        }
+
+        if (depto > munisPorDepto.length)
+        {
+            console.log("CUI con código de departamento inválido.");
+            return false;
+        }
+
+        if (muni > munisPorDepto[depto -1])
+        {
+            console.log("CUI con código de municipio inválido.");
+            return false;
+        }
+
+        // Se verifica el correlativo con base
+        // en el algoritmo del complemento 11.
+        var total = 0;
+
+        for (var i = 0; i < numero.length; i++)
+        {
+            total += numero[i] * (i + 2);
+        }
+
+        var modulo = (total % 11);
+
+        console.log("CUI con módulo: " + modulo);
+        return modulo === verificador;
+    }
+
+    $('#bufetebundle_demandantes_dpiDemandante').bind('change paste keyup', function (e) {
+        var $this = $(this);
+        var $parent = $this.parent();
+        var $next = $this.next();
+        var cui = $this.val();
+
+        if (cui && cuiIsValid(cui)) {
+            $parent.addClass('has-success');
+            $next.addClass('glyphicon glyphicon-ok');
+            $parent.removeClass('has-error');
+            $next.removeClass('glyphicon-remove');
+        } else if (cui) {
+            $parent.addClass('has-error');
+            $next.addClass('glyphicon-remove');
+            $parent.removeClass('has-success');
+            $next.removeClass('glyphicon-ok');
+        } else {
+            $parent.removeClass('has-error');
+            $next.removeClass('glyphicon-remove');
+            $parent.removeClass('has-success');
+            $next.removeClass('glyphicon-ok');
+        }
+    });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac23 %} active {% endblock %}
+      {% block title %}
+        <h1>Crear Asunto</h1>
+      {% endblock %}
+
+{% block body %}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-4">
+          <div class="form-group ">
+            <div class="col-md-5">
+              {{form_label(form.asunto,'Asunto')}}
+              {{ form_widget(form.asunto,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <a href="{{ path('tipoasunto_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+{% endblock %}

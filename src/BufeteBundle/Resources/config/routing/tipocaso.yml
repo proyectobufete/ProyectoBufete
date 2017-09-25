@@ -1,0 +1,24 @@
+tipocaso_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Tipocaso:index" }
+    methods:  GET
+
+tipocaso_show:
+    path:     /{idTipo}/show
+    defaults: { _controller: "BufeteBundle:Tipocaso:show" }
+    methods:  GET
+
+tipocaso_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Tipocaso:new" }
+    methods:  [GET, POST]
+
+tipocaso_edit:
+    path:     /{idTipo}/edit
+    defaults: { _controller: "BufeteBundle:Tipocaso:edit" }
+    methods:  [GET, POST]
+
+tipocaso_delete:
+    path:     /{idTipo}/delete
+    defaults: { _controller: "BufeteBundle:Tipocaso:delete" }
+    methods:  DELETE

@@ -1,0 +1,24 @@
+laborales_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Laborales:index" }
+    methods:  GET
+
+laborales_show:
+    path:     /{idTipolaboral}/show
+    defaults: { _controller: "BufeteBundle:Laborales:show" }
+    methods:  GET
+
+laborales_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Laborales:new" }
+    methods:  [GET, POST]
+
+laborales_edit:
+    path:     /{idTipolaboral}/edit
+    defaults: { _controller: "BufeteBundle:Laborales:edit" }
+    methods:  [GET, POST]
+
+laborales_delete:
+    path:     /{idTipolaboral}/delete
+    defaults: { _controller: "BufeteBundle:Laborales:delete" }
+    methods:  DELETE

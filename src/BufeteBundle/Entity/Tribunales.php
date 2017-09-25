@@ -80,5 +80,10 @@ class Tribunales
     {
         return $this->estadoTribunal;
     }
-}
 
+    public function __toString()
+ {
+   return $this->tribunal;
+ }
+
+}

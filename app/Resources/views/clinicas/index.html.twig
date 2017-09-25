@@ -1,0 +1,69 @@
+{% extends 'layout.html.twig' %}
+{% block act6 %}active{% endblock %}
+{% block ac17 %}active{% endblock %}
+{% block title %}
+  <h1>Listado de Clínicas</h1>
+{% endblock %}
+{% block body %}
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('clinicas_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Agregar Clínica
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+
+              <th>Nombre</th>
+              <th>Fecha de Inicio</th>
+              <th>Fecha de Finalización</th>
+              <th>Observaciones</th>
+              <th>Estado </th>
+              <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for clinica in clinicas %}
+          <tr>
+            <td>{{ clinica.nombreClinica }}</td>
+            <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+            <td>{{ clinica.observaciones }}</td>
+            <td>{{ clinica.estadoClinica }}</td>
+              <td>
+                  <a href="{{ path('clinicas_show', { 'idClinica': clinica.idClinica }) }}" class="btn yellow" >Ver</a>
+                  <a href="{{ path('clinicas_edit', { 'idClinica': clinica.idClinica }) }}" class="btn blue">Editar</a>
+              </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

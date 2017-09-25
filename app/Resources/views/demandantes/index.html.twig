@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+{% block act5 %}
+  active
+{% endblock %}
+{% block ac16 %}
+  active
+{% endblock %}
+
+{% block title %}
+  <h1>Listado de Demandantes</h1>
+{% endblock %}
+{% block body %}
+  <div class="portlet-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('demandantes_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Agregar Demandante
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+              <tr role="row">
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>DPI</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for demandante in demandantes %}
+                <tr>
+                  <td>{{ demandante.nombreDemandante }}</td>
+                  <td>{{ demandante.edadDemandante }}</td>
+                  <td>{{ demandante.dpiDemandante }}</td>
+                  <td>{{ demandante.direccionDemandante }}</td>
+                  <td>{{ demandante.telefonoDemandante }}</td>
+                  <td>
+                    <a href="{{ path('demandantes_show', { 'idDemandante': demandante.idDemandante }) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('demandantes_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

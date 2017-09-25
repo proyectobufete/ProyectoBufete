@@ -80,5 +80,9 @@ class Estadosciviles
     {
         return $this->estadoEstadocivil;
     }
-}
 
+    public function __toString()
+ {
+   return $this->estadocivil;
+ }
+}

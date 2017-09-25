@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac6 %} active {% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
+{% block body %}
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                    <th>Id tipo</th>
+                    <td>{{ tipocaso.idTipo }}</td>
+                </tr>
+                <tr>
+                    <th>Tipo</th>
+                    <td>{{ tipocaso.tipo }}</td>
+                </tr>
+                <tr>
+                    <th>Estado </th>
+                    <td>{% if tipocaso.estadoTipo %}Activo{% else %}No{% endif %}</td>
+                </tr>
+              </tbody>
+          </table>
+          <table>
+            <tr>
+              <a href="{{ path('tipocaso_index') }}" class="btn  default">Regresar</a>
+            </tr>
+            <tr>
+              <a href="{{ path('tipocaso_edit', { 'idTipo': tipocaso.idTipo }) }}" class="btn  blue">Editar</a>
+            </tr>
+            <tr>
+              {{ form_start(delete_form) }}
+                <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
+            </tr>
+          </table>
+          </div>
+        </div>
+      </div>
+{% endblock %}
