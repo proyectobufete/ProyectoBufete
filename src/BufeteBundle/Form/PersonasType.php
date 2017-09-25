@@ -42,7 +42,7 @@ class PersonasType extends AbstractType
         ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
-                        "ACTIVO" =>1,
+                        "ACTIVO " =>1,
                         "INACTIVO" =>0,
               ),
                 'expanded'  => true,

@@ -21,7 +21,11 @@
                 <td>{{ revisione.observaciones }}</td>
                 <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if revisione.fechaRevision %}{{ revisione.fechaRevision|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ revisione.ruta }}</td>
+                <td><a href="{{ asset ('uploads/final/'~revisione.ruta) }}" download>
+                      <img src="{{ asset ('uploads/final/pdf.png')}}" width="28" height="30">
+                    </a>
+                </td>
+
                 <td>
                     <ul>
                         <li>

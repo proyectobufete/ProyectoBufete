@@ -8,6 +8,11 @@ personas_new:
     defaults: { _controller: "BufeteBundle:Personas:new" }
     methods:  [GET, POST]
 
+personas_newpersonal:
+    path:     /newpersonal
+    defaults: { _controller: "BufeteBundle:Personas:newpersonal" }
+    methods:  [GET, POST]
+
 personas_editEstudiante:
     path:     /{idPersona}/editEstudiante
     defaults: { _controller: "BufeteBundle:Personas:editEstudiante" }

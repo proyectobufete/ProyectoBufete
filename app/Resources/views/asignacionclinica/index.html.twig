@@ -1,9 +1,8 @@
 {% extends 'layout.html.twig' %}
-{% block act %} active {% endblock %}
-{% block ac %} active {% endblock %}
-
+{% block act6 %}active{% endblock %}
+{% block ac25 %}active{% endblock %}
 {% block title %}
-  <h1>Listado de Ciudades</h1>
+  <h1>Listado de Asignaciones</h1>
 {% endblock %}
 {% block body %}
 <div class="portlet-body">
@@ -22,9 +21,9 @@
       </div>
       <div class="col-md-6">
         <div class="btn-group">
-          <a href="{{ path('ciudad_new') }}">
+          <a href="{{ path('asignacionclinica_new') }}">
             <button id="sample_editable_1_new" class="btn green">
-              Agregar Ciudad
+              Asignar Clínica
               <i class="fa fa-plus"></i>
             </button>
           </a>
@@ -36,24 +35,28 @@
     <div class="table-responsive">
       <table class="table table-bordered ">
         <thead>
-          <tr role="row" class="">
-            <th>Id Ciudad</th>
-            <th>Código Postal</th>
-            <th>Ciudad</th>
-            <th>Estado </th>
-            <th>Opciones</th>
+          <tr>
+              <th>Clínica</th>
+              <th>Estudinate</th>
+              <th>Carné</th>
+              <th>Asesor</th>
+              <th>Observaciones</th>
+              <th>Estado</th>
+              <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
-          {% for ciudad in ciudads %}
+          {% for asignacionclinica in asignacionclinicas %}
           <tr>
-              <td><a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">{{ ciudad.idCiudad }}</a></td>
-              <td>{{ ciudad.postalCiudad }}</td>
-              <td>{{ ciudad.ciudad }}</td>
-              <td>{% if ciudad.estadoCiudad %}Activo{% else %}No{% endif %}</td>
+              <td>{{asignacionclinica.idClinica}}</td>
+              <td>{{asignacionclinica.idEstudiante}}</td>
+              <td>{{asignacionclinica.idEstudiante.carneEstudiante}}</td>
+              <td>{{asignacionclinica.idClinica.idPersona}}</td>
+              <td>{{ asignacionclinica.observacionesClinica }}</td>
+              <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
               <td>
-                  <a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}" class="btn yellow" >Ver</a>
-                  <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}" class="btn blue">Editar</a>
+                  <a href="{{ path('asignacionclinica_show', { 'idAsignacion': asignacionclinica.idAsignacion }) }}" class="btn yellow" >Ver</a>
+                  <a href="{{ path('asignacionclinica_edit', { 'idAsignacion': asignacionclinica.idAsignacion }) }}" class="btn blue">Editar</a>
               </td>
           </tr>
           {% endfor %}
@@ -61,7 +64,6 @@
         </tbody>
       </table>
     </div>
-
   </div>
  </div>
 </div>

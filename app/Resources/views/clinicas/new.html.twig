@@ -1,16 +1,65 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act6 %}active{% endblock %}
+{% block ac17 %}active{% endblock %}
+
+      {% block title %}
+        <h1>Crear Clínica</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Clinica creation</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-3">
+            <div class="row">
+            <div class="col-md-3">
+              {{form_label(form.fechaAsignacion,'Fecha de Inicio')}}
+              {{ form_widget(form.fechaAsignacion,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-3">
+              {{form_label(form.fechaFin,'Fecha de finalización')}}
+              {{ form_widget(form.fechaFin,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                {{form_label(form.nombreClinica,'Nombre de la Clínica')}}
+                {{ form_widget(form.nombreClinica,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(form.idPersona,'Asesor')}}
+                {{ form_widget(form.idPersona,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(form.idTipo,'Tipo de Clínica')}}
+                {{ form_widget(form.idTipo,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4  ">
+                {{form_label(form.observaciones,'Observaciones')}}
+                {{ form_widget(form.observaciones,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2  ">
+                {{form_label(form.estadoClinica,'Estado')}}
+                {{ form_widget(form.estadoClinica,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <a href="{{ path('clinicas_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('clinicas_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

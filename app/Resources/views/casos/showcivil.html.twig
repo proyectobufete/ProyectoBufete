@@ -160,6 +160,10 @@
           </div>
           {% if caso.idEstudiante != null %}
           <div class="row">
+            <div class="col-md-5">
+            <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.nombrePersona }}">
+            </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Carné</b></h4></b></label>
               <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.carneEstudiante }}">
@@ -196,7 +200,7 @@
           </div>
           {% endif %}
           <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-7">
               <label for="" class=" control-label"><h4><b>Observaciones</b></h4></label>
                 <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.observaciones }}">
               </div>
@@ -210,7 +214,10 @@
                     <a href="{{ path('casos_casosciviles') }}" class="btn default">Regresar</a>
                   </tr>
                   <tr>
-                    <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso}) }}" class="btn btn-purple">Agregar Revision</a>
+                    <a href="{{ path('revisiones_new', { 'idCaso': caso.idCaso}) }}" class="btn btn-purple">Agregar Revision</a>
+                  </tr>
+                  <tr>
+                    <a href="{{ path('revisiones_revisonestudiante', { 'idCaso': caso.idCaso}) }}" class="btn btn-Black">Ver Revision</a>
                   </tr>
                 {% endif %}
                 {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}

@@ -5,18 +5,19 @@ namespace BufeteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class CivilesType extends AbstractType
+class AsignacionclinicaType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('pretencion',TextareaType::class)
-
-        ;
+        $builder->add('notaClinica')
+        ->add('observacionesClinica')
+        ->add('estadoAsignacionest')
+        ->add('idEstudiante')
+        ->add('idClinica');
     }
 
     /**
@@ -25,7 +26,7 @@ class CivilesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BufeteBundle\Entity\Civiles'
+            'data_class' => 'BufeteBundle\Entity\Asignacionclinica'
         ));
     }
 
@@ -34,7 +35,7 @@ class CivilesType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'bufetebundle_civiles';
+        return 'bufetebundle_asignacionclinica';
     }
 
 

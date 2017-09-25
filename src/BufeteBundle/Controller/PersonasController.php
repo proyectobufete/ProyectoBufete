@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use BufeteBundle\Entity\Estudiantes;
+use BufeteBundle\Form\PersonaspersonalType;
 use BufeteBundle\Form\PersonasType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -305,6 +306,62 @@ class PersonasController extends Controller
         }
 
         return $this->render('personas/new.html.twig', array(
+            'persona' => $persona,
+
+            'form' => $form->createView(),
+
+        ));
+    }
+
+    public function newpersonalAction(Request $request)
+    {
+        $persona = new Personas();
+
+        //GENERAR CONTRASEÑA
+        $autocont = $this->get("app.autocont");
+        $pass = $autocont->obtener();
+
+        $form = $this->createForm('BufeteBundle\Form\PersonaspersonalType', $persona, array(
+            'passEnvio' =>$pass,
+        ));
+        $confirm = false;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+          if ($form->isValid()) {
+              $em = $this->getDoctrine()->getManager();
+              $persona_repo = $em->getRepository("BufeteBundle:Personas");
+              $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+              if (count($pe)==0) {
+                $factory = $this->get("security.encoder_factory");
+                $encoder = $factory->getEncoder($persona);
+                $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
+                $persona->setPassPersona($password);
+
+                //$em = $this->getDoctrine()->getManager();
+                $em->persist($persona);
+                $flush = $em->flush();
+                if ($flush == null) {
+                    $status = "El usuario se ha creado correctamente";
+                    $confirm = true;
+                } else {
+                  $status = "El usuario no se pudo registrar";
+                }
+            } else {
+                  $status = "El usuario ya existe";
+            }
+          } else {
+              $status = "El formulario no es valido";
+          }
+          if ($confirm) {
+            return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
+          }else {
+            $this->session->getFlashBag()->add("status", $status);
+          }
+
+        }
+
+        return $this->render('personas/newpersonal.html.twig', array(
             'persona' => $persona,
 
             'form' => $form->createView(),

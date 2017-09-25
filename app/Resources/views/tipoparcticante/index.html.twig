@@ -1,5 +1,6 @@
 {% extends 'layout.html.twig' %}
-
+{% block act2 %} active {% endblock %}
+{% block ac24 %} active {% endblock %}
 {% block title %}
   <h1>Listado de Practicas</h1>
 {% endblock %}
@@ -31,26 +32,28 @@
       <br>
       <br>
 
-      <div class="col-md-12 col-sm-12 col-xs-6">
-        <table class="table table-bordered ">
-          <thead>
-            <tr role="row" class="">
-                <th>Practica</th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for tipoparcticante in tipoparcticantes %}
-              <tr>
-                  <td>{{ tipoparcticante.tipopracticante }}</td>
-                <td>
-                  <a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante}) }}" class="btn yellow">Ver</a>
-                  <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}" class="btn blue ">Editar</a>
-                </td>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+              <tr role="row" class="">
+                  <th>Practica</th>
+                <th>Opciones</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for tipoparcticante in tipoparcticantes %}
+                <tr>
+                    <td>{{ tipoparcticante.tipopracticante }}</td>
+                  <td>
+                    <a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante}) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}" class="btn blue ">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
