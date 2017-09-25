@@ -7,6 +7,16 @@
 {% block body %}
       <div class="portlet-body">
         <div class="col-md-offset-3">
+          {% if is_granted('ROLE_ASESOR') %}
+          <table>
+            <tr>
+              <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso}) }}" class="btn default">Habilitar Revision</a>
+            </tr>
+            <tr>
+              <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso}) }}" class="btn blue">Ver Revisiones</a>
+            </tr>
+          </table>
+          {% endif %}
           <div class="row">
               <div class="col-md-5">
               <label for="" class=" control-label"><h4><b>Lugar y Fecha</b></h4></label>
@@ -148,6 +158,7 @@
               </div>
             </div>
           </div>
+          {% if caso.idEstudiante != null %}
           <div class="row">
             <div class="col-md-5">
             <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
@@ -168,6 +179,7 @@
               <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.direccionPersona }}">
               </div>
           </div>
+          {% endif %}
           <div class="row">
             <div class="col-md-6">
               <div class="col-md-offset-5">
@@ -175,6 +187,7 @@
               </div>
             </div>
           </div>
+          {% if caso.idPersona != null %}
           <div class="row">
               <div class="col-md-5">
               <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
@@ -185,6 +198,7 @@
               <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.telefonoPersona }}">
               </div>
           </div>
+          {% endif %}
           <div class="row">
               <div class="col-md-7">
               <label for="" class=" control-label"><h4><b>Observaciones</b></h4></label>

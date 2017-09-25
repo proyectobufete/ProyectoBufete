@@ -46,6 +46,50 @@ class PersonasController extends Controller
         ));
   }
 
+  /**
+   * Lista de casos laborales segun el asesor logueado
+   *
+   */
+  public function laboralesAsesorAction()
+  {
+      $idAsesor = $this->getUser()->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Personas p WITH c = p.idPersona
+        INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+        WHERE c.idPersona = :id
+        ORDER BY c.fechaCaso DESC"
+      )->setParameter('id', $idAsesor);
+      $casos = $query->getResult();
+
+      return $this->render('casos/laboralesestudiante.html.twig', array(
+          'casos' => $casos,
+      ));
+  }
+
+  /**
+   * Lista de casos civiles segun el asesor logueado
+   *
+   */
+  public function civilesAsesorAction()
+  {
+      $idAsesor = $this->getUser()->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Personas p WITH c = p.idPersona
+        INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+        WHERE c.idPersona = :id
+        ORDER BY c.fechaCaso DESC"
+      )->setParameter('id', $idAsesor);
+      $casos = $query->getResult();
+
+      return $this->render('casos/civilesestudiante.html.twig', array(
+          'casos' => $casos,
+      ));
+  }
+
   public function indexEstudiantesAction()
   {
     $em = $this->getDoctrine()->getManager();

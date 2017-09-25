@@ -35,7 +35,7 @@ security:
         - { path: ^/departamentos, roles: ROLE_ADMIN}
         - { path: ^/ciudad, roles: ROLE_ADMIN}
 
-        - { path: ^/personas, roles: ROLE_SECRETARIO}
+
         - { path: ^/bufetes, roles: ROLE_SECRETARIO}
         - { path: ^/trabajos, roles: ROLE_SECRETARIO}
         - { path: ^/tribunales, roles: ROLE_SECRETARIO}
