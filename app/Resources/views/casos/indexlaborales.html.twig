@@ -8,6 +8,54 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"> No asignados</i>
+              </button>
+            </span>
+            <input type="hidden" name="query" value="1" class="form-control" placeholder="Buscar"  />
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"> Asignados</i>
+              </button>
+            </span>
+            <input type="hidden" name="query" value="2" class="form-control" placeholder="Buscar"  />
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"> Fenecidos</i>
+              </button>
+            </span>
+            <input type="hidden" name="query" value="4" class="form-control" placeholder="Buscar"  />
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"> Descargados</i>
+              </button>
+            </span>
+            <input type="hidden" name="query" value="3" class="form-control" placeholder="Buscar"  />
+          </div>
+        </form>
+      </div>
       <div class="col-md-6">
         <div class="btn-group">
                   <a href="{{ path('casos_newlaboral') }}">

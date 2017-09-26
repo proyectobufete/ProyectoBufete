@@ -7,6 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 class ClinicasType extends AbstractType
 {
@@ -15,6 +18,7 @@ class ClinicasType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->idciudad = $options['idciudad'];
         $builder->add('nombreClinica')
         ->add('fechaAsignacion', DateType::class,  array(
           "data" => new \DateTime("now"),
@@ -32,7 +36,20 @@ class ClinicasType extends AbstractType
           )
         ))
         ->add('idTipo')
-        ->add('idPersona');
+        ->add('idPersona', EntityType::class,array(
+          "class" => "BufeteBundle:Personas",
+          "label" => "Asesor: ",
+          "query_builder" => function (EntityRepository $er){
+            return $er->createQueryBuilder('persona')
+            ->innerJoin('BufeteBundle:Bufetes', 'b', Join::WITH, 'persona.idBufete = b.idBufete')
+            ->where('persona.role = :rol')
+            ->andWhere('b.idCiudad = :ciudad')
+            ->setParameter('rol', 'ROLE_ASESOR')
+            ->setParameter('ciudad', $this->idciudad);
+          },
+          'placeholder' => 'Ninguno seleccionado',
+          'required'   => false,
+        ));
     }
 
     /**
@@ -41,7 +58,8 @@ class ClinicasType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BufeteBundle\Entity\Clinicas'
+            'data_class' => 'BufeteBundle\Entity\Clinicas',
+            'idciudad' => null,
         ));
     }
 

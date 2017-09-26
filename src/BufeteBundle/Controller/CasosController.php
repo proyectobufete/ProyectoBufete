@@ -25,17 +25,31 @@ class CasosController extends Controller
      * Listar casos laborales.
      *
      */
-    public function indexLaboralesAction()
+    public function indexLaboralesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-          $bufete = $this->getUser()->getIdBufete();
+        $bufete = $this->getUser()->getIdBufete();
+
+        $searchQuery = $request->get('query');
+        if(!empty($searchQuery))
+        {
+          $query = $em->createQuery(
+            "SELECT c FROM BufeteBundle:Casos c
+              INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+              WHERE c.estadoCaso = :name
+              ORDER BY c.fechaCaso DESC");
+          $query->setParameter('name', $searchQuery);
+          $casos = $query->getResult();
+        }
+        else
+        {
           $query = $em->createQuery(
             "SELECT c FROM BufeteBundle:Casos c
             INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
             ORDER BY c.fechaCaso DESC"
           );
           $casos = $query->getResult();
-
+        }
 
         return $this->render('casos/indexlaborales.html.twig', array(
             'casos' => $casos,
@@ -46,16 +60,31 @@ class CasosController extends Controller
      * Listar casos civiles.
      *
      */
-    public function indexCivilesAction()
+    public function indexCivilesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $bufete = $this->getUser()->getIdBufete();
-        $query = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
-          ORDER BY c.fechaCaso DESC"
-        );
-        $casos = $query->getResult();
+
+        $searchQuery = $request->get('query');
+        if(!empty($searchQuery))
+        {
+          $query = $em->createQuery(
+            "SELECT c FROM BufeteBundle:Casos c
+              INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+              WHERE c.estadoCaso = :name
+              ORDER BY c.fechaCaso DESC");
+          $query->setParameter('name', $searchQuery);
+          $casos = $query->getResult();
+        }
+        else
+        {
+          $query = $em->createQuery(
+            "SELECT c FROM BufeteBundle:Casos c
+            INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+            ORDER BY c.fechaCaso DESC"
+          );
+          $casos = $query->getResult();
+        }
 
         return $this->render('casos/indexciviles.html.twig', array(
             'casos' => $casos,
@@ -275,7 +304,7 @@ class CasosController extends Controller
         $editForm = $this->createForm('BufeteBundle\Form\CasosType', $caso, array('idciudad'=> $idciudad));
         $editForm->handleRequest($request);
 
-        $tipopractica = null; $flush = null; $mensaje = null; $confirm = false;
+        $tipopractica = null; $mensaje = null; $confirm = false;
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
@@ -299,8 +328,7 @@ class CasosController extends Controller
             }else {
               $this->session->getFlashBag()->add("status", $mensaje);
             }
-            //$this->session->getFlashBag()->add("status", $mensaje);
-            //return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
+
         }
 
         return $this->render('casos/editlaboral.html.twig', array(
@@ -315,21 +343,39 @@ class CasosController extends Controller
      */
     public function editCivilAction(Request $request, Casos $caso)
     {
-        $deleteForm = $this->createDeleteForm($caso);
         $idciudad = $caso->getIdDemandante()->getIdCiudad()->getIdCiudad();
         $editForm = $this->createForm('BufeteBundle\Form\CasocivilType', $caso, array('idciudad'=> $idciudad));
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $tipopractica = null; $mensaje = null; $confirm = false;
 
-            return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $tipopractica = $editForm->get('idEstudiante')->getData();
+            if($tipopractica == null)
+            {
+                $this->getDoctrine()->getManager()->flush();
+                $confirm = true;
+            } else {
+                 $tipopractica = $editForm->get('idEstudiante')->getData()->getidtipopracticante()->getidtipopracticante();
+                 if($tipopractica != 3)
+                 {
+                     $this->getDoctrine()->getManager()->flush();
+                     $confirm = true;
+                 } else {
+                   $mensaje = "El estudiante esta realizando practicas externas";
+                 }
+            }
+            if ($confirm) {
+              return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+            }else {
+              $this->session->getFlashBag()->add("status", $mensaje);
+            }
+
         }
 
         return $this->render('casos/editcivil.html.twig', array(
             'caso' => $caso,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
