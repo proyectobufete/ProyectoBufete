@@ -45,7 +45,7 @@ security:
 
         - { path: ^/casos/casoslaborales, roles: ROLE_ESTUDIANTE}
         - { path: ^/casos/casosciviles, roles: ROLE_ESTUDIANTE}
-        - { path: ^/home, roles: [ROLE_DIRECTOR, ROLE_SECRETARIO, ROLE_ESTUDIANTE]}
+        - { path: ^/home, roles: [ROLE_DIRECTOR, ROLE_ASESOR, ROLE_SECRETARIO, ROLE_ESTUDIANTE]}
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_SECRETARIO

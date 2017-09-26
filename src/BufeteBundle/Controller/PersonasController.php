@@ -68,7 +68,6 @@ class PersonasController extends Controller
       $em = $this->getDoctrine()->getManager();
       $query = $em->createQuery(
         "SELECT c FROM BufeteBundle:Casos c
-        INNER JOIN BufeteBundle:Personas p WITH c = p.idPersona
         INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
         WHERE c.idPersona = :id
         ORDER BY c.fechaCaso DESC"
@@ -90,7 +89,6 @@ class PersonasController extends Controller
       $em = $this->getDoctrine()->getManager();
       $query = $em->createQuery(
         "SELECT c FROM BufeteBundle:Casos c
-        INNER JOIN BufeteBundle:Personas p WITH c = p.idPersona
         INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
         WHERE c.idPersona = :id
         ORDER BY c.fechaCaso DESC"
