@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class PersonaspersonalType extends AbstractType
 {
@@ -37,16 +38,9 @@ class PersonaspersonalType extends AbstractType
                 'multiple'  => false,
             ))
             //->add('role')
-            ->add('role', ChoiceType::class,array(
-                "label" => "Roles",
-                    "choices"=> array(
-                        "Secretario" =>"ROLE_SECRETARIO",
-                        "Director" =>"ROLE_DIRECTOR",
-              ),
-                'expanded'  => true,
-                'multiple'  => false,
+            ->add('role', HiddenType::class, array(
+    'data' => 'ROLE_ASESOR',))
 
-            ))
             ->add('idBufete')
 
           ;

@@ -40,7 +40,7 @@
              </div>
 
            <div class="row">
-             <div class="col-md-5">
+             <div class="col-md-6">
                {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
              </div>
            </div>
@@ -83,16 +83,16 @@
                 {{form_widget(form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
-            <div class="col-md-offset-1">
+            <div class="">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="col-md-offset-2">
+                  <div class="col-md-offset-3">
                     <label disabled for=""><h3><b>Datos del Demandado</b></h3></label>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                   {{form_label(form.nombreDemandado,'Nombre Completo')}}
                   {{form_widget(form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
                 </div>
@@ -108,19 +108,23 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                   {{form_label(form.dirDemandado,'Dirección')}}
                   {{form_widget(form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                   {{form_label(form.dirnotificacionDemandado,'Dirección de Notificación')}}
                   {{form_widget(form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
                 </div>
               </div>
             </div>
-            <hr style="color:black;" />
+            <div class="row">
+              <div class="col-md-6">
+                    <hr style="color:black;" />        
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-3">
                 {{form_label(form.idEstudiante,'Estudiante')}}
