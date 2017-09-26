@@ -41,7 +41,7 @@ class PersonaspersonalType extends AbstractType
             ->add('role', HiddenType::class, array(
     'data' => 'ROLE_ASESOR',))
 
-            ->add('idBufete')
+      
 
           ;
     }

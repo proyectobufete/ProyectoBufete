@@ -23,8 +23,8 @@ class TrabajosController extends Controller
         {
           $em = $this->getDoctrine()->getManager();
           $query = $em->createQuery(
-            "SELECT t FROM BufeteBundle:Trabajos t WHERE t.trabajo = :name");
-          $query->setParameter('name', $searchQuery);
+            "SELECT t FROM BufeteBundle:Trabajos t WHERE t.trabajo like :name");
+          $query->setParameter('name', '%'.$searchQuery.'%');
           $trabajos = $query->getResult();
         }
         else

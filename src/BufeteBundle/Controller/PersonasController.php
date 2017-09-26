@@ -349,7 +349,7 @@ class PersonasController extends Controller
                 $encoder = $factory->getEncoder($persona);
                 $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
                 $persona->setPassPersona($password);
-
+                $persona->setIdBufete($this->getUser()->getIdBufete());
                 //$em = $this->getDoctrine()->getManager();
                 $em->persist($persona);
                 $flush = $em->flush();
