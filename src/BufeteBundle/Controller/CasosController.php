@@ -271,12 +271,40 @@ class CasosController extends Controller
      * Detalle caso laboral
      *
      */
-    public function showLaboralAction(Casos $caso)
+    public function showLaboralAction(Request $request, Casos $caso)
     {
         $deleteForm = $this->createDeleteForm($caso);
         return $this->render('casos/showlaboral.html.twig', array(
             'caso' => $caso,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Detalle caso laboral
+     *
+     */
+    public function mostrarLaboralAction(Request $request)
+    {
+        $var=$request->request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $caso = $em->getRepository('BufeteBundle:Casos')->findOneBy(array('idCaso' => $var));
+        return $this->render('casos/showlaboral.html.twig', array(
+            'caso' => $caso,
+        ));
+    }
+
+    /**
+     * Detalle caso civil
+     *
+     */
+    public function mostrarCivilAction(Request $request)
+    {
+        $var=$request->request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $caso = $em->getRepository('BufeteBundle:Casos')->findOneBy(array('idCaso' => $var));
+        return $this->render('casos/showcivil.html.twig', array(
+            'caso' => $caso,
         ));
     }
 

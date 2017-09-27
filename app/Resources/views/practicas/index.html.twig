@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Practicas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idpractica</th>
+                <th>Iniciopractica</th>
+                <th>Fechafin</th>
+                <th>Estadopractica</th>
+                <th>Observaciones</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for practica in practicas %}
+            <tr>
+                <td><a href="{{ path('practicas_show', { 'idPractica': practica.idPractica }) }}">{{ practica.idPractica }}</a></td>
+                <td>{% if practica.inicioPractica %}{{ practica.inicioPractica|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if practica.fechaFin %}{{ practica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if practica.estadoPractica %}Yes{% else %}No{% endif %}</td>
+                <td>{{ practica.observaciones }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('practicas_show', { 'idPractica': practica.idPractica }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('practicas_edit', { 'idPractica': practica.idPractica }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('practicas_new') }}">Create a new practica</a>
+        </li>
+    </ul>
+{% endblock %}
