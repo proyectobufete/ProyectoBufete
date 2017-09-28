@@ -47,3 +47,13 @@ personas_indexEstudiantes:
     path:     /indexEstudiantes
     defaults: { _controller: "BufeteBundle:Personas:indexEstudiantes" }
     methods:  GET
+
+personas_editpassestudiante:
+    path:     /{idPersona}/editpassestudiante
+    defaults: { _controller: "BufeteBundle:Personas:editpassestudiante" }
+    methods:  [GET, POST]
+
+personas_editpasspersonal:
+    path:     /{idPersona}/editpasspersonal
+    defaults: { _controller: "BufeteBundle:Personas:editpasspersonal" }
+    methods:  [GET, POST]

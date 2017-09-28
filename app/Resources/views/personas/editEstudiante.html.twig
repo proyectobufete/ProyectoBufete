@@ -42,8 +42,7 @@
               {{form_widget(edit_form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-3">
-              {{form_label(edit_form.idBufete,'Bufete')}}
-              {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
+
             </div>
           </div>
           <div class="row">
@@ -52,8 +51,10 @@
               {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-2">
-              {{form_label(edit_form.passPersona,'Contraseña')}}
-              {{form_widget(edit_form.passPersona,{'attr':{'class' : 'form-control'}}) }}
+
+
+
+
             </div>
             <br>
             <div class="col-md-2">
@@ -101,10 +102,19 @@
       <div class="form-actions">
         <div class="row">
           <div class="col-md-offset-2 col-md-9">
-            <button type="submit" name="Create" class="btn green">Editar</button>
+            <button type="submit" name="Create" class="btn green">Guardar</button>
+
+
+
+            <a href="{{ path('personas_editpassestudiante', {'idPersona': persona.idPersona}) }}">
+              <button type="button" name="cancelar" class="btn default">cambiar Contraseña</button>
+            </a>
+
             <a href="{{ path('personas_indexEstudiantes') }}">
               <button type="button" name="cancelar" class="btn default">Cancelar</button>
             </a>
+
+
           </div>
         </div>
       </div>
