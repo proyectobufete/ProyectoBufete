@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+{% block act6 %}active{% endblock %}
+{% block ac25 %}active{% endblock %}
+      {% block title %}
+        <h1>Editar Asignación</h1>
+      {% endblock %}
+
+{% block body %}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-4">
+          <div class="row">
+            <div class="col-md-5">
+              {{form_label(edit_form.idEstudiante,'Estudiante')}}
+              {{ form_widget(edit_form.idEstudiante,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              {{form_label(edit_form.idClinica,'Clínica')}}
+              {{ form_widget(edit_form.idClinica,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              {{form_label(edit_form.observacionesClinica,'Observaciones')}}
+              {{ form_widget(edit_form.observacionesClinica,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-5">
+              <label class="cr-styled">
+                  {{ form_widget(edit_form.estadoAsignacionest)}}
+                  <i class="fa"></i>
+                  {{form_label(edit_form.estadoAsignacionest,'Estado')}}
+              </label>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Editar</button>
+              <a href="{{ path('asignacionclinica_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
+
+{% endblock %}

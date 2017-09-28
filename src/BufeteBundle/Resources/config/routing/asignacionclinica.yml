@@ -1,0 +1,24 @@
+asignacionclinica_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:index" }
+    methods:  GET
+
+asignacionclinica_show:
+    path:     /{idAsignacion}/show
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:show" }
+    methods:  GET
+
+asignacionclinica_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:new" }
+    methods:  [GET, POST]
+
+asignacionclinica_edit:
+    path:     /{idAsignacion}/edit
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:edit" }
+    methods:  [GET, POST]
+
+asignacionclinica_delete:
+    path:     /{idAsignacion}/delete
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:delete" }
+    methods:  DELETE

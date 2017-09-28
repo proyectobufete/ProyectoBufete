@@ -16,11 +16,22 @@ class TrabajosController extends Controller
      * Lists all trabajo entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $trabajos = $em->getRepository('BufeteBundle:Trabajos')->findAll();
+        $searchQuery = $request->get('query');
+        if(!empty($searchQuery))
+        {
+          $em = $this->getDoctrine()->getManager();
+          $query = $em->createQuery(
+            "SELECT t FROM BufeteBundle:Trabajos t WHERE t.trabajo like :name");
+          $query->setParameter('name', '%'.$searchQuery.'%');
+          $trabajos = $query->getResult();
+        }
+        else
+        {
+          $em = $this->getDoctrine()->getManager();
+          $trabajos = $em->getRepository('BufeteBundle:Trabajos')->findAll();
+        }
 
         return $this->render('trabajos/index.html.twig', array(
             'trabajos' => $trabajos,

@@ -49,7 +49,9 @@ class CasocivilType extends AbstractType
             return $er->createQueryBuilder('demandante')
             ->where('demandante.idCiudad = :ciudad')
             ->setParameter('ciudad', $this->idciudad);
-            }
+          },
+          'placeholder' => 'Ninguno seleccionado',
+          'required'   => true,
         ))
         ->add('idEstudiante')
         ->add('idTribunal')
@@ -63,7 +65,9 @@ class CasocivilType extends AbstractType
             ->andWhere('b.idCiudad = :ciudad')
             ->setParameter('rol', 'ROLE_ASESOR')
             ->setParameter('ciudad', $this->idciudad);
-            }
+          },
+          'placeholder' => 'Ninguno seleccionado',
+          'required'   => false,
         ))
         //->add('idTipo')
         ->add('idTipoasunto')

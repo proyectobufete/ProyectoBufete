@@ -6,7 +6,6 @@
       {% endblock %}
 
 {% block body %}
-
     <div class="portlet-body form">
       <div id="form_sample_1" class="form-horizontal" >
 
@@ -32,12 +31,19 @@
                 {{form_widget(form.noCaso,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-3">
-                {{form_label(form.idTipoasunto,'Tipo asunto')}}
-                {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
-              </div>
-            </div>
+        <div class="row">
+             <div class="col-md-6">
+               <div class="col-md-offset-4">
+                 <label for=""><h3><b>Asunto</b></h3></label>
+               </div>
+             </div>
+             </div>
+
+           <div class="row">
+             <div class="col-md-6">
+               {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
+             </div>
+           </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="col-md-offset-4">
@@ -46,7 +52,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-5">
                 {{form_widget(form.idDemandante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
               </div>
               <div class="col-md-3">
@@ -55,14 +61,14 @@
             </div>
             <div class="row">
               <div class="col-md-5">
-                <div class="col-md-offset-3">
+                <div class="col-md-offset-4">
                   <label disabled for=""><h3><b>Pretención Procesal</b></h3></label>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
-                {{form_widget(form.civiles)}}
+              <div class="col-md-6">
+                {{form_widget(form.civiles.pretencion,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
@@ -73,52 +79,58 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_widget(form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="col-md-offset-2">
-                  <label disabled for=""><h3><b>Datos del Demandado</b></h3></label>
+            <div class="">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="col-md-offset-3">
+                    <label disabled for=""><h3><b>Datos del Demandado</b></h3></label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  {{form_label(form.nombreDemandado,'Nombre Completo')}}
+                  {{form_widget(form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1">
+                  {{form_label(form.otroDemandado,'Edad')}}
+                  {{form_widget(form.otroDemandado,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+                <div class="col-md-3">
+                  {{form_label(form.telefonoDemandado,'Teléfono')}}
+                  {{form_widget(form.telefonoDemandado,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  {{form_label(form.dirDemandado,'Dirección')}}
+                  {{form_widget(form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  {{form_label(form.dirnotificacionDemandado,'Dirección de Notificación')}}
+                  {{form_widget(form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
-                {{form_label(form.nombreDemandado,'Nombre Completo')}}
-                {{form_widget(form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
+              <div class="col-md-6">
+                    <hr style="color:black;" />        
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-1">
-                {{form_label(form.otroDemandado,'Edad')}}
-                {{form_widget(form.otroDemandado,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-              <div class="col-md-3">
-                {{form_label(form.telefonoDemandado,'Teléfono')}}
-                {{form_widget(form.telefonoDemandado,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-5">
-                {{form_label(form.dirDemandado,'Dirección')}}
-                {{form_widget(form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-5">
-                {{form_label(form.dirnotificacionDemandado,'Dirección de Notificación')}}
-                {{form_widget(form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-            </div>
-            <hr style="color:black;" />
             <div class="row">
               <div class="col-md-3">
                 {{form_label(form.idEstudiante,'Estudiante')}}
-                {{form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+                {{form_widget(form.idEstudiante,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado'}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.idPersona,'Asesor')}}
                 {{form_widget(form.idPersona,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
               </div>
@@ -126,15 +138,15 @@
             <div class="row">
               <div class="col-md-3">
                 {{form_label(form.idTribunal,'Tribunal')}}
-                {{form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+                {{form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado'}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.estadoCaso,'Estado del Caso')}}
                 {{form_widget(form.estadoCaso,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(form.observaciones,'Observaciones')}}
                 {{form_widget(form.observaciones,{'attr':{'class' : 'form-control'}}) }}
               </div>

@@ -10,10 +10,18 @@
 
     <div class="portlet-body form">
       <div id="form_sample_1" class="form-horizontal" >
-
         {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
         <div class="form-body colorform">
           <div class="col-md-offset-2">
+            <div class="row">
+              <div class="col-md-5">
+                {% for message in app.session.flashbag().get('status') %}
+                  <div class="alert alert-danger text-center">
+                    <strong>¡Error! </strong>{{message}}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-3">
                 {{form_label(edit_form.fechaCaso,'Fecha')}}
@@ -157,6 +165,11 @@
                   {{form_label(edit_form.laborales.otros,'Otros')}}
                   {{ form_widget(edit_form.laborales.otros,{'attr':{'class' : 'form-control'}}) }}
                 </div>
+
+                <div class="col-md-2">
+                  {{form_label(edit_form.laborales.otros2,'Otros 2')}}
+                  {{ form_widget(edit_form.laborales.otros2,{'attr':{'class' : 'form-control'}}) }}
+                </div>
               </div>
             </div>
             <div class="row">
@@ -221,8 +234,8 @@
            </div>
            <div class="row">
              <div class="col-md-5">
-               {{form_label(form.observaciones,'Observaciones')}}
-               {{form_widget(form.observaciones,{'attr':{'class' : 'form-control'}}) }}
+               {{form_label(edit_form.observaciones,'Observaciones')}}
+               {{form_widget(edit_form.observaciones,{'attr':{'class' : 'form-control'}}) }}
              </div>
            </div>
           </div>

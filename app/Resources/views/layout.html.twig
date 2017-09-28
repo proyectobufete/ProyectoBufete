@@ -7,21 +7,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
-
+<link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="img/favicon_1.ico">
 
         <title>Bufete Popular </title>
         <link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css')}} " />
 
-<link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
+
         <!-- Google-Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
 
-        <!-- Bootstrap core CSS -->
+
         <link  href="{{asset('asst/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('asst/css/bootstrap-reset.css')}}" rel="stylesheet">
 
-          <link href="{{asset('asst/css/components.css')}}" id="style_components" rel="stylesheet" type="text/css"/>
+     <!-- Bootstrap  QUE descompone todo
+        <link href="{{asset('asst/css/components.css')}}" id="style_components" rel="stylesheet" type="text/css"/>  -->
 
         <!--Animation css-->
         <link href="{{asset('asst/css/animate.css')}}" rel="stylesheet">
@@ -76,7 +77,8 @@
                     </li>
                     <li class="has-submenu  {% block act6 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Clínicas</span></a>
                         <ul class="list-unstyled">
-                            <li class="{% block ac17 %}{% endblock %}"><a href="{{path("clinicas_index")}}">Asignar Clínicas</a></li>
+                            <li class="{% block ac17 %}{% endblock %}"><a href="{{path("clinicas_index")}}">Clínicas</a></li>
+                            <li class="{% block ac25 %}{% endblock %}"><a href="{{path("asignacionclinica_index")}}">Asignar Clínicas</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-android-contact"></i> <span class="nav-label">Personas</span></a>
@@ -92,15 +94,26 @@
                             <li class="{% block ac5 %}{% endblock %}"><a href="{{path("tribunales_index")}}">Tribunales</a></li>
                             <li class="{% block ac6 %}{% endblock %}"><a href="{{path("tipocaso_index")}}">Tipo de Caso</a></li>
                             <li class="{% block ac7 %}{% endblock %}"><a href="{{path("estadosciviles_index")}}">Estado Civil</a></li>
+                            <li class="{% block ac23 %}{% endblock %}"><a href="{{path("tipoasunto_index")}}">Asunto</a></li>
+                            <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
+                            <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
 
                         </ul>
                     </li>
                   {% endif %}
-                  {% if is_granted('ROLE_ESTUDIANTE') %}
+                  {% if is_granted('ROLE_ESTUDIANTE')%}
                   <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
                       <ul class="list-unstyled">
                           <li class="{% block ac21 %}{% endblock %}"><a href="{{path("casos_casoslaborales")}}">Laborales</a></li>
                           <li class="{% block ac22 %}{% endblock %}"><a href="{{path("casos_casosciviles")}}">Civiles</a></li>
+                      </ul>
+                  </li>
+                  {% endif %}
+                  {% if is_granted('ROLE_ASESOR') %}
+                  <li class="has-submenu {% block act23 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                      <ul class="list-unstyled">
+                          <li class="{% block ac26 %}{% endblock %}"><a href="{{path("personas_laboralesAsesor")}}">Laborales</a></li>
+                          <li class="{% block ac27 %}{% endblock %}"><a href="{{path("personas_civilesAsesor")}}">Civiles</a></li>
                       </ul>
                   </li>
                   {% endif %}
@@ -152,7 +165,7 @@
                 <!-- Aqui va el contenido Principal -->
                 <!-- ================== -->
                 <!-- ================== -->
-								<div class="portlet box blue">
+                <div class="portlet box blue">
 					        <div class="portlet-title">
 					          {% block title %}
 					          {% endblock %}

@@ -16,16 +16,28 @@ class EstadoscivilesController extends Controller
      * Lists all estadoscivile entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+         $searchQuery = $request->get('query');
+         if(!empty($searchQuery))
+         {
+           $em = $this->getDoctrine()->getManager();
+           $query = $em->createQuery(
+             "SELECT e FROM BufeteBundle:Estadosciviles e WHERE e.estadocivil like :name");
+           $query->setParameter('name', '%'.$searchQuery.'%');
+           $estadosciviles = $query->getResult();
+         }
+         else
+         {
+           $em = $this->getDoctrine()->getManager();
+           $estadosciviles = $em->getRepository('BufeteBundle:Estadosciviles')->findAll();
+         }
 
-        $estadosciviles = $em->getRepository('BufeteBundle:Estadosciviles')->findAll();
+         return $this->render('estadosciviles/index.html.twig', array(
+             'estadosciviles' => $estadosciviles,
+         ));
+     }
 
-        return $this->render('estadosciviles/index.html.twig', array(
-            'estadosciviles' => $estadosciviles,
-        ));
-    }
 
     /**
      * Creates a new estadoscivile entity.

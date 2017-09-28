@@ -15,21 +15,22 @@
                 <i class="fa fa-search"></i>
               </button>
             </span>
-            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"  />
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"  />
           </div>
         </form>
       </div>
       <div class="col-md-6">
         <div class="btn-group">
                   <a href="{{ path('trabajos_new') }}">
-                    <button id="sample_editable_1_new" class="btn green">
+                    <button id="sample_editable_1_new" class=" btn green">
                       Agregar Trabajo <i class="fa fa-plus"></i>
                     </button></a>
         </div>
       </div>
       <br>
       <br>
-  <div class="col-md-12 col-sm-12 col-xs-6">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="table-responsive">
       <table class="table table-bordered ">
         <thead>
           <tr role="row" class="">
@@ -52,6 +53,7 @@
           </tbody>
         </tbody>
       </table>
+    </div>
   </div>
 </div>
 </div>
