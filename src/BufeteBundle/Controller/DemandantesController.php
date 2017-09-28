@@ -38,7 +38,7 @@ class DemandantesController extends Controller
     }
 
     /**
-     * Creates a new demandante entity.
+     * Creates a new demandante por admin entity.
      *
      */
     public function newAction(Request $request)
@@ -56,6 +56,34 @@ class DemandantesController extends Controller
         }
 
         return $this->render('demandantes/new.html.twig', array(
+            'demandante' => $demandante,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Creates a new demandante por secretario entity.
+     *
+     */
+    public function demandantesecreAction(Request $request)
+    {
+        $demandante = new Demandantes();
+        $ciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $form = $this->createForm('BufeteBundle\Form\DemandantesecreType', $demandante);
+        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $ciudad_repo = $em->getRepository("BufeteBundle:Ciudad");
+            $city = $ciudad_repo->find($ciudad);
+            $demandante->setIdCiudad($city);
+
+            $em->persist($demandante);
+            $em->flush();
+
+            return $this->redirectToRoute('demandantes_show', array('idDemandante' => $demandante->getIddemandante()));
+        }
+
+        return $this->render('demandantes/newdemandante.html.twig', array(
             'demandante' => $demandante,
             'form' => $form->createView(),
         ));
@@ -92,6 +120,29 @@ class DemandantesController extends Controller
         }
 
         return $this->render('demandantes/edit.html.twig', array(
+            'demandante' => $demandante,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Editar demandante con secretario entity.
+     *
+     */
+    public function editdemandanteAction(Request $request, Demandantes $demandante)
+    {
+        $deleteForm = $this->createDeleteForm($demandante);
+        $editForm = $this->createForm('BufeteBundle\Form\DemandantesecreType', $demandante);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('demandantesecre_edit', array('idDemandante' => $demandante->getIddemandante()));
+        }
+
+        return $this->render('demandantes/editdemandante.html.twig', array(
             'demandante' => $demandante,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
