@@ -31,47 +31,10 @@ class PersonasController extends Controller
     $this->session = new Session();
   }
 
-<<<<<<< HEAD
-
-  public function ejemploajaxprocesoAction(Request $request)
-  {
-
-    /*
-    if (!$request->isXmlHttpRequest()) {
-      return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
-    }
-    die();
-    */
-
-      $persona = new Personas();
-      $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona);
-      $form->handleRequest($request);
-
-      /*
-      $var=$request->get("valorCaja1");
-      $nuevavar = (int)$var;
-      $carne=$var;
-      dump($carne);
-      */
-
-      //GENERAR CONTRASEÑA
-      $autocont = $this->get("app.autocont");
-      $pass = $autocont->obtener();
-
-
-      return $this->render('personas/ejemploajaxproceso.php', array(
-          'persona' => $persona,
-
-          'form' => $form->createView(),
-      ));
-  }
-
-=======
   /**
    * Lista de asesores
    *
    */
->>>>>>> 618f0d243e81d27cef84fef4f370beacf4a8d40a
   public function indexAsesoresAction()
   {
       $em = $this->getDoctrine()->getManager();
