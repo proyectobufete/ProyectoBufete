@@ -5,6 +5,8 @@ namespace BufeteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class PracticasType extends AbstractType
 {
@@ -13,9 +15,24 @@ class PracticasType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('inicioPractica')->add('fechaFin')->add('estadoPractica')->add('observaciones')->add('idEstudiante');
+        $builder->add('inicioPractica', DateType::class,  array(
+          "data" => new \DateTime("now"),
+          'widget' => 'single_text'
+        ))
+        ->add('fechaFin', DateType::class, array(
+          'widget' => 'single_text'
+        ))
+        ->add('estadoPractica', ChoiceType::class,array(
+          "label" => "Estado del caso: ",
+          "choices"=> array(
+            "Activo" => 1,
+            "Inactivo" => 0,
+          )
+        ))
+        ->add('observaciones')
+        ->add('idEstudiante');
     }
-    
+
     /**
      * {@inheritdoc}
      */
