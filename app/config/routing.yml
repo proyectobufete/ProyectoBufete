@@ -86,3 +86,7 @@ Revisiones:
 AsignarClinica:
     resource: "@BufeteBundle/Resources/config/routing/asignacionclinica.yml"
     prefix:     /asignacionclinica
+
+Practicas:
+    resource: "@BufeteBundle/Resources/config/routing/practicas.yml"
+    prefix:     /practicas
