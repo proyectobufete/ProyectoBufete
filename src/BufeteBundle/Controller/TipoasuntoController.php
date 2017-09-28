@@ -16,16 +16,27 @@ class TipoasuntoController extends Controller
      * Lists all tipoasunto entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+         $searchQuery = $request->get('query');
+         if(!empty($searchQuery))
+         {
+           $em = $this->getDoctrine()->getManager();
+           $query = $em->createQuery(
+             "SELECT t FROM BufeteBundle:Tipoasunto t WHERE t.asunto like :name");
+           $query->setParameter('name', '%'.$searchQuery.'%');
+           $tipoasuntos = $query->getResult();
+         }
+         else
+         {
+           $em = $this->getDoctrine()->getManager();
+           $tipoasuntos = $em->getRepository('BufeteBundle:Tipoasunto')->findAll();
+         }
 
-        $tipoasuntos = $em->getRepository('BufeteBundle:Tipoasunto')->findAll();
-
-        return $this->render('tipoasunto/index.html.twig', array(
-            'tipoasuntos' => $tipoasuntos,
-        ));
-    }
+         return $this->render('tipoasunto/index.html.twig', array(
+             'tipoasuntos' => $tipoasuntos,
+         ));
+     }
 
     /**
      * Creates a new tipoasunto entity.

@@ -38,30 +38,32 @@
       <br>
       <br>
 
-      <div class="col-md-12 col-sm-12 col-xs-6">
-        <table class="table table-bordered ">
-          <thead>
-            <tr role="row" class="">
-              <th>Pais</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for paise in paises %}
-              <tr>
-                <td>{{ paise.pais }}</td>
-                <td>
-                  {% if paise.estadoPais %}Activo{% else %}No{% endif %}
-                </td>
-                <td>
-                  <a href="{{ path('paises_show', { 'idPais': paise.idPais }) }}" class="btn yellow">Ver</a>
-                  <a href="{{ path('paises_edit', { 'idPais': paise.idPais }) }}" class="btn blue ">Editar</a>
-                </td>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+              <tr role="row" class="">
+                <th>Pais</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for paise in paises %}
+                <tr>
+                  <td>{{ paise.pais }}</td>
+                  <td>
+                    {% if paise.estadoPais %}Activo{% else %}No{% endif %}
+                  </td>
+                  <td>
+                    <a href="{{ path('paises_show', { 'idPais': paise.idPais }) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('paises_edit', { 'idPais': paise.idPais }) }}" class="btn blue ">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

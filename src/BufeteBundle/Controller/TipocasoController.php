@@ -16,16 +16,28 @@ class TipocasoController extends Controller
      * Lists all tipocaso entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+         $searchQuery = $request->get('query');
+         if(!empty($searchQuery))
+         {
+           $em = $this->getDoctrine()->getManager();
+           $query = $em->createQuery(
+             "SELECT t FROM BufeteBundle:Tipocaso t WHERE t.tipo like :name");
+           $query->setParameter('name', '%'.$searchQuery.'%');
+           $tipocasos = $query->getResult();
+         }
+         else
+         {
+           $em = $this->getDoctrine()->getManager();
+           $tipocasos = $em->getRepository('BufeteBundle:Tipocaso')->findAll();
+         }
 
-        $tipocasos = $em->getRepository('BufeteBundle:Tipocaso')->findAll();
+         return $this->render('tipocaso/index.html.twig', array(
+             'tipocasos' => $tipocasos,
+         ));
+     }
 
-        return $this->render('tipocaso/index.html.twig', array(
-            'tipocasos' => $tipocasos,
-        ));
-    }
 
     /**
      * Creates a new tipocaso entity.

@@ -19,7 +19,7 @@
                 <i class="fa fa-search"></i>
               </button>
             </span>
-            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
           </div>
         </form>
       </div>
@@ -36,30 +36,32 @@
       <br>
       <br>
 
-      <div class="col-md-12 col-sm-12 col-xs-6">
-        <table class="table table-bordered">
-          <thead>
-            <tr role="row" class="">
-              <th>Estado civil</th>
-              <th>Estado</th>
-              <th>opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for estadoscivile in estadosciviles %}
-              <tr>
-                <td>{{ estadoscivile.estadocivil }}</td>
-                <td>
-                  {% if estadoscivile.estadoEstadocivil %}Activo{% else %}No{% endif %}
-                </td>
-                <td>
-                  <a href="{{ path('estadosciviles_show', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}" class="btn yellow">Ver</a>
-                  <a href="{{ path('estadosciviles_edit', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}" class="btn blue ">Editar</a>
-                </td>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr role="row" class="">
+                <th>Estado civil</th>
+                <th>Estado</th>
+                <th>opciones</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for estadoscivile in estadosciviles %}
+                <tr>
+                  <td>{{ estadoscivile.estadocivil }}</td>
+                  <td>
+                    {% if estadoscivile.estadoEstadocivil %}Activo{% else %}No{% endif %}
+                  </td>
+                  <td>
+                    <a href="{{ path('estadosciviles_show', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('estadosciviles_edit', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}" class="btn blue ">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
