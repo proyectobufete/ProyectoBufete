@@ -240,7 +240,7 @@ class CasosController extends Controller
             }
 
             if ($confirm) {
-              return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdCaso()));
+              return $this->redirectToRoute('casos_verlaboral', array('idCaso' => $caso->getIdCaso()));
             }else {
               $this->session->getFlashBag()->add("status", $mensaje);
             }
@@ -307,7 +307,7 @@ class CasosController extends Controller
             }
 
             if ($confirm) {
-              return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+              return $this->redirectToRoute('casos_vercivil', array('idCaso' => $caso->getIdcaso()));
             }else {
               $this->session->getFlashBag()->add("status", $mensaje);
             }
@@ -405,7 +405,7 @@ class CasosController extends Controller
                  }
             }
             if ($confirm) {
-              return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
+              return $this->redirectToRoute('casos_verlaboral', array('idCaso' => $caso->getIdcaso()));
             }else {
               $this->session->getFlashBag()->add("status", $mensaje);
             }
@@ -447,7 +447,7 @@ class CasosController extends Controller
                  }
             }
             if ($confirm) {
-              return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+              return $this->redirectToRoute('casos_vercivil', array('idCaso' => $caso->getIdcaso()));
             }else {
               $this->session->getFlashBag()->add("status", $mensaje);
             }
