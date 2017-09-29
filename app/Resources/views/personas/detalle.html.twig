@@ -72,10 +72,14 @@
           </tr>
           <tr>
             {% if persona.role == "ROLE_ESTUDIANTE" %}
+
+
+
               <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
 
             {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
               <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
+
             {% endif %}
             <tr></tr>
           </table>
