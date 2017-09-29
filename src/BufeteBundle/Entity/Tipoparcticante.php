@@ -16,8 +16,6 @@ class Tipoparcticante
      * @var string
      */
     private $tipopracticante;
-
-
     /**
      * Get idtipopracticante
      *
