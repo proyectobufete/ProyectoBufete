@@ -23,10 +23,20 @@ casos_showlaboral:
     defaults: { _controller: "BufeteBundle:Casos:mostrarLaboral" }
     methods:  [GET, POST]
 
+casos_verlaboral:
+    path:     /{idCaso}/laboral
+    defaults: { _controller: "BufeteBundle:Casos:showLaboral" }
+    methods:  GET
+
 casos_showcivil:
     path:     /showcivil
     defaults: { _controller: "BufeteBundle:Casos:mostrarCivil" }
     methods:  [GET, POST]
+
+casos_vercivil:
+    path:     /{idCaso}/civil
+    defaults: { _controller: "BufeteBundle:Casos:showCivil" }
+    methods:  GET
 
 casos_newlaboral:
     path:     /newlaboral
