@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class RevisionesType extends AbstractType
 {
@@ -21,7 +22,10 @@ class RevisionesType extends AbstractType
         $builder
         ->add('ruta',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
         ->add('observaciones')
-        ->add('fechaEnvio')
+        ->add('fechaEnvio', DateType::class, array(
+          "data" => new \DateTime("now"),
+          'widget' => 'single_text'
+        ))
         ->add('fechaRevision')
 
         //->add('idCaso')
