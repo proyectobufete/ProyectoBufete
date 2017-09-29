@@ -1,32 +1,44 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac2 %} active {% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Departamento</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                    <th>Id departamento</th>
+                    <td>{{ departamento.idDepartamento }}</td>
+                </tr>
+                <tr>
+                    <th>Departamento</th>
+                    <td>{{ departamento.departamento }}</td>
+                </tr>
+                <tr>
+                    <th>Pais</th>
+                    <td>{{ departamento.idPais.pais }}</td>
+                </tr>
+              </tbody>
+          </table>
 
-    <table>
-        <tbody>
+          <table>
             <tr>
-                <th>Iddepartamento</th>
-                <td>{{ departamento.idDepartamento }}</td>
+              <a href="{{ path('departamentos_index') }}" class="btn  default">Regresar</a>
             </tr>
             <tr>
-                <th>Departamento</th>
-                <td>{{ departamento.departamento }}</td>
+              <a href="{{ path('departamentos_edit', { 'idDepartamento': departamento.idDepartamento }) }}" class="btn blue">Editar</a>
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('departamentos_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('departamentos_edit', { 'idDepartamento': departamento.idDepartamento }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <tr>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn  red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
+            </tr>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}

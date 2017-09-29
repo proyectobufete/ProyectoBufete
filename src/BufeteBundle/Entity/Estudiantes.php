@@ -167,5 +167,10 @@ class Estudiantes
     {
         return $this->idtipopracticante;
     }
-}
 
+    public function __toString()
+    {
+      $noombre = $this->getIdPersona()->getNombrePersona();
+      return $this->carneEstudiante. " -- ". $noombre;
+    }
+}

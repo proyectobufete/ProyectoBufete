@@ -1,40 +1,49 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac %} active {% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Ciudad</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                    <th>Id ciudad</th>
+                    <td>{{ ciudad.idCiudad }}</td>
+                </tr>
+                <tr>
+                    <th>Código Postal</th>
+                    <td>{{ ciudad.postalCiudad }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre Ciudad</th>
+                    <td>{{ ciudad.ciudad }}</td>
+                </tr>
+                <tr>
+                    <th>Estado</th>
+                    <td>{% if ciudad.estadoCiudad %}Activo{% else %}No{% endif %}</td>
+                </tr>
+              </tbody>
+          </table>
 
-    <table>
-        <tbody>
+          <table>
             <tr>
-                <th>Idciudad</th>
-                <td>{{ ciudad.idCiudad }}</td>
+              <a href="{{ path('ciudad_index') }}" class="btn default">Regresar</a>
             </tr>
             <tr>
-                <th>Postalciudad</th>
-                <td>{{ ciudad.postalCiudad }}</td>
+              <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}" class="btn blue">Editar</a>
             </tr>
             <tr>
-                <th>Ciudad</th>
-                <td>{{ ciudad.ciudad }}</td>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
             </tr>
-            <tr>
-                <th>Estadociudad</th>
-                <td>{% if ciudad.estadoCiudad %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+          </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('ciudad_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </div>
+        </div>
+      </div>
 {% endblock %}

@@ -1,41 +1,60 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac4 %} active {% endblock %}
+{% block title %}
+  <h1>Listado de Trabajos</h1>
+{% endblock %}
 {% block body %}
-    <h1>Trabajos list</h1>
-
-    <table>
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"  />
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+                  <a href="{{ path('trabajos_new') }}">
+                    <button id="sample_editable_1_new" class=" btn green">
+                      Agregar Trabajo <i class="fa fa-plus"></i>
+                    </button></a>
+        </div>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered ">
         <thead>
-            <tr>
-                <th>Idtrabajo</th>
-                <th>Trabajo</th>
-                <th>Estadotrabajo</th>
-                <th>Actions</th>
-            </tr>
+          <tr role="row" class="">
+            <th>Trabajo</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+          </tr>
         </thead>
         <tbody>
-        {% for trabajo in trabajos %}
-            <tr>
-                <td><a href="{{ path('trabajos_show', { 'idTrabajo': trabajo.idTrabajo }) }}">{{ trabajo.idTrabajo }}</a></td>
-                <td>{{ trabajo.trabajo }}</td>
-                <td>{% if trabajo.estadoTrabajo %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('trabajos_show', { 'idTrabajo': trabajo.idTrabajo }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('trabajos_edit', { 'idTrabajo': trabajo.idTrabajo }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+          {% for trabajo in trabajos %}
+          <tr>
+              <td>{{ trabajo.trabajo }}</td>
+              <td>{% if trabajo.estadoTrabajo %}Activo{% else %}No{% endif %}</td>
+              <td>
+                <a href="{{ path('trabajos_show', { 'idTrabajo': trabajo.idTrabajo }) }}" class="btn yellow " >Ver</a>
+                <a href="{{ path('trabajos_edit', { 'idTrabajo': trabajo.idTrabajo }) }}" class="btn blue ">Editar</a>
+              </td>
+          </tr>
+          {% endfor %}
+          </tbody>
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('trabajos_new') }}">Create a new trabajo</a>
-        </li>
-    </ul>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock %}

@@ -74,3 +74,19 @@ Tribunales:
 Estudiantes:
     resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
     prefix:     /estudiantes
+
+InfoFinal:
+    resource: "@BufeteBundle/Resources/config/routing/infofinal.yml"
+    prefix:     /infofinal
+
+Revisiones:
+    resource: "@BufeteBundle/Resources/config/routing/revisiones.yml"
+    prefix:     /revisiones
+
+AsignarClinica:
+    resource: "@BufeteBundle/Resources/config/routing/asignacionclinica.yml"
+    prefix:     /asignacionclinica
+
+Practicas:
+    resource: "@BufeteBundle/Resources/config/routing/practicas.yml"
+    prefix:     /practicas

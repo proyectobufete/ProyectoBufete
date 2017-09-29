@@ -1,41 +1,60 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac5 %} active {% endblock %}
+{% block title %}
+  <h1>Listado de Tribunales</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tribunales list</h1>
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"  />
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+                  <a href="{{ path('tribunales_new') }}">
+                    <button id="sample_editable_1_new" class="btn green">
+                      Agregar Tribunal <i class="fa fa-plus"></i>
+                    </button></a>
+        </div>
+      </div>
+      <br>
+      <br>
 
-    <table>
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="table-responsive">
+      <table class="table table-bordered ">
         <thead>
-            <tr>
-                <th>Idtribunal</th>
-                <th>Tribunal</th>
-                <th>Estadotribunal</th>
-                <th>Actions</th>
-            </tr>
+          <tr role="row" class="">
+            <th>Tribunal</th>
+            <th>Estado </th>
+            <th>Opciones</th>
+          </tr>
         </thead>
         <tbody>
-        {% for tribunale in tribunales %}
-            <tr>
-                <td><a href="{{ path('tribunales_show', { 'idTribunal': tribunale.idTribunal }) }}">{{ tribunale.idTribunal }}</a></td>
-                <td>{{ tribunale.tribunal }}</td>
-                <td>{% if tribunale.estadoTribunal %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('tribunales_show', { 'idTribunal': tribunale.idTribunal }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('tribunales_edit', { 'idTribunal': tribunale.idTribunal }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+          {% for tribunale in tribunales %}
+              <tr>
+                  <td>{{ tribunale.tribunal }}</td>
+                  <td>{% if tribunale.estadoTribunal %}Activo{% else %}No{% endif %}</td>
+                  <td>
+                    <a href="{{ path('tribunales_show', { 'idTribunal': tribunale.idTribunal }) }}" class="btn yellow" >Ver</a>
+                    <a href="{{ path('tribunales_edit', { 'idTribunal': tribunale.idTribunal }) }}" class="btn blue ">Editar</a>
+                  </td>
+              </tr>
+          {% endfor %}
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('tribunales_new') }}">Create a new tribunale</a>
-        </li>
-    </ul>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock %}

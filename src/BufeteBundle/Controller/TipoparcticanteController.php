@@ -16,16 +16,28 @@ class TipoparcticanteController extends Controller
      * Lists all tipoparcticante entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+         $searchQuery = $request->get('query');
+         if(!empty($searchQuery))
+         {
+           $em = $this->getDoctrine()->getManager();
+           $query = $em->createQuery(
+             "SELECT t FROM BufeteBundle:Tipoparcticante t WHERE t.tipopracticante like :name");
+           $query->setParameter('name', '%'.$searchQuery.'%');
+           $tipoparcticantes = $query->getResult();
+         }
+         else
+         {
+           $em = $this->getDoctrine()->getManager();
+           $tipoparcticantes = $em->getRepository('BufeteBundle:Tipoparcticante')->findAll();
+         }
 
-        $tipoparcticantes = $em->getRepository('BufeteBundle:Tipoparcticante')->findAll();
+         return $this->render('tipoparcticante/index.html.twig', array(
+             'tipoparcticantes' => $tipoparcticantes,
+         ));
+     }
 
-        return $this->render('tipoparcticante/index.html.twig', array(
-            'tipoparcticantes' => $tipoparcticantes,
-        ));
-    }
 
     /**
      * Creates a new tipoparcticante entity.

@@ -13,9 +13,19 @@ class DemandantesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombreDemandante')->add('edadDemandante')->add('dpiDemandante')->add('cedulaDemandante')->add('direccionDemandante')->add('dirtrabajoDemandante')->add('telefonoDemandante')->add('idEstadocivil')->add('idTrabajo')->add('idCiudad');
+        $builder
+        ->add('nombreDemandante')
+        ->add('edadDemandante')
+        ->add('dpiDemandante')
+        ->add('cedulaDemandante')
+        ->add('direccionDemandante')
+        ->add('dirtrabajoDemandante')
+        ->add('telefonoDemandante')
+        ->add('idEstadocivil')
+        ->add('idTrabajo')
+        ->add('idCiudad');
     }
-    
+
     /**
      * {@inheritdoc}
      */

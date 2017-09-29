@@ -44,7 +44,7 @@ class PersonasnuevasType extends AbstractType
 
                         "Asesor" =>"ROLE_ASESOR",
                         "Secretario" =>"ROLE_SECRETARIO",
-                        "Director" =>"ROLE_DIRECTO",
+                        "Director" =>"ROLE_DIRECTOR",
               ),
                 'expanded'  => true,
                 'multiple'  => false,

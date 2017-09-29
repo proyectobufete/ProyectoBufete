@@ -37,16 +37,6 @@ BufeteBundle\Entity\Estudiantes:
                 unsigned: false
             column: Estado_Estudiante
     manyToOne:
-        idPersona:
-            targetEntity: Personas
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                Id_Persona:
-                    referencedColumnName: Id_Persona
-            orphanRemoval: false
         idtipopracticante:
             targetEntity: Tipoparcticante
             cascade: {  }
@@ -56,5 +46,16 @@ BufeteBundle\Entity\Estudiantes:
             joinColumns:
                 idtipoPracticante:
                     referencedColumnName: idtipoPracticante
+            orphanRemoval: false
+    oneToOne:
+        idPersona:
+            targetEntity: Personas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: estudiantes
+            joinColumns:
+                Id_Persona:
+                    referencedColumnName: Id_Persona
             orphanRemoval: false
     lifecycleCallbacks: {  }

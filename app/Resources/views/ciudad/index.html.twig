@@ -1,43 +1,68 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac %} active {% endblock %}
 
+{% block title %}
+  <h1>Listado de Ciudades</h1>
+{% endblock %}
 {% block body %}
-    <h1>Ciudads list</h1>
-
-    <table>
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('ciudad_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Agregar Ciudad
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
+      <table class="table table-bordered ">
         <thead>
-            <tr>
-                <th>Idciudad</th>
-                <th>Postalciudad</th>
-                <th>Ciudad</th>
-                <th>Estadociudad</th>
-                <th>Actions</th>
-            </tr>
+          <tr role="row" class="">
+            <th>Id Ciudad</th>
+            <th>Código Postal</th>
+            <th>Ciudad</th>
+            <th>Estado </th>
+            <th>Opciones</th>
+          </tr>
         </thead>
         <tbody>
-        {% for ciudad in ciudads %}
-            <tr>
-                <td><a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">{{ ciudad.idCiudad }}</a></td>
-                <td>{{ ciudad.postalCiudad }}</td>
-                <td>{{ ciudad.ciudad }}</td>
-                <td>{% if ciudad.estadoCiudad %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+          {% for ciudad in ciudads %}
+          <tr>
+              <td><a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">{{ ciudad.idCiudad }}</a></td>
+              <td>{{ ciudad.postalCiudad }}</td>
+              <td>{{ ciudad.ciudad }}</td>
+              <td>{% if ciudad.estadoCiudad %}Activo{% else %}No{% endif %}</td>
+              <td>
+                  <a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}" class="btn yellow" >Ver</a>
+                  <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}" class="btn blue">Editar</a>
+              </td>
+          </tr>
+          {% endfor %}
 
-    <ul>
-        <li>
-            <a href="{{ path('ciudad_new') }}">Create a new ciudad</a>
-        </li>
-    </ul>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+ </div>
+</div>
 {% endblock %}

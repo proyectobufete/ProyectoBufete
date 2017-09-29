@@ -1,39 +1,60 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac24 %} active {% endblock %}
+{% block title %}
+  <h1>Listado de Practicas</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tipoparcticantes list</h1>
+  <div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('tipoparcticante_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Agregar Practica
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <br>
+      <br>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Idtipopracticante</th>
-                <th>Tipopracticante</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tipoparcticante in tipoparcticantes %}
-            <tr>
-                <td><a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">{{ tipoparcticante.idtipopracticante }}</a></td>
-                <td>{{ tipoparcticante.tipopracticante }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('tipoparcticante_new') }}">Create a new tipoparcticante</a>
-        </li>
-    </ul>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+              <tr role="row" class="">
+                  <th>Practica</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tipoparcticante in tipoparcticantes %}
+                <tr>
+                    <td>{{ tipoparcticante.tipopracticante }}</td>
+                  <td>
+                    <a href="{{ path('tipoparcticante_show', { 'idtipopracticante': tipoparcticante.idtipopracticante}) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}" class="btn blue ">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
