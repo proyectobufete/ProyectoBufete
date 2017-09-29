@@ -55,7 +55,11 @@
         <a href="{{ path('demandantes_index') }}" class="btn default">Regresar</a>
       </tr>
       <tr>
-        <a href="{{ path('demandantes_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('demandantes_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
+        {% else %}
+          <a href="{{ path('demandantesecre_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
+        {% endif %}
       </tr>
       <tr>
         {{ form_start(delete_form) }}

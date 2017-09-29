@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DemandantesType extends AbstractType
+class DemandantesecreType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -23,7 +23,8 @@ class DemandantesType extends AbstractType
         ->add('telefonoDemandante')
         ->add('idEstadocivil')
         ->add('idTrabajo')
-        ->add('idCiudad');
+        //->add('idCiudad')
+        ;
     }
 
     /**
