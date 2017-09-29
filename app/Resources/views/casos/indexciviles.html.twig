@@ -16,31 +16,62 @@
            </button></a>
        </div>
      </div>
-     <div class="col-md-offset-9">
-        <table style="width:70%">
-          <tr>
-            <th> </th>
-            <th><form method="get" action=""  role="search">
-                <button type="submit" name="buscar" class="btn default green-stripe">Asignado</button>
-                <input type="hidden" name="query" value="2"   />
-            </form></th>
-            <th><form method="get" action=""  role="search">
-                  <button type="submit" name="buscar" class="btn btn-primary" >No Asignado</button>
-                <input type="hidden" name="query" value="1"  />
-            </form></th>
-            <th><form method="get" action=""  role="search">
-                <button type="submit" name="buscar" class="btn btn-primary" >Fenecido</button>
-                <input type="hidden" name="query" value="4"  />
-            </form></th>
-            <th><form method="get" action=""  role="search">
-              <button type="submit" name="buscar" class="btn btn-primary" >Descargados</button>
-              <input type="hidden" name="query" value="3"  />
-            </form></th>
-          </tr>
-        </table>
 
+
+
+
+     <div class="col-md-offset-7">
+       <div class="">
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="2" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               Asignado
+             </label>
+           </div>
+         </form>
+       </div>
+
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="1" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               No Asignado
+             </label>
+           </div>
+         </form>
+       </div>
+
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="4" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               Fenecido
+             </label>
+           </div>
+         </form>
+       </div>
+
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="3" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               Descargados
+             </label>
+           </div>
+         </form>
+       </div>
+
+    </div>
      </div>
-
    </div>
 
    <div class="row">
