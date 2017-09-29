@@ -1,32 +1,40 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac24 %} active {% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Tipoparcticante</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ tipoparcticante.idtipopracticante }}</td>
+                </tr>
+                <tr>
+                    <th>Tipo Practica</th>
+                    <td>{{ tipoparcticante.tipopracticante }}</td>
+                </tr>
+            </tbody>
+          </table>
 
-    <table>
-        <tbody>
+          <table>
             <tr>
-                <th>Idtipopracticante</th>
-                <td>{{ tipoparcticante.idtipopracticante }}</td>
+              <a href="{{ path('tipoparcticante_index') }}" class="btn default">Regresar</a>
             </tr>
             <tr>
-                <th>Tipopracticante</th>
-                <td>{{ tipoparcticante.tipopracticante }}</td>
+              <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}" class="btn blue">Editar</a>
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('tipoparcticante_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <tr>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
+            </tr>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}

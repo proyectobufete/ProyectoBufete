@@ -8,6 +8,11 @@ personas_new:
     defaults: { _controller: "BufeteBundle:Personas:new" }
     methods:  [GET, POST]
 
+personas_newpersonal:
+    path:     /newpersonal
+    defaults: { _controller: "BufeteBundle:Personas:newpersonal" }
+    methods:  [GET, POST]
+
 personas_editEstudiante:
     path:     /{idPersona}/editEstudiante
     defaults: { _controller: "BufeteBundle:Personas:editEstudiante" }
@@ -41,4 +46,25 @@ personas_indexAsesores:
 personas_indexEstudiantes:
     path:     /indexEstudiantes
     defaults: { _controller: "BufeteBundle:Personas:indexEstudiantes" }
+    methods:  GET
+
+
+personas_editpassestudiante:
+    path:     /{idPersona}/editpassestudiante
+    defaults: { _controller: "BufeteBundle:Personas:editpassestudiante" }
+    methods:  [GET, POST]
+
+personas_editpasspersonal:
+    path:     /{idPersona}/editpasspersonal
+    defaults: { _controller: "BufeteBundle:Personas:editpasspersonal" }
+    methods:  [GET, POST]
+
+personas_laboralesAsesor:
+    path:     /laboralesasesor
+    defaults: { _controller: "BufeteBundle:Personas:laboralesAsesor" }
+    methods:  GET
+
+personas_civilesAsesor:
+    path:     /civilesasesor
+    defaults: { _controller: "BufeteBundle:Personas:civilesAsesor" }
     methods:  GET

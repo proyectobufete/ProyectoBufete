@@ -1,36 +1,43 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac7 %} active {% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Estadoscivile</h1>
-
-    <table>
-        <tbody>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                    <th>Id estadocivil</th>
+                    <td>{{ estadoscivile.idEstadocivil }}</td>
+                </tr>
+                <tr>
+                    <th>Estado civil</th>
+                    <td>{{ estadoscivile.estadocivil }}</td>
+                </tr>
+                <tr>
+                    <th>Estado</th>
+                    <td>{% if estadoscivile.estadoEstadocivil %}Activo{% else %}No{% endif %}</td>
+                </tr>
+              </tbody>
+          </table>
+          <table>
             <tr>
-                <th>Idestadocivil</th>
-                <td>{{ estadoscivile.idEstadocivil }}</td>
+              <a href="{{ path('estadosciviles_index') }}" class="btn default">Regresar</a>
             </tr>
             <tr>
-                <th>Estadocivil</th>
-                <td>{{ estadoscivile.estadocivil }}</td>
+              <a href="{{ path('estadosciviles_edit', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}" class="btn blue">Editar</a>
             </tr>
             <tr>
-                <th>Estadoestadocivil</th>
-                <td>{% if estadoscivile.estadoEstadocivil %}Yes{% else %}No{% endif %}</td>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('estadosciviles_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('estadosciviles_edit', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}

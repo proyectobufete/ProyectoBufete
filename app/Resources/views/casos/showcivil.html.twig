@@ -1,0 +1,252 @@
+{% extends 'layout.html.twig' %}
+{% block act3 %} active {% endblock %}
+{% block ac8 %} active {% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
+{% block body %}
+      <div class="portlet-body">
+        <div class="col-md-offset-3">
+          {% if is_granted('ROLE_ASESOR') %}
+          <table>
+            <tr>
+              <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn default">Habilitar revision</button>
+                  <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+              </form>
+            </tr>
+            <tr>
+              <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Ver revisiones</button>
+                  <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+              </form>
+            </tr>
+          </table>
+          {% endif %}
+          <div class="row">
+              <div class="col-md-5">
+              <label for="" class=" control-label"><h4><b>Lugar y Fecha</b></h4></label>
+                <input disabled type="text" style="font-size:20px;"  class="form-control input-lg " value="{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>No. Caso</b></h4></b></label>
+              <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.noCaso }}">
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-6">
+                <label for=""><h3><b>Asunto</b></h3></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+             <textarea disabled class="form-control" style="font-size:18px;" rows="1" value="" id="comment">{{ caso.idTipoasunto.asunto }}</textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-5">
+                <label for=""><h3><b>Datos del Demandante</b></h3></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4">
+              <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
+                <input disabled type="text" style="font-size:19px;"  class="form-control input-lg" value="{{ caso.idDemandante.nombreDemandante }}">
+              </div>
+              <div class="col-md-1">
+              <label for="" class=" control-label"><h4><b>Edad</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.edadDemandante }}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Teléfono</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.telefonoDemandante }}">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-3">
+              <label for="" class=" control-label"><h4><b>DPI</b></h4></label>
+                <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.dpiDemandante }}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Cedula</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.cedulaDemandante }}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Estado Civil</b></h4></b></label>
+              <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.idEstadocivil.estadocivil }}">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Profesión u Oficio</b></h4></label>
+                <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.idTrabajo.trabajo }}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Ciudad</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.idCiudad.ciudad }}">
+              </div>
+              <div class="col-md-3">
+              <label for="" class=" control-label"><h4><b>Dirección de Trabajo</b></h4></b></label>
+              <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.dirtrabajoDemandante }}">
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+            <label for="" class=" control-label"><h4><b>Dirección de Recidencia</b></h4></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.direccionDemandante }}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-5">
+                <label disabled for=""><h3><b>Pretención Procesal</b></h3></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+               <textarea disabled class="form-control" style="font-size:18px;" rows="4" value="" id="comment">{{ caso.civiles.pretencion }}</textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-6">
+                <label disabled for=""><h3><b>Pruebas</b></h3></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+               <textarea disabled class="form-control" style="font-size:18px;" rows="4" value="" id="comment">{{ caso.pruebasCaso }}</textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-5">
+                <label disabled for=""><h3><b>Datos del Demandado</b></h3></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4">
+              <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.nombreDemandado }}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Teléfono</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.telefonoDemandado }}">
+              </div>
+              <div class="col-md-1">
+              <label for="" class=" control-label"><h4><b>Edad</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.otroDemandado }}">
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+            <label for="" class=" control-label"><h4><b>Dirección</b></h4></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.dirDemandado }}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+            <label for="" class=" control-label"><h4><b>Dirección de Notificación</b></h4></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.dirnotificacionDemandado }}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-5">
+                <label disabled for=""><h3><b>Datos del Estudiante</b></h3></label>
+              </div>
+            </div>
+          </div>
+          {% if caso.idEstudiante != null %}
+          <div class="row">
+            <div class="col-md-5">
+            <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.nombrePersona }}">
+            </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Carné</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.carneEstudiante }}">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Teléfono</b></h4></label>
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.telefonoPersona }}">
+              </div>
+              <div class="col-md-5">
+              <label for="" class=" control-label"><h4><b>Dirección</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.direccionPersona }}">
+              </div>
+          </div>
+          {% endif %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-offset-5">
+                <label disabled for=""><h3><b>Datos del Asesor</b></h3></label>
+              </div>
+            </div>
+          </div>
+          {% if caso.idPersona != null %}
+          <div class="row">
+              <div class="col-md-5">
+              <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.nombrePersona }}">
+              </div>
+              <div class="col-md-2">
+              <label for="" class=" control-label"><h4><b>Teléfono</b></h4></b></label>
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.telefonoPersona }}">
+              </div>
+          </div>
+          {% endif %}
+          <div class="row">
+              <div class="col-md-7">
+              <label for="" class=" control-label"><h4><b>Observaciones</b></h4></label>
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.observaciones }}">
+              </div>
+          </div>
+          <br>
+          <br>
+            <div class="form-actions">
+              <table>
+                {% if is_granted('ROLE_ESTUDIANTE') %}
+                  <tr>
+                    <a href="{{ path('casos_casosciviles') }}" class="btn default">Regresar</a>
+                  </tr>
+                  <tr>
+                    <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                        <button type="submit" name="buscar" class="btn btn-purple">Agregar revision</button>
+                        <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                    </form>
+                  </tr>
+                  <tr>
+                    <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                        <button type="submit" name="buscar" class="btn btn-Black">Ver revision</button>
+                        <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                    </form>
+                  </tr>
+                {% endif %}
+                {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
+                  <tr>
+                    <a href="{{ path('casos_indexciviles') }}" class="btn default">Regresar</a>
+                  </tr>
+                  <tr>
+                    <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso }) }}" class="btn blue">Editar</a>
+                  </tr>
+                  <tr>
+                    <a href="#" class="btn btn-purple">Imprimir</a>
+                  </tr>
+                {% endif %}
+              </table>
+            </div>
+            <br>
+            <br>
+        </div>
+      </div>
+{% endblock %}

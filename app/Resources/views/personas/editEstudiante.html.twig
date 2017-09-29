@@ -23,37 +23,52 @@
           <div class="row">
             <div class="col-md-4">
               {{form_label(edit_form.nombrePersona,'Nombre Estudiante')}}
-              {{form_widget(edit_form.nombrePersona,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(edit_form.nombrePersona,{'attr':{'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
+
+          </div>
+          <div class="row">
             <div class="col-md-2">
-              {{form_label(edit_form.telefonoPersona,'Número de Teléfono')}}
+              {{form_label(edit_form.telefonoPersona,'Número de Teléfono 1')}}
               {{form_widget(edit_form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              {{form_label(edit_form.direccionPersona,'Dirección')}}
-              {{form_widget(edit_form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
+            <div class="col-md-2">
+              {{form_label(edit_form.tel2Persona,'Número de Teléfono 2')}}
+              {{form_widget(edit_form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
             </div>
+
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
+              {{form_label(edit_form.dpiPersona,'DPI')}}
+              {{form_widget(edit_form.dpiPersona,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-2">
               {{form_label(edit_form.emailPersona,'Correo Electrónico')}}
               {{form_widget(edit_form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
+
             <div class="col-md-3">
-              {{form_label(edit_form.idBufete,'Bufete')}}
-              {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
-            </div>
+
+
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
+              {{form_label(edit_form.direccionPersona,'Dirección')}}
+              {{form_widget(edit_form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-2">
               {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
               {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-2">
-              {{form_label(edit_form.passPersona,'Contraseña')}}
-              {{form_widget(edit_form.passPersona,{'attr':{'class' : 'form-control'}}) }}
+
+
+
+
             </div>
             <br>
             <div class="col-md-2">
@@ -66,11 +81,11 @@
               {{form_label(edit_form.estadoPersona,'Estado')}}
               {{form_widget(edit_form.estadoPersona) }}
             </div>
-
+            <div class="col-md-2">
+              {{form_widget(edit_form.role) }}
+            </div>
           </div>
-          <div class="row">
 
-          </div>
           <div class="row">
             <div class="col-md-6 col-md-offset-2">
               <label for="">
@@ -81,17 +96,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               {{form_label(edit_form.estudiantes.carneEstudiante,'No. Carné')}}
-              {{form_widget(edit_form.estudiantes.carneEstudiante,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(edit_form.estudiantes.carneEstudiante,{'attr':{ 'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
+            <div class="col-md-2">
+              {{form_label(edit_form.estudiantes.idtipopracticante,'Tipo de Practica')}}
+              {{form_widget(edit_form.estudiantes.idtipopracticante,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <br>
+          <div class="row">
             <div class="col-md-3">
-              <br>
-              <br>
               <label class="cr-styled">
                 {{ form_widget(edit_form.estudiantes.cierrePensum)}}
                 <i class="fa"></i>
-                {{form_label(edit_form.estudiantes.cierrePensum,'Cierre de Pensum')}}
+                {{form_label(edit_form.estudiantes.cierrePensum,'Cierre de Cursos')}}
               </label>
             </div>
           </div>
@@ -101,10 +121,19 @@
       <div class="form-actions">
         <div class="row">
           <div class="col-md-offset-2 col-md-9">
-            <button type="submit" name="Create" class="btn green">Editar</button>
+            <button type="submit" name="Create" class="btn green">Guardar</button>
+
+
+
+            <a href="{{ path('personas_editpassestudiante', {'idPersona': persona.idPersona}) }}">
+              <button type="button" name="cancelar" class="btn default">cambiar Contraseña</button>
+            </a>
+
             <a href="{{ path('personas_indexEstudiantes') }}">
               <button type="button" name="cancelar" class="btn default">Cancelar</button>
             </a>
+
+
           </div>
         </div>
       </div>

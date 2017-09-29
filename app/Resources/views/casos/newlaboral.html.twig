@@ -1,0 +1,302 @@
+{% extends 'layout.html.twig' %}
+{% block act3 %}
+  active
+{% endblock %}
+{% block ac9 %}
+  active
+{% endblock %}
+{% block title %}
+  <h1>Ficha de Adjudicación de Casos Ramo Laboral</h1>
+{% endblock %}
+
+{% block body %}
+
+  <div class="portlet-body form">
+    <div id="form_sample_1" class="form-horizontal">
+
+      {{ form_start(form,{'attr':{'role':'form'}}) }}
+      <div class="form-body colorform">
+        <div class="col-md-offset-3">
+          <div class="row">
+            <div class="col-md-5">
+              {% for message in app.session.flashbag().get('status') %}
+                <div class="alert alert-danger text-center">
+                  <strong>¡Error! </strong>{{message}}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              {{form_label(form.fechaCaso,'Fecha')}}
+              {{form_widget(form.fechaCaso,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-2">
+              <b>Número de caso</b>
+              {{form_widget(form.noCaso,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+                  <div class="row">
+             <div class="col-md-6">
+               <div class="col-md-offset-4">
+                 <label for=""><h3><b>Asunto</b></h3></label>
+               </div>
+             </div>
+             </div>
+
+           <div class="row">
+             <div class="col-md-5">
+               {{form_widget(form.idTipoasunto,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
+             </div>
+           </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+              <label for="">
+                <h4>
+                  <b>Demandante</b>
+                </h4>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              {{form_widget(form.idDemandante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+            </div>
+            <div class="col-md-3">
+              <a href="{{ path('demandantes_new') }}"><button type="button" name="cancelar" class="btn btn-purple">Registrar</button></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+              <label for="">
+                <h4>
+                  <b>Datos del Proceso</b>
+                </h4>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              {{form_label(form.laborales.fechaInicio,'Inicio de la Relación')}}
+              {{form_widget(form.laborales.fechaInicio,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+              {{form_label(form.laborales.fechaFin,'Fin de la Relación')}}
+              {{form_widget(form.laborales.fechaFin,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              {{form_label(form.laborales.salario,'Salario Devengado')}}
+              {{form_widget(form.laborales.salario,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-3">
+              {{form_label(form.laborales.idTrabajo,' Tabajo Desempeñado')}}
+              {{form_widget(form.laborales.idTrabajo,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+              <label for="">
+                <h4>
+                  <b>Prestaciones que reclama</b>
+                </h4>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-offset-0">
+            <div class="row">
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.vaciones)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.vaciones,'Vacaciones')}}
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.diasasueto)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.diasasueto,'Dias de Asueto')}}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.indemnizacion)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.indemnizacion,'Indemnización')}}
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.aguinaldo)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.aguinaldo,'Aguinaldo')}}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.diaseptimos)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.diaseptimos,'Dias Septimos')}}
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.reajustesalarial)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.reajustesalarial,'Reajuste Salarial')}}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.bonoanual)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.bonoanual,'Bono Anual')}}
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.salariosretenidos)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.salariosretenidos,'Salarios Retenidos')}}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.horasextra)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.horasextra,'Horas Extraordinarias')}}
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="cr-styled">
+                  {{ form_widget(form.laborales.bonoincentivo)}}
+                  <i class="fa"></i>
+                  {{form_label(form.laborales.bonoincentivo,'Bono Incentivo')}}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                {{form_label(form.laborales.otros,'Otros')}}
+                {{ form_widget(form.laborales.otros,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-1">
+
+              </div>
+              <div class="col-md-2">
+                {{form_label(form.laborales.otros2,'Otros 2')}}
+                {{ form_widget(form.laborales.otros2,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+              <label for="">
+                <h4>
+                  <b>Pruebas</b>
+                </h4>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{form_label(form.pruebasCaso,' ')}}
+              {{ form_widget(form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+              <label for="">
+                <h4>
+                  <b>Datos del Demandado</b>
+                </h4>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{form_label(form.nombreDemandado,'Patrono o Empresa')}}
+              {{ form_widget(form.nombreDemandado,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{form_label(form.dirDemandado,'Dirección')}}
+              {{ form_widget(form.dirDemandado,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{form_label(form.dirnotificacionDemandado,'Dirección de Notificación')}}
+              {{ form_widget(form.dirnotificacionDemandado,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              {{form_label(form.telefonoDemandado,'Teléfono')}}
+              {{ form_widget(form.telefonoDemandado,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+            <div class="col-md-4">
+              {{form_label(form.otroDemandado,'Otros')}}
+              {{ form_widget(form.otroDemandado,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                  <hr style="color:black;" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              {{form_label(form.idEstudiante,'Nombre del Estudiante')}}
+              {{ form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado'}) }}
+            </div>
+            <div class="col-md-3">
+              {{form_label(form.idPersona,'Nombre del Asesor')}}
+              {{ form_widget(form.idPersona,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              {{form_label(form.idTribunal,'Tribunal')}}
+              {{ form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado'}) }}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+              {{form_label(form.estadoCaso,'Estado del caso')}}
+              {{ form_widget(form.estadoCaso,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{form_label(form.observaciones,'Observaciones')}}
+              {{form_widget(form.observaciones,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-9">
+            <button type="submit" name="Create" class="btn green">Crear</button>
+            <a href="{{ path('casos_indexlaborales') }}">
+              <button type="button" name="cancelar" class="btn default">Cancelar</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+
+{% endblock %}

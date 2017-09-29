@@ -16,17 +16,28 @@ class TribunalesController extends Controller
      * Lists all tribunale entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $tribunales = $em->getRepository('BufeteBundle:Tribunales')->findAll();
+     public function indexAction(Request $request)
+     {
+         $searchQuery = $request->get('query');
+         if(!empty($searchQuery))
+         {
+           $em = $this->getDoctrine()->getManager();
+           $query = $em->createQuery(
+             "SELECT t FROM BufeteBundle:Tribunales t WHERE t.tribunal like :name");
+           $query->setParameter('name', '%'.$searchQuery.'%');
+           $tribunales = $query->getResult();
+         }
+         else
+         {
+           $em = $this->getDoctrine()->getManager();
+           $tribunales = $em->getRepository('BufeteBundle:Tribunales')->findAll();
+         }
 
-        return $this->render('tribunales/index.html.twig', array(
-            'tribunales' => $tribunales,
-        ));
-    }
-
+         return $this->render('tribunales/index.html.twig', array(
+             'tribunales' => $tribunales,
+         ));
+     }
     /**
      * Creates a new tribunale entity.
      *

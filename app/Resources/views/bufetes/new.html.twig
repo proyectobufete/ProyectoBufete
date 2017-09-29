@@ -1,16 +1,75 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac14 %} active {% endblock %}
+      {% block title %}
+        <h1>Crear Bufete</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Bufete creation</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal " >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+          <div class="form-group ">
+            <div class="col-md-6">
+              {{form_label(form.nombreBufete)}}
+              {{ form_widget(form.nombreBufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-6">
+              {{form_label(form.telefono1Bufete,'Teléfono 1:')}}
+              {{ form_widget(form.telefono1Bufete,{'attr':{'class' : 'form-control','type' : 'number'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-6">
+              {{form_label(form.telefono2,'Teléfono 2:')}}
+              {{ form_widget(form.telefono2,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-6">
+              {{form_label(form.emailBufete,'Correo Electrónico:')}}
+              {{ form_widget(form.emailBufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-6">
+              {{form_label(form.direccionBufete,'Direccion:')}}
+              {{ form_widget(form.direccionBufete,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-6">
+              {{form_label(form.idCiudad,'Ciudad:')}}
+              {{ form_widget(form.idCiudad,{'attr':{'class' : 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="col-md-5">
+              <label class="cr-styled">
+                  {{ form_widget(form.estadoBufete)}}
+                  <i class="fa"></i>
+                  {{form_label(form.estadoBufete,'Estado')}}
+              </label>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="colorformpie">
+        <div class="form-actions ">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
+                <button type="submit" name="Create" class="btn green">Crear</button>
+                <a href="{{ path('bufetes_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+       </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('bufetes_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

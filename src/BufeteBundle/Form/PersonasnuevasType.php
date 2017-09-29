@@ -8,6 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+
 
 class PersonasnuevasType extends AbstractType
 {
@@ -19,6 +22,8 @@ class PersonasnuevasType extends AbstractType
     {
       $this->passEnvio = $options['passEnvio'];
         $builder
+
+
             ->add('nombrePersona')
             ->add('telefonoPersona')
             ->add('tel2Persona')
@@ -26,7 +31,10 @@ class PersonasnuevasType extends AbstractType
             ->add('direccionPersona')
             ->add('emailPersona')
             ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
-            ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
+            ->add('passPersona',TextType::Class, array (
+                  "data"=>"$this->passEnvio",
+                  'required'   => false,
+                ))
             ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
@@ -44,7 +52,7 @@ class PersonasnuevasType extends AbstractType
 
                         "Asesor" =>"ROLE_ASESOR",
                         "Secretario" =>"ROLE_SECRETARIO",
-                        "Director" =>"ROLE_DIRECTO",
+                        "Director" =>"ROLE_DIRECTOR",
               ),
                 'expanded'  => true,
                 'multiple'  => false,

@@ -7,11 +7,19 @@ bufete_paises:
     resource: "@BufeteBundle/Resources/config/routing/paises.yml"
     prefix:   /paises
 
+login:
+    path: /login
+    defaults: {_controller: BufeteBundle:Auth:login}
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
 
 bufete_homepage:
-    path:     /
+    path:     /home
     defaults: { _controller: BufeteBundle:Default:index }
-
 
 bufete_personas:
         resource: "@BufeteBundle/Resources/config/routing/personas.yml"
@@ -72,3 +80,19 @@ bufete_tribunales:
 bufete_estudiantes:
         resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
         prefix:   /estudiantes
+
+bufete_infofinal:
+        resource: "@BufeteBundle/Resources/config/routing/infofinal.yml"
+        prefix:   /infofinal
+
+bufete_revisiones:
+        resource: "@BufeteBundle/Resources/config/routing/revisiones.yml"
+        prefix:   /revisiones
+
+bufete_asignacionclinica:
+        resource: "@BufeteBundle/Resources/config/routing/asignacionclinica.yml"
+        prefix:   /asignacionclinica
+
+bufete_practicas:
+        resource: "@BufeteBundle/Resources/config/routing/practicas.yml"
+        prefix:   /practicas

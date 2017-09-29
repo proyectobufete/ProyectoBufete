@@ -8,11 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use BufeteBundle\Entity\Estudiantes;
+use BufeteBundle\Form\PersonaspersonalType;
 use BufeteBundle\Form\PersonasType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use BufeteBundle\Entity\Post;
+
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 /**
@@ -28,21 +31,75 @@ class PersonasController extends Controller
     $this->session = new Session();
   }
 
+  /**
+   * Lista de asesores
+   *
+   */
   public function indexAsesoresAction()
   {
-
       $em = $this->getDoctrine()->getManager();
 
-      $query = $em->CreateQuery(
-          "SELECT p FROM BufeteBundle:Personas p
-          WHERE p.role LIKE 'ROLE_ASESOR'"
-        );
-
+      $rol = $this->getUser()->getRole();
+      if ($rol == "ROLE_ADMIN") {
+        $query = $em->CreateQuery(
+            "SELECT p FROM BufeteBundle:Personas p
+            WHERE p.role LIKE 'ROLE_ASESOR'"
+          );
         $asesores = $query->getResult();
+      } elseif ($rol == "ROLE_SECRETARIO") {
+        $bufete = $this->getUser()->getIdBufete();
+        $query = $em->CreateQuery(
+            "SELECT p FROM BufeteBundle:Personas p
+            WHERE p.role LIKE 'ROLE_ASESOR' and p.idBufete = :id"
+          )->setParameter('id', $bufete);
+        $asesores = $query->getResult();
+      }
 
         return $this->render('personas/indexAsesores.html.twig', array(
           'asesores' => $asesores,
         ));
+  }
+
+  /**
+   * Lista de casos laborales segun el asesor logueado
+   *
+   */
+  public function laboralesAsesorAction()
+  {
+      $idAsesor = $this->getUser()->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+        WHERE c.idPersona = :id
+        ORDER BY c.fechaCaso DESC"
+      )->setParameter('id', $idAsesor);
+      $casos = $query->getResult();
+
+      return $this->render('casos/laboralesestudiante.html.twig', array(
+          'casos' => $casos,
+      ));
+  }
+
+  /**
+   * Lista de casos civiles segun el asesor logueado
+   *
+   */
+  public function civilesAsesorAction()
+  {
+      $idAsesor = $this->getUser()->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+        WHERE c.idPersona = :id
+        ORDER BY c.fechaCaso DESC"
+      )->setParameter('id', $idAsesor);
+      $casos = $query->getResult();
+
+      return $this->render('casos/civilesestudiante.html.twig', array(
+          'casos' => $casos,
+      ));
   }
 
   public function indexEstudiantesAction()
@@ -212,7 +269,55 @@ class PersonasController extends Controller
      * Creates a new persona entity.
      *
      */
-    public function newAction(Request $request)
+     public function newAction(Request $request)
+     {
+         $persona = new Personas();
+         //GENERAR CONTRASEÑA
+         $autocont = $this->get("app.autocont");
+         $pass = $autocont->obtener();
+         $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
+             'passEnvio' =>$pass,
+         ));
+         $confirm = false;
+         $form->handleRequest($request);
+         if ($form->isSubmitted()){
+           if ($form->isValid()) {
+               $em = $this->getDoctrine()->getManager();
+               $persona_repo = $em->getRepository("BufeteBundle:Personas");
+               $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+               if (count($pe)==0) {
+                 $factory = $this->get("security.encoder_factory");
+                 $encoder = $factory->getEncoder($persona);
+                 $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
+                 $persona->setPassPersona($password);
+                 //$em = $this->getDoctrine()->getManager();
+                 $em->persist($persona);
+                 $flush = $em->flush();
+                 if ($flush == null) {
+                     $status = "El usuario se ha creado correctamente";
+                     $confirm = true;
+                 } else {
+                   $status = "El usuario no se pudo registrar";
+                 }
+             } else {
+                   $status = "El usuario ya existe";
+             }
+           } else {
+               $status = "El formulario no es valido";
+           }
+           if ($confirm) {
+             return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
+           }else {
+             $this->session->getFlashBag()->add("status", $status);
+           }
+         }
+         return $this->render('personas/new.html.twig', array(
+             'persona' => $persona,
+             'form' => $form->createView(),
+         ));
+     }
+
+    public function newpersonalAction(Request $request)
     {
         $persona = new Personas();
 
@@ -220,7 +325,7 @@ class PersonasController extends Controller
         $autocont = $this->get("app.autocont");
         $pass = $autocont->obtener();
 
-        $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
+        $form = $this->createForm('BufeteBundle\Form\PersonaspersonalType', $persona, array(
             'passEnvio' =>$pass,
         ));
         $confirm = false;
@@ -228,15 +333,18 @@ class PersonasController extends Controller
 
         if ($form->isSubmitted()){
           if ($form->isValid()) {
+
               $em = $this->getDoctrine()->getManager();
               $persona_repo = $em->getRepository("BufeteBundle:Personas");
               $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+
+
               if (count($pe)==0) {
                 $factory = $this->get("security.encoder_factory");
                 $encoder = $factory->getEncoder($persona);
                 $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
                 $persona->setPassPersona($password);
-
+                $persona->setIdBufete($this->getUser()->getIdBufete());
                 //$em = $this->getDoctrine()->getManager();
                 $em->persist($persona);
                 $flush = $em->flush();
@@ -260,7 +368,7 @@ class PersonasController extends Controller
 
         }
 
-        return $this->render('personas/new.html.twig', array(
+        return $this->render('personas/newpersonal.html.twig', array(
             'persona' => $persona,
 
             'form' => $form->createView(),
@@ -327,6 +435,52 @@ class PersonasController extends Controller
          ));
      }
 
+     public function editpassestudianteAction(Request $request, Personas $persona)
+     {
+         $nomComp = $persona->getnombrePersona();
+         $telefono = $persona->gettelefonoPersona();
+         $direccion = $persona->getdireccionPersona();
+         $correo = $persona->getemailPersona();
+
+         //GENERAR CONTRASEÑA
+         $autocont = $this->get("app.autocont");
+         $pass = $autocont->obtener();
+
+         $deleteForm = $this->createDeleteForm($persona);
+
+         if($persona->getrole() == "ROLE_ESTUDIANTE")
+         {
+           $carne = $persona->getestudiantes()->getcarneEstudiante();
+           $editForm = $this->createForm('BufeteBundle\Form\PersonasType', $persona, array(
+               'nombreEnvio' => $nomComp,
+               'carneEnvio'=> $carne,
+               'telefonoEnvio'=>$telefono,
+               'direccionEnvio'=>$direccion,
+               'correoEnvio'=>$correo,
+               'passEnvio' =>$pass,
+           ));
+         }
+
+         $editForm->handleRequest($request);
+
+         if ($editForm->isSubmitted() && $editForm->isValid()) {
+             $factory = $this->get("security.encoder_factory");
+             $encoder = $factory->getEncoder($persona);
+             $password = $encoder->encodePassword($editForm->get("passPersona")->getData(), $persona->getSalt());
+             $persona->setPassPersona($password);
+             $this->getDoctrine()->getManager()->flush();
+
+
+             return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdpersona()));
+         }
+
+         return $this->render('personas/editpassestudiante.html.twig', array(
+             'persona' => $persona,
+             'edit_form' => $editForm->createView(),
+             'delete_form' => $deleteForm->createView(),
+         ));
+     }
+
      public function editPersonalAction(Request $request, Personas $persona)
      {
          $nomComp = $persona->getnombrePersona();
@@ -357,6 +511,48 @@ class PersonasController extends Controller
          }
 
          return $this->render('personas/editPersonal.html.twig', array(
+             'persona' => $persona,
+             'edit_form' => $editForm->createView(),
+             'delete_form' => $deleteForm->createView(),
+
+         ));
+     }
+
+     public function editpasspersonalAction(Request $request, Personas $persona)
+     {
+         $nomComp = $persona->getnombrePersona();
+         $telefono = $persona->gettelefonoPersona();
+         $direccion = $persona->getdireccionPersona();
+         $correo = $persona->getemailPersona();
+
+         //GENERAR CONTRASEÑA
+         $autocont = $this->get("app.autocont");
+         $pass = $autocont->obtener();
+
+
+         $deleteForm = $this->createDeleteForm($persona);
+
+         if($persona->getrole() == "ROLE_ADMIN" || "ROLE_ASESOR" || "ROLE_SECRETARIO" ||"ROLE_DIRECTOR")
+         {
+             $carne = "null";
+             $editForm = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
+               'passEnvio' =>$pass,
+             ));
+         }
+         $editForm->handleRequest($request);
+
+         if ($editForm->isSubmitted() && $editForm->isValid()) {
+             $factory = $this->get("security.encoder_factory");
+             $encoder = $factory->getEncoder($persona);
+             $password = $encoder->encodePassword($editForm->get("passPersona")->getData(), $persona->getSalt());
+             $persona->setPassPersona($password);
+
+             $this->getDoctrine()->getManager()->flush();
+
+             return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdpersona()));
+         }
+
+         return $this->render('personas/editpasspersonal.html.twig', array(
              'persona' => $persona,
              'edit_form' => $editForm->createView(),
              'delete_form' => $deleteForm->createView(),

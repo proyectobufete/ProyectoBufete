@@ -1,0 +1,67 @@
+{% extends 'layout.html.twig' %}
+{% block act2 %}active{% endblock %}
+{% block ac28 %}active{% endblock %}
+{% block title %}
+  <h1>Listado de Practicas</h1>
+{% endblock %}
+{% block body %}
+  <div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('practicas_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Asignar Practica
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered ">
+            <thead>
+                <tr><th>Estudiante</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha de Finalización</th>
+                    <th>Estado</th>
+                    <th>Observaciones</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for practica in practicas  %}
+                <tr>
+                  <td>{{ practica.idEstudiante }}</td>
+                  <td>{% if practica.inicioPractica %}{{ practica.inicioPractica|date('Y-m-d') }}{% endif %}</td>
+                  <td>{% if practica.fechaFin %}{{ practica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                  <td>{% if practica.estadoPractica %}Activo{% else %}No{% endif %}</td>
+                  <td>{{ practica.observaciones }}</td>
+                  <td>
+                    <a href="{{ path('practicas_show', { 'idPractica': practica.idPractica }) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('practicas_edit', {'idPractica': practica.idPractica }) }}" class="btn blue ">Editar</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
