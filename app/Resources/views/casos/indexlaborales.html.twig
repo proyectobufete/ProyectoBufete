@@ -1,119 +1,130 @@
 {% extends 'layout.html.twig' %}
 {% block act3 %} active {% endblock %}
-{% block ac9 %} active {% endblock %}
-
+{% block ac8 %} active {% endblock %}
 {% block title %}
-  <h1>Listado de Casos Laborales</h1>
+  <h1>Listado de Casos Civiles</h1>
 {% endblock %}
+
 {% block body %}
-<div class="portlet-body">
-    <div class="row">
-      <div class="col-md-2">
-        <form method="get" action="" class="form-inline" role="search">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" name="buscar" class="btn btn-blue">
-                <i class="fa fa-search"> No asignados</i>
-              </button>
-            </span>
-            <input type="hidden" name="query" value="1" class="form-control" placeholder="Buscar"  />
-          </div>
-        </form>
-      </div>
-      <div class="col-md-2">
-        <form method="get" action="" class="form-inline" role="search">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" name="buscar" class="btn btn-blue">
-                <i class="fa fa-search"> Asignados</i>
-              </button>
-            </span>
-            <input type="hidden" name="query" value="2" class="form-control" placeholder="Buscar"  />
-          </div>
-        </form>
-      </div>
-      <div class="col-md-2">
-        <form method="get" action="" class="form-inline" role="search">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" name="buscar" class="btn btn-blue">
-                <i class="fa fa-search"> Fenecidos</i>
-              </button>
-            </span>
-            <input type="hidden" name="query" value="4" class="form-control" placeholder="Buscar"  />
-          </div>
-        </form>
-      </div>
-      <div class="col-md-2">
-        <form method="get" action="" class="form-inline" role="search">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" name="buscar" class="btn btn-blue">
-                <i class="fa fa-search"> Descargados</i>
-              </button>
-            </span>
-            <input type="hidden" name="query" value="3" class="form-control" placeholder="Buscar"  />
-          </div>
-        </form>
-      </div>
-      <div class="col-md-6">
+ <div class="portlet-body">
+   <div class="row">
+     <div class="col-md-3">
         <div class="btn-group">
-                  <a href="{{ path('casos_newlaboral') }}">
-                    <button id="sample_editable_1_new" class="btn green">
-                      Agregar Caso Laboral <i class="fa fa-plus"></i>
-                    </button></a>
-        </div>
-      </div>
+           <a href="{{ path('casos_newcivil') }}">
+           <button id="sample_editable_1_new" class="btn green">
+             Agregar Caso Civil <i class="fa fa-plus"></i>
+           </button></a>
+       </div>
+     </div>
 
-  <div class="col-md-12 col-sm-12 col-xs-12" >
-    <div class="table-responsive">
-      <table class="table table-bordered ">
-        <thead>
-          <tr role="row" class="">
-            <th>No de caso</th>
-            <th>Fecha </th>
-            <th>Demandante</th>
-            <th>Dorección Demandante</th>
-            <th>Nombre de demandado</th>
-            <th>Direccion Demandado</th>
-            <th>Nombre Estudiante</th>
-            <th>Carné Estudiante</th>
-            <th>Estado</th>
-            <th>Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for caso in casos %}
-          <tr>
-            <td>{{ caso.noCaso }}</td>
-            <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
-            <td>{{ caso.idDemandante.nombreDemandante }}</td>
-            <td>{{ caso.idDemandante.direccionDemandante  }}</td>
-            <td>{{ caso.nombreDemandado }}</td>
-            <td>{{ caso.dirDemandado }}</td>
-            <td>{% if caso.idEstudiante != null %}
-                  {{ caso.idEstudiante.idPersona.nombrePersona }}
-                {% endif %}
-            </td>
-            <td>{% if caso.idEstudiante != null %}
-                  {{ caso.idEstudiante.carneEstudiante }}
-                {% endif %}
-            </td>
-            <td>{{ caso.estadoCaso }}</td>
-              <td>
-                <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
-                    <button type="submit" name="buscar" class="btn yellow">Ver</button>
-                    <input type="hidden" name="id" value="{{caso.idCaso}}"/>
-                </form>
-                  <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso }) }}" class="btn blue">Editar</a>
-              </td>
-          </tr>
-          {% endfor %}
 
-        </tbody>
-      </table>
+
+
+     <div class="col-md-offset-7">
+       <div class="">
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="2" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               Asignado
+             </label>
+           </div>
+         </form>
+       </div>
+
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="1" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               No Asignado
+             </label>
+           </div>
+         </form>
+       </div>
+
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="4" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               Fenecido
+             </label>
+           </div>
+         </form>
+       </div>
+
+       <div class="radio-inline">
+         <form method="get" action=""  role="search">
+           <div class="radio">
+             <label class="cr-styled">
+               <input type="radio" name="query" value="3" onchange="this.form.submit()"/>
+               <i class="fa"></i>
+               Descargados
+             </label>
+           </div>
+         </form>
+       </div>
+
     </div>
-  </div>
+     </div>
+   </div>
+
+   <div class="row">
+     <div class="col-md-12 col-sm-12 col-xs-12" >
+       <div class="table-responsive">
+         <table class="table table-bordered ">
+           <thead>
+             <tr role="row" class="">
+               <th>No de caso</th>
+               <th>Fecha </th>
+               <th>Demandante</th>
+               <th>Dorección Demandante</th>
+               <th>Nombre de demandado</th>
+               <th>Direccion Demandado</th>
+               <th>Nombre Estudiante</th>
+               <th>Carné Estudiante</th>
+               <th>Estado</th>
+               <th>Opciones</th>
+             </tr>
+           </thead>
+           <tbody>
+             {% for caso in casos %}
+             <tr>
+               <td>{{ caso.noCaso }}</td>
+               <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+               <td>{{ caso.idDemandante.nombreDemandante }}</td>
+               <td>{{ caso.idDemandante.direccionDemandante  }}</td>
+               <td>{{ caso.nombreDemandado }}</td>
+               <td>{{ caso.dirDemandado }}</td>
+               <td>{% if caso.idEstudiante != null %}
+                     {{ caso.idEstudiante.idPersona.nombrePersona }}
+                   {% endif %}
+               </td>
+               <td>{% if caso.idEstudiante != null %}
+                     {{ caso.idEstudiante.carneEstudiante }}
+                   {% endif %}
+               </td>
+               <td>{{ caso.estadoCaso }}</td>
+                 <td>
+                   <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
+                       <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                       <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                   </form>
+                     <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso }) }}" class="btn blue">Editar</a>
+                 </td>
+             </tr>
+             {% endfor %}
+
+           </tbody>
+         </table>
+       </div>
+     </div>
+
+   </div>
  </div>
-</div>
 {% endblock %}
