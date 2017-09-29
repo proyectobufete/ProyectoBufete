@@ -30,10 +30,10 @@ class CasosType extends AbstractType
         ->add('estadoCaso', ChoiceType::class,array(
           "label" => "Estado del caso: ",
           "choices"=> array(
-            "No asignado" => 0,
-            "En tramite" => 1,
-            "Descargado" => 2,
-            "Fenecido" => 3,
+            "No asignado" => 1,
+            "En tramite" => 2,
+            "Descargado" => 3,
+            "Fenecido" => 4,
           )
         ))
         ->add('nombreDemandado')

@@ -25,17 +25,57 @@ class CasosController extends Controller
      * Listar casos laborales.
      *
      */
-    public function indexLaboralesAction()
+    public function indexLaboralesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-          $bufete = $this->getUser()->getIdBufete();
-          $query = $em->createQuery(
-            "SELECT c FROM BufeteBundle:Casos c
-            INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
-            ORDER BY c.fechaCaso DESC"
-          );
-          $casos = $query->getResult();
-
+        $ciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $rol = $this->getUser()->getRole();
+        $casos = null;
+        if($rol == "ROLE_SECRETARIO")
+        {
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery)){
+                $repo = $em->getRepository("BufeteBundle:Casos");
+                $query = $repo->createQueryBuilder('c')
+                ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
+                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+                ->where('d.idCiudad = :ciudad')
+                ->andWhere('c.estadoCaso = :opcion')
+                ->setParameter('ciudad', $ciudad)
+                ->setParameter('opcion', $searchQuery)
+                ->orderBy('c.fechaCaso', 'DESC')
+                ->getQuery();
+                $casos = $query->getResult();
+            } else {
+                $repo = $em->getRepository("BufeteBundle:Casos");
+                $query = $repo->createQueryBuilder('c')
+                ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
+                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+                ->where('d.idCiudad = :ciudad')
+                ->setParameter('ciudad', $ciudad)
+                ->orderBy('c.fechaCaso', 'DESC')
+                ->getQuery();
+                $casos = $query->getResult();
+            }
+        } elseif ($rol == "ROLE_ADMIN") {
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery)){
+                $query = $em->createQuery(
+                  "SELECT c FROM BufeteBundle:Casos c
+                    INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+                    WHERE c.estadoCaso = :opcion
+                    ORDER BY c.fechaCaso DESC");
+                $query->setParameter('opcion', $searchQuery);
+                $casos = $query->getResult();
+            } else {
+              $query = $em->createQuery(
+                "SELECT c FROM BufeteBundle:Casos c
+                INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+                ORDER BY c.fechaCaso DESC"
+              );
+              $casos = $query->getResult();
+            }
+        }
 
         return $this->render('casos/indexlaborales.html.twig', array(
             'casos' => $casos,
@@ -46,16 +86,58 @@ class CasosController extends Controller
      * Listar casos civiles.
      *
      */
-    public function indexCivilesAction()
+    public function indexCivilesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $bufete = $this->getUser()->getIdBufete();
-        $query = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
-          ORDER BY c.fechaCaso DESC"
-        );
-        $casos = $query->getResult();
+        $ciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $rol = $this->getUser()->getRole();
+        $casos = null;
+        if($rol == "ROLE_SECRETARIO")
+        {
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery))
+            {
+                $repo = $em->getRepository("BufeteBundle:Casos");
+                $query = $repo->createQueryBuilder('c')
+                ->innerJoin('BufeteBundle:Civiles', 'ci', 'WITH', 'c.idCaso = ci.idCaso')
+                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+                ->where('d.idCiudad = :ciudad')
+                ->andWhere('c.estadoCaso = :opcion')
+                ->setParameter('ciudad', $ciudad)
+                ->setParameter('opcion', $searchQuery)
+                ->orderBy('c.fechaCaso', 'DESC')
+                ->getQuery();
+                $casos = $query->getResult();
+            } else{
+                $repo = $em->getRepository("BufeteBundle:Casos");
+                $query = $repo->createQueryBuilder('c')
+                ->innerJoin('BufeteBundle:Civiles', 'ci', 'WITH', 'c.idCaso = ci.idCaso')
+                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+                ->where('d.idCiudad = :ciudad')
+                ->setParameter('ciudad', $ciudad)
+                ->orderBy('c.fechaCaso', 'DESC')
+                ->getQuery();
+                $casos = $query->getResult();
+            }
+        } elseif ($rol == "ROLE_ADMIN") {
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery)){
+              $query = $em->createQuery(
+                "SELECT c FROM BufeteBundle:Casos c
+                  INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+                  WHERE c.estadoCaso = :opcion
+                  ORDER BY c.fechaCaso DESC");
+              $query->setParameter('opcion', $searchQuery);
+              $casos = $query->getResult();
+            } else {
+              $query = $em->createQuery(
+                "SELECT c FROM BufeteBundle:Casos c
+                INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+                ORDER BY c.fechaCaso DESC"
+              );
+              $casos = $query->getResult();
+            }
+        }
 
         return $this->render('casos/indexciviles.html.twig', array(
             'casos' => $casos,
@@ -242,12 +324,40 @@ class CasosController extends Controller
      * Detalle caso laboral
      *
      */
-    public function showLaboralAction(Casos $caso)
+    public function showLaboralAction(Request $request, Casos $caso)
     {
         $deleteForm = $this->createDeleteForm($caso);
         return $this->render('casos/showlaboral.html.twig', array(
             'caso' => $caso,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Detalle caso laboral
+     *
+     */
+    public function mostrarLaboralAction(Request $request)
+    {
+        $var=$request->request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $caso = $em->getRepository('BufeteBundle:Casos')->findOneBy(array('idCaso' => $var));
+        return $this->render('casos/showlaboral.html.twig', array(
+            'caso' => $caso,
+        ));
+    }
+
+    /**
+     * Detalle caso civil
+     *
+     */
+    public function mostrarCivilAction(Request $request)
+    {
+        $var=$request->request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $caso = $em->getRepository('BufeteBundle:Casos')->findOneBy(array('idCaso' => $var));
+        return $this->render('casos/showcivil.html.twig', array(
+            'caso' => $caso,
         ));
     }
 
@@ -275,7 +385,7 @@ class CasosController extends Controller
         $editForm = $this->createForm('BufeteBundle\Form\CasosType', $caso, array('idciudad'=> $idciudad));
         $editForm->handleRequest($request);
 
-        $tipopractica = null; $flush = null; $mensaje = null; $confirm = false;
+        $tipopractica = null; $mensaje = null; $confirm = false;
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
@@ -299,8 +409,7 @@ class CasosController extends Controller
             }else {
               $this->session->getFlashBag()->add("status", $mensaje);
             }
-            //$this->session->getFlashBag()->add("status", $mensaje);
-            //return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
+
         }
 
         return $this->render('casos/editlaboral.html.twig', array(
@@ -315,21 +424,39 @@ class CasosController extends Controller
      */
     public function editCivilAction(Request $request, Casos $caso)
     {
-        $deleteForm = $this->createDeleteForm($caso);
         $idciudad = $caso->getIdDemandante()->getIdCiudad()->getIdCiudad();
         $editForm = $this->createForm('BufeteBundle\Form\CasocivilType', $caso, array('idciudad'=> $idciudad));
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $tipopractica = null; $mensaje = null; $confirm = false;
 
-            return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $tipopractica = $editForm->get('idEstudiante')->getData();
+            if($tipopractica == null)
+            {
+                $this->getDoctrine()->getManager()->flush();
+                $confirm = true;
+            } else {
+                 $tipopractica = $editForm->get('idEstudiante')->getData()->getidtipopracticante()->getidtipopracticante();
+                 if($tipopractica != 3)
+                 {
+                     $this->getDoctrine()->getManager()->flush();
+                     $confirm = true;
+                 } else {
+                   $mensaje = "El estudiante esta realizando practicas externas";
+                 }
+            }
+            if ($confirm) {
+              return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+            }else {
+              $this->session->getFlashBag()->add("status", $mensaje);
+            }
+
         }
 
         return $this->render('casos/editcivil.html.twig', array(
             'caso' => $caso,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

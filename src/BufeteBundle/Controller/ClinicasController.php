@@ -34,7 +34,8 @@ class ClinicasController extends Controller
     public function newAction(Request $request)
     {
         $clinica = new Clinicas();
-        $form = $this->createForm('BufeteBundle\Form\ClinicasType', $clinica);
+        $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $form = $this->createForm('BufeteBundle\Form\ClinicasType', $clinica, array('idciudad'=> $idciudad));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

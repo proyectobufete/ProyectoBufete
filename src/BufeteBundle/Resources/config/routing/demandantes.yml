@@ -13,9 +13,19 @@ demandantes_new:
     defaults: { _controller: "BufeteBundle:Demandantes:new" }
     methods:  [GET, POST]
 
+demandantesecre_new:
+    path:     /newdemandante
+    defaults: { _controller: "BufeteBundle:Demandantes:demandantesecre" }
+    methods:  [GET, POST]
+
 demandantes_edit:
     path:     /{idDemandante}/edit
     defaults: { _controller: "BufeteBundle:Demandantes:edit" }
+    methods:  [GET, POST]
+
+demandantesecre_edit:
+    path:     /{idDemandante}/editar
+    defaults: { _controller: "BufeteBundle:Demandantes:editdemandante" }
     methods:  [GET, POST]
 
 demandantes_delete:

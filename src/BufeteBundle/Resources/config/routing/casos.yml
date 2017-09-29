@@ -19,14 +19,14 @@ casos_indexciviles:
     methods:  GET
 
 casos_showlaboral:
-    path:     /{idCaso}/showlaboral
-    defaults: { _controller: "BufeteBundle:Casos:showLaboral" }
-    methods:  GET
+    path:     /showlaboral
+    defaults: { _controller: "BufeteBundle:Casos:mostrarLaboral" }
+    methods:  [GET, POST]
 
 casos_showcivil:
-    path:     /{idCaso}/showcivil
-    defaults: { _controller: "BufeteBundle:Casos:showCivil" }
-    methods:  GET
+    path:     /showcivil
+    defaults: { _controller: "BufeteBundle:Casos:mostrarCivil" }
+    methods:  [GET, POST]
 
 casos_newlaboral:
     path:     /newlaboral

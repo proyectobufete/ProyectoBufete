@@ -92,3 +92,7 @@ bufete_revisiones:
 bufete_asignacionclinica:
         resource: "@BufeteBundle/Resources/config/routing/asignacionclinica.yml"
         prefix:   /asignacionclinica
+
+bufete_practicas:
+        resource: "@BufeteBundle/Resources/config/routing/practicas.yml"
+        prefix:   /practicas

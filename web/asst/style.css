@@ -25,3 +25,302 @@
 	border: 5px solid #A8A8A8;
 
 }
+
+.portlet > .portlet-body.blue,
+.portlet.blue {
+  background-color: #3598dc;
+}
+
+.portlet.solid.blue > .portlet-title,
+.portlet.solid.blue > .portlet-body {
+  border: 0;
+  color: #FFFFFF;
+}
+.portlet.solid.blue > .portlet-title > .caption {
+  font-weight: 400;
+}
+.portlet.solid.blue > .portlet-title > .caption > i {
+  color: #FFFFFF;
+}
+.portlet.solid.blue > .portlet-title > .tools > a.remove {
+  background-image: url(../img/portlet-remove-icon-white.png);
+}
+.portlet.solid.blue > .portlet-title > .tools > a.config {
+  background-image: url(../img/portlet-config-icon-white.png);
+}
+.portlet.solid.blue > .portlet-title > .tools > a.reload {
+  background-image: url(../img/portlet-reload-icon-white.png);
+}
+.portlet.solid.blue > .portlet-title > .tools > a.expand {
+  background-image: url(../img/portlet-expand-icon-white.png);
+}
+.portlet.solid.blue > .portlet-title > .tools > a.collapse {
+  background-image: url(../img/portlet-collapse-icon-white.png);
+}
+.portlet.solid.blue > .portlet-title > .tools > a.fullscreen {
+  color: #fdfdfd;
+}
+
+.portlet.box.blue {
+  border: 1px solid #60aee4;
+  border-top: 0;
+}
+.portlet.box.blue > .portlet-title {
+  background-color: #3598dc;
+}
+.portlet.box.blue > .portlet-title > .caption {
+  color: #FFFFFF;
+}
+.portlet.box.blue > .portlet-title > .caption > i {
+  color: #FFFFFF;
+}
+.portlet.box.blue > .portlet-title > .actions .btn-default {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid #95c9ed;
+  color: #aad4f0;
+}
+.portlet.box.blue > .portlet-title > .actions .btn-default > i {
+  color: #b7daf3;
+}
+.portlet.box.blue > .portlet-title > .actions .btn-default:hover, .portlet.box.blue > .portlet-title > .actions .btn-default:focus, .portlet.box.blue > .portlet-title > .actions .btn-default:active, .portlet.box.blue > .portlet-title > .actions .btn-default.active {
+  border: 1px solid #c0dff4;
+  color: #d6eaf8;
+}
+
+.portlet > .portlet-title {
+    border-bottom: 1px solid #eee;
+    padding: 0;
+    margin-bottom: 10px;
+    min-height: 41px;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.portlet.box > .portlet-title {
+    border-bottom: 0;
+    padding: 1px 10px;
+    margin-bottom: 0;
+    color: #fff;
+}
+.form {
+  padding: 0 !important;
+}
+.form .form-body {
+  padding: 10px;
+}
+
+.form .form-bordered .form-actions {
+  margin-top: 0;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+@media (max-width: 991px) {
+  .form .form-bordered .form-actions {
+    /* 991px */
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+.form .form-actions {
+  padding: 20px 10px;
+  margin: 0;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e5e5e5;
+  *zoom: 1;
+}
+.portlet.light .form .form-actions {
+  background: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.form .form-actions.noborder {
+  border-top: 0;
+}
+.portlet .form .form-actions {
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  -ms-border-radius: 0 0 4px 4px;
+  -o-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+}
+.form .form-actions:before, .form .form-actions:after {
+  content: " ";
+  display: table;
+}
+.form .form-actions:after {
+  clear: both;
+}
+.form .form-actions.right {
+  padding-left: 0;
+  padding-right: 10px;
+  text-align: right;
+}
+.portlet.light .form .form-actions.right {
+  padding-right: 0;
+}
+.form .form-actions.left {
+  padding-left: 10px;
+  padding-right: 0;
+  text-align: left;
+}
+.portlet.light .form .form-actions.left {
+  padding-left: 0;
+}
+.form .form-actions.nobg {
+  background-color: transparent;
+}
+.form .form-actions.top {
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-top: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.portlet.light .form .form-actions.top {
+  background: none;
+}
+.form .form-actions .btn-set {
+  display: inline-block;
+}
+@media (max-width: 767px) {
+  .form .form-actions {
+    /* 767px */
+  }
+  .form .form-actions .btn-set {
+    margin-bottom: 3px;
+    margin-top: 3px;
+    float: left !important;
+  }
+}
+.form .form-section {
+  margin: 30px 0px 25px 0px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+.form .form-section:first-child {
+  margin-top: 5px;
+}
+/***********
+Green Colors
+************/
+.green.btn {
+  color: #FFFFFF;
+  background-color: #26a69a;
+}
+.green.btn:hover, .green.btn:focus, .green.btn:active, .green.btn.active {
+  color: #FFFFFF;
+  background-color: #1f897f;
+}
+.open .green.btn.dropdown-toggle {
+  color: #FFFFFF;
+  background-color: #1f897f;
+}
+.green.btn:active, .green.btn.active {
+  background-image: none;
+  background-color: #1b746c;
+}
+.green.btn:active:hover, .green.btn.active:hover {
+  background-color: #1c7d74;
+}
+.open .green.btn.dropdown-toggle {
+  background-image: none;
+}
+.green.btn.disabled, .green.btn.disabled:hover, .green.btn.disabled:focus, .green.btn.disabled:active, .green.btn.disabled.active, .green.btn[disabled], .green.btn[disabled]:hover, .green.btn[disabled]:focus, .green.btn[disabled]:active, .green.btn[disabled].active, fieldset[disabled] .green.btn, fieldset[disabled] .green.btn:hover, fieldset[disabled] .green.btn:focus, fieldset[disabled] .green.btn:active, fieldset[disabled] .green.btn.active {
+  background-color: #26a69a;
+}
+.green.btn .badge {
+  color: #26a69a;
+  background-color: #FFFFFF;
+}
+
+/* Button Strip */
+.btn.green-stripe {
+  border-left: 3px solid #26a69a;
+}
+
+/* Portlet */
+.portlet > .portlet-body.green,
+.portlet.green {
+  background-color: #26a69a;
+}
+/**********
+Blue Colors
+***********/
+
+/* Button */
+.blue.btn {
+  color: #FFFFFF;
+  background-color: #3598dc;
+}
+.blue.btn:hover, .blue.btn:focus, .blue.btn:active, .blue.btn.active {
+  color: #FFFFFF;
+  background-color: #2386ca;
+}
+.open .blue.btn.dropdown-toggle {
+  color: #FFFFFF;
+  background-color: #2386ca;
+}
+.blue.btn:active, .blue.btn.active {
+  background-image: none;
+  background-color: #1f78b5;
+}
+.blue.btn:active:hover, .blue.btn.active:hover {
+  background-color: #217ebd;
+}
+.open .blue.btn.dropdown-toggle {
+  background-image: none;
+}
+.blue.btn.disabled, .blue.btn.disabled:hover, .blue.btn.disabled:focus, .blue.btn.disabled:active, .blue.btn.disabled.active, .blue.btn[disabled], .blue.btn[disabled]:hover, .blue.btn[disabled]:focus, .blue.btn[disabled]:active, .blue.btn[disabled].active, fieldset[disabled] .blue.btn, fieldset[disabled] .blue.btn:hover, fieldset[disabled] .blue.btn:focus, fieldset[disabled] .blue.btn:active, fieldset[disabled] .blue.btn.active {
+  background-color: #3598dc;
+}
+.blue.btn .badge {
+  color: #3598dc;
+  background-color: #FFFFFF;
+}
+
+/* Button Strip */
+.btn.blue-stripe {
+  border-left: 3px solid #3598dc;
+}
+
+/***********
+Yellow Colors
+************/
+
+/* Button */
+.yellow.btn {
+  color: #FFFFFF;
+  background-color: #c49f47;
+}
+.yellow.btn:hover, .yellow.btn:focus, .yellow.btn:active, .yellow.btn.active {
+  color: #FFFFFF;
+  background-color: #af8c38;
+}
+.open .yellow.btn.dropdown-toggle {
+  color: #FFFFFF;
+  background-color: #af8c38;
+}
+.yellow.btn:active, .yellow.btn.active {
+  background-image: none;
+  background-color: #9c7c32;
+}
+.yellow.btn:active:hover, .yellow.btn.active:hover {
+  background-color: #a48334;
+}
+.open .yellow.btn.dropdown-toggle {
+  background-image: none;
+}
+.yellow.btn.disabled, .yellow.btn.disabled:hover, .yellow.btn.disabled:focus, .yellow.btn.disabled:active, .yellow.btn.disabled.active, .yellow.btn[disabled], .yellow.btn[disabled]:hover, .yellow.btn[disabled]:focus, .yellow.btn[disabled]:active, .yellow.btn[disabled].active, fieldset[disabled] .yellow.btn, fieldset[disabled] .yellow.btn:hover, fieldset[disabled] .yellow.btn:focus, fieldset[disabled] .yellow.btn:active, fieldset[disabled] .yellow.btn.active {
+  background-color: #c49f47;
+}
+.yellow.btn .badge {
+  color: #c49f47;
+  background-color: #FFFFFF;
+}
+
+/* Button Strip */
+.btn.yellow-stripe {
+  border-left: 3px solid #c49f47;
+}
