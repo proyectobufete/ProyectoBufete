@@ -1,11 +1,10 @@
 {% extends 'layout.html.twig' %}
 {% block act5 %} active {% endblock %}
-
 {% block title %}
   <h1>Detalles</h1>
 {% endblock %}
 {% block body %}
-  <div class="portlet-body">
+  <div class="portlet-body ">
     <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
       <div class="col-md-4">
         <table class="table table-striped table-bordered table-hover dataTable no-footer">
@@ -65,23 +64,22 @@
 
             {% if persona.role == "ROLE_ESTUDIANTE" %}
               <a href="{{ path('personas_indexEstudiantes') }}" class="btn default">Regresar</a>
-
             {% elseif persona.role == "ROLE_ASESOR" %}
               <a href="{{ path('personas_indexAsesores') }}" class="btn default">Regresar</a>
             {% endif %}
           </tr>
           <tr>
             {% if persona.role == "ROLE_ESTUDIANTE" %}
-
-
-
               <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
-
             {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
               <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
-
             {% endif %}
-            <tr></tr>
+          </tr>
+          <tr>
+            {% if persona.role == "ROLE_ESTUDIANTE" %}
+              <a href="{{ path('personas_HistorialEstudiante', { 'id': persona.estudiantes.idEstudiante })}}" class="btn yellow">Historial</a>
+            {% endif %}
+          </tr>
           </table>
 
         </div>
