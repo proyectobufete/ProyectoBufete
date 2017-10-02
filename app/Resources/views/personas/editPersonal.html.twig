@@ -51,7 +51,7 @@
                 {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
                 {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              
+
             </div>
             <div class="row">
               <div class="col-md-5">
@@ -83,8 +83,10 @@
               <button type="button" name="cancelar" class="btn default">Cancelar</button>
             </a>
           </div>
-
+        </div>
+      </div>
+    {{ form_end(edit_form) }}
     </div>
-
+  </div>
 
 {% endblock %}
