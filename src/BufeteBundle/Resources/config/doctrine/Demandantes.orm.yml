@@ -68,13 +68,17 @@ BufeteBundle\Entity\Demandantes:
             options:
                 unsigned: false
             column: Telefono_Demandante
-        idEstadocivil:
-            type: integer
-            nullable: true
-            options:
-                unsigned: false
-            column: Id_EstadoCivil
     manyToOne:
+        idEstadocivil:
+            targetEntity: Estadosciviles
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_EstadoCivil:
+                    referencedColumnName: Id_EstadoCivil
+            orphanRemoval: false
         idTrabajo:
             targetEntity: Trabajos
             cascade: {  }
