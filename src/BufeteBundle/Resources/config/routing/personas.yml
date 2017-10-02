@@ -78,3 +78,8 @@ personas_civilesAsesor:
     path:     /civilesasesor
     defaults: { _controller: "BufeteBundle:Personas:civilesAsesor" }
     methods:  GET
+
+personas_HistorialEstudiante:
+    path:     /{id}/HistorialEstudiante
+    defaults: { _controller: "BufeteBundle:Personas:HistorialEstudiante" }
+    methods:  GET
