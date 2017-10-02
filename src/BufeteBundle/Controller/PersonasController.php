@@ -102,28 +102,33 @@ class PersonasController extends Controller
       ));
   }
 
-  public function indexEstudiantesAction()
+  public function indexEstudiantesAction(Request $request)
   {
-    $em = $this->getDoctrine()->getManager();
-
-/*
-    $query = $em->CreateQuery(
-        "SELECT p FROM BufeteBundle:Personas p
-        WHERE p.role LIKE 'ROLE_ESTUDIANTE'"
-      );
-*/
-    $query = $em->CreateQuery(
-       "SELECT p FROM BufeteBundle:Personas p
-        INNER JOIN BufeteBundle:Estudiantes e
-        WITH p=e.idPersona"
-      );
-
-      $estudiantes = $query->getResult();
-
-      return $this->render('personas/indexEstudiantes.html.twig', array(
-          'estudiantes' => $estudiantes,
-
-      ));
+    $searchQuery = $request->get('query');
+    if(!empty($searchQuery))
+    {
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->CreateQuery(
+         "SELECT p FROM BufeteBundle:Personas p
+          INNER JOIN BufeteBundle:Estudiantes e
+          WITH p=e.idPersona WHERE (p.nombrePersona like :name OR e.carneEstudiante like :name)"
+        );
+        $query->setParameter('name', '%'.$searchQuery.'%');
+        $estudiantes = $query->getResult();
+    }
+    else
+    {
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->CreateQuery(
+         "SELECT p FROM BufeteBundle:Personas p
+          INNER JOIN BufeteBundle:Estudiantes e
+          WITH p=e.idPersona"
+        );
+        $estudiantes = $query->getResult();
+    }
+    return $this->render('personas/indexEstudiantes.html.twig', array(
+        'estudiantes' => $estudiantes,
+    ));
   }
 
 
