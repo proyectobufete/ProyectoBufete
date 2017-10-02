@@ -5,6 +5,9 @@ namespace BufeteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 class AsignacionclinicaType extends AbstractType
 {
@@ -13,11 +16,24 @@ class AsignacionclinicaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->bufete = $options['bufete'];
         $builder->add('notaClinica')
         ->add('observacionesClinica')
         ->add('estadoAsignacionest')
         ->add('idEstudiante')
-        ->add('idClinica');
+        ->add('idClinica', EntityType::class,array(
+          "class" => "BufeteBundle:Clinicas",
+          "label" => "Clinica: ",
+          "query_builder" => function (EntityRepository $er){
+            return $er->createQueryBuilder('c')
+            ->innerJoin('BufeteBundle:Personas', 'p', Join::WITH, 'p.idPersona = c.idPersona')
+            ->where('p.idBufete = :bufete')
+            ->andWhere('c.estadoClinica = 1')
+            ->setParameter('bufete', $this->bufete);
+          },
+          'placeholder' => 'Ninguno seleccionado',
+          'required'   => false,
+        ));
     }
 
     /**
@@ -26,7 +42,8 @@ class AsignacionclinicaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BufeteBundle\Entity\Asignacionclinica'
+            'data_class' => 'BufeteBundle\Entity\Asignacionclinica',
+            'bufete' => null,
         ));
     }
 

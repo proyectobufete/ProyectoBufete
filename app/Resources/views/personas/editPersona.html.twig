@@ -2,7 +2,7 @@
 {% block act5 %} active {% endblock %}
 {% block ac13 %} active {% endblock %}
       {% block title %}
-        <h1>Editar Asesor</h1>
+        <h1>Editar Persona</h1>
       {% endblock %}
 
 {% block body %}
@@ -51,7 +51,10 @@
                 {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
                 {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-
+              <div class="col-md-2">
+                {{form_label(edit_form.idBufete,'Bufete')}}
+                {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
+              </div>
             </div>
             <div class="row">
               <div class="col-md-5">
@@ -75,8 +78,8 @@
           <div class="col-md-offset-2 col-md-9">
             <button type="submit" name="Create" class="btn green">Guardar</button>
 
-            <a href="{{ path('personas_editpasspersonal', {'idPersona': persona.idPersona}) }}">
-              <button type="button" name="cancelar" class="btn default">cambiar Contraseña</button>
+            <a href="{{ path('personas_editpasspersona', {'idPersona': persona.idPersona}) }}">
+              <button type="button" name="cancelar" class="btn default">Cambiar Contraseña</button>
             </a>
 
             <a href="{{ path('personas_indexAsesores') }}">
