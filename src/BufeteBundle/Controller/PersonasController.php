@@ -410,13 +410,13 @@ class PersonasController extends Controller
          if($persona->getrole() == "ROLE_ESTUDIANTE")
          {
            $carne = $persona->getestudiantes()->getcarneEstudiante();
-           $editForm = $this->createForm('BufeteBundle\Form\PersonasType', $persona, array(
+           $editForm = $this->createForm('BufeteBundle\Form\editarestudianteType', $persona, array(
                'nombreEnvio' => $nomComp,
                'carneEnvio'=> $carne,
                'telefonoEnvio'=>$telefono,
                'direccionEnvio'=>$direccion,
                'correoEnvio'=>$correo,
-               'passEnvio' =>$pass,
+               //'passEnvio' =>$pass,
            ));
          }
 
@@ -483,25 +483,10 @@ class PersonasController extends Controller
 
      public function editPersonalAction(Request $request, Personas $persona)
      {
-         $nomComp = $persona->getnombrePersona();
-         $telefono = $persona->gettelefonoPersona();
-         $direccion = $persona->getdireccionPersona();
-         $correo = $persona->getemailPersona();
-
-         //GENERAR CONTRASEÑA
-         $autocont = $this->get("app.autocont");
-         $pass = $autocont->obtener();
-
 
          $deleteForm = $this->createDeleteForm($persona);
+         $editForm = $this->createForm('BufeteBundle\Form\editarpersonalType', $persona);
 
-         if($persona->getrole() == "ROLE_ADMIN" || "ROLE_ASESOR" || "ROLE_SECRETARIO" ||"ROLE_DIRECTOR")
-         {
-             $carne = "null";
-             $editForm = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
-               'passEnvio' =>$pass,
-             ));
-         }
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -520,25 +505,16 @@ class PersonasController extends Controller
 
      public function editpasspersonalAction(Request $request, Personas $persona)
      {
-         $nomComp = $persona->getnombrePersona();
-         $telefono = $persona->gettelefonoPersona();
-         $direccion = $persona->getdireccionPersona();
-         $correo = $persona->getemailPersona();
-
          //GENERAR CONTRASEÑA
          $autocont = $this->get("app.autocont");
          $pass = $autocont->obtener();
 
-
          $deleteForm = $this->createDeleteForm($persona);
 
-         if($persona->getrole() == "ROLE_ADMIN" || "ROLE_ASESOR" || "ROLE_SECRETARIO" ||"ROLE_DIRECTOR")
-         {
-             $carne = "null";
-             $editForm = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
-               'passEnvio' =>$pass,
-             ));
-         }
+         $editForm = $this->createForm('BufeteBundle\Form\PersonaspersonalType', $persona, array(
+           'passEnvio' =>$pass,
+         ));
+
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {

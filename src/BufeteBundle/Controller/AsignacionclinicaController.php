@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AsignacionclinicaController extends Controller
 {
-  
+
     /**
      * Lists all asignacionclinica entities.
      *
@@ -20,8 +20,21 @@ class AsignacionclinicaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $asignacionclinicas = $em->getRepository('BufeteBundle:Asignacionclinica')->findAll();
+        $rol = $this->getUser()->getRole();
+        if($rol == "ROLE_ADMIN")
+        {
+            $asignacionclinicas = $em->getRepository('BufeteBundle:Asignacionclinica')->findAll();
+        } elseif ($rol == "ROLE_SECRETARIO") {
+            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+            $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+            $query = $repo->createQueryBuilder('a')
+            ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+            ->where('p.idBufete = :bufete')
+            ->setParameter('bufete', $bufete)
+            ->getQuery();
+            $asignacionclinicas = $query->getResult();
+          }
 
         return $this->render('asignacionclinica/index.html.twig', array(
             'asignacionclinicas' => $asignacionclinicas,
@@ -35,7 +48,8 @@ class AsignacionclinicaController extends Controller
     public function newAction(Request $request)
     {
         $asignacionclinica = new Asignacionclinica();
-        $form = $this->createForm('BufeteBundle\Form\AsignacionclinicaType', $asignacionclinica);
+        $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+        $form = $this->createForm('BufeteBundle\Form\AsignacionclinicaType', $asignacionclinica, array('bufete'=> $bufete));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,7 +87,8 @@ class AsignacionclinicaController extends Controller
     public function editAction(Request $request, Asignacionclinica $asignacionclinica)
     {
         $deleteForm = $this->createDeleteForm($asignacionclinica);
-        $editForm = $this->createForm('BufeteBundle\Form\AsignacionclinicaType', $asignacionclinica);
+        $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+        $editForm = $this->createForm('BufeteBundle\Form\AsignacionclinicaType', $asignacionclinica, array('bufete'=> $bufete));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
