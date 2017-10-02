@@ -541,6 +541,7 @@ class PersonasController extends Controller
          ));
      }
 
+
      /**
       * funcion para el historial de estudiantes
       *
@@ -572,6 +573,62 @@ class PersonasController extends Controller
           'clinicas' => $clinicas,
       ));
     }
+
+
+     public function editPersonaAction(Request $request, Personas $persona)
+     {
+
+         $deleteForm = $this->createDeleteForm($persona);
+         $editForm = $this->createForm('BufeteBundle\Form\editpersonaType', $persona);
+
+         $editForm->handleRequest($request);
+
+         if ($editForm->isSubmitted() && $editForm->isValid()) {
+             $this->getDoctrine()->getManager()->flush();
+
+             return $this->redirectToRoute('personas_editPersona', array('idPersona' => $persona->getIdpersona()));
+         }
+
+         return $this->render('personas/editPersona.html.twig', array(
+             'persona' => $persona,
+             'edit_form' => $editForm->createView(),
+             'delete_form' => $deleteForm->createView(),
+
+         ));
+     }
+
+     public function editpassperAction(Request $request, Personas $persona)
+     {
+         //GENERAR CONTRASEÑA
+         $autocont = $this->get("app.autocont");
+         $pass = $autocont->obtener();
+
+         $deleteForm = $this->createDeleteForm($persona);
+
+         $editForm = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
+           'passEnvio' =>$pass,
+         ));
+
+         $editForm->handleRequest($request);
+
+         if ($editForm->isSubmitted() && $editForm->isValid()) {
+             $factory = $this->get("security.encoder_factory");
+             $encoder = $factory->getEncoder($persona);
+             $password = $encoder->encodePassword($editForm->get("passPersona")->getData(), $persona->getSalt());
+             $persona->setPassPersona($password);
+
+             $this->getDoctrine()->getManager()->flush();
+
+             return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdpersona()));
+         }
+
+         return $this->render('personas/editpassper.html.twig', array(
+             'persona' => $persona,
+             'edit_form' => $editForm->createView(),
+             'delete_form' => $deleteForm->createView(),
+
+         ));
+     }
 
 
     /**
