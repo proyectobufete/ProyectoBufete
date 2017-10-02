@@ -23,6 +23,11 @@ personas_editPersonal:
     defaults: { _controller: "BufeteBundle:Personas:editPersonal" }
     methods:  [GET, POST]
 
+personas_editPersona:
+    path:     /{idPersona}/editPersona
+    defaults: { _controller: "BufeteBundle:Personas:editPersona" }
+    methods:  [GET, POST]
+
 personas_delete:
     path:     /{idPersona}/delete
     defaults: { _controller: "BufeteBundle:Personas:delete" }
@@ -57,6 +62,11 @@ personas_editpassestudiante:
 personas_editpasspersonal:
     path:     /{idPersona}/editpasspersonal
     defaults: { _controller: "BufeteBundle:Personas:editpasspersonal" }
+    methods:  [GET, POST]
+
+personas_editpasspersona:
+    path:     /{idPersona}/editpasspersona
+    defaults: { _controller: "BufeteBundle:Personas:editpassper" }
     methods:  [GET, POST]
 
 personas_laboralesAsesor:
