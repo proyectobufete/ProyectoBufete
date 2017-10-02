@@ -541,6 +541,39 @@ class PersonasController extends Controller
          ));
      }
 
+     /**
+      * funcion para el historial de estudiantes
+      *
+      */
+      public function HistorialEstudianteAction(Request $request, Personas $persona)
+    {
+      $carne=  $request->get('id');
+      //$carne = $persona->getestudiantes()->getcarneEstudiante();
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Civiles l WITH c = l.idCaso
+        WHERE c.idEstudiante = :id");
+      $query->setParameter('id', $carne);
+      $civiles = $query->getResult();
+      $query2 = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+        WHERE c.idEstudiante = :id");
+      $query2->setParameter('id', $carne);
+      $laborales = $query2->getResult();
+      $query3 = $em->createQuery(
+        "SELECT a FROM BufeteBundle:Asignacionclinica a WHERE a.idEstudiante = :id");
+      $query3->setParameter('id', $carne);
+      $clinicas = $query3->getResult();
+      return $this->render('personas/HistorialEstudiante.html.twig', array(
+          'civiles' => $civiles,
+          'laborales' => $laborales,
+          'clinicas' => $clinicas,
+      ));
+    }
+
+
     /**
      * Deletes a persona entity.
      *
