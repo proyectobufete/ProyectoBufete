@@ -161,13 +161,4 @@ BufeteBundle\Entity\Casos:
                 id_tipoAsunto:
                     referencedColumnName: id_tipoAsunto
             orphanRemoval: false
-    oneToOne:
-        laborales:
-            targetEntity: Laborales
-            mappedBy: idCaso
-            cascade: ["persist"]
-        civiles:
-            targetEntity: Civiles
-            mappedBy: idCaso
-            cascade: ["persist"]
     lifecycleCallbacks: {  }

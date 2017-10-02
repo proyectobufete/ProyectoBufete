@@ -76,6 +76,16 @@ BufeteBundle\Entity\Laborales:
             options:
                 fixed: false
     manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
         idTrabajo:
             targetEntity: Trabajos
             cascade: {  }
@@ -85,16 +95,5 @@ BufeteBundle\Entity\Laborales:
             joinColumns:
                 Id_Trabajo:
                     referencedColumnName: Id_Trabajo
-            orphanRemoval: false
-    oneToOne:
-        idCaso:
-            targetEntity: Casos
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: laborales
-            joinColumns:
-                Id_Caso:
-                    referencedColumnName: Id_Caso
             orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -5,10 +5,10 @@ namespace BufeteBundle\Controller;
 use BufeteBundle\Entity\Revisiones;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
+use BufeteBundle\Entity\Casos;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-use BufeteBundle\Entity\Casos;
-
 
 /**
  * Revisione controller.
@@ -42,7 +42,7 @@ class RevisionesController extends Controller
         $form = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $form->handleRequest($request);
 
-        $var=$request->query->get("idCaso");
+        $var=$request->request->get("idCaso");
         $nuevavar = (int)$var;
         $idrecibido=$var;
 
@@ -54,28 +54,35 @@ class RevisionesController extends Controller
             $idCaso = $caso_repo->find($idrecibido);
             $revisione->setIdCaso($idCaso);
 
-              $file = $revisione->getruta();
-              if(($file instanceof UploadedFile) && ($file->getError() == '0'))
-              {
-                $validator = $this->get('validator');
-                $errors = $validator->validate($revisione);
+            $file = $revisione->getruta();
+                            if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+                            {
+                              $validator = $this->get('validator');
+                              $errors = $validator->validate($revisione);
+                              if (count($errors) > 0) {
+                                /*
+                                 * Uses a __toString method on the $errors variable which is a
+                                 * ConstraintViolationList object. This gives us a nice string
+                                 * for debugging.
+                                 */
+                                $errorsString = (string) $errors;
+                                return new Response($errorsString);
+                              }
+                              $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                              $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+                              $file->move($cvDir, $fileName);
+                              $revisione->setRuta($fileName);
+                            }
 
-                if (count($errors) > 0) {
-                  /*
-                   * Uses a __toString method on the $errors variable which is a
-                   * ConstraintViolationList object. This gives us a nice string
-                   * for debugging.
-                   */
-                  $errorsString = (string) $errors;
-                  return new Response($errorsString);
-                }
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-                $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
-                $file->move($cvDir, $fileName);
 
-                $revisione->setRuta($fileName);
-              }
+
+
+
+
+
+
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($revisione);
@@ -104,41 +111,12 @@ class RevisionesController extends Controller
         ));
     }
 
-    public function revisonestudianteAction(Request $request)
-    {
-
-      $var=$request->query->get("idCaso");
-      $nuevavar = (int)$var;
-      $idrecibido=$var;
-
-
-
-      $em = $this->getDoctrine()->getManager();
-
-      $query = $em->CreateQuery(
-          "SELECT p FROM BufeteBundle:Revisiones p
-          WHERE p.idCaso = ".$idrecibido
-        );
-
-        $revisiones = $query->getResult();
-
-        return $this->render('revisiones/revisonestudiante.html.twig', array(
-          'revisiones' => $revisiones,
-        ));
-    }
-
     /**
      * Displays a form to edit an existing revisione entity.
      *
      */
     public function editAction(Request $request, Revisiones $revisione)
     {
-        $ruta = $revisione->getruta();
-
-        $quien = $revisione->getidCaso()->getidEstudiante()->getidEstudiante();
-
-
-
         $deleteForm = $this->createDeleteForm($revisione);
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $editForm->handleRequest($request);
@@ -150,7 +128,6 @@ class RevisionesController extends Controller
         }
 
         return $this->render('revisiones/edit.html.twig', array(
-            'rutaEnvio' => $ruta,
             'revisione' => $revisione,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

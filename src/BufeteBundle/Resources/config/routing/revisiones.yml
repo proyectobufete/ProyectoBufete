@@ -3,11 +3,6 @@ revisiones_index:
     defaults: { _controller: "BufeteBundle:Revisiones:index" }
     methods:  GET
 
-revisiones_revisonestudiante:
-    path:     /revisonestudiante
-    defaults: { _controller: "BufeteBundle:Revisiones:revisonestudiante" }
-    methods:  GET
-
 revisiones_show:
     path:     /{idRevision}/show
     defaults: { _controller: "BufeteBundle:Revisiones:show" }

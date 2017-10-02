@@ -22,13 +22,13 @@ BufeteBundle\Entity\Civiles:
             length: 65535
             options:
                 fixed: false
-    oneToOne:
+    manyToOne:
         idCaso:
             targetEntity: Casos
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: civiles
+            inversedBy: null
             joinColumns:
                 Id_Caso:
                     referencedColumnName: Id_Caso

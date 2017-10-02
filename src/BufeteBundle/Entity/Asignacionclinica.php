@@ -168,4 +168,3 @@ class Asignacionclinica
         return $this->idClinica;
     }
 }
-
