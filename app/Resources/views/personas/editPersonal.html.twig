@@ -11,9 +11,9 @@
       <div id="form_sample_1" class="form-horizontal" >
         {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
         <div class="form-body colorform">
-          <div class="col-md-offset-2">
+          <div class="col-md-offset-3">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(edit_form.nombrePersona,'Nombre')}}
                 {{form_widget(edit_form.nombrePersona,{'attr':{ 'class' : 'form-control'}}) }}
               </div>
@@ -21,33 +21,33 @@
             </div>
             <div class="row">
               <div class="col-md-2">
-                  {{form_label(edit_form.telefonoPersona,'Teléfono')}}
+                  {{form_label(edit_form.telefonoPersona,'Teléfono 1')}}
                   {{form_widget(edit_form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
               <div class="col-md-2">
-                  {{form_label(edit_form.tel2Persona,'Teléfono')}}
+                  {{form_label(edit_form.tel2Persona,'Teléfono 2')}}
                   {{form_widget(edit_form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.dpiPersona,'DPI')}}
                 {{form_widget(edit_form.dpiPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.emailPersona,'Correo Electrónico')}}
                 {{form_widget(edit_form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(edit_form.direccionPersona,'Dirección')}}
                 {{form_widget(edit_form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
 
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
                 {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
@@ -72,7 +72,7 @@
 
       <div class="form-actions">
         <div class="row">
-          <div class="col-md-offset-2 col-md-9">
+          <div class="col-md-offset-3 col-md-9">
             <button type="submit" name="Create" class="btn green">Guardar</button>
 
             <a href="{{ path('personas_editpasspersonal', {'idPersona': persona.idPersona}) }}">
