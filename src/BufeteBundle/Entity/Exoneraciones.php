@@ -168,4 +168,3 @@ class Exoneraciones
         return $this->idTipo;
     }
 }
-

@@ -10,20 +10,40 @@
                 <td>{{ revisione.idRevision }}</td>
             </tr>
             <tr>
-                <th>Observaciones</th>
-                <td>{{ revisione.observaciones }}</td>
+                <th>Idpersona</th>
+                <td>{{ revisione.idPersona }}</td>
+            </tr>
+            <tr>
+                <th>Tituloentrega</th>
+                <td>{{ revisione.tituloEntrega }}</td>
+            </tr>
+            <tr>
+                <th>Fechacreacion</th>
+                <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nombrearchivo</th>
+                <td>{{ revisione.nombreArchivo }}</td>
+            </tr>
+            <tr>
+                <th>Rutaarchivo</th>
+                <td>{{ revisione.rutaArchivo }}</td>
+            </tr>
+            <tr>
+                <th>Fechalimite</th>
+                <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Comentarios</th>
+                <td>{{ revisione.comentarios }}</td>
             </tr>
             <tr>
                 <th>Fechaenvio</th>
-                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Fecharevision</th>
-                <td>{% if revisione.fechaRevision %}{{ revisione.fechaRevision|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Ruta</th>
-                <td>{{ revisione.ruta }}</td>
+                <th>Estadorevision</th>
+                <td>{{ revisione.estadoRevision }}</td>
             </tr>
         </tbody>
     </table>

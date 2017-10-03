@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Departamentos" table="departamentos">
+    <indexes>
+      <index name="IX_Relationship1" columns="Id_Pais"/>
+    </indexes>
+    <id name="idDepartamento" type="integer" column="Id_Departamento">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="departamento" type="string" column="Departamento" length="75" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idPais" target-entity="Paises" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Pais" referenced-column-name="Id_Pais"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
