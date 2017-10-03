@@ -31,7 +31,8 @@ class RevisionesType extends AbstractType
           ->add('comentarios')
           ->add('fechaEnvio')
           ->add('estadoRevision')
-          ->add('idCaso');
+          //->add('idCaso')
+          ;
     }
 
     /**

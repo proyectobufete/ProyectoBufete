@@ -1,12 +1,24 @@
 <?php
 
 namespace BufeteBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Revisiones
  */
 class Revisiones
 {
+
+    /**
+     * @Assert\File(
+     *     maxSize = "5000k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF"
+     * )
+     */
+    protected $rutaArchivo;
+
+
     /**
      * @var integer
      */
@@ -35,7 +47,7 @@ class Revisiones
     /**
      * @var string
      */
-    private $rutaArchivo;
+    //private $rutaArchivo;
 
     /**
      * @var \DateTime
@@ -313,4 +325,3 @@ class Revisiones
         return $this->idCaso;
     }
 }
-
