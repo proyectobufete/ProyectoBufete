@@ -10,7 +10,7 @@
           {% if is_granted('ROLE_ASESOR') %}
           <table>
             <tr>
-              <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+              <form method="post" action="{{ path('revisiones_new')}}" class="form-inline" role="search">
                   <button type="submit" name="buscar" class="btn default">Habilitar revision</button>
                   <input type="hidden" name="id" value="{{caso.idCaso}}"/>
               </form>

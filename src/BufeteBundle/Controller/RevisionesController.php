@@ -39,22 +39,32 @@ class RevisionesController extends Controller
     {
         $revisione = new Revisiones();
         $caso = new Casos();
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $form->handleRequest($request);
 
-        $var=$request->request->get("idCaso");
-        $nuevavar = (int)$var;
-        $idrecibido=$var;
+
+
+                $var=$request->request->get("idCaso");
+                //$var=$request->query->get("idCaso");
+                $nuevavar = (int)$var;
+                $idrecibido=$var;
+
+
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
 
-            $caso_repo = $em->getRepository("BufeteBundle:Casos");
-            $idCaso = $caso_repo->find($idrecibido);
-            $revisione->setIdCaso($idCaso);
 
-            $file = $revisione->getruta();
+          $em = $this->getDoctrine()->getManager();
+          $caso_repo = $em->getRepository("BufeteBundle:Casos");
+          $idCaso = $caso_repo->find($idrecibido);
+          $revisione->setIdCaso($idCaso);
+
+            $file = $revisione->getRutaArchivo();
                             if(($file instanceof UploadedFile) && ($file->getError() == '0'))
                             {
                               $validator = $this->get('validator');
@@ -71,7 +81,7 @@ class RevisionesController extends Controller
                               $fileName = md5(uniqid()).'.'.$file->guessExtension();
                               $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
                               $file->move($cvDir, $fileName);
-                              $revisione->setRuta($fileName);
+                              $revisione->setRutaArchivo($fileName);
                             }
 
 
@@ -93,6 +103,8 @@ class RevisionesController extends Controller
 
         return $this->render('revisiones/new.html.twig', array(
             'revisione' => $revisione,
+            'var'=> $idrecibido,
+
             'form' => $form->createView(),
         ));
     }
