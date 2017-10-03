@@ -45,7 +45,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('personas_editPersona', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
                     {% else %}
-                        <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
+                        <a href="{{ path('personas_editAsesor', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
                     {% endif %}
 
                   </td>
