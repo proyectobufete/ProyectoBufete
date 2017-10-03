@@ -7,10 +7,15 @@
         <thead>
             <tr>
                 <th>Idrevision</th>
-                <th>Observaciones</th>
+                <th>Idpersona</th>
+                <th>Tituloentrega</th>
+                <th>Fechacreacion</th>
+                <th>Nombrearchivo</th>
+                <th>Rutaarchivo</th>
+                <th>Fechalimite</th>
+                <th>Comentarios</th>
                 <th>Fechaenvio</th>
-                <th>Fecharevision</th>
-                <th>Ruta</th>
+                <th>Estadorevision</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,14 +23,15 @@
         {% for revisione in revisiones %}
             <tr>
                 <td><a href="{{ path('revisiones_show', { 'idRevision': revisione.idRevision }) }}">{{ revisione.idRevision }}</a></td>
-                <td>{{ revisione.observaciones }}</td>
-                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if revisione.fechaRevision %}{{ revisione.fechaRevision|date('Y-m-d') }}{% endif %}</td>
-                <td><a href="{{ asset ('uploads/final/'~revisione.ruta) }}" download>
-                      <img src="{{ asset ('uploads/final/pdf.png')}}" width="28" height="30">
-                    </a>
-                </td>
-
+                <td>{{ revisione.idPersona }}</td>
+                <td>{{ revisione.tituloEntrega }}</td>
+                <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ revisione.nombreArchivo }}</td>
+                <td>{{ revisione.rutaArchivo }}</td>
+                <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ revisione.comentarios }}</td>
+                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ revisione.estadoRevision }}</td>
                 <td>
                     <ul>
                         <li>
