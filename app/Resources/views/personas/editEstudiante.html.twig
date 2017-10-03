@@ -2,7 +2,7 @@
 {% block act5 %} active {% endblock %}
 {% block ac12 %} active {% endblock %}
       {% block title %}
-        <h1>Crear País</h1>
+        <h1>Editar Estudiante</h1>
       {% endblock %}
 
 {% block body %}
@@ -12,7 +12,7 @@
         <div class="form-body colorform">
 
 
-          <div class="col-md-offset-2">
+          <div class="col-md-offset-3">
             <div class="row">
               <div class="col-md-6 col-md-offset-2">
                 <label for="">
@@ -31,11 +31,11 @@
             </div>
             <div class="row">
               <div class="col-md-2">
-                {{form_label(edit_form.telefonoPersona,'Número de Teléfono 1')}}
+                {{form_label(edit_form.telefonoPersona,'Teléfono 1')}}
                 {{form_widget(edit_form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
               <div class="col-md-2">
-                {{form_label(edit_form.tel2Persona,'Número de Teléfono 2')}}
+                {{form_label(edit_form.tel2Persona,'Teléfono 2')}}
                 {{form_widget(edit_form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
               </div>
 
@@ -77,7 +77,7 @@
 
 <br>
             <div class="row">
-              <div class="col-md-6 col-md-offset-2">
+              <div class="col-md-6 col-md-offset-3">
                 <label for="">
                   <h4>
                     <b>Datos Académicos</b>
@@ -113,7 +113,7 @@
         </div>
         <div class="form-actions">
           <div class="row">
-            <div class="col-md-offset-2 col-md-9">
+            <div class="col-md-offset-3 col-md-9">
               <button type="submit" name="Create" class="btn green">Editar</button>
               <a href="{{ path('personas_editpassestudiante', {'idPersona': persona.idPersona}) }}">
                 <button type="button" name="cancelar" class="btn default">cambiar Contraseña</button>

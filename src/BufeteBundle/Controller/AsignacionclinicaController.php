@@ -19,6 +19,7 @@ class AsignacionclinicaController extends Controller
      */
     public function indexAction()
     {
+        $clin = 1;
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
         if($rol == "ROLE_ADMIN")
@@ -31,7 +32,9 @@ class AsignacionclinicaController extends Controller
             ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
             ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
             ->where('p.idBufete = :bufete')
+            ->andWhere('c.idClinica = :cli')
             ->setParameter('bufete', $bufete)
+            ->setParameter('cli', $clin)
             ->getQuery();
             $asignacionclinicas = $query->getResult();
           }
