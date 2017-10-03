@@ -1,10 +1,6 @@
 {% extends 'layout.html.twig' %}
-{% block act3 %}
-  active
-{% endblock %}
-{% block ac9 %}
-  active
-{% endblock %}
+{% block act3 %}active{% endblock %}
+{% block ac9 %}active{% endblock %}
 {% block title %}
   <h1>Ficha de Adjudicación de Casos Ramo Laboral</h1>
 {% endblock %}
@@ -32,13 +28,13 @@
               {{form_widget(form.fechaCaso,{'attr':{'class' : 'form-control'}}) }}
             </div>
             <div class="col-md-3">
-              <b>Número de caso</b>
+              {{form_label(form.noCaso,'Número de Caso')}}
               {{form_widget(form.noCaso,{'attr':{'class' : 'form-control'}}) }}
             </div>
           </div>
                   <div class="row">
              <div class="col-md-6">
-               <div class="col-md-offset-4">
+               <div class="col-md-offset-5">
                  <label for=""><h3><b>Asunto</b></h3></label>
                </div>
              </div>
@@ -52,9 +48,9 @@
           <div class="row">
             <div class="col-md-6 col-md-offset-2">
               <label for="">
-                <h4>
+                <h3>
                   <b>Demandante</b>
-                </h4>
+                </h3>
               </label>
             </div>
           </div>
@@ -69,9 +65,9 @@
           <div class="row">
             <div class="col-md-6 col-md-offset-2">
               <label for="">
-                <h4>
+                <h3>
                   <b>Datos del Proceso</b>
-                </h4>
+                </h3>
               </label>
             </div>
           </div>
@@ -99,9 +95,9 @@
           <div class="row">
             <div class="col-md-6 col-md-offset-1">
               <label for="">
-                <h4>
+                <h3>
                   <b>Prestaciones que reclama</b>
-                </h4>
+                </h3>
               </label>
             </div>
           </div>
@@ -201,11 +197,11 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 col-md-offset-2">
+            <div class="col-md-6 col-md-offset-3">
               <label for="">
-                <h4>
+                <h3>
                   <b>Pruebas</b>
-                </h4>
+                </h3>
               </label>
             </div>
           </div>
@@ -218,9 +214,9 @@
           <div class="row">
             <div class="col-md-6 col-md-offset-2">
               <label for="">
-                <h4>
+                <h3>
                   <b>Datos del Demandado</b>
-                </h4>
+                </h3>
               </label>
             </div>
           </div>
