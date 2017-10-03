@@ -1,56 +1,70 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block act5 %} active {% endblock %}
+{% block ac29 %} active {% endblock %}
 
+{% block title %}
+  <h1>Listado de Usuarios</h1>
+{% endblock %}
 {% block body %}
-    <h1>Lista General de Personas</h1>
+<div class="portlet-body">
+  <div class="row">
+    <div class="col-md-2">
+      <form method="get" action="" class="form-inline" role="search">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+          <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="btn-group">
+        <a href="{{ path('personas_new') }}">
+          <button id="sample_editable_1_new" class="btn green">
+            Agregar Usuario
+            <i class="fa fa-plus"></i>
+          </button>
+        </a>
+      </div>
+    </div>
 
-    <table>
+    <div class="col-md-12 col-sm-12 col-xs-6">
+      <table class="table table-bordered ">
         <thead>
-            <tr>
-
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Email</th>
-                <th>Tipo de Usuario</th>
-                <th>Opciones</th>
-            </tr>
+          <tr role="row" class="">
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Email</th>
+            <th>Tipo de Usuario</th>
+            <th>Opciones</th>
+          </tr>
         </thead>
         <tbody>
-        {% for persona in personas %}
+          {% for persona in personas %}
             <tr>
+              <td>{{ persona.nombrePersona }}</td>
+              <td>{{ persona.telefonoPersona }}</td>
+              <td>{{ persona.direccionPersona }}</td>
+              <td>{{ persona.emailPersona }}</td>
+              <td>{{ persona.role }}</td>
+              <td>
+                <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}" class="btn yellow">Ver</a>
+                {% if persona.role == "ROLE_ESTUDIANTE" %}
+                  <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
 
-                <td>{{ persona.nombrePersona }}</td>
-                <td>{{ persona.telefonoPersona }}</td>
-                <td>{{ persona.direccionPersona }}</td>
-                <td>{{ persona.emailPersona }}</td>
-                <td>{{ persona.role }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}">Más Detalles</a>
-                        </li>
-                        <li>
-                          {% if persona.role == "ROLE_ESTUDIANTE" %}
-                              <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}">Editar</a>
-
-                          {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
-                              <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}">Editar</a>
-                          {% endif %}
-
-                        </li>
-                    </ul>
-                </td>
+                {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+                  <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
+                {% endif %}
+              </td>
             </tr>
-        {% endfor %}
+          {% endfor %}
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('personas_registro') }}">Agregar nuevo Alumno</a>
-        </li>
-        <li>
-            <a href="{{ path('personas_new') }}">Agregar nuevo Personal</a>
-        </li>
-    </ul>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}
