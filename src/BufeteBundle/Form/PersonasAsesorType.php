@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class PersonaspersonalType extends AbstractType
+class PersonasAsesorType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -41,7 +41,7 @@ class PersonaspersonalType extends AbstractType
             ->add('role', HiddenType::class, array(
     'data' => 'ROLE_ASESOR',))
 
-      
+
 
           ;
     }

@@ -7,10 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class editarpersonalType extends AbstractType
+class editasesorType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,7 +17,6 @@ class editarpersonalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('nombrePersona')
             ->add('telefonoPersona')
@@ -27,7 +25,6 @@ class editarpersonalType extends AbstractType
             ->add('direccionPersona')
             ->add('emailPersona')
             ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
-
             ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
@@ -37,12 +34,8 @@ class editarpersonalType extends AbstractType
                 'expanded'  => true,
                 'multiple'  => false,
             ))
-            //->add('role')
             ->add('role', HiddenType::class, array(
-    'data' => 'ROLE_ASESOR',))
-
-
-
+                'data' => 'ROLE_ASESOR',))
           ;
     }
 

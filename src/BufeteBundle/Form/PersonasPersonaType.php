@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 
-class PersonasnuevasType extends AbstractType
+class PersonasPersonaType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,8 +22,6 @@ class PersonasnuevasType extends AbstractType
     {
       $this->passEnvio = $options['passEnvio'];
         $builder
-
-
             ->add('nombrePersona')
             ->add('telefonoPersona')
             ->add('tel2Persona')
@@ -44,22 +42,18 @@ class PersonasnuevasType extends AbstractType
                 'expanded'  => true,
                 'multiple'  => false,
             ))
-            //->add('role')
             ->add('role', ChoiceType::class,array(
                 "label" => "Roles",
                     "choices"=> array(
                         "Administrador" =>"ROLE_ADMIN",
-
                         "Asesor" =>"ROLE_ASESOR",
                         "Secretario" =>"ROLE_SECRETARIO",
                         "Director" =>"ROLE_DIRECTOR",
               ),
                 'expanded'  => true,
                 'multiple'  => false,
-
             ))
             ->add('idBufete')
-
           ;
     }
 

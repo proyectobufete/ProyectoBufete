@@ -17,7 +17,6 @@
                 {{form_label(edit_form.nombrePersona,'Nombre')}}
                 {{form_widget(edit_form.nombrePersona,{'attr':{ 'class' : 'form-control'}}) }}
               </div>
-
             </div>
             <div class="row">
               <div class="col-md-2">
@@ -46,16 +45,13 @@
               </div>
             </div>
             <div class="row">
-
               <div class="col-md-3">
                 {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
                 {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-
             </div>
             <div class="row">
               <div class="col-md-5">
-
                 {{form_widget(edit_form.role)}}
               </div>
             </div>
@@ -75,8 +71,8 @@
           <div class="col-md-offset-3 col-md-9">
             <button type="submit" name="Create" class="btn green">Guardar</button>
 
-            <a href="{{ path('personas_editpasspersonal', {'idPersona': persona.idPersona}) }}">
-              <button type="button" name="cancelar" class="btn default">cambiar Contraseña</button>
+            <a href="{{ path('personas_editpassasesor', {'idPersona': persona.idPersona}) }}">
+              <button type="button" name="cancelar" class="btn default">Cambiar Contraseña</button>
             </a>
 
             <a href="{{ path('personas_indexAsesores') }}">
