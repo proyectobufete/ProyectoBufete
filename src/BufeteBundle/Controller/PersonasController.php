@@ -151,7 +151,17 @@ class PersonasController extends Controller
 
       $em = $this->getDoctrine()->getManager();
 
-      $personas = $em->getRepository('BufeteBundle:Personas')->findAll();
+      $query = $em->createQuery(
+        "SELECT p FROM BufeteBundle:Personas p
+        WHERE p.role LIKE :asesor OR p.role LIKE :admin OR p.role LIKE :director OR p.role LIKE :secretario
+        ORDER BY p.role"
+      )
+      ->setParameter('asesor', 'ROLE_ASESOR')
+      ->setParameter('admin', 'ROLE_ADMIN')
+      ->setParameter('director', 'ROLE_DIRECTOR')
+      ->setParameter('secretario', 'ROLE_SECRETARIO');
+      $personas = $query->getResult();
+      //$personas = $em->getRepository('BufeteBundle:Personas')->findAll();
 
       return $this->render('personas/index.html.twig', array(
           'personas' => $personas,
