@@ -71,6 +71,54 @@ class AsignacionclinicaController extends Controller
         ));
 
       }
+
+      /**
+       * Listado de Estudiantes por Clinica para vista asesor
+       *
+       */
+        public function ListClinicasEstAsesorAction(Request $request)
+        {
+          $clin = $request->get('idAsignacion');;
+          $em = $this->getDoctrine()->getManager();
+          $rol = $this->getUser()->getRole();
+          $per = $this->getUser()->getIdPersona();
+          if ($rol == "ROLE_ASESOR") {
+              $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+              $query = $repo->createQueryBuilder('a')
+              ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+              ->Where('c.idClinica = :cli')
+              ->setParameter('cli', $clin)
+              ->getQuery();
+              $asignacionclinicas = $query->getResult();
+          }
+
+          return $this->render('asignacionclinica/ListClinicasEstAsesor.html.twig', array(
+              'asignacionclinicas' => $asignacionclinicas,
+              'per' => $per,
+          ));
+        }
+
+    /**
+     * Lists all asignacionclinica entities.
+     *
+     */
+    public function clinicasAsesorAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idpersona = $this->getUser()->getIdPersona();
+        $repo = $em->getRepository("BufeteBundle:Clinicas");
+        $query = $repo->createQueryBuilder('c')
+        ->where('c.idPersona = :id')
+        ->setParameter('id', $idpersona)
+        ->getQuery();
+        $clinicas = $query->getResult();
+
+        return $this->render('asignacionclinica/clinicasasesor.html.twig', array(
+            'clinicas' => $clinicas,
+        ));
+    }
+
     /**
      * Creates a new asignacionclinica entity.
      *
