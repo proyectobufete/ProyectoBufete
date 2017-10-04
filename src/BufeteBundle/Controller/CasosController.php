@@ -498,7 +498,7 @@ class CasosController extends Controller
               'Content-Type'          => 'application/pdf',
               'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
           )
-      )
+      );
    }
 
     /**
