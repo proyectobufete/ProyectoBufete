@@ -27,3 +27,8 @@ asignacionclinica_delete:
     path:     /{idAsignacion}/delete
     defaults: { _controller: "BufeteBundle:Asignacionclinica:delete" }
     methods:  DELETE
+
+asignacionclinica_listEstudiantes:
+    path:     /{idAsignacion}/listEstudiantes
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:listEstudiantes" }
+    methods:  GET
