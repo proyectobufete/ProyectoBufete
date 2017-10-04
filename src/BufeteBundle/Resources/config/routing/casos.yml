@@ -62,3 +62,8 @@ casos_delete:
     path:     /{idCaso}/delete
     defaults: { _controller: "BufeteBundle:Casos:delete" }
     methods:  DELETE
+
+casos_printcivil:
+    path:     /{idCaso}/printcivil
+    defaults: { _controller: "BufeteBundle:Casos:printCivil" }
+    methods:  GET

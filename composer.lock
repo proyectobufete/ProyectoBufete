@@ -492,7 +492,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2017-09-29 17:50:40"
+            "time": "2017-09-29T17:50:40+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -580,9 +580,7 @@
                 "cache",
                 "caching"
             ],
-
-            "time": "2017-09-29 14:39:10"
-
+            "time": "2017-09-29T14:39:10+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1182,9 +1180,7 @@
                 "pseudorandom",
                 "random"
             ],
-
-            "time": "2017-09-27 21:40:39"
-
+            "time": "2017-09-27T21:40:39+00:00"
         },
         {
             "name": "psr/log",
@@ -2050,9 +2046,7 @@
             "keywords": [
                 "templating"
             ],
-
-            "time": "2017-09-27 18:06:46"
-
+            "time": "2017-09-27T18:06:46+00:00"
         }
     ],
     "packages-dev": [
