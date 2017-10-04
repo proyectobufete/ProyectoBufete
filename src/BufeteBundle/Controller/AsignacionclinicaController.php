@@ -45,6 +45,26 @@ class AsignacionclinicaController extends Controller
     }
 
     /**
+     * Lists all asignacionclinica entities.
+     *
+     */
+    public function clinicasAsesorAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idpersona = $this->getUser()->getIdPersona();
+        $repo = $em->getRepository("BufeteBundle:Clinicas");
+        $query = $repo->createQueryBuilder('c')
+        ->where('c.idPersona = :id')
+        ->setParameter('id', $idpersona)
+        ->getQuery();
+        $clinicas = $query->getResult();
+
+        return $this->render('asignacionclinica/clinicasasesor.html.twig', array(
+            'clinicas' => $clinicas,
+        ));
+    }
+
+    /**
      * Creates a new asignacionclinica entity.
      *
      */
