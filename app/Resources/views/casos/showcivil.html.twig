@@ -10,14 +10,20 @@
           {% if is_granted('ROLE_ASESOR') %}
           <table>
             <tr>
-              <form method="post" action="{{ path('revisiones_new')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn blue">Habilitar Revisión</button>
+              <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Habilitar Link</button>
                   <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
               </form>
             </tr>
             <tr>
-              <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+              <form method="post" action="{{ path('revisiones_indexLink')}}" class="form-inline" role="search">
                   <button type="submit" name="buscar" class="btn blue">Ver revisiones</button>
+                  <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+              </form>
+            </tr>
+            <tr>
+              <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Subir Revisión</button>
                   <input type="hidden" name="id" value="{{caso.idCaso}}"/>
               </form>
             </tr>

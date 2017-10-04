@@ -8,7 +8,10 @@ revisiones_indexInformes:
     defaults: { _controller: "BufeteBundle:Revisiones:indexInformes" }
     methods:  GET
 
-
+revisiones_indexLink:
+    path:     /indexLink
+    defaults: { _controller: "BufeteBundle:Revisiones:indexLink" }
+    methods:  [GET, POST]
 
 revisiones_showInforme:
     path:     /{idRevision}/showInforme
@@ -20,14 +23,24 @@ revisiones_showRevision:
     defaults: { _controller: "BufeteBundle:Revisiones:showRevision" }
     methods:  GET
 
-revisiones_new:
-    path:     /new
-    defaults: { _controller: "BufeteBundle:Revisiones:new" }
+revisiones_showLink:
+    path:     /{idRevision}/showLink
+    defaults: { _controller: "BufeteBundle:Revisiones:showLink" }
+    methods:  GET
+
+revisiones_uploadRevision:
+    path:     /uploadRevision
+    defaults: { _controller: "BufeteBundle:Revisiones:uploadRevision" }
     methods:  [GET, POST]
 
 revisiones_upload:
     path:     /upload
     defaults: { _controller: "BufeteBundle:Revisiones:upload" }
+    methods:  [GET, POST]
+
+revisiones_newLink:
+    path:     /newLink
+    defaults: { _controller: "BufeteBundle:Revisiones:newLink" }
     methods:  [GET, POST]
 
 revisiones_delete:
