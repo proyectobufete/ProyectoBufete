@@ -71,6 +71,34 @@ class AsignacionclinicaController extends Controller
         ));
 
       }
+
+      /**
+       * Listado de Estudiantes por Clinica para vista asesor
+       *
+       */
+        public function ListClinicasEstAsesorAction(Request $request)
+        {
+          $clin = $request->get('idAsignacion');;
+          $em = $this->getDoctrine()->getManager();
+          $rol = $this->getUser()->getRole();
+          $per = $this->getUser()->getIdPersona();
+          if ($rol == "ROLE_ASESOR") {
+              $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+              $query = $repo->createQueryBuilder('a')
+              ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+              ->Where('c.idClinica = :cli')
+              ->setParameter('cli', $clin)
+              ->getQuery();
+              $asignacionclinicas = $query->getResult();
+          }
+
+          return $this->render('asignacionclinica/ListClinicasEstAsesor.html.twig', array(
+              'asignacionclinicas' => $asignacionclinicas,
+              'per' => $per,
+          ));
+        }
+
     /**
      * Lists all asignacionclinica entities.
      *
