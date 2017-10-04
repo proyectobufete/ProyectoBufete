@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% block act24 %}active{% endblock %}
-{% block ac28 %}active{% endblock %}
+{% block ac30 %}active{% endblock %}
 {% block title %}
   <h1>Listado de Clínicas</h1>
 {% endblock %}
@@ -18,16 +18,6 @@
             <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
           </div>
         </form>
-      </div>
-      <div class="col-md-6">
-        <div class="btn-group">
-          <a href="{{ path('clinicas_new') }}">
-            <button id="sample_editable_1_new" class="btn green">
-              Agregar Clínica
-              <i class="fa fa-plus"></i>
-            </button>
-          </a>
-        </div>
       </div>
       <br>
       <br>
@@ -53,7 +43,7 @@
             <td>{{ clinica.observaciones }}</td>
             <td>{{ clinica.estadoClinica }}</td>
               <td>
-                  <a href="{{ path('clinicas_show', { 'idClinica': clinica.idClinica }) }}" class="btn yellow" >Ver</a>
+                  <a href="{{ path('asignacionclinica_listClinicasEstAsesor', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
               </td>
           </tr>
           {% endfor %}

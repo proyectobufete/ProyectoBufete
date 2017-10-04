@@ -1,0 +1,4 @@
+errores_notfound:
+    path:     /notfound
+    defaults: { _controller: "BufeteBundle:Errores:notfound" }
+    methods:  GET

@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+{% block act6 %}active{% endblock %}
+{% block ac25 %}active{% endblock %}
+{% block title %}
+  <h1>Listado de estudiantes</h1>
+{% endblock %}
+{% block body %}
+
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+              <th>Estudinate</th>
+              <th>Carné</th>
+              <th>Nota</th>
+              <th>Observaciones</th>
+              <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for asignacionclinica in asignacionclinicas %}
+          {% if asignacionclinica.idClinica.idPersona.idPersona == per %}
+          <tr>
+              <td>{{asignacionclinica.idEstudiante}}</td>
+              <td>{{asignacionclinica.idEstudiante.carneEstudiante}}</td>
+              <td>{{asignacionclinica.notaClinica}}</td>
+              <td>{{ asignacionclinica.observacionesClinica }}</td>
+              <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

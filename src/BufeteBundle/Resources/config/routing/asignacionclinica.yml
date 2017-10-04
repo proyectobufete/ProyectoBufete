@@ -32,3 +32,8 @@ asignacionclinica_listEstudiantes:
     path:     /{idAsignacion}/listEstudiantes
     defaults: { _controller: "BufeteBundle:Asignacionclinica:listEstudiantes" }
     methods:  GET
+
+asignacionclinica_listClinicasEstAsesor:
+    path:     /{idAsignacion}/ListClinicasEstAsesor
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:ListClinicasEstAsesor" }
+    methods:  GET
