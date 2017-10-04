@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Revisione</h1>
+    <h1>Detalle del Link</h1>
+
 
     <table>
         <tbody>
-
+          <tr>
+              <th>No. Caso</th>
+              <td>{{ nocasoEnvio }}</td>
+          </tr>
             <tr>
                 <th>Titulo de la entrega</th>
                 <td>{{ revisione.tituloEntrega }}</td>
@@ -20,23 +24,37 @@
             </tr>
             <tr>
                 <th>Prioridad</th>
-                <td>{{ revisione.estadoRevision }}</td>
+                <td>
+                  {% if revisione.estadoRevision == 3 %}
+                    {{ "Alta"  }}
+                  {% elseif revisione.estadoRevision == 2 %}
+                    {{"Media"}}
+                    {% elseif revisione.estadoRevision == 1 %}
+                      {{"Baja"}}
+                  {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Estudiante</th>
-                <td>{{ revisione.idPersona }}</td>
+                <td>{{ nombrecarneEnvio}}</td>
             </tr>
 
             <tr>
                 <th>Nombrearchivo</th>
-                <td>{{ revisione.nombreArchivo }}</td>
+                <td>
+                  {% if revisione.RutaArchivo != null %}
+                    <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                      <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                    </a>
+                  {% endif %}
+              </td>
             </tr>
             <tr>
                 <th>Comentarios</th>
                 <td>{{ revisione.comentarios }}</td>
             </tr>
             <tr>
-                <th>Prioridad</th>
+                <th>Fercha del envio</th>
                 <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>

@@ -6,20 +6,30 @@
     <table>
         <tbody>
             <tr>
+                <th>No. Caso</th>
+                <td>{{ nocasoEnvio }}</td>
+            </tr>
+            <tr>
                 <th>Titulo de la entrega</th>
                 <td>{{ revisione.tituloEntrega }}</td>
             </tr>
             <tr>
                 <th>Asesor</th>
-                <td>{{ revisione.idPersona }}</td>
+                <td>{{ asesorEnvio }}</td>
             </tr>
             <tr>
                 <th>Fecha de envio</th>
                 <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Nombrearchivo</th>
-                <td>{{ revisione.nombreArchivo }}</td>
+                <th>Nombre del archivo</th>
+                <td>
+                  {% if revisione.RutaArchivo != null %}
+                    <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                      <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                    </a>
+                  {% endif %}
+              </td>
             </tr>
             <tr>
                 <th>Comentarios</th>
@@ -27,7 +37,24 @@
             </tr>
             <tr>
                 <th>Prioridad</th>
-                <td>{{ revisione.estadoRevision }}</td>
+                <td>
+                  {% if revisione.estadoRevision == 3 %}
+                    {{ "Alta"  }}
+                  {% elseif revisione.estadoRevision == 2 %}
+                    {{"Media"}}
+                    {% elseif revisione.estadoRevision == 1 %}
+                      {{"Baja"}}
+                  {% endif %}
+                </td>
+                <td>
+                  {% if revisione.idPersona == 3 %}
+                    {{ "Alta"  }}
+                  {% elseif revisione.idPersona == 2 %}
+                    {{"Media"}}
+                    {% elseif revisione.idPersona == 1 %}
+                      {{"Baja"}}
+                  {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>
