@@ -19,6 +19,34 @@ class AsignacionclinicaController extends Controller
      */
     public function indexAction()
     {
+      $em = $this->getDoctrine()->getManager();
+      $rol = $this->getUser()->getRole();
+      if($rol == "ROLE_ADMIN")
+      {
+          $asignacionclinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+      } elseif ($rol == "ROLE_SECRETARIO") {
+          $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+          $repo = $em->getRepository("BufeteBundle:Clinicas");
+          $query = $repo->createQueryBuilder('c')
+          ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+          ->where('p.idBufete = :bufete')
+          ->setParameter('bufete', $bufete)
+          ->getQuery();
+          $asignacionclinicas = $query->getResult();
+        }
+
+        return $this->render('asignacionclinica/index.html.twig', array(
+            'asignacionclinicas' => $asignacionclinicas,
+        ));
+    }
+
+    /**
+     * Listado de Estudiantes por Clinica
+     *
+     */
+      public function listEstudiantesAction(Request $request)
+      {
+        $clin = $request->get('idAsignacion');;
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
         if($rol == "ROLE_ADMIN")
@@ -31,16 +59,18 @@ class AsignacionclinicaController extends Controller
             ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
             ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
             ->where('p.idBufete = :bufete')
+            ->andWhere('c.idClinica = :cli')
             ->setParameter('bufete', $bufete)
+            ->setParameter('cli', $clin)
             ->getQuery();
             $asignacionclinicas = $query->getResult();
           }
 
-        return $this->render('asignacionclinica/index.html.twig', array(
+        return $this->render('asignacionclinica/listEstudiantes.html.twig', array(
             'asignacionclinicas' => $asignacionclinicas,
         ));
-    }
 
+      }
     /**
      * Creates a new asignacionclinica entity.
      *
