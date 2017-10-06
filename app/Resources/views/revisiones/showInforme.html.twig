@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Revisione</h1>
+    <h1>Informe</h1>
 
     <table>
         <tbody>
@@ -23,11 +23,13 @@
             </tr>
             <tr>
                 <th>Nombrearchivo</th>
-                <td>{{ revisione.nombreArchivo }}</td>
-            </tr>
-            <tr>
-                <th>Rutaarchivo</th>
-                <td>{{ revisione.rutaArchivo }}</td>
+                <td>
+                  {% if revisione.RutaArchivo != null %}
+                    <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                      <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                    </a>
+                  {% endif %}
+              </td>
             </tr>
             <tr>
                 <th>Fechalimite</th>
@@ -50,10 +52,13 @@
 
     <ul>
         <li>
-            <a href="{{ path('revisiones_index') }}">Back to the list</a>
+            <a href="{{ path('revisiones_indexLinkCaso') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('revisiones_edit', { 'idRevision': revisione.idRevision }) }}">Edit</a>
+
+          <!--aqui va la redireccion para editar las habilitaciones-->
+
+
         </li>
         <li>
             {{ form_start(delete_form) }}

@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Entregas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No. Revisión</th>
+                <th>Número de Caso</th>
+                <th>Tituloentrega</th>
+                <th>Fechacreacion</th>
+                <th>Fechalimite</th>
+                <th>Nombrearchivo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+
+        {% set countergeneral = 0 %}
+        {% set counter = 0 %}
+        {% for revisione in revisiones %}
+
+            {% if varEnvio == revisione.idCaso.idCaso %}
+              {% set counter = counter + 1 %}
+
+          {% endif %}
+        {% endfor %}
+
+
+
+        {% for revisione in revisiones %}
+
+            {% if varEnvio == revisione.idCaso.idCaso %}
+
+            <tr>
+
+              <td>{{ counter }}</td>
+              {% set counter = counter - 1 %}
+
+                <td>{{ numcasoEnvio }}</td>
+                <td>{{ revisione.tituloEntrega }}</td>
+                <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                  {% if revisione.RutaArchivo != null %}
+                    <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                      <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                    </a>
+                  {% endif %}
+                <td>
+
+                <td>
+                    <ul>
+
+                            {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
+                              <li>
+                                  <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
+                              </li>
+                            {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null) or (revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
+                              <li>
+                                  <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
+                              </li>
+                              <li>
+                                <form method="post" action="{{ path('revisiones_upload')}}" class="form-inline" role="search">
+                                  {% if (revisione.fechaEnvio!=null) %}
+                                    <button type="submit" name="buscar" class="btn blue">Editar Entrega</button>
+                                  {% elseif (revisione.fechaEnvio==null) %}
+                                    <button type="submit" name="buscar" class="btn blue">Subir Informe</button>
+                                  {% endif %}
+                                    <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                </form>
+                              </li>
+
+                            {% endif %}
+
+                    </ul>
+                </td>
+            </tr>
+
+            {% endif %}
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('revisiones_newLink') }}">Habilitar Nuevo Link</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -22,7 +22,7 @@
         <tbody>
         {% for revisione in revisiones %}
             <tr>
-                <td><a href="{{ path('revisiones_show', { 'idRevision': revisione.idRevision }) }}">{{ revisione.idRevision }}</a></td>
+                <td><a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">{{ revisione.idRevision }}</a></td>
                 <td>{{ revisione.idPersona }}</td>
                 <td>{{ revisione.tituloEntrega }}</td>
                 <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -35,10 +35,14 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('revisiones_show', { 'idRevision': revisione.idRevision }) }}">show</a>
+                            <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('revisiones_edit', { 'idRevision': revisione.idRevision }) }}">edit</a>
+                          <form method="post" action="{{ path('revisiones_upload')}}" class="form-inline" role="search">
+                              <button type="submit" name="buscar" class="btn blue">Subir informe</button>
+                              <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                          </form>
+
                         </li>
                     </ul>
                 </td>
