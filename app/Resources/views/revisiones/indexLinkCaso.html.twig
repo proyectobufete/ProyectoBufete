@@ -16,9 +16,11 @@
                 <th>No. Revisión</th>
                 <th>Número de Caso</th>
                 <th>Tituloentrega</th>
-                <th>Fechacreacion</th>
-                <th>Fechalimite</th>
+                <th>Fecha de creacion</th>
+                <th>Fecha limite</th>
+                <th>Fecha de Envio</th>
                 <th>Nombrearchivo</th>
+                <th>Estado de la Entrega</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -51,13 +53,24 @@
                 <td>{{ revisione.tituloEntrega }}</td>
                 <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                   {% if revisione.RutaArchivo != null %}
                     <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
                       <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
                     </a>
                   {% endif %}
+                </td>
                 <td>
+                    {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s')  %}
+                      enviado --- antes:
+                    {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s')  %}
+                      retrazada
+                    {% elseif revisione.fechaEnvio == null  %}
+                      falta --- :
+                    {% endif %}
+
+                </td>
 
                 <td>
                     <ul>
@@ -66,16 +79,29 @@
                               <li>
                                   <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
                               </li>
+                              <li>
 
+                                <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
+                                    <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
+                                    <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                </form>
+
+                              </li>
                             {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null) or (revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
                               <li>
                                   <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
                               </li>
                               <li>
-                                  link para editar que falta
+                                {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
+                                <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
+                                    <button type="submit" name="buscar" class="btn blue">Editar Link</button>
+                                    <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                </form>
+                                {% endif %}
                               </li>
+
                               <li>
-                                
+
                               </li>
 
                             {% endif %}
@@ -90,9 +116,5 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('revisiones_newLink') }}">Habilitar Nuevo Link</a>
-        </li>
-    </ul>
+
 {% endblock %}

@@ -279,7 +279,6 @@ class RevisionesController extends Controller
      */
     public function uploadAction(Request $request)
     {
-
         $post=$request->get("idRevision");
 
         $em = $this->getDoctrine()->getManager();
@@ -327,6 +326,103 @@ class RevisionesController extends Controller
         ));
     }
 
+    public function editLinkAction(Request $request)
+    {
+        $post=$request->get("idRevision");
+
+        $em = $this->getDoctrine()->getManager();
+        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+
+
+        $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+          $file = $revisione->getRutaArchivo();
+
+          if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+          {
+            $validator = $this->get('validator');
+            $errors = $validator->validate($revisione);
+            if (count($errors) > 0)
+            {
+
+              $errorsString = (string) $errors;
+              return new Response($errorsString);
+            }
+
+            $revisione->setNombreArchivo($file->getClientOriginalName());
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+            $file->move($cvDir, $fileName);
+            $revisione->setRutaArchivo($fileName);
+          }
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+
+        return $this->render('revisiones/upload.html.twig', array(
+            'envio'=> $revisione,
+            'revisione' => $revisione,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
+
+    public function editRevisionAction(Request $request)
+    {
+        $post=$request->get("idRevision");
+
+        $em = $this->getDoctrine()->getManager();
+        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+
+
+        $editForm = $this->createForm('BufeteBundle\Form\RevisionesAsesorType', $revisione);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+          $file = $revisione->getRutaArchivo();
+
+          if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+          {
+            $validator = $this->get('validator');
+            $errors = $validator->validate($revisione);
+            if (count($errors) > 0)
+            {
+
+              $errorsString = (string) $errors;
+              return new Response($errorsString);
+            }
+
+            $revisione->setNombreArchivo($file->getClientOriginalName());
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+            $file->move($cvDir, $fileName);
+            $revisione->setRutaArchivo($fileName);
+          }
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+
+        return $this->render('revisiones/upload.html.twig', array(
+            'envio'=> $revisione,
+            'revisione' => $revisione,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
     public function uploadRevisionAction(Request $request)
     {
         $revisione = new Revisiones();
