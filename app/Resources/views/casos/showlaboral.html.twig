@@ -18,8 +18,8 @@
               </form>
             </tr>
             <tr>
-              <form method="post" action="{{ path('revisiones_indexLink')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn blue">Ver Links Habilitados</button>
+              <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
                   <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
               </form>
             </tr>
@@ -358,15 +358,18 @@
                 <a href="{{ path('casos_casoslaborales') }}" class="btn default">Regresar</a>
               </tr>
               <tr>
-                <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
-                    <button type="submit" name="buscar" class="btn btn-purple">Agregar revision</button>
-                    <input type="hidden" name="id" value="{{caso.idCaso}}"/>
-                </form>
+
+
+
+
+
+
+
               </tr>
               <tr>
-                <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
-                    <button type="submit" name="buscar" class="btn btn-Black">Ver revision</button>
-                    <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                <form method="post" action="{{ path('revisiones_indexLinkCasoEst')}}" class="form-inline" role="search">
+                    <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
+                    <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
                 </form>
               </tr>
             {% endif %}

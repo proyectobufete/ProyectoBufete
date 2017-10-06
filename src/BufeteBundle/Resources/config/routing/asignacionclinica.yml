@@ -37,3 +37,8 @@ asignacionclinica_listClinicasEstAsesor:
     path:     /{idAsignacion}/ListClinicasEstAsesor
     defaults: { _controller: "BufeteBundle:Asignacionclinica:ListClinicasEstAsesor" }
     methods:  GET
+
+asignacionclinica_editNota:
+    path:     /{idAsignacion}/editNota
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:editNota" }
+    methods:  [GET, POST]

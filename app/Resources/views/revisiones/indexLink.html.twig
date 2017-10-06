@@ -7,31 +7,27 @@
         <thead>
             <tr>
 
-
                 <th>Tituloentrega</th>
                 <th>Fechacreacion</th>
-
-
                 <th>Fechalimite</th>
                 <th>Nombrearchivo</th>
-
-
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+
+
+
+
         {% for revisione in revisiones %}
+
             <tr>
 
 
                 <td>{{ revisione.tituloEntrega }}</td>
                 <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-
-
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ revisione.nombreArchivo }}</td>
-
-
                 <td>
                     <ul>
                         <li>

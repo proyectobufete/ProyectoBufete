@@ -17,6 +17,8 @@ use BufeteBundle\Form\RevisionesEstudiantesType;
  */
 class RevisionesController extends Controller
 {
+
+
     /**
      * Lists all revisione entities.
      *
@@ -45,16 +47,74 @@ class RevisionesController extends Controller
 
     public function indexLinkAction(Request $request)
     {
-      $var=$request->request->get("idCaso");
-
         $em = $this->getDoctrine()->getManager();
 
         $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findAll();
 
         return $this->render('revisiones/indexLink.html.twig', array(
             'revisiones' => $revisiones,
+
         ));
     }
+
+    public function indexLinkCasoAction(Request $request)
+    {
+      $var=$request->request->get("idCaso");
+
+
+      $em = $this->getDoctrine()->getManager();
+      $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
+                   'idCaso' => $var
+      ));
+      $numerocaso = $caso_datos->getNoCaso();
+
+        $em = $this->getDoctrine()->getManager();
+        $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findBy(
+          array(), array('idRevision' => 'DESC')
+        );
+
+
+
+          return $this->render('revisiones/indexLinkCaso.html.twig', array(
+              'revisiones' => $revisiones,
+              'ruta'=> 'uploads/final/',
+              'varEnvio' =>$var,
+              'numcasoEnvio'=>$numerocaso,
+          ));
+
+
+
+    }
+
+    public function indexLinkCasoEstAction(Request $request)
+    {
+      $var=$request->request->get("idCaso");
+
+
+      $em = $this->getDoctrine()->getManager();
+      $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
+                   'idCaso' => $var
+      ));
+      $numerocaso = $caso_datos->getNoCaso();
+
+        $em = $this->getDoctrine()->getManager();
+        $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findBy(
+          array(), array('idRevision' => 'DESC')
+        );
+
+
+
+          return $this->render('revisiones/indexLinkCasoEst.html.twig', array(
+              'revisiones' => $revisiones,
+              'ruta'=> 'uploads/final/',
+              'varEnvio' =>$var,
+              'numcasoEnvio'=>$numerocaso,
+          ));
+
+
+
+    }
+
     /**
      * Creates a new revisione entity.
      *
@@ -73,12 +133,16 @@ class RevisionesController extends Controller
                 $nuevavar = (int)$var;
                 $idrecibido=$var;
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
 
           $em = $this->getDoctrine()->getManager();
           $caso_repo = $em->getRepository("BufeteBundle:Casos");
           $idCaso = $caso_repo->find($idrecibido);
           $revisione->setIdCaso($idCaso);
+
+
 
           $revisione->SetIdPersona($idCaso->getIdEstudiante()->getIdEstudiante());
 
@@ -128,26 +192,83 @@ class RevisionesController extends Controller
 
         return $this->render('revisiones/showInforme.html.twig', array(
             'revisione' => $revisione,
+            'ruta'=> 'uploads/final/',
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     public function showLinkAction(Revisiones $revisione)
     {
+
+      $idestudiante = $revisione->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $estudiante_datos = $em->getRepository('BufeteBundle:Estudiantes')->findOneBy(array(
+                   'idEstudiante' => $idestudiante
+      ));
+
+
+
+      $idpersona = $estudiante_datos->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $persona_datos = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+                   'idPersona' => $idpersona
+      ));
+
+
+      $idcaso = $revisione->getIdcaso();
+      $em = $this->getDoctrine()->getManager();
+      $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
+                   'idCaso' => $idcaso
+      ));
+
+      $nombre = $persona_datos->getNombrePersona();
+      $carne = (string)$estudiante_datos->getCarneEstudiante();
+      $numcaso = $caso_datos->getNoCaso();
+
+
+
+
         $deleteForm = $this->createDeleteForm($revisione);
+
+
 
         return $this->render('revisiones/showLink.html.twig', array(
             'revisione' => $revisione,
+            'nombrecarneEnvio' => $nombre." - ".$carne,
+            'nocasoEnvio' => $numcaso,
+            'ruta'=> 'uploads/final/',
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     public function showRevisionAction(Revisiones $revisione)
     {
+      $id = $revisione->getIdPersona();
+      $em = $this->getDoctrine()->getManager();
+      $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+            'idPersona' => $id,
+
+      ));
+
+
+      $idcaso = $revisione->getIdcaso();
+      $em = $this->getDoctrine()->getManager();
+      $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
+                   'idCaso' => $idcaso
+      ));
+
+      $nombre = $persona->getNombrePersona();
+      $numcaso = $caso_datos->getNoCaso();
+
+
+
         $deleteForm = $this->createDeleteForm($revisione);
 
         return $this->render('revisiones/showRevision.html.twig', array(
             'revisione' => $revisione,
+            'asesorEnvio' =>$nombre,
+            'nocasoEnvio' => $numcaso,
+            'ruta'=> 'uploads/final/',
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -158,7 +279,6 @@ class RevisionesController extends Controller
      */
     public function uploadAction(Request $request)
     {
-
         $post=$request->get("idRevision");
 
         $em = $this->getDoctrine()->getManager();
@@ -206,6 +326,103 @@ class RevisionesController extends Controller
         ));
     }
 
+    public function editLinkAction(Request $request)
+    {
+        $post=$request->get("idRevision");
+
+        $em = $this->getDoctrine()->getManager();
+        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+
+
+        $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+          $file = $revisione->getRutaArchivo();
+
+          if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+          {
+            $validator = $this->get('validator');
+            $errors = $validator->validate($revisione);
+            if (count($errors) > 0)
+            {
+
+              $errorsString = (string) $errors;
+              return new Response($errorsString);
+            }
+
+            $revisione->setNombreArchivo($file->getClientOriginalName());
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+            $file->move($cvDir, $fileName);
+            $revisione->setRutaArchivo($fileName);
+          }
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+
+        return $this->render('revisiones/upload.html.twig', array(
+            'envio'=> $revisione,
+            'revisione' => $revisione,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
+
+    public function editRevisionAction(Request $request)
+    {
+        $post=$request->get("idRevision");
+
+        $em = $this->getDoctrine()->getManager();
+        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+
+
+        $editForm = $this->createForm('BufeteBundle\Form\RevisionesAsesorType', $revisione);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+          $file = $revisione->getRutaArchivo();
+
+          if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+          {
+            $validator = $this->get('validator');
+            $errors = $validator->validate($revisione);
+            if (count($errors) > 0)
+            {
+
+              $errorsString = (string) $errors;
+              return new Response($errorsString);
+            }
+
+            $revisione->setNombreArchivo($file->getClientOriginalName());
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+            $file->move($cvDir, $fileName);
+            $revisione->setRutaArchivo($fileName);
+          }
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+
+        return $this->render('revisiones/upload.html.twig', array(
+            'envio'=> $revisione,
+            'revisione' => $revisione,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
     public function uploadRevisionAction(Request $request)
     {
         $revisione = new Revisiones();
@@ -227,9 +444,9 @@ class RevisionesController extends Controller
           $idCaso = $caso_repo->find($idrecibido);
           $revisione->setIdCaso($idCaso);
 
-          $revisione->SetIdPersona($revisione->getIdcaso()->getIdPersona()->getIdPersona());
 
-          
+          $revisione->SetIdPersona($idCaso->getIdPersona()->getIdPersona());
+
             $file = $revisione->getRutaArchivo();
 
                             if(($file instanceof UploadedFile) && ($file->getError() == '0'))

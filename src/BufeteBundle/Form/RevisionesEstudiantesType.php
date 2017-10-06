@@ -22,12 +22,12 @@ class RevisionesEstudiantesType extends AbstractType
         $builder
           //->add('idPersona')
           ->add('tituloEntrega')
-
+          /*
             ->add('fechaCreacion', DateTimeType::class, array(
               "data" => new \DateTime("now")
             ))
-
-          ->add('nombreArchivo')
+          */
+          //->add('nombreArchivo')
           ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           //->add('fechaLimite')
           ->add('comentarios')
