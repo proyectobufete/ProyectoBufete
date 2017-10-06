@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Revisione</h1>
+
+    <table>
+        <tbody>
+
+            <tr>
+                <th>Titulo de la entrega</th>
+                <td>{{ revisione.tituloEntrega }}</td>
+            </tr>
+            <tr>
+                <th>Fecha de creacion</th>
+                <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fecha limite</th>
+                <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Prioridad</th>
+                <td>{{ revisione.estadoRevision }}</td>
+            </tr>
+            <tr>
+                <th>Estudiante</th>
+                <td>{{ revisione.idPersona }}</td>
+            </tr>
+
+            <tr>
+                <th>Nombrearchivo</th>
+                <td>{{ revisione.nombreArchivo }}</td>
+            </tr>
+            <tr>
+                <th>Comentarios</th>
+                <td>{{ revisione.comentarios }}</td>
+            </tr>
+            <tr>
+                <th>Prioridad</th>
+                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('revisiones_indexRevisiones') }}">Back to the list</a>
+        </li>
+        <li>
+
+          aqui va la redireccion para editar las habilitaciones
+
+
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

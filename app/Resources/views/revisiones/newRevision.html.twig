@@ -1,0 +1,21 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Habilitar Link de revisión</h1>
+
+
+
+
+    {{ form_start(form, {'enctype':'multipart/form-data'}) }}
+        {{ form_widget(form) }}
+        <input type="hidden" name="idCaso" value="{{var}}"/>
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('revisiones_indexRevisiones') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
