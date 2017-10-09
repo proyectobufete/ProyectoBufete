@@ -86,8 +86,37 @@ class RevisionesController extends Controller
 
     }
 
+
+    public function envioCorreoAction()
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('a.j.orozco038@gmail.com')
+            ->setTo('a.j.orozco038@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'revisiones/envioCorreo.html.twig',
+                    array('name' => "adder",)
+                )
+            )
+        ;
+        $this->get('mailer')->send($message);
+
+        return $this->render('revisiones/envioCorreo.html.twig', array(
+
+        ));
+
+
+    }
+
+
     public function indexLinkCasoEstAction(Request $request)
     {
+
+
+
+
+
       $var=$request->request->get("idCaso");
 
 
@@ -133,6 +162,10 @@ class RevisionesController extends Controller
                 $nuevavar = (int)$var;
                 $idrecibido=$var;
 
+                $em = $this->getDoctrine()->getManager();
+                $caso_repo1 = $em->getRepository("BufeteBundle:Casos");
+                $numcaso = $caso_repo1->find($idrecibido);
+                $num = $numcaso->getNoCaso();
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -177,7 +210,7 @@ class RevisionesController extends Controller
         return $this->render('revisiones/newLink.html.twig', array(
             'revisione' => $revisione,
             'var'=> $var,
-
+            'comEnvio'=>$num,
             'form' => $form->createView(),
         ));
     }

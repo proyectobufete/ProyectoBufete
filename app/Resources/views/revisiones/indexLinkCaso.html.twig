@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Entregas</h1>
+    <h1>Entregas del caso No. {{numcasoEnvio}}</h1>
 
 
     <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
@@ -14,11 +14,9 @@
         <thead>
             <tr>
                 <th>No. Revisión</th>
-                <th>Número de Caso</th>
                 <th>Tituloentrega</th>
-                <th>Fecha de creacion</th>
                 <th>Fecha limite</th>
-                <th>Fecha de Envio</th>
+                <th>Fecha recibido</th>
                 <th>Nombrearchivo</th>
                 <th>Estado de la Entrega</th>
                 <th>Actions</th>
@@ -49,9 +47,7 @@
               <td>{{ counter }}</td>
               {% set counter = counter - 1 %}
 
-                <td>{{ numcasoEnvio }}</td>
                 <td>{{ revisione.tituloEntrega }}</td>
-                <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
@@ -61,14 +57,24 @@
                     </a>
                   {% endif %}
                 </td>
+
                 <td>
-                    {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s')  %}
-                      enviado --- antes:
-                    {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s')  %}
-                      retrazada
-                    {% elseif revisione.fechaEnvio == null  %}
-                      falta --- :
+                  {% if revisione.tituloEntrega!= 'CORRECCIÓN DE INFORME' %}
+
+
+                    {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null %}
+
+
+                          Entregado
+                    {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
+
+                          Retrazado
+                    {% elseif revisione.fechaEnvio == null %}
+                          Pendiente
                     {% endif %}
+
+
+                  {% endif %}
 
                 </td>
 
