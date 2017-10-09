@@ -1,22 +1,46 @@
+{% extends 'layout.html.twig' %}
 
-{% extends 'base.html.twig' %}
+      {% block title %}
+        <h1>Habilitar Revisión</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Habilitar Link de revisión</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-4">
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(form.tituloEntrega,'Titulo de Entrega')}}
+                {{form_widget(form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(form.fechaLimite,'Fecha Limite')}}
+                {{form_widget(form.fechaLimite,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(form.estadoRevision,'Prioridad')}}
+                {{form_widget(form.estadoRevision) }}
+              </div>
+            </div>
+            <input type="hidden" name="idCaso" value="{{var}}"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <a href=""><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
 
-
-
-
-    {{ form_start(form, {'enctype':'multipart/form-data'}) }}
-        {{ form_widget(form) }}
-
-        <input type="hidden" name="idCaso" value="{{var}}"/>
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('revisiones_indexRevisiones') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

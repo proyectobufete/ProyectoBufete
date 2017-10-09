@@ -86,6 +86,14 @@
                 <a href="{{ path('asignacionclinica_editNota', { 'idAsignacion': asignacionclinica.idAsignacion }) }}" class="btn blue">Editar</a>
               </td>
           </tr>
+          {% else %}
+          <h2>Not Found</h2>
+          <a href="{{ path('errores_notfound') }}" class="btn blue">red</a>
+          <script>
+            var   segundos = 1;
+            function redireccion() { document.location.href="{{ path('errores_notfound') }}";}
+            setTimeout("redireccion()");
+          </script>
           {% endif %}
           {% endfor %}
         </tbody>
