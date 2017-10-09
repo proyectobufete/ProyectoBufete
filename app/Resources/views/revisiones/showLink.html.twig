@@ -22,15 +22,59 @@
                 <th>Fecha limite</th>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+
+
+            <tr>
+              <th>Estado de la entrega</th>
+              <td>
+              {% if revisione.tituloEntrega!= 'CORRECCIÓN DE INFORME' %}
+
+
+              {% set m1 = 0 %}
+              {% set d1 = 0 %}
+              {% set h1 = 0 %}
+              {% set i1 = 0 %}
+
+              {% set diferencia = date(revisione.fechaEnvio).diff(date(revisione.fechaLimite) ) %}
+
+              {% if( diferencia.m != 0 )%} {% set m1 = 1 %} {% endif %}
+              {% if( diferencia.d != 0 )%} {% set d1 = 1 %} {% endif %}
+              {% if( diferencia.h != 0 )%} {% set h1 = 1 %} {% endif %}
+              {% if( diferencia.i != 0 )%} {% set i1 = 1 %} {% endif %}
+
+                  {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null %}
+                      Entregado
+                        {% if( m1 != 0 )%} {{diferencia.m}} meses {% endif %}
+                        {% if( d1 != 0 )%} {{diferencia.d}} dias {% endif %}
+                        {% if( h1 != 0 )%} {{diferencia.h}} horas {% endif %}
+                        {% if( i1 != 0 )%} {{diferencia.i}} minutos {% endif %}
+                      antes
+                {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
+                      Retrazado por
+                        {% if( m1 != 0 )%} {{diferencia.m}} meses {% endif %}
+                        {% if( d1 != 0 )%} {{diferencia.d}} dias {% endif %}
+                        {% if( h1 != 0 )%} {{diferencia.h}} horas {% endif %}
+                        {% if( i1 != 0 )%} {{diferencia.i}} minutos {% endif %}
+                {% elseif revisione.fechaEnvio == null %}
+                      {% set diferencia = date('now').diff(date(revisione.fechaLimite) ) %}
+                      faltan
+                        {% if( diferencia.m != 0 )%} {{diferencia.m}} meses {% endif %}
+                        {% if( diferencia.d != 0 )%} {{diferencia.d}} dias {% endif %}
+                        {% if( diferencia.h != 0 )%} {{diferencia.h}} horas {% endif %}
+                        {% if( diferencia.i != 0 )%} {{diferencia.i}} minutos {% endif %}
+                {% endif %}
+
+              {% endif %}
+              <td>
+            </tr>
+
+
             <tr>
                 <th>Prioridad</th>
                 <td>
-                  {% if revisione.estadoRevision == 3 %}
-                    {{ "Alta"  }}
-                  {% elseif revisione.estadoRevision == 2 %}
-                    {{"Media"}}
-                    {% elseif revisione.estadoRevision == 1 %}
-                      {{"Baja"}}
+                  {% if revisione.estadoRevision == 3 %} {{ "Alta"  }}
+                  {% elseif revisione.estadoRevision == 2 %} {{"Media"}}
+                    {% elseif revisione.estadoRevision == 1 %} {{"Baja"}}
                   {% endif %}
                 </td>
             </tr>
