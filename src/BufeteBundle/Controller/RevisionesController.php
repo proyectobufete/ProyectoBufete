@@ -120,7 +120,7 @@ class RevisionesController extends Controller
               );
         $this->get('mailer')
         ->send($message);
-        
+
 
         return $this->render('revisiones/envioCorreo.html.twig', array(
 
@@ -420,7 +420,7 @@ class RevisionesController extends Controller
             return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
         }
 
-        return $this->render('revisiones/upload.html.twig', array(
+        return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
             'edit_form' => $editForm->createView(),
