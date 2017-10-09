@@ -5,6 +5,8 @@ namespace BufeteBundle\Controller;
 use BufeteBundle\Entity\Asignacionclinica;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use BufeteBundle\Form\AsignarNotaClinicaType;
+
 
 /**
  * Asignacionclinica controller.
@@ -199,17 +201,17 @@ class AsignacionclinicaController extends Controller
       $asignacionclinica->setNotaClinica($nota);
   //    $asignacionclinica->setObservacionesClinica($obs);
       $this->getDoctrine()->getManager()->flush();
-/*        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+//        if ($editForm->isSubmitted() && $editForm->isValid()) {
+//            $this->getDoctrine()->getManager()->flush();
+//
             //return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
-        }
-*/    return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
+  //      }
+    return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
 
-      /*  return $this->render('asignacionclinica/editNota.html.twig', array(
-            'asignacionclinica' => $asignacionclinica,
-            'edit_form' => $editForm->createView(),
-        ));*/
+    //  return $this->render('asignacionclinica/editNota.html.twig', array(
+  //      'asignacionclinica' => $asignacionclinica,
+    //        'edit_form' => $editForm->createView(),
+      //  ));
     }
 
 

@@ -27,6 +27,7 @@
               <br>
               <div class="row">
                 <div class=" col-md-5">
+                  {{ form_widget(edit_form.save, { 'label': 'Click me' }) }}
                   <button type="submit" name="Create" class="btn green">Guardar</button>
                   <a href="{{ path('asignacionclinica_listClinicasEstAsesor', { 'idAsignacion': asignacionclinica.idClinica.idClinica }) }}" class="btn yellow" >Cancelar</a>
                 </div>
