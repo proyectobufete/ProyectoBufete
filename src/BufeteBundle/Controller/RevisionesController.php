@@ -89,6 +89,9 @@ class RevisionesController extends Controller
 
     public function envioCorreoAction()
     {
+
+
+  /*
         $message = \Swift_Message::newInstance()
             ->setSubject('Hello Email')
             ->setFrom('a.j.orozco038@gmail.com')
@@ -101,6 +104,23 @@ class RevisionesController extends Controller
             )
         ;
         $this->get('mailer')->send($message);
+*/
+
+
+
+
+        $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('a.j.orozco038@gmail.com')
+                ->setTo('a.j.orozco038@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                      'revisiones/envioCorreo.html.twig',
+                      array('name' => "adder",)
+                )
+              );
+        $this->get('mailer')
+        ->send($message);
+        
 
         return $this->render('revisiones/envioCorreo.html.twig', array(
 
