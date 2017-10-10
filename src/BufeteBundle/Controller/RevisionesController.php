@@ -110,7 +110,7 @@ class RevisionesController extends Controller
 
 
         $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('a.j.orozco038@gmail.com')
+                ->setFrom('grupo15carrera@gmial.com')
                 ->setTo('a.j.orozco038@gmail.com')
                 ->setBody(
                     $this->renderView(
@@ -123,6 +123,7 @@ class RevisionesController extends Controller
 
 
         return $this->render('revisiones/envioCorreo.html.twig', array(
+          'name' => "no",
 
         ));
 
