@@ -66,7 +66,7 @@ class RevisionesController extends Controller
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
                    'idCaso' => $var
       ));
-      $numerocaso = $caso_datos->getNoCaso();
+      
 
         $em = $this->getDoctrine()->getManager();
         $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findBy(
@@ -79,7 +79,7 @@ class RevisionesController extends Controller
               'revisiones' => $revisiones,
               'ruta'=> 'uploads/final/',
               'varEnvio' =>$var,
-              'numcasoEnvio'=>$numerocaso,
+              'casoEnvio'=>$caso_datos,
           ));
 
 
@@ -195,6 +195,8 @@ class RevisionesController extends Controller
           $caso_repo = $em->getRepository("BufeteBundle:Casos");
           $idCaso = $caso_repo->find($idrecibido);
           $revisione->setIdCaso($idCaso);
+
+          $revisione->setIdRevisado(111);
 
 
 

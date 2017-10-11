@@ -46,6 +46,7 @@ class RevisionesType extends AbstractType
                   'multiple'  => false,
               ))
           //->add('idCaso')
+          //->add(‘idRevisado’)
           ;
     }
 

@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Entregas del caso No. {{numcasoEnvio}}</h1>
+    <h1>Entregas del caso No. {{casoEnvio.noCaso}}</h1>
 
 
-    <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-        <button type="submit" name="buscar" class="btn blue">Agregar Revisión</button>
-        <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
-    </form>
+
+
+      <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="btn blue">Habilitar Entrega *</button>
+          <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
+      </form>
 
 
     <table>
@@ -33,10 +35,11 @@
             {% if varEnvio == revisione.idCaso.idCaso %}
               {% set counter = counter + 1 %}
 
+
           {% endif %}
         {% endfor %}
 
-
+        {% set counterF = counter %}
 
         {% for revisione in revisiones %}
 
@@ -45,7 +48,7 @@
             <tr>
 
               <td>{{ counter }}</td>
-              {% set counter = counter - 1 %}
+            {% set counter = counter - 1 %}
 
                 <td>{{ revisione.tituloEntrega }}</td>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -100,8 +103,15 @@
                               <li>
                                 {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
                                 <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
-                                    <button type="submit" name="buscar" class="btn blue">Editar Link</button>
+                                    <button type="submit" name="buscar" class="btn blue">Editar Entrega</button>
                                     <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                </form>
+                                {% endif %}
+                                {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and (counterF == counter + 1) %}
+
+                                <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
+                                    <button type="submit" name="buscar" class="btn blue">Agregar Revision *</button>
+                                    <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
                                 </form>
                                 {% endif %}
                               </li>
@@ -118,7 +128,13 @@
 
             {% endif %}
 
+
+
+
+
         {% endfor %}
+
+
         </tbody>
     </table>
 
