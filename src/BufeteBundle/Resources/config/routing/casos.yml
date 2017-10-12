@@ -38,6 +38,16 @@ casos_vercivil:
     defaults: { _controller: "BufeteBundle:Casos:showCivil" }
     methods:  GET
 
+casos_printcivil:
+    path:     /{idCaso}/printcivil
+    defaults: { _controller: "BufeteBundle:Casos:printCivil" }
+    methods:  GET
+
+casos_printlaboral:
+    path:     /{idCaso}/printlaboral
+    defaults: { _controller: "BufeteBundle:Casos:printlaboral" }
+    methods:  GET
+
 casos_newlaboral:
     path:     /newlaboral
     defaults: { _controller: "BufeteBundle:Casos:newLaboral" }
