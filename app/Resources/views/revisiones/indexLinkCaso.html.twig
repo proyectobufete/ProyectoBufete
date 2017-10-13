@@ -4,13 +4,10 @@
     <h1>Entregas del caso No. {{casoEnvio.noCaso}}</h1>
 
 
-
-
       <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
           <button type="submit" name="buscar" class="btn blue">Habilitar Entrega *</button>
           <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
       </form>
-
 
     <table>
         <thead>
@@ -25,8 +22,6 @@
             </tr>
         </thead>
         <tbody>
-
-
 
         {% set countergeneral = 0 %}
         {% set counter = 0 %}
