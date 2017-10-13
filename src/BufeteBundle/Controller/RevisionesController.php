@@ -66,7 +66,7 @@ class RevisionesController extends Controller
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
                    'idCaso' => $var
       ));
-      $numerocaso = $caso_datos->getNoCaso();
+      
 
         $em = $this->getDoctrine()->getManager();
         $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findBy(
@@ -79,7 +79,7 @@ class RevisionesController extends Controller
               'revisiones' => $revisiones,
               'ruta'=> 'uploads/final/',
               'varEnvio' =>$var,
-              'numcasoEnvio'=>$numerocaso,
+              'casoEnvio'=>$caso_datos,
           ));
 
 
@@ -89,6 +89,9 @@ class RevisionesController extends Controller
 
     public function envioCorreoAction()
     {
+
+
+  /*
         $message = \Swift_Message::newInstance()
             ->setSubject('Hello Email')
             ->setFrom('a.j.orozco038@gmail.com')
@@ -101,8 +104,26 @@ class RevisionesController extends Controller
             )
         ;
         $this->get('mailer')->send($message);
+*/
+
+
+
+
+        $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('grupo15carrera@gmial.com')
+                ->setTo('a.j.orozco038@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                      'revisiones/envioCorreo.html.twig',
+                      array('name' => "adder",)
+                )
+              );
+        $this->get('mailer')
+        ->send($message);
+
 
         return $this->render('revisiones/envioCorreo.html.twig', array(
+          'name' => "no",
 
         ));
 
@@ -174,6 +195,8 @@ class RevisionesController extends Controller
           $caso_repo = $em->getRepository("BufeteBundle:Casos");
           $idCaso = $caso_repo->find($idrecibido);
           $revisione->setIdCaso($idCaso);
+
+          $revisione->setIdRevisado(111);
 
 
 
@@ -400,7 +423,7 @@ class RevisionesController extends Controller
             return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
         }
 
-        return $this->render('revisiones/upload.html.twig', array(
+        return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
             'edit_form' => $editForm->createView(),

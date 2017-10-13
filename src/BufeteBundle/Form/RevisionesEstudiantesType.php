@@ -36,6 +36,7 @@ class RevisionesEstudiantesType extends AbstractType
           ))
           //->add('estadoRevision')
           //->add('idCaso')
+          //->add(‘idRevisado’)
           ;
     }
 

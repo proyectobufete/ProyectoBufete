@@ -8,6 +8,13 @@ use BufeteBundle\Entity\Civiles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
+use Dompdf\Dompdf;
+use Dompdf\Autoloader;
+use Twig_Autoloader;
+use Dompdf\Options;
+
+
 
 /**
  * Caso controller.
@@ -376,6 +383,37 @@ class CasosController extends Controller
         ));
     }
 
+    public function printCivilAction(Casos $caso)
+    {
+      $snappy = $this->get('knp_snappy.pdf');
+          $snappy->setOption('no-outline', true);
+          $snappy->setOption('encoding', 'UTF-8');
+          $snappy->setOption('page-size','LEGAL');
+          $html = $this->renderView('casos/printcivil.html.twig', array('caso' => $caso));
+          $filename = 'CasoPDF';
+          return new Response(
+              $snappy->getOutputFromHtml($html),
+              200,
+              array(
+                  'Content-Type'          => 'application/pdf',
+                  'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
+    }
+
+    public function printLaboralAction(Casos $caso)
+    {
+      $snappy = $this->get('knp_snappy.pdf');
+          $snappy->setOption('no-outline', true);
+          $snappy->setOption('encoding', 'UTF-8');
+          $snappy->setOption('page-size','LEGAL');
+          $html = $this->renderView('casos/printlaboral.html.twig', array('caso' => $caso));
+          $filename = 'CasoPDF';
+          return new Response(
+              $snappy->getOutputFromHtml($html),
+              200,
+              array(
+                  'Content-Type'          => 'application/pdf',
+                  'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
+    }
     /**
      * Editar caso laboral
      *
@@ -480,6 +518,7 @@ class CasosController extends Controller
     }
 
     /**
+
 * @param User $entity
 *
 * @Route("/{id}/entity-remove", requirements={"id" = "\d+"}, name="print_route_name")
@@ -502,6 +541,7 @@ class CasosController extends Controller
    }
 
     /**
+
      * Creates a form to delete a caso entity.
      *
      * @param Casos $caso The caso entity
