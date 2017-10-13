@@ -66,7 +66,7 @@ class RevisionesController extends Controller
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
                    'idCaso' => $var
       ));
-      
+
 
         $em = $this->getDoctrine()->getManager();
         $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findBy(
@@ -103,7 +103,8 @@ class RevisionesController extends Controller
                 )
             )
         ;
-        $this->get('mailer')->send($message);
+        $this->get('mailer')
+        ->send($message);
 */
 
 

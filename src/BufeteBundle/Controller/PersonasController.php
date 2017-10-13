@@ -227,10 +227,17 @@ class PersonasController extends Controller
           $autocont = $this->get("app.autocont");
           $pass = $autocont->obtener();
 
-          //recibir del get el CARNE
-          $var=$request->query->get("carne");
-          $nuevavar = (int)$var;
-          $carne=$var;
+
+          if(!isset($carne))
+          {
+            //recibir del get el CARNE
+            $var=$request->query->get("carne");
+            $nuevavar = (int)$var;
+            $carne=$var;
+          }
+
+
+
 
           //CONSULTAR EL SERVICIO DE LA CUNOC
           if(isset($carne))

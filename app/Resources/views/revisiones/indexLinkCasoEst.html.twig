@@ -78,11 +78,15 @@
                               </li>
                               <li>
                                 <form method="post" action="{{ path('revisiones_upload')}}" class="form-inline" role="search">
-                                  {% if (revisione.fechaEnvio!=null) %}
-                                    <button type="submit" name="buscar" class="btn blue">Editar Entrega</button>
-                                  {% elseif (revisione.fechaEnvio==null) %}
-                                    <button type="submit" name="buscar" class="btn blue">Subir Informe</button>
+
+                                  {% if (date('now') < revisione.fechaLimite) or (date('now') < revisione.fechaEnvio)  %}
+                                      {% if (revisione.fechaEnvio!=null) %}
+                                        <button type="submit" name="buscar" class="btn blue">Editar Entrega</button>
+                                      {% elseif (revisione.fechaEnvio==null) %}
+                                        <button type="submit" name="buscar" class="btn blue">Subir Informe</button>
+                                      {% endif %}
                                   {% endif %}
+
                                     <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                                 </form>
                               </li>
@@ -101,7 +105,7 @@
 
     <ul>
         <li>
-            
+
         </li>
     </ul>
 {% endblock %}
