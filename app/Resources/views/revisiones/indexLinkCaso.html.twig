@@ -1,176 +1,76 @@
 {% extends 'layout.html.twig' %}
-
+{% block act2 %} active {% endblock %}
+{% block ac4 %} active {% endblock %}
 {% block title %}
-  <h1>Listado Entregas</h1>
+  <h1>Listado de Trabajos</h1>
 {% endblock %}
 {% block body %}
-<<<<<<< HEAD
 <div class="portlet-body">
-    <div class="row">
-      <div class="col-md-2">
-        <form method="get" action="" class="form-inline" role="search">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
-                <i class="fa fa-search"></i>
-              </button>
-            </span>
-            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
-          </div>
-        </form>
-      </div>
-      <div class="col-md-6">
-        <div class="btn-group">
-          <a href="{{ path('ciudad_new') }}">
-            <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-                <button type="submit" name="buscar" class="btn blue">Agregar Revisión</button>
-                <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
-            </form>
-          </a>
+  <div class="row">
+    <div class="col-md-2">
+      <form method="get" action="" class="form-inline" role="search">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+          <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
         </div>
-      </div>
-      <br>
-      <br>
-  <div class="col-md-12 col-sm-12 col-xs-12" >
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="btn-group">
+        <a href="{{ path('trabajos_new') }}">
+          <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
+            <button type="submit" name="buscar" class="btn green">Agregar Revisión</button>
+            <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
+          </form>
+          <i class="fa fa-plus"></i>
+        </button>
+      </a>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="table-responsive">
       <table class="table table-bordered ">
         <thead>
           <tr>
-              <th>No. Revisión</th>
-              <th>Número de Caso</th>
-              <th>Tituloentrega</th>
-              <th>Fecha de creacion</th>
-              <th>Fecha limite</th>
-              <th>Fecha de Envio</th>
-              <th>Nombrearchivo</th>
-              <th>Estado de la Entrega</th>
-              <th>Actions</th>
+            <th>No. Revisión</th>
+            <th>Tituloentrega</th>
+            <th>Fecha limite</th>
+            <th>Fecha recibido</th>
+            <th>Nombrearchivo</th>
+            <th>Estado de la Entrega</th>
+            <th>Actions</th>
           </tr>
-=======
-    <h1>Entregas del caso No. {{numcasoEnvio}}</h1>
-
-
-    <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-        <button type="submit" name="buscar" class="btn blue">Agregar Revisión</button>
-        <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
-    </form>
-
-
-    <table>
-        <thead>
-            <tr>
-                <th>No. Revisión</th>
-                <th>Tituloentrega</th>
-                <th>Fecha limite</th>
-                <th>Fecha recibido</th>
-                <th>Nombrearchivo</th>
-                <th>Estado de la Entrega</th>
-                <th>Actions</th>
-            </tr>
->>>>>>> fa9200c2e09301e97cf894d3c43d7007ed36cc76
         </thead>
         <tbody>
-
-
-
-        {% set countergeneral = 0 %}
-        {% set counter = 0 %}
-        {% for revisione in revisiones %}
+          {% set countergeneral = 0 %}
+          {% set counter = 0 %}
+          {% for revisione in revisiones %}
 
             {% if varEnvio == revisione.idCaso.idCaso %}
               {% set counter = counter + 1 %}
 
-          {% endif %}
-        {% endfor %}
+            {% endif %}
+          {% endfor %}
 
+          {% for revisione in revisiones %}
 
-
-        {% for revisione in revisiones %}
-
-<<<<<<< HEAD
-          {% if varEnvio == revisione.idCaso.idCaso %}
-
-          <tr>
-
-      <td>{{ counter }}</td>
-      {% set counter = counter - 1 %}
-
-      <td>{{ numcasoEnvio }}</td>
-      <td>{{ revisione.tituloEntrega }}</td>
-      <td>
-        {% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}
-      </td>
-      <td>
-        {% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}
-      </td>
-      <td>
-        {% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}
-      </td>
-      <td>
-        {% if revisione.RutaArchivo != null %}
-          <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
-            <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
-          </a>
-        {% endif %}
-      </td>
-      <td>
-        {% if revisione.fechaLimite | date('Y-m-d H:i:s') > revisione.fechaEnvio | date('Y-m-d H:i:s') %}
-          enviado --- antes:
-        {% elseif revisione.fechaLimite | date('Y-m-d H:i:s') < revisione.fechaEnvio | date('Y-m-d H:i:s') %}
-          retrazada
-        {% elseif revisione.fechaEnvio == null %}
-          falta --- :
-        {% endif %}
-      </td>
-      <td>
-        <ul>
-          {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
-            <li>
-              <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
-            </li>
-            <li>
-              <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
-                <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
-                <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-              </form>
-            </li>
-          {% elseif(revisione.fechaLimite != null or revisione.fechaEnvio != null)or(revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
-            <li>
-              <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
-            </li>
-            <li>
-              {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
-                <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn blue">Editar Link</button>
-                  <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-                </form>
-              {% endif %}
-            </li>
-            <li></li>
-          {% endif %}
-        </ul>
-      </td>
-    </tr>
-  {% endif %}
-{% endfor %}
-</tbody>
-      </table>
-    </div>
-
-  </div>
- </div>
-</div>
-=======
             {% if varEnvio == revisione.idCaso.idCaso %}
-
-            <tr>
-
-              <td>{{ counter }}</td>
-              {% set counter = counter - 1 %}
-
+             <tr>
+                <td>{{ counter }}</td>
+                {% set counter = counter - 1 %}
                 <td>{{ revisione.tituloEntrega }}</td>
-                <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                  {% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}
+                </td>
+                <td>
+                  {% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}
+                </td>
                 <td>
                   {% if revisione.RutaArchivo != null %}
                     <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
@@ -178,71 +78,53 @@
                     </a>
                   {% endif %}
                 </td>
-
                 <td>
-                  {% if revisione.tituloEntrega!= 'CORRECCIÓN DE INFORME' %}
-
-
-                    {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null %}
-
-
-                          Entregado
+                  {% if revisione.tituloEntrega != 'CORRECCIÓN DE INFORME' %}
+                    {% if revisione.fechaLimite | date('Y-m-d H:i:s') > revisione.fechaEnvio | date('Y-m-d H:i:s')and revisione.fechaEnvio != null %}
+                      Entregado
                     {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
-
-                          Retrazado
+                      Retrazado
                     {% elseif revisione.fechaEnvio == null %}
-                          Pendiente
+                      Pendiente
                     {% endif %}
-
-
                   {% endif %}
-
                 </td>
-
                 <td>
-                    <ul>
-
-                            {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
-                              <li>
-                                  <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
-                              </li>
-                              <li>
-
-                                <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
-                                    <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
-                                    <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-                                </form>
-
-                              </li>
-                            {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null) or (revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
-                              <li>
-                                  <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
-                              </li>
-                              <li>
-                                {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
-                                <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
-                                    <button type="submit" name="buscar" class="btn blue">Editar Link</button>
-                                    <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-                                </form>
-                                {% endif %}
-                              </li>
-
-                              <li>
-
-                              </li>
-
-                            {% endif %}
-
-                    </ul>
+                  <ul>
+                    {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
+                      <li>
+                        <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
+                      </li>
+                      <li>
+                        <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
+                          <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
+                          <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                        </form>
+                      </li>
+                    {% elseif(revisione.fechaLimite != null or revisione.fechaEnvio != null)or(revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
+                      <li>
+                        <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
+                      </li>
+                      <li>
+                        {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
+                          <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
+                            <button type="submit" name="buscar" class="btn blue">Editar Link</button>
+                            <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                          </form>
+                        {% endif %}
+                      </li>
+                      <li></li>
+                    {% endif %}
+                  </ul>
                 </td>
-            </tr>
-
+              </tr>
             {% endif %}
-
-        {% endfor %}
+          {% endfor %}
         </tbody>
+      </tbody>
     </table>
-
-
->>>>>>> fa9200c2e09301e97cf894d3c43d7007ed36cc76
+  </div>
+</div>
+</div>
+</div>
 {% endblock %}
