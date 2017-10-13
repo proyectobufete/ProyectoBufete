@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Exoneraciones" table="exoneraciones">
+    <indexes>
+      <index name="IX_Relationship28" columns="Id_Estudiante"/>
+      <index name="IX_Relationship32" columns="Id_Tipo"/>
+    </indexes>
+    <id name="idExoneracion" type="integer" column="Id_Exoneracion">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechaExamen" type="date" column="Fecha_Examen" nullable="false"/>
+    <field name="observaciones" type="text" column="observaciones" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechasolvencias" type="date" column="fechasolvencias" nullable="true"/>
+    <many-to-one field="idEstudiante" target-entity="Estudiantes" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Estudiante" referenced-column-name="Id_Estudiante"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipo" target-entity="Tipocaso" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Tipo" referenced-column-name="Id_Tipo"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

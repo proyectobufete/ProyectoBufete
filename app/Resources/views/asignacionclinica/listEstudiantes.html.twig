@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+{% block act6 %}active{% endblock %}
+{% block ac25 %}active{% endblock %}
+{% block title %}
+  <h1>Listado de </h1>
+{% endblock %}
+{% block body %}
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('asignacionclinica_new') }}">
+            <button id="sample_editable_1_new" class="btn green">
+              Asignar Clínica
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+              <th>Estudinate</th>
+              <th>Carné</th>
+              <th>Nota</th>
+              <th>Observaciones</th>
+              <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for asignacionclinica in asignacionclinicas %}
+          <tr>
+              <td>{{asignacionclinica.idEstudiante}}</td>
+              <td>{{asignacionclinica.idEstudiante.carneEstudiante}}</td>
+              <td>{{asignacionclinica.notaClinica}}</td>
+              <td>{{ asignacionclinica.observacionesClinica }}</td>
+              <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

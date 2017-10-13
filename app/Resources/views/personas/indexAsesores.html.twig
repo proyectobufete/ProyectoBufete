@@ -41,12 +41,13 @@
                 <td>{{ persona.idBufete }}</td>
                   <td>
                     <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}" class="btn yellow" >Ver</a>
-                    {% if persona.role == "ROLE_ESTUDIANTE" %}
-                        <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
 
-                    {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
-                        <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('personas_editPersona', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
+                    {% else %}
+                        <a href="{{ path('personas_editAsesor', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
                     {% endif %}
+
                   </td>
               </tr>
           {% endfor %}

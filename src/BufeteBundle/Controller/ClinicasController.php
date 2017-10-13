@@ -19,8 +19,20 @@ class ClinicasController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+        $rol = $this->getUser()->getRole();
+        if($rol == "ROLE_ADMIN")
+        {
+            $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+        } elseif ($rol == "ROLE_SECRETARIO") {
+            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+            $repo = $em->getRepository("BufeteBundle:Clinicas");
+            $query = $repo->createQueryBuilder('c')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+            ->where('p.idBufete = :bufete')
+            ->setParameter('bufete', $bufete)
+            ->getQuery();
+            $clinicas = $query->getResult();
+          }
 
         return $this->render('clinicas/index.html.twig', array(
             'clinicas' => $clinicas,
@@ -73,7 +85,8 @@ class ClinicasController extends Controller
     public function editAction(Request $request, Clinicas $clinica)
     {
         $deleteForm = $this->createDeleteForm($clinica);
-        $editForm = $this->createForm('BufeteBundle\Form\ClinicasType', $clinica);
+        $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $editForm = $this->createForm('BufeteBundle\Form\ClinicasType', $clinica, array('idciudad'=> $idciudad));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

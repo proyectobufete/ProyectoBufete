@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Subir Informe</h1>
+
+
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+
+
+        <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+        <input type="submit" value="Guardar" />
+
+
+
+    {{ form_end(edit_form) }}
+
+
+
+    <ul>
+        <li>
+            <a href="{{ path('revisiones_indexInformes') }}">Back to the list</a>
+        </li>
+
+    </ul>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Informe</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idrevision</th>
+                <td>{{ revisione.idRevision }}</td>
+            </tr>
+            <tr>
+                <th>Idpersona</th>
+                <td>{{ revisione.idPersona }}</td>
+            </tr>
+            <tr>
+                <th>Tituloentrega</th>
+                <td>{{ revisione.tituloEntrega }}</td>
+            </tr>
+            <tr>
+                <th>Fechacreacion</th>
+                <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nombrearchivo</th>
+                <td>
+                  {% if revisione.RutaArchivo != null %}
+                    <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                      <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                    </a>
+                  {% endif %}
+              </td>
+            </tr>
+            <tr>
+                <th>Fechalimite</th>
+                <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Comentarios</th>
+                <td>{{ revisione.comentarios }}</td>
+            </tr>
+            <tr>
+                <th>Fechaenvio</th>
+                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Estadorevision</th>
+                <td>{{ revisione.estadoRevision }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('revisiones_indexLinkCaso') }}">Back to the list</a>
+        </li>
+        <li>
+
+          <!--aqui va la redireccion para editar las habilitaciones-->
+
+
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -16,28 +16,58 @@ BufeteBundle\Entity\Revisiones:
             generator:
                 strategy: IDENTITY
     fields:
-        observaciones:
-            type: text
-            nullable: true
-            length: 65535
-            options:
-                fixed: false
-            column: Observaciones
-        fechaEnvio:
-            type: date
-            nullable: true
-            column: fecha_envio
-        fechaRevision:
-            type: date
-            nullable: true
-            column: Fecha_Revision
-        ruta:
-            type: text
+        idPersona:
+            type: integer
             nullable: false
+            options:
+                unsigned: false
+            column: Id_Persona
+        tituloEntrega:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: Titulo_Entrega
+        fechaCreacion:
+            type: datetime
+            nullable: false
+            column: Fecha_Creacion
+        nombreArchivo:
+            type: string
+            nullable: true
+            length: 75
+            options:
+                fixed: false
+            column: Nombre_Archivo
+        rutaArchivo:
+            type: text
+            nullable: true
             length: 65535
             options:
                 fixed: false
-            column: Ruta
+            column: Ruta_Archivo
+        fechaLimite:
+            type: datetime
+            nullable: true
+            column: Fecha_Limite
+        comentarios:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: Comentarios
+        fechaEnvio:
+            type: datetime
+            nullable: true
+            column: Fecha_Envio
+        estadoRevision:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: Estado_Revision
     manyToOne:
         idCaso:
             targetEntity: Casos
