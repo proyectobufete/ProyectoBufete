@@ -75,6 +75,18 @@ class Revisiones
     private $idCaso;
 
 
+
+
+
+    /**
+     * @var integer
+     */
+    private $idRevisado;
+
+
+
+
+
     /**
      * Get idRevision
      *
@@ -323,5 +335,30 @@ class Revisiones
     public function getIdCaso()
     {
         return $this->idCaso;
+    }
+
+
+    /**
+     * Set idRevisado
+     *
+     * @param integer $idRevisado
+     *
+     * @return Revisiones
+     */
+    public function setIdRevisado($idRevisado)
+    {
+        $this->idRevisado = $idRevisado;
+
+        return $this;
+    }
+
+    /**
+     * Get idRevisado
+     *
+     * @return integer
+     */
+    public function getIdRevisado()
+    {
+        return $this->idRevisado;
     }
 }
