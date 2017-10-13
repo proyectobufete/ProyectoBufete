@@ -6,7 +6,7 @@ use BufeteBundle\Entity\Asignacionclinica;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use BufeteBundle\Form\AsignarNotaClinicaType;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Asignacionclinica controller.
@@ -14,6 +14,12 @@ use BufeteBundle\Form\AsignarNotaClinicaType;
  */
 class AsignacionclinicaController extends Controller
 {
+
+    private $session;
+
+    public function __construct(){
+      $this->session = new Session();
+    }
 
     /**
      * Lists all asignacionclinica entities.
@@ -195,12 +201,20 @@ class AsignacionclinicaController extends Controller
 //      $obs = $request->get('obs');
       $id = $request->get('id');
       $asignacion_repo = $em->getRepository("BufeteBundle:Asignacionclinica");
-      $asignacionclinica = $asignacion_repo->find($id);
-      $editForm = $this->createForm('BufeteBundle\Form\AsignarNotaClinicaType', $asignacionclinica);
-      $editForm->handleRequest($request);
-      $asignacionclinica->setNotaClinica($nota);
+      $asignacionclinica = $asignacion_repo->findOneBy(array('idAsignacion' => $id));
+      if($nota > 100 || $nota < 0)
+      {
+        $mensaje = "Debe asignar una nota entre 0 y 100";
+        $this->session->getFlashBag()->add("status", $mensaje);
+      } else {
+        $editForm = $this->createForm('BufeteBundle\Form\AsignarNotaClinicaType', $asignacionclinica);
+        $editForm->handleRequest($request);
+        $asignacionclinica->setNotaClinica($nota);
+        $this->getDoctrine()->getManager()->flush();
+      }
+
   //    $asignacionclinica->setObservacionesClinica($obs);
-      $this->getDoctrine()->getManager()->flush();
+
 //        if ($editForm->isSubmitted() && $editForm->isValid()) {
 //            $this->getDoctrine()->getManager()->flush();
 //
