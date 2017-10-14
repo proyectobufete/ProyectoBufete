@@ -1,8 +1,68 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
+{% block title %}
+  <h1>Detalles link</h1>
+{% endblock %}
 {% block body %}
-    <h1>Detalle del Link</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+            <tbody>
+              <tr>
+                  <th>No. Caso</th>
+                  <td>{{ nocasoEnvio }}</td>
+              </tr>
+                <tr>
+                    <th>Titulo de la entrega</th>
+                    <td>{{ revisione.tituloEntrega }}</td>
+                </tr>
+                <tr>
+                    <th>Fecha de creacion</th>
+                    <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Fecha limite</th>
+                    <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Prioridad</th>
+                    <td>
+                      {% if revisione.estadoRevision == 3 %}
+                        {{ "Alta"  }}
+                      {% elseif revisione.estadoRevision == 2 %}
+                        {{"Media"}}
+                        {% elseif revisione.estadoRevision == 1 %}
+                          {{"Baja"}}
+                      {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Estudiante</th>
+                    <td>{{ nombrecarneEnvio}}</td>
+                </tr>
 
+
+                <tr>
+                    <th>Nombrearchivo</th>
+                    <td>
+                      {% if revisione.RutaArchivo != null %}
+                        <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                          <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                        </a>
+                      {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                    <th>Comentarios</th>
+                    <td>{{ revisione.comentarios }}</td>
+                </tr>
+                <tr>
+                    <th>Fercha del envio</th>
+                    <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+            </tbody>
+          </table>
 
     <table>
         <tbody>
@@ -22,15 +82,59 @@
                 <th>Fecha limite</th>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+
+
+            <tr>
+              <th>Estado de la entrega</th>
+              <td>
+              {% if revisione.tituloEntrega!= 'CORRECCIÓN DE INFORME' %}
+
+
+              {% set m1 = 0 %}
+              {% set d1 = 0 %}
+              {% set h1 = 0 %}
+              {% set i1 = 0 %}
+
+              {% set diferencia = date(revisione.fechaEnvio).diff(date(revisione.fechaLimite) ) %}
+
+              {% if( diferencia.m != 0 )%} {% set m1 = 1 %} {% endif %}
+              {% if( diferencia.d != 0 )%} {% set d1 = 1 %} {% endif %}
+              {% if( diferencia.h != 0 )%} {% set h1 = 1 %} {% endif %}
+              {% if( diferencia.i != 0 )%} {% set i1 = 1 %} {% endif %}
+
+                  {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null %}
+                      Entregado
+                        {% if( m1 != 0 )%} {{diferencia.m}} meses {% endif %}
+                        {% if( d1 != 0 )%} {{diferencia.d}} dias {% endif %}
+                        {% if( h1 != 0 )%} {{diferencia.h}} horas {% endif %}
+                        {% if( i1 != 0 )%} {{diferencia.i}} minutos {% endif %}
+                      antes
+                {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
+                      Retrazado por
+                        {% if( m1 != 0 )%} {{diferencia.m}} meses {% endif %}
+                        {% if( d1 != 0 )%} {{diferencia.d}} dias {% endif %}
+                        {% if( h1 != 0 )%} {{diferencia.h}} horas {% endif %}
+                        {% if( i1 != 0 )%} {{diferencia.i}} minutos {% endif %}
+                {% elseif revisione.fechaEnvio == null %}
+                      {% set diferencia = date('now').diff(date(revisione.fechaLimite) ) %}
+                      faltan
+                        {% if( diferencia.m != 0 )%} {{diferencia.m}} meses {% endif %}
+                        {% if( diferencia.d != 0 )%} {{diferencia.d}} dias {% endif %}
+                        {% if( diferencia.h != 0 )%} {{diferencia.h}} horas {% endif %}
+                        {% if( diferencia.i != 0 )%} {{diferencia.i}} minutos {% endif %}
+                {% endif %}
+
+              {% endif %}
+              <td>
+            </tr>
+
+
             <tr>
                 <th>Prioridad</th>
                 <td>
-                  {% if revisione.estadoRevision == 3 %}
-                    {{ "Alta"  }}
-                  {% elseif revisione.estadoRevision == 2 %}
-                    {{"Media"}}
-                    {% elseif revisione.estadoRevision == 1 %}
-                      {{"Baja"}}
+                  {% if revisione.estadoRevision == 3 %} {{ "Alta"  }}
+                  {% elseif revisione.estadoRevision == 2 %} {{"Media"}}
+                    {% elseif revisione.estadoRevision == 1 %} {{"Baja"}}
                   {% endif %}
                 </td>
             </tr>
@@ -39,41 +143,21 @@
                 <td>{{ nombrecarneEnvio}}</td>
             </tr>
 
+
+          <table>
             <tr>
-                <th>Nombrearchivo</th>
-                <td>
-                  {% if revisione.RutaArchivo != null %}
-                    <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
-                      <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
-                    </a>
-                  {% endif %}
-              </td>
+              <a href="" class="btn default">Regresar</a>
             </tr>
             <tr>
-                <th>Comentarios</th>
-                <td>{{ revisione.comentarios }}</td>
+              <a href="" class="btn blue">Editar</a>
             </tr>
             <tr>
-                <th>Fercha del envio</th>
-                <td>{% if revisione.fechaEnvio %}{{ revisione.fechaEnvio|date('Y-m-d H:i:s') }}{% endif %}</td>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
             </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('revisiones_indexRevisiones') }}">Back to the list</a>
-        </li>
-        <li>
-
-          aqui va la redireccion para editar las habilitaciones
-
-
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}

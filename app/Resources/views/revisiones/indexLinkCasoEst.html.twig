@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Entregas</h1>
+    <h1>Entregas del caso No. {{numcasoEnvio}}</h1>
 
     <table>
         <thead>
             <tr>
                 <th>No. Revisión</th>
-                <th>Número de Caso</th>
                 <th>Tituloentrega</th>
                 <th>Fechacreacion</th>
                 <th>Fechalimite</th>
                 <th>Nombrearchivo</th>
+                <th>Estado de la Entrega</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,7 +40,6 @@
               <td>{{ counter }}</td>
               {% set counter = counter - 1 %}
 
-                <td>{{ numcasoEnvio }}</td>
                 <td>{{ revisione.tituloEntrega }}</td>
                 <td>{% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -50,9 +49,23 @@
                       <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
                     </a>
                   {% endif %}
+                  <td>
+                    {% if revisione.tituloEntrega!= 'CORRECCIÓN DE INFORME' %}
+
+                      {% if revisione.fechaLimite|date('Y-m-d H:i:s') > revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null %}
+                            Entregado
+                      {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
+                            Retrazado
+                      {% elseif revisione.fechaEnvio == null %}
+                            Pendiente
+                      {% endif %}
+
+                    {% endif %}
+
+                  </td>
                 <td>
 
-                <td>
+
                     <ul>
 
                             {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
@@ -88,7 +101,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('revisiones_newLink') }}">Habilitar Nuevo Link</a>
+            
         </li>
     </ul>
 {% endblock %}

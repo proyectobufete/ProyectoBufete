@@ -21,12 +21,7 @@
                   <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
               </form>
             </tr>
-            <tr>
-              <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn blue">Subir Revisión</button>
-                  <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-              </form>
-            </tr>
+            
           </table>
           {% endif %}
           <div class="row">
@@ -228,15 +223,9 @@
                     <a href="{{ path('casos_casosciviles') }}" class="btn default">Regresar</a>
                   </tr>
                   <tr>
-                    <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
-                        <button type="submit" name="buscar" class="btn btn-purple">Agregar revision</button>
-                        <input type="hidden" name="id" value="{{caso.idCaso}}"/>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
-                        <button type="submit" name="buscar" class="btn btn-Black">Ver revision</button>
-                        <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                    <form method="post" action="{{ path('revisiones_indexLinkCasoEst')}}" class="form-inline" role="search">
+                        <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
+                        <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
                     </form>
                   </tr>
                 {% endif %}
@@ -248,7 +237,7 @@
                     <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso }) }}" class="btn blue">Editar</a>
                   </tr>
                   <tr>
-                    <a href=""{{ path('casos_printcivil', {'idCaso': caso.idCaso }) }}"" class="btn btn-purple">Imprimir</a>
+                    <a href="{{ path('casos_printcivil', {'idCaso': caso.idCaso }) }}" class="btn btn-purple">Imprimir</a>
                   </tr>
                 {% endif %}
               </table>

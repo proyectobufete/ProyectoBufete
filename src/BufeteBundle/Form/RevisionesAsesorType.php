@@ -48,6 +48,7 @@ class RevisionesAsesorType extends AbstractType
                   'expanded'  => true,
                   'multiple'  => false,
               ))
+          //->add(‘idRevisado’)    
           //->add('idCaso')
           ;
     }
