@@ -5,6 +5,8 @@ namespace BufeteBundle\Controller;
 use BufeteBundle\Entity\Asignacionclinica;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use BufeteBundle\Form\AsignarNotaClinicaType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Asignacionclinica controller.
@@ -12,6 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AsignacionclinicaController extends Controller
 {
+
+    private $session;
+
+    public function __construct(){
+      $this->session = new Session();
+    }
 
     /**
      * Lists all asignacionclinica entities.
@@ -190,27 +198,58 @@ class AsignacionclinicaController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $nota = $request->get('nota');
-      $obs = $request->get('obs');
+//      $obs = $request->get('obs');
       $id = $request->get('id');
       $asignacion_repo = $em->getRepository("BufeteBundle:Asignacionclinica");
-      $asignacionclinica = $asignacion_repo->find($id);
+      $asignacionclinica = $asignacion_repo->findOneBy(array('idAsignacion' => $id));
+      if($nota > 100 || $nota < 0)
+      {
+        $mensaje = "Debe asignar una nota entre 0 y 100";
+        $this->session->getFlashBag()->add("status", $mensaje);
+      } else {
         $editForm = $this->createForm('BufeteBundle\Form\AsignarNotaClinicaType', $asignacionclinica);
-        //$editForm->handleRequest($request);
+        $editForm->handleRequest($request);
         $asignacionclinica->setNotaClinica($nota);
-        $asignacionclinica->setObservacionesClinica($obs);
         $this->getDoctrine()->getManager()->flush();
-/*        if ($editForm->isSubmitted() && $editForm->isValid()) {
+      }
+
+  //    $asignacionclinica->setObservacionesClinica($obs);
+
+//        if ($editForm->isSubmitted() && $editForm->isValid()) {
+//            $this->getDoctrine()->getManager()->flush();
+//
+            //return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
+  //      }
+    return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
+
+    //  return $this->render('asignacionclinica/editNota.html.twig', array(
+  //      'asignacionclinica' => $asignacionclinica,
+    //        'edit_form' => $editForm->createView(),
+      //  ));
+    }
+
+
+    /**
+     * Displays a form to edit an existing asignacionclinica entity.
+     *
+     */
+/*    public function editNotaAction(Request $request, Asignacionclinica $asignacionclinica)
+    {
+
+      $editForm = $this->createForm('BufeteBundle\Form\AsignarNotaClinicaType', $asignacionclinica);
+      $editForm->handleRequest($request);
+      $hola = $asignacionclinica->getIdClinica()->getIdClinica();
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
+            return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $hola));
         }
-*/        return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
 
-    /*    return $this->render('asignacionclinica/editNota.html.twig', array(
+        return $this->render('asignacionclinica/editNota.html.twig', array(
             'asignacionclinica' => $asignacionclinica,
             'edit_form' => $editForm->createView(),
-        ));*/
-    }
+        ));
+    }*/
 
     /**
      * Deletes a asignacionclinica entity.

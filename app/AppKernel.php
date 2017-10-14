@@ -18,9 +18,6 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new BufeteBundle\BufeteBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
-            new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
-            new TFox\MpdfPortBundle\TFoxMpdfPortBundle(),
-
 
         ];
 
