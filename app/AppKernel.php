@@ -18,8 +18,11 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new BufeteBundle\BufeteBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+<<<<<<< HEAD
             
 
+=======
+>>>>>>> e94a5bc0ab1171b5a15938231439839e0a0c367f
 
         ];
 
