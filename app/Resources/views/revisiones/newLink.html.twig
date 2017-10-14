@@ -19,8 +19,9 @@
             </div>
             <div class="row">
               <div class="col-md-4">
-                {{form_label(form.fechaLimite,'Fecha Limite')}}
-                {{form_widget(form.fechaLimite,{'attr':{'class' : 'form-control'}}) }}
+                <div class="panel-body">
+                    <textarea class="wysihtml5 form-control" rows="9"></textarea>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -44,7 +45,17 @@
       </div>
     </div>
 
-
+    <script>
+            jQuery(document).ready(function(){
+                $('.wysihtml5').wysihtml5();
+                $('.summernote').summernote({
+                    height: 200,                 // set editor height
+                    minHeight: null,             // set minimum height of editor
+                    maxHeight: null,             // set maximum height of editor
+                    focus: true                 // set focus to editable area after initializing summernote
+                });
+            });
+        </script>
 
 
 {% endblock %}
