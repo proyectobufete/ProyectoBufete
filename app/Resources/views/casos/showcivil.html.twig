@@ -21,7 +21,7 @@
                   <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
               </form>
             </tr>
-            
+
           </table>
           {% endif %}
           <div class="row">
@@ -238,6 +238,9 @@
                   </tr>
                   <tr>
                     <a href="{{ path('casos_printcivil', {'idCaso': caso.idCaso }) }}" class="btn btn-purple">Imprimir</a>
+                  </tr>
+                  <tr>
+                    <a href="{{ path('casos_transferircivil', { 'idCaso': caso.idCaso }) }}" class="btn yellow">Transferir</a>
                   </tr>
                 {% endif %}
               </table>
