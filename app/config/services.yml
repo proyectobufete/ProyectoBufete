@@ -11,6 +11,9 @@ services:
     app.registrocunoc:
         class: BufeteBundle\Services\Registrocunoc
         arguments: ['carne']
+
+    app.security.access_denied_handler:
+        class: BufeteBundle\Security\AccessDeniedHandler
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
