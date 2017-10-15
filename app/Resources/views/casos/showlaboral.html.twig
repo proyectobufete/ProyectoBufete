@@ -23,7 +23,7 @@
                   <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
               </form>
             </tr>
-            
+
 
 
           </table>
@@ -374,6 +374,9 @@
               </tr>
               <tr>
                 <a href="{{ path('casos_printlaboral', {'idCaso': caso.idCaso }) }}" class="btn btn-purple">Imprimir</a>
+              </tr>
+              <tr>
+                <a href="{{ path('casos_transferirlaboral', { 'idCaso': caso.idCaso }) }}" class="btn yellow">Transferir</a>
               </tr>
             {% endif %}
           </table>

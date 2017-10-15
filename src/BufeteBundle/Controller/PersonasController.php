@@ -146,7 +146,7 @@ class PersonasController extends Controller
    * Lists all persona entities.
    *
    */
-  public function indexAction()
+  public function indexUsuariosAction()
   {
 
       $em = $this->getDoctrine()->getManager();
