@@ -146,7 +146,7 @@ class PersonasController extends Controller
    * Lists all persona entities.
    *
    */
-  public function indexAction()
+  public function indexUsuariosAction()
   {
 
       $em = $this->getDoctrine()->getManager();
@@ -217,6 +217,8 @@ class PersonasController extends Controller
 ////////////////////////////////////////////////////////////////////////////////////
 /*  AGREGAR ESTUDIANTE */
 
+
+
   public function registroAction(Request $request)
   {
           $persona = new Personas();
@@ -227,17 +229,17 @@ class PersonasController extends Controller
           $autocont = $this->get("app.autocont");
           $pass = $autocont->obtener();
 
-          //recibir del get el CARNE
-          $var=$request->query->get("carne");
-          $nuevavar = (int)$var;
-          $carne=$var;
+            //recibir del get el CARNE
+            $var=$request->query->get("carne");
+            $nuevavar = (int)$var;
+            $carne=$var;
 
           //CONSULTAR EL SERVICIO DE LA CUNOC
-          if(isset($carne))
-          {
-            $datos1 = $this->get("app.registrocunoc");
-            $datos = $datos1->consultar($carne);
-          }
+              if(isset($carne))
+              {
+                  $datos1 = $this->get("app.registrocunoc");
+                  $datos = $datos1->consultar($carne);
+              }
 
           $nomComp =""; $carrera =""; $telefono=""; $correo=""; $direccion=""; $muni_dep="";
 
@@ -260,6 +262,8 @@ class PersonasController extends Controller
                     'correoEnvio'=>$correo,
                     'passEnvio' =>$pass,
                   ));
+
+
 
           $form->handleRequest($request);
           $confirm = null;
@@ -296,11 +300,13 @@ class PersonasController extends Controller
                 }
               }
               if ($confirm) {
+
                 return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
               }else {
                 $this->session->getFlashBag()->add("status", $status);
               }
           }
+
 
           return $this->render('personas/registro.html.twig', array(
               'persona' => $persona,
@@ -322,7 +328,7 @@ class PersonasController extends Controller
          $telefono = $persona->gettelefonoPersona();
          $direccion = $persona->getdireccionPersona();
          $correo = $persona->getemailPersona();
-
+         $usuario = $persona->getusuarioPersona();
          //GENERAR CONTRASEÑA
          $autocont = $this->get("app.autocont");
          $pass = $autocont->obtener();
@@ -343,11 +349,45 @@ class PersonasController extends Controller
          }
 
          $editForm->handleRequest($request);
-
+         $confirm = null;
+         $nom = null;
          if ($editForm->isSubmitted() && $editForm->isValid()) {
-             $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $username = $editForm->get("usuarioPersona")->getData();
+            $persona_repo = $em->getRepository("BufeteBundle:Personas");
+            $pe = $persona_repo->findOneBy(array('usuarioPersona' => $editForm->get("usuarioPersona")->getData()));
+            if($usuario == $username)
+            {
+              $em->persist($persona);
+              $flush = $em->flush();
+              if ($flush == null) {
+                  $status = "El usuario se ha creado correctamente";
+                  $confirm = true;
+              } else {
+                $status = "El usuario no se pudo registrar";
+              }
+            }elseif ($usuario != $username ) {
+              if(count($pe) == 0){
+                  $em->persist($persona);
+                  $flush = $em->flush();
+                  if ($flush == null) {
+                      $status = "El usuario se ha creado correctamente";
+                      $confirm = true;
+                  } else {
+                      $status = "El usuario no se pudo registrar";
+                  }
+              }else {
+                  $status = "El nombre de usuario ya existe";
+              }
+            }
 
-             return $this->redirectToRoute('personas_editEstudiante', array('idPersona' => $persona->getIdpersona()));
+            if ($confirm) {
+              return $this->redirectToRoute('personas_indexEstudiantes');
+            }else {
+              $this->session->getFlashBag()->add("status", $status);
+            }
+             //$this->getDoctrine()->getManager()->flush();
+             //return $this->redirectToRoute('personas_editEstudiante', array('idPersona' => $persona->getIdpersona()));
          }
 
          return $this->render('personas/editEstudiante.html.twig', array(
@@ -462,23 +502,54 @@ class PersonasController extends Controller
 
      public function editPersonaAction(Request $request, Personas $persona)
      {
-
+         $usuario = $persona->getusuarioPersona();
          $deleteForm = $this->createDeleteForm($persona);
          $editForm = $this->createForm('BufeteBundle\Form\editpersonaType', $persona);
 
          $editForm->handleRequest($request);
-
+         $confirm = null;
          if ($editForm->isSubmitted() && $editForm->isValid()) {
-             $this->getDoctrine()->getManager()->flush();
-
-             return $this->redirectToRoute('personas_editPersona', array('idPersona' => $persona->getIdpersona()));
+           $em = $this->getDoctrine()->getManager();
+           $username = $editForm->get("usuarioPersona")->getData();
+           $persona_repo = $em->getRepository("BufeteBundle:Personas");
+           $pe = $persona_repo->findOneBy(array('usuarioPersona' => $editForm->get("usuarioPersona")->getData()));
+           if($usuario == $username)
+           {
+             $em->persist($persona);
+             $flush = $em->flush();
+             if ($flush == null) {
+                 $status = "El usuario se ha creado correctamente";
+                 $confirm = true;
+             } else {
+               $status = "El usuario no se pudo registrar";
+             }
+           }elseif ($usuario != $username ) {
+             if(count($pe) == 0){
+                 $em->persist($persona);
+                 $flush = $em->flush();
+                 if ($flush == null) {
+                     $status = "El usuario se ha creado correctamente";
+                     $confirm = true;
+                 } else {
+                     $status = "El usuario no se pudo registrar";
+                 }
+             }else {
+                 $status = "El nombre de usuario ya existe";
+             }
+           }
+           if ($confirm) {
+             return $this->redirectToRoute('personas_index');
+           }else {
+             $this->session->getFlashBag()->add("status", $status);
+           }
+             //$this->getDoctrine()->getManager()->flush();
+             //return $this->redirectToRoute('personas_editPersona', array('idPersona' => $persona->getIdpersona()));
          }
 
          return $this->render('personas/editPersona.html.twig', array(
              'persona' => $persona,
              'edit_form' => $editForm->createView(),
              'delete_form' => $deleteForm->createView(),
-
          ));
      }
 
@@ -581,14 +652,50 @@ class PersonasController extends Controller
 
      public function editAsesorAction(Request $request, Personas $persona)
      {
+         $usuario = $persona->getusuarioPersona();
          $deleteForm = $this->createDeleteForm($persona);
          $editForm = $this->createForm('BufeteBundle\Form\editasesorType', $persona);
 
          $editForm->handleRequest($request);
+         $confirm = null;
          if ($editForm->isSubmitted() && $editForm->isValid()) {
-             $this->getDoctrine()->getManager()->flush();
+           $em = $this->getDoctrine()->getManager();
+           $username = $editForm->get("usuarioPersona")->getData();
+           $persona_repo = $em->getRepository("BufeteBundle:Personas");
+           $pe = $persona_repo->findOneBy(array('usuarioPersona' => $editForm->get("usuarioPersona")->getData()));
+           if($usuario == $username)
+           {
+             $em->persist($persona);
+             $flush = $em->flush();
+             if ($flush == null) {
+                 $status = "El usuario se ha creado correctamente";
+                 $confirm = true;
+             } else {
+               $status = "El usuario no se pudo registrar";
+             }
+           }elseif ($usuario != $username ) {
+             if(count($pe) == 0){
+                 $em->persist($persona);
+                 $flush = $em->flush();
+                 if ($flush == null) {
+                     $status = "El usuario se ha creado correctamente";
+                     $confirm = true;
+                 } else {
+                     $status = "El usuario no se pudo registrar";
+                 }
+             }else {
+                 $status = "El nombre de usuario ya existe";
+             }
+           }
 
-             return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdpersona()));
+           if ($confirm) {
+             return $this->redirectToRoute('personas_indexAsesores');
+           }else {
+             $this->session->getFlashBag()->add("status", $status);
+           }
+
+             //$this->getDoctrine()->getManager()->flush();
+             //return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdpersona()));
          }
 
          return $this->render('personas/editAsesor.html.twig', array(

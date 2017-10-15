@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Revisione Enviada</h1>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>No. Caso</th>
+        <td>{{ nocasoEnvio }}</td>
+      </tr>
+      <tr>
+        <th>Asesor</th>
+        <td>{{ asesorEnvio }}</td>
+      </tr>
+      <tr>
+        <th>Titulo de la entrega</th>
+        <td>{{ revisione.tituloEntrega }}</td>
+      </tr>
+      <tr>
+        <th>Nombre del archivo</th>
+        <td>
+          {% if revisione.RutaArchivo != null %}
+            <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+              <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <th>Comentarios</th>
+        <td>{{ revisione.comentarios }}</td>
+      </tr>
+      <tr>
+        <th>Prioridad</th>
+        <td>
+          {% if revisione.estadoRevision == 3 %}
+            {{ "Alta"  }}
+          {% elseif revisione.estadoRevision == 2 %}
+            {{"Media"}}
+          {% elseif revisione.estadoRevision == 1 %}
+            {{"Baja"}}
+          {% endif %}
+        </td>
+        <td>
+          {% if revisione.idPersona == 3 %}
+            {{ "Alta"  }}
+          {% elseif revisione.idPersona == 2 %}
+            {{"Media"}}
+          {% elseif revisione.idPersona == 1 %}
+            {{"Baja"}}
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <th>Fecha de envio</th>
+        <td>
+          {% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li>
+      <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
+        <button type="submit" name="buscar" class="btn blue">Regresar</button>
+        <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
+      </form>
+    </li>
+
+  </ul>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-  <h1>Detalles link</h1>
+  <h1>Detalles de la Entrega</h1>
 {% endblock %}
 {% block body %}
       <div class="portlet-body">
@@ -42,9 +42,9 @@
                     <td>{{ nombrecarneEnvio}}</td>
                 </tr>
 
-<<<<<<< HEAD
+
                 <tr>
-                    <th>Nombrearchivo</th>
+                    <th>Nombre del archivo</th>
                     <td>
                       {% if revisione.RutaArchivo != null %}
                         <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
@@ -63,7 +63,7 @@
                 </tr>
             </tbody>
           </table>
-=======
+
     <table>
         <tbody>
           <tr>
@@ -142,19 +142,28 @@
                 <th>Estudiante</th>
                 <td>{{ nombrecarneEnvio}}</td>
             </tr>
->>>>>>> fa9200c2e09301e97cf894d3c43d7007ed36cc76
-
           <table>
+
             <tr>
-              <a href="" class="btn default">Regresar</a>
+
+              {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
+              <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Editar Entrega</button>
+                  <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+              </form>
+              {% endif %}
             </tr>
             <tr>
-              <a href="" class="btn blue">Editar</a>
-            </tr>
-            <tr>
+
+              <!--
               {{ form_start(delete_form) }}
                   <button type="submit" class="btn red" name="Delete">Eliminar</button>
-              {{ form_end(delete_form) }}
+              {{ form_end(delete_form) }}-->
+
+              <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Regresar</button>
+                  <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
+              </form>
             </tr>
           </table>
           </div>

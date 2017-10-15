@@ -24,9 +24,11 @@ class RevisionesType extends AbstractType
           //->add('idPersona')
 
           ->add('tituloEntrega')
-          ->add('fechaLimite', DateType::class, array(
+          ->add('fechaLimite', DateTimeType::class, array(
+
             "data" => new \DateTime("now"),
-            'widget' => 'single_text'
+            'widget' => 'single_text',
+
           ))
           ->add('fechaCreacion', DateTimeType::class, array(
               "data" => new \DateTime("now")
@@ -47,6 +49,7 @@ class RevisionesType extends AbstractType
                   'multiple'  => false,
               ))
           //->add('idCaso')
+          //->add(‘idRevisado’)
           ;
     }
 

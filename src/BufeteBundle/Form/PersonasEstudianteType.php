@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 class PersonasEstudianteType extends AbstractType
 {
     /**
@@ -29,7 +31,7 @@ class PersonasEstudianteType extends AbstractType
       $builder
 
       //form DATOS PERSONALES
-
+        
         ->add('nombrePersona',TextType::Class, array ("data"=>$this->nomEnvio))
         ->add('telefonoPersona',TextType::Class, array ("data"=>$this->telEnvio))
         ->add('tel2Persona')
@@ -59,6 +61,7 @@ class PersonasEstudianteType extends AbstractType
                 'label'=>' ',
                 'carneEnvio' =>$this->carneEnvio,
             ))
+
           ;
     }
 
