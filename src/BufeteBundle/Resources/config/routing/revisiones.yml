@@ -38,6 +38,11 @@ revisiones_showRevision:
     defaults: { _controller: "BufeteBundle:Revisiones:showRevision" }
     methods:  GET
 
+revisiones_showRevisionEstudiante:
+    path:     /{idRevision}/showRevisionEstudiante
+    defaults: { _controller: "BufeteBundle:Revisiones:showRevisionEstudiante" }
+    methods:  GET
+
 revisiones_showLink:
     path:     /{idRevision}/showLink
     defaults: { _controller: "BufeteBundle:Revisiones:showLink" }

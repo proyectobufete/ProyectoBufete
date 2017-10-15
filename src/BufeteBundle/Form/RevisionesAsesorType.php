@@ -32,7 +32,7 @@ class RevisionesAsesorType extends AbstractType
           //->add('nombreArchivo')
           ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           //->add('fechaLimite')
-          ->add('comentarios')
+          //->add('comentarios')
           /*
           ->add('fechaEnvio', DateTimeType::class, array(
               "data" => new \DateTime("now")
@@ -48,7 +48,7 @@ class RevisionesAsesorType extends AbstractType
                   'expanded'  => true,
                   'multiple'  => false,
               ))
-          //->add(‘idRevisado’)    
+          //->add(‘idRevisado’)
           //->add('idCaso')
           ;
     }
