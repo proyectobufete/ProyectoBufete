@@ -403,7 +403,7 @@ class CasosController extends Controller
     public function printLaboralAction(Casos $caso)
     {
       $snappy = $this->get('knp_snappy.pdf');
-      $snappy->setOption('no-outline', true);
+      $snappy->setOption('no-outline', false);
       $snappy->setOption('encoding', 'UTF-8');
       $snappy->setOption('page-size','LEGAL');
       $snappy->setOption('footer-right','Página [page] de [topage]');
