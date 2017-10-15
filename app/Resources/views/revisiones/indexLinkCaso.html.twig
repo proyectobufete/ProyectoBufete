@@ -38,6 +38,7 @@
 
             {% for revisione in revisiones %}
               {% if varEnvio == revisione.idCaso.idCaso %}
+              {% set counter = counter - 1 %}
                 <tr>
                   <td>
                     <h2 class="list-group-item-heading">
@@ -60,11 +61,17 @@
                     <div align="right">
                       {% if revisione.tituloEntrega != 'CORRECCIÓN DE INFORME' %}
                         {% if revisione.fechaLimite | date('Y-m-d H:i:s') > revisione.fechaEnvio | date('Y-m-d H:i:s')and revisione.fechaEnvio != null %}
-                        <h4><span class="label label-success">Entregado</span></h4>
+                          <h4>
+                            <span class="label label-success">Entregado</span>
+                          </h4>
                         {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
-                          <h4><span class="label label-warning">Retrasada</span></h4>
+                          <h4>
+                            <span class="label label-warning">Retrasada</span>
+                          </h4>
                         {% elseif revisione.fechaEnvio == null %}
-                          <h4><span class="label label-info">Pendiente</span></h4>
+                          <h4>
+                            <span class="label label-info">Pendiente</span>
+                          </h4>
                         {% endif %}
                       {% endif %}
                     </div>
@@ -75,10 +82,9 @@
                         {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
                           <li>
                             <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">
-                              <img src="{{ asset ('asst/img/ver.png')}}" width="25" height="25">Detalle</a>
+                              <img src="{{ asset ('asst/img/ver.png')}}" width="25" height="25">Detalles</a>
                           </li>
                           <li>
-
                             <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
                               <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
                               <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
@@ -100,8 +106,9 @@
                             {% endif %}
                             {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and(counterF == counter + 1) %}
 
-                              <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-                                <button type="submit" name="buscar" class="btn blue">Agregar Revision *</button>
+                              <form id="myform2" method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
+                                <a href="#" onclick="document.getElementById('myform2').submit()">Agregar Revesión
+                                  <img src="{{ asset ('asst/img/add.png')}}" width="25" height="25"></a>
                                 <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
                               </form>
                             {% endif %}
@@ -110,9 +117,9 @@
 
                       </ul>
                     </div>
-                  </td>
+                </td>
                 </tr>
-              {% endif %}
+            {% endif %}
             {% endfor %}
 
           </tbody>
