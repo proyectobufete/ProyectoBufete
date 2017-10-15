@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Entregas del caso No. {{numcasoEnvio}}</h1>
+    <h1>Entregas del caso No. {{casoEnvio.noCaso}}</h1>
 
     <table>
         <thead>
@@ -74,7 +74,7 @@
                               </li>
                             {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null) or (revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
                               <li>
-                                  <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
+                                  <a href="{{ path('revisiones_showInforme', { 'idRevision': revisione.idRevision }) }}">Detalles</a>
                               </li>
                               <li>
                                 <form method="post" action="{{ path('revisiones_upload')}}" class="form-inline" role="search">

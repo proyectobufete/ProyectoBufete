@@ -11,6 +11,11 @@
           <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
       </form>
 
+      <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="btn yellow">Regresar</button>
+          <input type="hidden" name="id" value="{{casoEnvio.idCaso}}"/>
+      </form>
+
 
     <table>
         <thead>

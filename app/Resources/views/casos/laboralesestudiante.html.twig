@@ -20,16 +20,17 @@
           <table class="table table-bordered ">
             <thead>
               <tr role="row" class="">
-                <th>No de caso</th>
+                <th>No.</th>
                 <th>Fecha </th>
                 <th>Demandante</th>
-                <th>Dorección Demandante</th>
-                <th>Nombre de demandado</th>
-                <th>Direccion Demandado</th>
+
+
+
                 <th>Nombre Estudiante</th>
                 <th>Carné Estudiante</th>
                 <th>Estado</th>
-                <th>Opciones</th>
+                <th colspan="2"> Opciones</th>
+
               </tr>
             </thead>
             <tbody>
@@ -38,9 +39,9 @@
                 <td>{{ caso.noCaso }}</td>
                 <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ caso.idDemandante.nombreDemandante }}</td>
-                <td>{{ caso.idDemandante.direccionDemandante  }}</td>
-                <td>{{ caso.nombreDemandado }}</td>
-                <td>{{ caso.dirDemandado }}</td>
+
+
+
                 <td>{{ caso.idEstudiante.idPersona.nombrePersona }}</td>
                 <td>{{ caso.idEstudiante.carneEstudiante }}</td>
                 <td>{{ caso.estadoCaso }}</td>
@@ -50,6 +51,14 @@
                           <input type="hidden" name="id" value="{{caso.idCaso}}"/>
                       </form>
                   </td>
+
+                  <!--
+                  <td>
+                    <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+                        <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
+                        <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+                    </form>
+                  </td>-->
               </tr>
               {% endfor %}
 

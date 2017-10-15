@@ -12,10 +12,7 @@
 
 
             <tr>
-              <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn blue">Habilitar Revisión</button>
-                  <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-              </form>
+
             </tr>
             <tr>
               <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
@@ -23,7 +20,11 @@
                   <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
               </form>
             </tr>
-            
+
+            <tr>
+              <a href="{{ path('personas_laboralesAsesor') }}"> Regresar </a>
+            </tr>
+
 
 
           </table>
@@ -359,7 +360,7 @@
 
 
               <tr>
-                <form method="post" action="{{ path('revisiones_indexLinkCasoEst')}}" class="form-inline" role="search">
+                <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
                     <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
                     <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
                 </form>

@@ -24,7 +24,7 @@ class RevisionesType extends AbstractType
           //->add('idPersona')
 
           ->add('tituloEntrega')
-          ->add('fechaLimite', DateType::class, array(
+          ->add('fechaLimite', DateTimeType::class, array(
             "data" => new \DateTime("now")
 
           ))
