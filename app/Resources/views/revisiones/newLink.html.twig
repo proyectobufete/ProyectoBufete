@@ -5,31 +5,58 @@
       {% endblock %}
 
 {% block body %}
-
     <div class="portlet-body form">
-      <div id="form_sample_1" class="form-horizontal" >
+      <div id="form_sample_1" class="cmxform form-horizontal tasi-form" >
         {{ form_start(form,{'attr':{'role':'form'}}) }}
         <div class="form-body colorform">
-          <div class="col-md-offset-4">
+          <div class="col-md-offset-2">
+
             <div class="row">
-              <div class="col-md-4">
-                {{form_label(form.tituloEntrega,'Titulo de Entrega')}}
-                {{form_widget(form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Titulo de Revisión</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Prioridad</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.estadoRevision) }}
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Entrega</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.fechaLimite,{'attr':{'class' : 'form-control'}, 'type' : 'datetime-local'} ) }}
+                      <span class="help-block">
+                        <small>dia/mes/año hora:minutos</small>
+                      </span>
+                  </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
-                <div class="panel-body">
-                    <textarea class="wysihtml5 form-control" rows="9"></textarea>
-                </div>
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Creación</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.fechaCreacion) }}
+                  </div>
               </div>
             </div>
+
+
+
             <div class="row">
               <div class="col-md-4">
-                {{form_label(form.estadoRevision,'Prioridad')}}
-                {{form_widget(form.estadoRevision) }}
+
               </div>
             </div>
+
             <input type="hidden" name="idCaso" value="{{var}}"/>
           </div>
         </div>
@@ -45,17 +72,6 @@
       </div>
     </div>
 
-    <script>
-            jQuery(document).ready(function(){
-                $('.wysihtml5').wysihtml5();
-                $('.summernote').summernote({
-                    height: 200,                 // set editor height
-                    minHeight: null,             // set minimum height of editor
-                    maxHeight: null,             // set maximum height of editor
-                    focus: true                 // set focus to editable area after initializing summernote
-                });
-            });
-        </script>
 
 
 {% endblock %}

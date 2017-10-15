@@ -217,6 +217,8 @@ class PersonasController extends Controller
 ////////////////////////////////////////////////////////////////////////////////////
 /*  AGREGAR ESTUDIANTE */
 
+
+
   public function registroAction(Request $request)
   {
           $persona = new Personas();
@@ -227,17 +229,17 @@ class PersonasController extends Controller
           $autocont = $this->get("app.autocont");
           $pass = $autocont->obtener();
 
-          //recibir del get el CARNE
-          $var=$request->query->get("carne");
-          $nuevavar = (int)$var;
-          $carne=$var;
+            //recibir del get el CARNE
+            $var=$request->query->get("carne");
+            $nuevavar = (int)$var;
+            $carne=$var;
 
           //CONSULTAR EL SERVICIO DE LA CUNOC
-          if(isset($carne))
-          {
-            $datos1 = $this->get("app.registrocunoc");
-            $datos = $datos1->consultar($carne);
-          }
+              if(isset($carne))
+              {
+                  $datos1 = $this->get("app.registrocunoc");
+                  $datos = $datos1->consultar($carne);
+              }
 
           $nomComp =""; $carrera =""; $telefono=""; $correo=""; $direccion=""; $muni_dep="";
 
@@ -260,6 +262,8 @@ class PersonasController extends Controller
                     'correoEnvio'=>$correo,
                     'passEnvio' =>$pass,
                   ));
+
+
 
           $form->handleRequest($request);
           $confirm = null;
@@ -296,11 +300,13 @@ class PersonasController extends Controller
                 }
               }
               if ($confirm) {
+
                 return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
               }else {
                 $this->session->getFlashBag()->add("status", $status);
               }
           }
+
 
           return $this->render('personas/registro.html.twig', array(
               'persona' => $persona,

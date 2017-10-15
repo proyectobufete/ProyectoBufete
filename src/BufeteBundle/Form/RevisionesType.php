@@ -24,8 +24,10 @@ class RevisionesType extends AbstractType
           //->add('idPersona')
 
           ->add('tituloEntrega')
-          ->add('fechaLimite', DateType::class, array(
-            "data" => new \DateTime("now")
+          ->add('fechaLimite', DateTimeType::class, array(
+
+            "data" => new \DateTime("now"),
+            'widget' => 'single_text',
 
           ))
           ->add('fechaCreacion', DateTimeType::class, array(
@@ -34,7 +36,7 @@ class RevisionesType extends AbstractType
           //->add('nombreArchivo')
           //->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
 
-          ->add('comentarios')
+          //->add('comentarios')
           //->add('fechaEnvio')
           ->add('estadoRevision',ChoiceType::class,array(
                   "label" => "Prioridad",
