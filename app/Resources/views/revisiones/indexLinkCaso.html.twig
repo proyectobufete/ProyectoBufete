@@ -53,7 +53,7 @@
             <tr>
 
               <td>{{ counter }}</td>
-            {% set counter = counter - 1 %}
+              {% set counter = counter - 1 %}
 
                 <td>{{ revisione.tituloEntrega }}</td>
                 <td>{% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('Y-m-d H:i:s') }}{% endif %}</td>

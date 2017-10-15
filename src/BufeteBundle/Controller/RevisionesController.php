@@ -326,6 +326,9 @@ class RevisionesController extends Controller
 
 
 
+
+
+
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesEstudiantesType', $revisione);
         $editForm->handleRequest($request);
 
@@ -352,10 +355,22 @@ class RevisionesController extends Controller
                 $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
                 $file->move($cvDir, $fileName);
                 $revisione->setRutaArchivo($fileName);
+
+
+
               }
+
+
+
 
           }
 
+          $fecha = date("Y-m-d H:i:s");
+          $nuevafecha = strtotime('+19 hour', strtotime($fecha)); // 6 hour en horario de verano
+          $nuevafecha = date('Y-m-d H:i:s', $nuevafecha);
+
+
+          $revisione->setFechaEnvio($nuevafecha);
 
                 $this->getDoctrine()->getManager()->flush();
 
