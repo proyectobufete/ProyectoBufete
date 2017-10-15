@@ -315,6 +315,7 @@ class RevisionesController extends Controller
      */
     public function uploadAction(Request $request)
     {
+
         $post=$request->get("idRevision");
 
         $em = $this->getDoctrine()->getManager();
@@ -324,34 +325,41 @@ class RevisionesController extends Controller
         ));
 
 
+
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesEstudiantesType', $revisione);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-          $file = $revisione->getRutaArchivo();
-
-          if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+          if ($revisione->getnombreArchivo() == "")
           {
-            $validator = $this->get('validator');
-            $errors = $validator->validate($revisione);
-            if (count($errors) > 0)
-            {
 
-              $errorsString = (string) $errors;
-              return new Response($errorsString);
-            }
 
-            $revisione->setNombreArchivo($file->getClientOriginalName());
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
-            $file->move($cvDir, $fileName);
-            $revisione->setRutaArchivo($fileName);
+              $file = $revisione->getRutaArchivo();
+
+              if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+              {
+                $validator = $this->get('validator');
+                $errors = $validator->validate($revisione);
+                  if (count($errors) > 0)
+                  {
+                    $errorsString = (string) $errors;
+                    return new Response($errorsString);
+                  }
+
+                $revisione->setNombreArchivo($file->getClientOriginalName());
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+                $file->move($cvDir, $fileName);
+                $revisione->setRutaArchivo($fileName);
+              }
+
           }
 
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
         }
 
         return $this->render('revisiones/upload.html.twig', array(
