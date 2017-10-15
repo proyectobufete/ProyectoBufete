@@ -68,6 +68,16 @@ casos_editcivil:
     defaults: { _controller: "BufeteBundle:Casos:editCivil" }
     methods:  [GET, POST]
 
+casos_transferirlaboral:
+    path:     /{idCaso}/transferirlaboral
+    defaults: { _controller: "BufeteBundle:Casos:transferirLaboral" }
+    methods:  [GET, POST]
+
+casos_transferircivil:
+    path:     /{idCaso}/transferircivil
+    defaults: { _controller: "BufeteBundle:Casos:transferirCivil" }
+    methods:  [GET, POST]
+
 casos_delete:
     path:     /{idCaso}/delete
     defaults: { _controller: "BufeteBundle:Casos:delete" }

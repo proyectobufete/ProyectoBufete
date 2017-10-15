@@ -19,9 +19,12 @@
         <!-- Google-Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
 
+        
 
         <link  href="{{asset('asst/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('asst/css/bootstrap-reset.css')}}" rel="stylesheet">
+
+
 
      <!-- Bootstrap  QUE descompone todo
         <link href="{{asset('asst/css/components.css')}}" id="style_components" rel="stylesheet" type="text/css"/>  -->
@@ -77,6 +80,12 @@
                             <li class="{% block ac9 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
                         </ul>
                     </li>
+                    <li class="has-submenu  {% block act12 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Practicas</span></a>
+                        <ul class="list-unstyled">
+                          <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
+                          <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
+                        </ul>
+                    </li>
                     <li class="has-submenu  {% block act6 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Clínicas</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac17 %}{% endblock %}"><a href="{{path("clinicas_index")}}">Clínicas</a></li>
@@ -98,12 +107,11 @@
                         <ul class="list-unstyled">
                             <li class="{% block ac4 %}{% endblock %}"><a href="{{path("trabajos_index")}}">Trabajos</a></li>
                             <li class="{% block ac5 %}{% endblock %}"><a href="{{path("tribunales_index")}}">Tribunales</a></li>
-                            <li class="{% block ac6 %}{% endblock %}"><a href="{{path("tipocaso_index")}}">Tipo de Caso</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                              <li class="{% block ac6 %}{% endblock %}"><a href="{{path("tipocaso_index")}}">Tipo de Caso</a></li>
+                            {% endif %}
                             <li class="{% block ac7 %}{% endblock %}"><a href="{{path("estadosciviles_index")}}">Estado Civil</a></li>
                             <li class="{% block ac23 %}{% endblock %}"><a href="{{path("tipoasunto_index")}}">Asunto</a></li>
-                            <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
-                            <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
-
                         </ul>
                     </li>
                   {% endif %}
@@ -182,7 +190,7 @@
 					          {% endblock %}
 					        </div>
 					        {% block body %}
-					            
+
 					        {% endblock %}
 					      </div>
 
@@ -211,6 +219,9 @@
         <script src="{{asset('asst/js/jquery.scrollTo.min.js')}}"></script>
         <script src="{{asset('asst/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
 
+
+
+
         <!-- Counter-up -->
         <script src="{{asset('asst/js/waypoints.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('asst/js/jquery.counterup.min.js')}}" type="text/javascript"></script>
@@ -220,6 +231,8 @@
         <!-- sweet alerts
         <script src="assets/sweet-alert/sweet-alert.min.js"></script>
         <script src="assets/sweet-alert/sweet-alert.init.js"></script>-->
+
+
 
         <script src="{{asset('asst/js/jquery.app.js')}}"></script>
         <!-- Chat -->

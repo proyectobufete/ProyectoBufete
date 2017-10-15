@@ -25,7 +25,9 @@ class RevisionesType extends AbstractType
 
           ->add('tituloEntrega')
           ->add('fechaLimite', DateTimeType::class, array(
-            "data" => new \DateTime("now")
+
+            "data" => new \DateTime("now"),
+            'widget' => 'single_text',
 
           ))
           ->add('fechaCreacion', DateTimeType::class, array(
