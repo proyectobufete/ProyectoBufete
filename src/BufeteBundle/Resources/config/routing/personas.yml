@@ -1,10 +1,10 @@
 personas_index:
-    path:     /
-    defaults: { _controller: "BufeteBundle:Personas:index" }
+    path:     /indexUsuarios
+    defaults: { _controller: "BufeteBundle:Personas:indexUsuarios" }
     methods:  GET
 
 personas_new:
-    path:     /new
+    path:     /nueva
     defaults: { _controller: "BufeteBundle:Personas:new" }
     methods:  [GET, POST]
 

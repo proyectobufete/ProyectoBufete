@@ -21,11 +21,10 @@
               </form>
             </tr>
 
+
             <tr>
               <a href="{{ path('personas_laboralesAsesor') }}"> Regresar </a>
             </tr>
-
-
 
           </table>
           {% endif %}
@@ -375,6 +374,9 @@
               </tr>
               <tr>
                 <a href="{{ path('casos_printlaboral', {'idCaso': caso.idCaso }) }}" class="btn btn-purple">Imprimir</a>
+              </tr>
+              <tr>
+                <a href="{{ path('casos_transferirlaboral', { 'idCaso': caso.idCaso }) }}" class="btn yellow">Transferir</a>
               </tr>
             {% endif %}
           </table>

@@ -4,8 +4,6 @@
     <h1>Entregas del caso No. {{casoEnvio.noCaso}}</h1>
 
 
-
-
       <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
           <button type="submit" name="buscar" class="btn blue">Habilitar Entrega *</button>
           <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
@@ -15,7 +13,6 @@
           <button type="submit" name="buscar" class="btn yellow">Regresar</button>
           <input type="hidden" name="id" value="{{casoEnvio.idCaso}}"/>
       </form>
-
 
     <table>
         <thead>
@@ -30,9 +27,6 @@
             </tr>
         </thead>
         <tbody>
-
-
-
         {% set countergeneral = 0 %}
         {% set counter = 0 %}
         {% for revisione in revisiones %}
@@ -75,17 +69,12 @@
 
                           Entregado
                     {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
-
                           Retrazado
                     {% elseif revisione.fechaEnvio == null %}
                           Pendiente
                     {% endif %}
-
-
                   {% endif %}
-
                 </td>
-
                 <td>
                     <ul>
 
@@ -130,18 +119,8 @@
                     </ul>
                 </td>
             </tr>
-
             {% endif %}
-
-
-
-
-
         {% endfor %}
-
-
         </tbody>
     </table>
-
-
 {% endblock %}
