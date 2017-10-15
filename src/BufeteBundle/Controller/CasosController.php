@@ -9,10 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
-use Dompdf\Dompdf;
-use Dompdf\Autoloader;
 use Twig_Autoloader;
-use Dompdf\Options;
 
 
 
@@ -24,7 +21,6 @@ class CasosController extends Controller
 {
 
     private $session;
-
     public function __construct(){
       $this->session = new Session();
     }
@@ -592,12 +588,17 @@ class CasosController extends Controller
 
     public function printCivilAction(Casos $caso)
     {
+      $nombre = $caso->getNoCaso();
+      $nombre = $nombre.$caso->getIdPersona()->getNombrePersona();
+      $nombre = $nombre.$caso->getIdEstudiante()->getIdPersona()->getNombrePersona();
       $snappy = $this->get('knp_snappy.pdf');
           $snappy->setOption('no-outline', true);
           $snappy->setOption('encoding', 'UTF-8');
           $snappy->setOption('page-size','LEGAL');
+          $snappy->setOption('footer-right','Página [page] de [topage]');
+          $snappy->setOption('footer-font-size','10');
           $html = $this->renderView('casos/printcivil.html.twig', array('caso' => $caso));
-          $filename = 'CasoPDF';
+          $filename = 'CasoPDF '.$nombre;
           return new Response(
               $snappy->getOutputFromHtml($html),
               200,
@@ -609,9 +610,11 @@ class CasosController extends Controller
     public function printLaboralAction(Casos $caso)
     {
       $snappy = $this->get('knp_snappy.pdf');
-          $snappy->setOption('no-outline', true);
-          $snappy->setOption('encoding', 'UTF-8');
-          $snappy->setOption('page-size','LEGAL');
+      $snappy->setOption('no-outline', false);
+      $snappy->setOption('encoding', 'UTF-8');
+      $snappy->setOption('page-size','LEGAL');
+      $snappy->setOption('footer-right','Página [page] de [topage]');
+      $snappy->setOption('footer-font-size','10');
           $html = $this->renderView('casos/printlaboral.html.twig', array('caso' => $caso));
           $filename = 'CasoPDF';
           return new Response(
