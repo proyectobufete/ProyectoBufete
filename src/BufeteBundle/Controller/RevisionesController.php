@@ -432,8 +432,7 @@ class RevisionesController extends Controller
             return $this->redirectToRoute('revisiones_showLink', array('idRevision' => $revisione->getIdrevision()));
         }
 
-        echo $fechaRecibida;
-        die();
+        
 
         return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
