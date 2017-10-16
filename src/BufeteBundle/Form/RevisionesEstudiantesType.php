@@ -31,9 +31,10 @@ class RevisionesEstudiantesType extends AbstractType
           ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           //->add('fechaLimite')
           ->add('comentarios')
-          ->add('fechaEnvio', DateTimeType::class, array(
-              "data" => new \DateTime("now")
-          ))
+
+          ->add('fechaEnvio'
+          )
+
           //->add('estadoRevision')
           //->add('idCaso')
           //->add(‘idRevisado’)
