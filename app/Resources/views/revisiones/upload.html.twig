@@ -1,30 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+
+      {% block title %}
+        <h1>Subir Revisión</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Subir Informe</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(edit_form, {'enctype':'multipart/form-data'}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-4">
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(edit_form.tituloEntrega,'Titulo de Revision')}}
+                {{form_widget(edit_form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(edit_form.rutaArchivo,'ruta')}}
+                {{form_widget(edit_form.rutaArchivo) }}
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                {{form_label(edit_form.comentarios,'Comentarios ')}}
+                {{form_widget(edit_form.comentarios,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
 
 
+            <div class="row">
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-
-
-        <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-        <input type="submit" value="Guardar" />
-
-
-
-    {{ form_end(edit_form) }}
-
-
-
-    <ul>
-        <li>
-          <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
-            <button type="submit" name="buscar" class="btn blue">Regresar</button>
-            <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
-          </form>
-        </li>
-
-    </ul>
+            </div>
+            <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
+                <button type="submit" name="buscar" class="btn blue">Regresar</button>
+                <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
 {% endblock %}
