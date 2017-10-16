@@ -28,6 +28,7 @@ security:
             logout:
                 path: /logout
                 target: /login
+            access_denied_handler: app.security.access_denied_handler
 
     access_control:
 
