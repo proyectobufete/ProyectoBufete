@@ -154,7 +154,8 @@ class Revisiones
      */
     public function setFechaCreacion($fechaCreacion)
     {
-        $this->fechaCreacion = $fechaCreacion;
+        $this->fechaCreacion = new \DateTime("now");
+        //$this->fechaCreacion = $fechaCreacion;
 
         return $this;
     }
@@ -274,7 +275,7 @@ class Revisiones
      */
     public function setFechaEnvio($fechaEnvio)
     {
-        $this->fechaEnvio = new \DateTime($fechaEnvio);
+        $this->fechaEnvio = new \DateTime();
         //$this->fechaEnvio = $fechaEnvio;
 
         return $this;

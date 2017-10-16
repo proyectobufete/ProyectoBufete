@@ -32,8 +32,7 @@ class RevisionesEstudiantesType extends AbstractType
           //->add('fechaLimite')
           ->add('comentarios')
 
-          ->add('fechaEnvio'
-          )
+          ->add('fechaEnvio')
 
           //->add('estadoRevision')
           //->add('idCaso')

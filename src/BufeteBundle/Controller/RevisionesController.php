@@ -10,6 +10,7 @@ use BufeteBundle\Entity\Casos;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use BufeteBundle\Form\RevisionesEstudiantesType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 /**
  * Revisione controller.
@@ -365,12 +366,7 @@ class RevisionesController extends Controller
 
           }
 
-          $fecha = date("Y-m-d H:i:s");
-          $nuevafecha = strtotime('+19 hour', strtotime($fecha)); // 6 hour en horario de verano
-          $nuevafecha = date('Y-m-d H:i:s', $nuevafecha);
 
-
-          $revisione->setFechaEnvio($nuevafecha);
 
                 $this->getDoctrine()->getManager()->flush();
 
@@ -395,6 +391,16 @@ class RevisionesController extends Controller
                      'idRevision' => $post
         ));
 
+          $fechaRecibida = $revisione->getFechaLimite()->format('Y-m-d H:i:s');
+
+          /*
+            $date = new \DateTime('2000-01-01 2:2:1');
+            $fecha2 = $date->format('Y-m-d H:i:s');
+            echo $fecha2;
+
+            echo $ddd;
+            die();
+          */
 
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $editForm->handleRequest($request);
@@ -426,9 +432,13 @@ class RevisionesController extends Controller
             return $this->redirectToRoute('revisiones_showLink', array('idRevision' => $revisione->getIdrevision()));
         }
 
+        echo $fechaRecibida;
+        die();
+
         return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
+            'fechLimEnvio' =>$fechaRecibida,
             'edit_form' => $editForm->createView(),
 
         ));
