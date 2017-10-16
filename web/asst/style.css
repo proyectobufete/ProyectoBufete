@@ -3,6 +3,13 @@
 
 }
 
+
+.btn-trs {
+    color: #333;
+    background-color: rgba(195, 190, 190, 0);
+    border-color: rgba(204, 204, 204, 0);
+}
+
 .colorform{
   background-color: #F7F9F9;
 }
