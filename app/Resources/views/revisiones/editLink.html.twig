@@ -19,9 +19,6 @@
                   </div>
               </div>
             </div>
-
-
-
             <div class="row">
               <div class="form-group ">
                   <label for="cname" class="control-label col-lg-2">Fecha limite de Entrega</label>
@@ -35,20 +32,21 @@
             </div>
             <div class="row">
               <div class="form-group ">
-                  <label for="cname" class="control-label col-lg-2">Fecha de Creación</label>
-                  <div class="col-md-5">
-                      {{form_widget(edit_form.fechaCreacion) }}
-                  </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group ">
                   <label for="cname" class="control-label col-lg-2">Prioridad</label>
                   <div class="col-md-5">
                       {{form_widget(edit_form.estadoRevision) }}
                   </div>
               </div>
             </div>
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Creación</label>
+                  <div class="col-md-5">
+                      {{form_widget(edit_form.fechaCreacion) }}
+                  </div>
+              </div>
+            </div>
+
             <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
           </div>
         </div>
