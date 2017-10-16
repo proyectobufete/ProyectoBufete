@@ -391,16 +391,8 @@ class RevisionesController extends Controller
                      'idRevision' => $post
         ));
 
-          $fechaRecibida = $revisione->getFechaLimite()->format('Y-m-d H:i:s');
-
-          /*
-            $date = new \DateTime('2000-01-01 2:2:1');
-            $fecha2 = $date->format('Y-m-d H:i:s');
-            echo $fecha2;
-
-            echo $ddd;
-            die();
-          */
+          //recuperar la fecha limite y enviarla a la vista//
+          $fechaHoraLimGuardada = $revisione->getFechaLimite()->format('Y-m-d') .'T'. $revisione->getFechaLimite()->format('H:i');
 
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $editForm->handleRequest($request);
@@ -432,12 +424,12 @@ class RevisionesController extends Controller
             return $this->redirectToRoute('revisiones_showLink', array('idRevision' => $revisione->getIdrevision()));
         }
 
-        
+
 
         return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
-            'fechLimEnvio' =>$fechaRecibida,
+            'fechaHoraLimEnvio' =>$fechaHoraLimGuardada,
             'edit_form' => $editForm->createView(),
 
         ));
