@@ -376,6 +376,7 @@ class RevisionesController extends Controller
         return $this->render('revisiones/upload.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
+              'ruta'=> 'uploads/final/',
             'edit_form' => $editForm->createView(),
 
         ));
@@ -479,6 +480,7 @@ class RevisionesController extends Controller
         return $this->render('revisiones/upload.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
+            'ruta'=> 'uploads/final/',
             'edit_form' => $editForm->createView(),
 
         ));

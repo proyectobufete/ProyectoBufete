@@ -220,7 +220,7 @@ class PersonasController extends Controller
 
 
   public function registroAction(Request $request)
-  {
+{
           $persona = new Personas();
           $estudiantes = new Estudiantes();
           $persona->setEstudiantes($estudiantes);
