@@ -14,6 +14,8 @@
               <button type="submit" name="buscar" class="btn green">Habilitar Entrega <i class="fa fa-plus"></i></button>
               <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
           </form>
+
+
           <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
               <button type="submit" name="buscar" class="btn yellow">Regresar</button>
               <input type="hidden" name="id" value="{{casoEnvio.idCaso}}"/>
@@ -81,7 +83,7 @@
 
                         {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
                           <li>
-                            
+
                               <button onclick="location='{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}'" type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
                                 <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
                               </button>
@@ -103,6 +105,8 @@
                               </button>
                           </li>
                           <li>
+
+
                             {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
                               <form id="myform" method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
                                   <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
@@ -111,6 +115,7 @@
                                 <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                               </form>
                             {% endif %}
+
                             {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and(counterF == counter + 1) %}
                               <form id="myform2" method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
                                   <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
@@ -119,6 +124,8 @@
                                 <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
                               </form>
                             {% endif %}
+
+
                           </li>
                         {% endif %}
 

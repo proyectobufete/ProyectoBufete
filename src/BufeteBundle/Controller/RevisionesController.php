@@ -325,22 +325,26 @@ class RevisionesController extends Controller
                      'idRevision' => $post
         ));
 
-
-
-
-
-
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesEstudiantesType', $revisione);
         $editForm->handleRequest($request);
 
+
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-          if ($revisione->getnombreArchivo() == "")
+          
+
+          $revisione->setTituloEntrega($editForm->get("tituloEntrega")->getData());
+          $revisione->setComentarios($editForm->get("comentarios")->getData());
+
+          $file =$editForm['rutaArchivo']->getData();
+
+
+
+          if (!empty($file) && $file!=null)
           {
 
-
-              $file = $revisione->getRutaArchivo();
-
+              //$file = $revisione->getRutaArchivo();
               if(($file instanceof UploadedFile) && ($file->getError() == '0'))
               {
                 $validator = $this->get('validator');
@@ -356,20 +360,12 @@ class RevisionesController extends Controller
                 $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
                 $file->move($cvDir, $fileName);
                 $revisione->setRutaArchivo($fileName);
-
-
-
               }
-
-
-
-
           }
-
-
-
+          else {
+            $revisione->setRutaArchivo(null);
+          }
                 $this->getDoctrine()->getManager()->flush();
-
                 return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
         }
 
@@ -379,6 +375,63 @@ class RevisionesController extends Controller
               'ruta'=> 'uploads/final/',
             'edit_form' => $editForm->createView(),
 
+        ));
+    }
+/*
+    public function UploadEditAction(Request $request, Revisiones $revisione)
+    {
+        $post=$request->get("idRevision");
+        $em = $this->getDoctrine()->getManager();
+        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+        $editForm = $this->createForm('BufeteBundle\Form\RevEstEditType', $revisione);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+        return $this->render('revisiones/UploadEdit.html.twig', array(
+            'envio'=> $revisione,
+            'revisione' => $revisione,
+              'ruta'=> 'uploads/final/',
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+*/
+    public function UploadEditAction(Request $request)
+    {
+        $IdRevisionRecibido=$request->get("idRevision");
+        $em = $this->getDoctrine()->getManager();
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $IdRevisionRecibido
+        ));
+        $deleteForm = $this->createDeleteForm($revisione);
+        $editForm = $this->createForm('BufeteBundle\Form\RevEstEditType', $revisione);
+        $editForm->handleRequest($request);
+
+        $rutaguardada = $revisione->getRutaArchivo();
+
+        dump($rutaguardada);
+        //die();
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            dump($revisione);
+            die();
+
+
+            dump($revisione->getRutaArchivo());
+            //die();
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+        return $this->render('revisiones/UploadEdit.html.twig', array(
+            'revisione' => $revisione,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'rutaGuardadaEnvio'=>$rutaguardada,
         ));
     }
 
@@ -436,9 +489,11 @@ class RevisionesController extends Controller
         ));
     }
 
-    public function editRevisionAction(Request $request)
+    public function editRevisionAction(Request $request, Revisiones $revisione)
     {
         $post=$request->get("idRevision");
+
+
 
         $em = $this->getDoctrine()->getManager();
         //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
@@ -485,6 +540,8 @@ class RevisionesController extends Controller
 
         ));
     }
+
+
     public function uploadRevisionAction(Request $request)
     {
         $revisione = new Revisiones();

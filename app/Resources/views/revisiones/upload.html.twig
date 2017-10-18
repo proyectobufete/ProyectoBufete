@@ -18,11 +18,28 @@
             </div>
 
 
+
             {% if revisione.RutaArchivo != null %}
               <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
                 <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
               </a>
             {% endif %}
+
+
+
+            <div class="row">
+              <div class="col-md-4">
+
+                
+
+
+            {{form_label(edit_form['rutaArchivo'],'Nombre:')}}
+            {{form_widget(edit_form['rutaArchivo']) }}
+
+          </div>
+        </div>
+
+
 
             <div class="row">
               <div class="col-md-4">
@@ -30,6 +47,8 @@
                 {{form_widget(edit_form.rutaArchivo) }}
               </div>
             </div>
+
+
             <br>
             <div class="row">
               <div class="col-md-4">
@@ -43,16 +62,17 @@
 
             </div>
             <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+
           </div>
         </div>
         <div class="form-actions">
           <div class="row">
             <div class="col-md-offset-4 col-md-9">
+              <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
               <button type="submit" name="Create" class="btn green">Crear</button>
-              <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
-                <button type="submit" name="buscar" class="btn blue">Regresar</button>
-                <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
-              </form>
+
+
+
             </div>
           </div>
         </div>
