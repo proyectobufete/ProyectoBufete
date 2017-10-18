@@ -86,6 +86,7 @@ security:
         - { path: ^/asignacionclinica/ClinicasAsesor, roles: ROLE_ASESOR}
         - { path: ^/asignacionclinica/([0-9]+)/ListClinicasEstAsesor, roles: ROLE_ASESOR}
 
+
         - { path: ^/casos/showlaboral, roles: [ROLE_SECRETARIO, ROLE_ASESOR, ROLE_ESTUDIANTE]}
         - { path: ^/casos/showcivil, roles: [ROLE_SECRETARIO, ROLE_ASESOR, ROLE_ESTUDIANTE]}
 
