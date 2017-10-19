@@ -24,12 +24,21 @@ class Registrocunoc {
             $res03 = verificar_con_RYE("VerificaNuevos", "xml_verificaNuevos", $xml03,$url);
             $xml02="<VERIFICAR_CARRERAS>".$acceso."<CARNET>".$carne."</CARNET>
                     <UNIDAD_ACADEMICA>12</UNIDAD_ACADEMICA><CICLO>".$ciclo."</CICLO></VERIFICAR_CARRERAS>";
-
             $url="http://rye.usac.edu.gt/WS/verificadatosRyEv01.php?wsdl";
-
             $res02 = verificar_con_RYE("VerificaCarreras", "xml_verificaCarreras", $xml02,$url);
-            $res03 = "<?xml version='1.0' encoding='UTF-8'?>".$res03;
-            $res02 = "<?xml version='1.0' encoding='UTF-8'?>".$res02;
+
+            if($res03 !== 0 && $res02!==0)
+            {
+              $res03 = "<?xml version='1.0' encoding='UTF-8'?>".$res03;
+              $res02 = "<?xml version='1.0' encoding='UTF-8'?>".$res02;
+            }
+            else if($res03 === 0 && $res02 === 0)
+            {
+              $foo = 1;
+              $alert = "<ALERT>$foo</ALERT>";
+              $res03 = $alert;
+              $res02 = $alert;
+            }
 
             $datos = new \SimpleXMLElement($res03);
             $datos1 = new \SimpleXMLElement($res02);

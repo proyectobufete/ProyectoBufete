@@ -239,19 +239,39 @@ class PersonasController extends Controller
               {
                   $datos1 = $this->get("app.registrocunoc");
                   $datos = $datos1->consultar($carne);
+
               }
+
+              /*
+              if (!$product) {
+                throw $this->createNotFoundException('El producto solicitado no existe.');
+              }
+              */
 
           $nomComp =""; $carrera =""; $telefono=""; $correo=""; $direccion=""; $muni_dep="";
 
-          if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
+          if(isset($datos))
           {
-              $carne = $datos->DATOS[0]->CARNET;
-              $nomComp =$datos->DATOS[0]->NOM1." ".$datos->DATOS[0]->NOM2." ".$datos->DATOS[0]->NOM3." ".$datos->DATOS[0]->APE1." ".$datos->DATOS[0]->APE2;
-              $telefono=$datos->DATOS->TELEFONO;
-              $correo=$datos->DATOS->CORREO;
-              $direccion=$datos->DATOS->DIRECCION;
-              $muni_dep=$datos->DATOS->MUNICIPIO." ".$datos->DATOS->DEPARTAMENTO;
+
+            if($datos == 1)
+            {
+              echo "ERROR DE SERVIDOR CENTRAL";
+              die();
+              //throw $this->createNotFoundException('El producto solicitado no existe.');
+            }
+            else if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
+            {
+
+                $carne = $datos->DATOS[0]->CARNET;
+                $nomComp =$datos->DATOS[0]->NOM1." ".$datos->DATOS[0]->NOM2." ".$datos->DATOS[0]->NOM3." ".$datos->DATOS[0]->APE1." ".$datos->DATOS[0]->APE2;
+                $telefono=$datos->DATOS->TELEFONO;
+                $correo=$datos->DATOS->CORREO;
+                $direccion=$datos->DATOS->DIRECCION;
+                $muni_dep=$datos->DATOS->MUNICIPIO." ".$datos->DATOS->DEPARTAMENTO;
+            }
           }
+
+
 
           $form = $this->createForm('BufeteBundle\Form\PersonasEstudianteType', $persona,
                   array(
