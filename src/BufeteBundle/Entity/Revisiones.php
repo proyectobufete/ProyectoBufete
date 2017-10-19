@@ -14,7 +14,6 @@ class Revisiones
      *     maxSize = "5000k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF",
-     *     maxSizeMessage = "El archivo es demaciado grande. El maximo permitido son 2MB",
      * )
      */
     protected $rutaArchivo;
