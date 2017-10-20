@@ -16,20 +16,43 @@ class DemandantesController extends Controller
      * Lists all demandante entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $searchQuery = $request->get('query');
         $rol = $this->getUser()->getRole();
+        $demandantes = null;
         if ($rol == "ROLE_ADMIN") {
+          if (!empty($searchQuery)) {
+            $repo = $em->getRepository("BufeteBundle:Demandantes");
+            $query = $repo->createQueryBuilder('d')
+            ->orWhere('d.nombreDemandante LIKE :param')
+            ->orWhere('d.dpiDemandante LIKE :param')
+            ->setParameter('param', '%'.$searchQuery.'%')
+            ->getQuery();
+            $demandantes = $query->getResult();
+          } else {
             $demandantes = $em->getRepository('BufeteBundle:Demandantes')->findAll();
+          }
         } elseif ($rol == "ROLE_SECRETARIO") {
           $ciudad = $this->getUser()->getIdBufete()->getIdCiudad();
-          $query = $em->createQuery(
-            "SELECT d FROM BufeteBundle:Demandantes d
-            WHERE d.idCiudad = :id"
-          )->setParameter('id', $ciudad);
-          $demandantes = $query->getResult();
+          if (strlen($searchQuery) > 1) {
+            $repo = $em->getRepository("BufeteBundle:Demandantes");
+            $query = $repo->createQueryBuilder('d')
+            ->orWhere('d.nombreDemandante LIKE :param')
+            ->orWhere('d.dpiDemandante LIKE :param')
+            ->andWhere('d.idCiudad = :ciudad')
+            ->setParameter('ciudad', $ciudad)
+            ->setParameter('param', '%'.$searchQuery.'%')
+            ->getQuery();
+            $demandantes = $query->getResult();
+          } else {
+            $query = $em->createQuery(
+              "SELECT d FROM BufeteBundle:Demandantes d
+              WHERE d.idCiudad = :id"
+            )->setParameter('id', $ciudad);
+            $demandantes = $query->getResult();
+          }
         }
 
         return $this->render('demandantes/index.html.twig', array(

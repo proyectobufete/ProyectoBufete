@@ -41,6 +41,7 @@
               <th>Nota</th>
               <th>Observaciones</th>
               <th>Estado</th>
+              <th></th>
           </tr>
         </thead>
         <tbody>
@@ -51,7 +52,16 @@
               <td>{{asignacionclinica.notaClinica}}</td>
               <td>{{ asignacionclinica.observacionesClinica }}</td>
               <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
-
+              <td>
+                  {% if asignacionclinica.notaClinica >= 61 %}
+                    <a href="#">
+                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Ganado
+                  {% endif %}
+                  {% if asignacionclinica.notaClinica < 61 %}
+                    <a href="#">
+                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>Perdido
+                  {% endif %}
+              </td>
           </tr>
           {% endfor %}
 
