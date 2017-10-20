@@ -91,22 +91,31 @@
                                   </button>
                                 </li>
                                 <li>
-                                  <form id="myform" method="post" action="{{ path('revisiones_upload')}}" class="form-inline" role="search">
+
 
                                     {% if (date('now') < revisione.fechaLimite) or (date('now') < revisione.fechaEnvio)  %}
-                                        {% if (revisione.fechaEnvio!=null) %}
-                                        <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
-                                          <b>Editar Entrega</b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
-                                        </button>
-                                        {% elseif (revisione.fechaEnvio==null) %}
-                                        <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
-                                          <b>Subir informe</b>   <img src="{{ asset ('asst/img/add.png')}}" width="22" height="22">
-                                        </button>
-                                        {% endif %}
+                                      {% if (revisione.fechaEnvio!=null) %}
 
+                                        <form method="post" action="{{ path('revisiones_upload')}}">
+                                          <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                            <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                              Editar Envio
+                                            </button>
+                                        </form>
+
+
+                                        {% elseif (revisione.fechaEnvio==null) %}
+                                        <form id="myform" method="post" action="{{ path('revisiones_upload')}}" class="form-inline" role="search">
+                                            <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                              <b>Subir informe</b>   <img src="{{ asset ('asst/img/add.png')}}" width="22" height="22">
+                                            </button>
+                                            <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                          </form>
+
+                                        {% endif %}
                                     {% endif %}
-                                      <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-                                  </form>
+
+
                                 </li>
 
                               {% endif %}

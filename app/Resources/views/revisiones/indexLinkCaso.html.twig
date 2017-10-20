@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
     <div class="actions">
-          <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
+          <form method="post" action="{{ path('9')}}" class="form-inline" role="search">
               <button type="submit" name="buscar" class="button button1">Habilitar Entrega <i class="fa fa-plus"></i></button>
               <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
           </form>
@@ -11,6 +11,7 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
+
       <div class="col-md-offset-11">
         <div class="col-md-2">
           <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
@@ -79,37 +80,49 @@
 
                         {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
                           <li>
-                            <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">
-                              <img src="{{ asset ('asst/img/ver.png')}}" width="25" height="25">Detalles</a>
+
+                              <button onclick="location='{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}'" type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
+                              </button>
                           </li>
                           <li>
                             <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
-                              <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
+
+                              <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <b>Editar Revisión </b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
+                              </button>
                               <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                             </form>
 
                           </li>
                         {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null)or(revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
                           <li>
-                            <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles
-                              <img src="{{ asset ('asst/img/ver.png')}}" width="25" height="25"></a>
+                              <button onclick="location='{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}'" type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
+                              </button>
                           </li>
                           <li>
+
+
                             {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
                               <form id="myform" method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
-                                <a href="#" onclick="document.getElementById('myform').submit()">Editar Entrega
-                                  <img src="{{ asset ('asst/img/edit.png')}}" width="25" height="25"></a>
+                                  <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                    <b>Editar Entrega</b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
+                                  </button>
                                 <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                               </form>
                             {% endif %}
-                            {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and(counterF == counter + 1) %}
 
+                            {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and(counterF == counter + 1) %}
                               <form id="myform2" method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-                                <a href="#" onclick="document.getElementById('myform2').submit()">Agregar Revesión
-                                  <img src="{{ asset ('asst/img/add.png')}}" width="25" height="25"></a>
+                                  <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                    <b>Agregar Revisión</b>   <img src="{{ asset ('asst/img/add.png')}}" width="22" height="22">
+                                  </button>
                                 <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
                               </form>
                             {% endif %}
+
+
                           </li>
                         {% endif %}
 

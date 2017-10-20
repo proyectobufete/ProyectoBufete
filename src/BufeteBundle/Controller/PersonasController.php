@@ -285,7 +285,7 @@ class PersonasController extends Controller
 
 
   public function registroAction(Request $request)
-  {
+{
           $persona = new Personas();
           $estudiantes = new Estudiantes();
           $persona->setEstudiantes($estudiantes);
@@ -308,14 +308,44 @@ class PersonasController extends Controller
 
           $nomComp =""; $carrera =""; $telefono=""; $correo=""; $direccion=""; $muni_dep="";
 
-          if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
+          $permiso = false;
+          if(isset($datos))
           {
-              $carne = $datos->DATOS[0]->CARNET;
-              $nomComp =$datos->DATOS[0]->NOM1." ".$datos->DATOS[0]->NOM2." ".$datos->DATOS[0]->NOM3." ".$datos->DATOS[0]->APE1." ".$datos->DATOS[0]->APE2;
-              $telefono=$datos->DATOS->TELEFONO;
-              $correo=$datos->DATOS->CORREO;
-              $direccion=$datos->DATOS->DIRECCION;
-              $muni_dep=$datos->DATOS->MUNICIPIO." ".$datos->DATOS->DEPARTAMENTO;
+            if($datos == 1)
+            {
+              $status = "ERROR DE CONEXIÓN";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if($datos==6)
+            {
+              $status = "CARNE INCORRECTO";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if($datos==16)
+            {
+              $status = "EL ESTUDIANTE NO SE ENCUENTRA INSCRITO";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if($datos==10)
+            {
+              $status = "EL ESTUDIANTE NO ESTA INSCRITO EN LA DIVICIONES DE CIENCIAS JURIDICAS Y SOCIALES";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
+            {
+              if($datos->STATUS==1 )
+              {
+                $carne = $datos->DATOS[0]->CARNET;
+                $nomComp =$datos->DATOS[0]->NOM1." ".$datos->DATOS[0]->NOM2." ".$datos->DATOS[0]->NOM3." ".$datos->DATOS[0]->APE1." ".$datos->DATOS[0]->APE2;
+                $telefono=$datos->DATOS->TELEFONO;
+                $correo=$datos->DATOS->CORREO;
+                $direccion=$datos->DATOS->DIRECCION;
+                $muni_dep=$datos->DATOS->MUNICIPIO." ".$datos->DATOS->DEPARTAMENTO;
+              }
+            }
+            else {
+              $status = "NO ENCONTRADO";
+            }
           }
 
           $form = $this->createForm('BufeteBundle\Form\PersonasEstudianteType', $persona,
@@ -327,8 +357,6 @@ class PersonasController extends Controller
                     'correoEnvio'=>$correo,
                     'passEnvio' =>$pass,
                   ));
-
-
 
           $form->handleRequest($request);
           $confirm = null;

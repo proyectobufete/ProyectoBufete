@@ -20,6 +20,21 @@
               </div>
             </div>
 
+
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Entrega</label>
+                  <div class="col-md-5">
+
+                      {{form_widget(edit_form.fechaLimite,{'value' : fechaHoraLimEnvio, 'attr':{'class' : 'form-control'}, 'type' : 'datetime-local'} ) }}
+                      <span class="help-block">
+                        <small>dia/mes/año hora:minutos</small>
+                      </span>
+                  </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="form-group ">
                   <label for="cname" class="control-label col-lg-2">Prioridad</label>
@@ -29,17 +44,6 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="form-group ">
-                  <label for="cname" class="control-label col-lg-2">Fecha de Entrega</label>
-                  <div class="col-md-5">
-                      {{form_widget(edit_form.fechaLimite,{'value' : '2017-12-19T16:39:57', 'attr':{'class' : 'form-control'}, 'type' : 'datetime-local'} ) }}
-                      <span class="help-block">
-                        <small>dia/mes/año hora:minutos</small>
-                      </span>
-                  </div>
-              </div>
-            </div>
             <div class="row">
               <div class="form-group ">
                   <label for="cname" class="control-label col-lg-2">Fecha de Creación</label>

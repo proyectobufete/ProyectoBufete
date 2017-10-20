@@ -19,25 +19,25 @@ class RevisionesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-      $this->rutaEnvio = $options['rutaEnvio'];
+      
+      $this->fechLimEnvio = $options['fechLimEnvio'];
         $builder
           //->add('idPersona')
 
           ->add('tituloEntrega')
+
           ->add('fechaLimite', DateTimeType::class, array(
-
-            "data" => new \DateTime("now"),
+            "data" => new \DateTime($this->fechLimEnvio),
             'widget' => 'single_text',
+          ))
 
-          ))
-          ->add('fechaCreacion', DateTimeType::class, array(
-              "data" => new \DateTime("now")
-          ))
+          ->add('fechaCreacion')
           //->add('nombreArchivo')
           //->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
 
           //->add('comentarios')
           //->add('fechaEnvio')
+
           ->add('estadoRevision',ChoiceType::class,array(
                   "label" => "Prioridad",
                       "choices"=> array(
@@ -61,6 +61,7 @@ class RevisionesType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'BufeteBundle\Entity\Revisiones',
             'rutaEnvio'=> null,
+            'fechLimEnvio' => null,
         ));
     }
 
@@ -70,6 +71,7 @@ class RevisionesType extends AbstractType
     public function getBlockPrefix()
     {
         return 'bufetebundle_revisiones';
+
     }
 
 

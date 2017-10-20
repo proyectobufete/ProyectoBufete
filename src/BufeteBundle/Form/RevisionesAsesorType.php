@@ -25,14 +25,12 @@ class RevisionesAsesorType extends AbstractType
           //->add('idPersona')
           ->add('tituloEntrega',TextType::Class, array ("data"=>"CORRECCIÓN DE INFORME"))
 
-            ->add('fechaCreacion', DateTimeType::class, array(
-              "data" => new \DateTime("now")
-            ))
+            ->add('fechaCreacion')
 
           //->add('nombreArchivo')
           ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           //->add('fechaLimite')
-          //->add('comentarios')
+          ->add('comentarios')
           /*
           ->add('fechaEnvio', DateTimeType::class, array(
               "data" => new \DateTime("now")
