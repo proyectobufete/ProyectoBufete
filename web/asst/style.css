@@ -3,6 +3,13 @@
 
 }
 
+
+.btn-trs {
+    color: #333;
+    background-color: rgba(195, 190, 190, 0);
+    border-color: rgba(204, 204, 204, 0);
+}
+
 .colorform{
   background-color: #F7F9F9;
 }
@@ -26,6 +33,16 @@
 	background-color: white;
 	border: 5px solid #A8A8A8;
 
+}
+
+.portlet > .portlet-title > .actions {
+  float: right;
+  display: inline-block;
+  padding: 6px 0;
+}
+
+.portlet.blue > .portlet-title > .actions {
+  padding: 18px 0 14px 0;
 }
 
 .portlet > .portlet-body.blue,
@@ -204,6 +221,49 @@
 .form .form-section:first-child {
   margin-top: 5px;
 }
+
+/***********
+Butons Colors
+************/
+.graysalsa.btn{
+  background-color: #ffffff;
+}
+
+.portlet.box.blue-sunglo > .portlet-title > .actions .btn-default {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.button {
+    background-color: transparent !important;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: transparent !important;
+    color: #d9eafa;
+    border: 2px solid #d9eafa;
+}
+
+.button1:hover {
+    background-color: transparent !important;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
 /***********
 Green Colors
 ************/

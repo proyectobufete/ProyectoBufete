@@ -42,3 +42,8 @@ asignacionclinica_editNota:
     path:     /{idAsignacion}/asignarNota
     defaults: { _controller: "BufeteBundle:Asignacionclinica:editNota" }
     methods:  [GET, POST]
+
+asignacionclinica_listClinicasEst:
+    path:     /ListClinicasEst
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:ListClinicasEst" }
+    methods:  GET

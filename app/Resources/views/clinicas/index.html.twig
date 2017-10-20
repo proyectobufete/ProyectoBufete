@@ -40,6 +40,7 @@
               <th>Nombre</th>
               <th>Fecha de Inicio</th>
               <th>Fecha de Finalización</th>
+              <th>Asesor</th>
               <th>Observaciones</th>
               <th>Estado </th>
               <th>Opciones</th>
@@ -51,6 +52,7 @@
             <td>{{ clinica.nombreClinica }}</td>
             <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
             <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+            <td>{{ clinica.idPersona }}</td>
             <td>{{ clinica.observaciones }}</td>
             <td>{{ clinica.estadoClinica }}</td>
               <td>

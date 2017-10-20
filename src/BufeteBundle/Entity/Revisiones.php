@@ -274,7 +274,8 @@ class Revisiones
      */
     public function setFechaEnvio($fechaEnvio)
     {
-        $this->fechaEnvio = $fechaEnvio;
+        $this->fechaEnvio = new \DateTime($fechaEnvio);
+        //$this->fechaEnvio = $fechaEnvio;
 
         return $this;
     }

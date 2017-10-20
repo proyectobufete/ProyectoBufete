@@ -1,28 +1,26 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
+    <div class="actions">
+          <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
+              <button type="submit" name="buscar" class="button button1">Habilitar Entrega <i class="fa fa-plus"></i></button>
+              <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
+          </form>
+    </div>
   <h1>Entregas del caso No. {{casoEnvio.noCaso}}</h1>
 {% endblock %}
 {% block body %}
 <div class="portlet-body">
     <div class="row">
-      <div class="col-md-2">
-
-      </div>
-      <div class="col-md-6">
-        <div class="btn-group">
-          <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
-              <button type="submit" name="buscar" class="btn green">Habilitar Entrega <i class="fa fa-plus"></i></button>
-              <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
-          </form>
+      <div class="col-md-offset-11">
+        <div class="col-md-2">
           <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
               <button type="submit" name="buscar" class="btn yellow">Regresar</button>
               <input type="hidden" name="id" value="{{casoEnvio.idCaso}}"/>
           </form>
-
         </div>
       </div>
-      <br>
-      <br>
+
+
       <div class="col-md-12 col-sm-12 col-xs-12">
 
         <table class="table table-striped">
@@ -108,7 +106,7 @@
 
                               <form id="myform2" method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
                                 <a href="#" onclick="document.getElementById('myform2').submit()">Agregar Revesión
-                                  <img src="{{ asset ('asst/img/edit.png')}}" width="25" height="25"></a>
+                                  <img src="{{ asset ('asst/img/add.png')}}" width="25" height="25"></a>
                                 <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
                               </form>
                             {% endif %}

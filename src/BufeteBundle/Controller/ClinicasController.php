@@ -18,8 +18,11 @@ class ClinicasController extends Controller
      */
     public function indexAction(Request $request)
     {
+
+      $searchQuery = $request->get('query');
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
+
         $searchQuery = $request->get('query');
         $clinicas = null;
         if($rol == "ROLE_ADMIN")
@@ -60,6 +63,7 @@ class ClinicasController extends Controller
               ->getQuery();
               $clinicas = $query->getResult();
             }
+
           }
 
         return $this->render('clinicas/index.html.twig', array(
