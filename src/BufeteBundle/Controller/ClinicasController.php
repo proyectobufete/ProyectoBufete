@@ -16,22 +16,44 @@ class ClinicasController extends Controller
      * Lists all clinica entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+
+      $searchQuery = $request->get('query');
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
-        if($rol == "ROLE_ADMIN")
-        {
-            $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
-        } elseif ($rol == "ROLE_SECRETARIO") {
-            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
-            $repo = $em->getRepository("BufeteBundle:Clinicas");
-            $query = $repo->createQueryBuilder('c')
-            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
-            ->where('p.idBufete = :bufete')
-            ->setParameter('bufete', $bufete)
-            ->getQuery();
-            $clinicas = $query->getResult();
+          if (!empty($searchQuery)) {
+            if($rol == "ROLE_ADMIN")
+            {
+                $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+            } elseif ($rol == "ROLE_SECRETARIO") {
+                $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+                $repo = $em->getRepository("BufeteBundle:Clinicas");
+                $query = $repo->createQueryBuilder('c')
+                ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+                ->where('p.idBufete = :bufete')
+                ->andWhere('c.nombreClinica like :name or p.nombrePersona like :name')
+                ->setParameter('bufete', $bufete)
+                ->setParameter('name', '%'.$searchQuery.'%')
+                ->getQuery();
+                $clinicas = $query->getResult();
+              }
+
+          }
+          else {
+            if($rol == "ROLE_ADMIN")
+            {
+                $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+            } elseif ($rol == "ROLE_SECRETARIO") {
+                $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+                $repo = $em->getRepository("BufeteBundle:Clinicas");
+                $query = $repo->createQueryBuilder('c')
+                ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+                ->where('p.idBufete = :bufete')
+                ->setParameter('bufete', $bufete)
+                ->getQuery();
+                $clinicas = $query->getResult();
+              }
           }
 
         return $this->render('clinicas/index.html.twig', array(

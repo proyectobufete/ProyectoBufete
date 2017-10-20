@@ -19,7 +19,7 @@
         <!-- Google-Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
 
-        
+
 
         <link  href="{{asset('asst/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('asst/css/bootstrap-reset.css')}}" rel="stylesheet">
@@ -121,6 +121,12 @@
                           <li class="{% block ac21 %}{% endblock %}"><a href="{{path("casos_casoslaborales")}}">Laborales</a></li>
                           <li class="{% block ac22 %}{% endblock %}"><a href="{{path("casos_casosciviles")}}">Civiles</a></li>
                       </ul>
+
+                  </li>
+                  <li class="has-submenu {% block act25 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Clínicas</span></a>
+                    <ul class="list-unstyled">
+                        <li class="{% block ac31 %}{% endblock %}"><a href="{{path("asignacionclinica_listClinicasEst")}}">Clínicas asignadas</a></li>
+                    </ul>
                   </li>
                   {% endif %}
                   {% if is_granted('ROLE_ASESOR') %}
