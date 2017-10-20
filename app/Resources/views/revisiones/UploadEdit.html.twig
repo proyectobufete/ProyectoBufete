@@ -1,13 +1,15 @@
 {% extends 'layout.html.twig' %}
 
       {% block title %}
-        <h1>Subir informe</h1>
+        <h1>Editar Envio</h1>
       {% endblock %}
 
 {% block body %}
+
+
     <div class="portlet-body form">
       <div id="form_sample_1" class="form-horizontal" >
-        {{ form_start(edit_form, {'enctype':'multipart/form-data'}) }}
+        {{ form_start(edit_form, {'enctype':'multipart/form-data'})}}
         <div class="form-body colorform">
           <div class="col-md-offset-4">
             <div class="row">
@@ -19,34 +21,7 @@
 
 
 
-            {% if revisione.RutaArchivo != null %}
-              <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
-                <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
-              </a>
-            {% endif %}
 
-
-
-            <div class="row">
-              <div class="col-md-4">
-
-                
-
-
-            {{form_label(edit_form['rutaArchivo'],'Nombre:')}}
-            {{form_widget(edit_form['rutaArchivo']) }}
-
-          </div>
-        </div>
-
-
-
-            <div class="row">
-              <div class="col-md-4">
-                {{form_label(edit_form.rutaArchivo,'ruta')}}
-                {{form_widget(edit_form.rutaArchivo) }}
-              </div>
-            </div>
 
 
             <br>
@@ -68,11 +43,9 @@
         <div class="form-actions">
           <div class="row">
             <div class="col-md-offset-4 col-md-9">
-              <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-              <button type="submit" name="Create" class="btn green">Crear</button>
 
-
-
+                <button type="submit" name="Create" class="btn green">Edit</button>
+            
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class RevisionesEstudiantesType extends AbstractType
+class RevEstEditEntregaType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -20,11 +20,7 @@ class RevisionesEstudiantesType extends AbstractType
     {
       $this->rutaEnvio = $options['rutaEnvio'];
         $builder
-          ->add('tituloEntrega')
-          ->add('rutaArchivo',FileType::class, array(
-              'data_class' => null,
-            ))
-          ->add('comentarios')
+          ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           ->add('fechaEnvio')
           ;
     }

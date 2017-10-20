@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class RevisionesEstudiantesType extends AbstractType
+class RevEstEditType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,10 @@ class RevisionesEstudiantesType extends AbstractType
         $builder
           ->add('tituloEntrega')
           ->add('rutaArchivo',FileType::class, array(
+              'label' => 'Informe PDF',
+              'attr' =>array('class'=>'form-control'),
               'data_class' => null,
+              'required' => false,
             ))
           ->add('comentarios')
           ->add('fechaEnvio')

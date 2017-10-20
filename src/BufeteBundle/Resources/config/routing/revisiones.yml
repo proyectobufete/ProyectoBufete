@@ -63,6 +63,11 @@ revisiones_editRevision:
     defaults: { _controller: "BufeteBundle:Revisiones:editRevision" }
     methods:  [GET, POST]
 
+revisiones_UploadEdit:
+    path:     /UploadEdit
+    defaults: { _controller: "BufeteBundle:Revisiones:UploadEdit" }
+    methods:  [GET, POST]
+
 revisiones_editLink:
     path:     /editLink
     defaults: { _controller: "BufeteBundle:Revisiones:editLink" }

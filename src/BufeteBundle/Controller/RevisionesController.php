@@ -10,6 +10,7 @@ use BufeteBundle\Entity\Casos;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use BufeteBundle\Form\RevisionesEstudiantesType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 /**
  * Revisione controller.
@@ -324,22 +325,26 @@ class RevisionesController extends Controller
                      'idRevision' => $post
         ));
 
-
-
-
-
-
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesEstudiantesType', $revisione);
         $editForm->handleRequest($request);
 
+
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-          if ($revisione->getnombreArchivo() == "")
+          
+
+          $revisione->setTituloEntrega($editForm->get("tituloEntrega")->getData());
+          $revisione->setComentarios($editForm->get("comentarios")->getData());
+
+          $file =$editForm['rutaArchivo']->getData();
+
+
+
+          if (!empty($file) && $file!=null)
           {
 
-
-              $file = $revisione->getRutaArchivo();
-
+              //$file = $revisione->getRutaArchivo();
               if(($file instanceof UploadedFile) && ($file->getError() == '0'))
               {
                 $validator = $this->get('validator');
@@ -355,33 +360,78 @@ class RevisionesController extends Controller
                 $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
                 $file->move($cvDir, $fileName);
                 $revisione->setRutaArchivo($fileName);
-
-
-
               }
-
-
-
-
           }
-
-          $fecha = date("Y-m-d H:i:s");
-          $nuevafecha = strtotime('+19 hour', strtotime($fecha)); // 6 hour en horario de verano
-          $nuevafecha = date('Y-m-d H:i:s', $nuevafecha);
-
-
-          $revisione->setFechaEnvio($nuevafecha);
-
+          else {
+            $revisione->setRutaArchivo(null);
+          }
                 $this->getDoctrine()->getManager()->flush();
-
                 return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
         }
 
         return $this->render('revisiones/upload.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
+              'ruta'=> 'uploads/final/',
             'edit_form' => $editForm->createView(),
 
+        ));
+    }
+/*
+    public function UploadEditAction(Request $request, Revisiones $revisione)
+    {
+        $post=$request->get("idRevision");
+        $em = $this->getDoctrine()->getManager();
+        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+        $editForm = $this->createForm('BufeteBundle\Form\RevEstEditType', $revisione);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+        return $this->render('revisiones/UploadEdit.html.twig', array(
+            'envio'=> $revisione,
+            'revisione' => $revisione,
+              'ruta'=> 'uploads/final/',
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+*/
+    public function UploadEditAction(Request $request)
+    {
+        $IdRevisionRecibido=$request->get("idRevision");
+        $em = $this->getDoctrine()->getManager();
+        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $IdRevisionRecibido
+        ));
+        $deleteForm = $this->createDeleteForm($revisione);
+        $editForm = $this->createForm('BufeteBundle\Form\RevEstEditType', $revisione);
+        $editForm->handleRequest($request);
+
+        $rutaguardada = $revisione->getRutaArchivo();
+
+        dump($rutaguardada);
+        //die();
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            dump($revisione);
+            die();
+
+
+            dump($revisione->getRutaArchivo());
+            //die();
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+        }
+        return $this->render('revisiones/UploadEdit.html.twig', array(
+            'revisione' => $revisione,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'rutaGuardadaEnvio'=>$rutaguardada,
         ));
     }
 
@@ -395,6 +445,8 @@ class RevisionesController extends Controller
                      'idRevision' => $post
         ));
 
+          //recuperar la fecha limite y enviarla a la vista//
+          $fechaHoraLimGuardada = $revisione->getFechaLimite()->format('Y-m-d') .'T'. $revisione->getFechaLimite()->format('H:i');
 
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $editForm->handleRequest($request);
@@ -426,17 +478,22 @@ class RevisionesController extends Controller
             return $this->redirectToRoute('revisiones_showLink', array('idRevision' => $revisione->getIdrevision()));
         }
 
+
+
         return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
+            'fechaHoraLimEnvio' =>$fechaHoraLimGuardada,
             'edit_form' => $editForm->createView(),
 
         ));
     }
 
-    public function editRevisionAction(Request $request)
+    public function editRevisionAction(Request $request, Revisiones $revisione)
     {
         $post=$request->get("idRevision");
+
+
 
         $em = $this->getDoctrine()->getManager();
         //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
@@ -478,10 +535,13 @@ class RevisionesController extends Controller
         return $this->render('revisiones/upload.html.twig', array(
             'envio'=> $revisione,
             'revisione' => $revisione,
+            'ruta'=> 'uploads/final/',
             'edit_form' => $editForm->createView(),
 
         ));
     }
+
+
     public function uploadRevisionAction(Request $request)
     {
         $revisione = new Revisiones();
