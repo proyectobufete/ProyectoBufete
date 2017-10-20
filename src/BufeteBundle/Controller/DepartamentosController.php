@@ -16,11 +16,22 @@ class DepartamentosController extends Controller
      * Lists all departamento entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $departamentos = null;
+        $searchQuery = $request->get('query');
 
-        $departamentos = $em->getRepository('BufeteBundle:Departamentos')->findAll();
+        if (!empty($searchQuery)) {
+          $repo = $em->getRepository("BufeteBundle:Departamentos");
+          $query = $repo->createQueryBuilder('d')
+          ->where('d.departamento LIKE :param')
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $departamentos = $query->getResult();
+        } else {
+          $departamentos = $em->getRepository('BufeteBundle:Departamentos')->findAll();
+        }
 
         return $this->render('departamentos/index.html.twig', array(
             'departamentos' => $departamentos,

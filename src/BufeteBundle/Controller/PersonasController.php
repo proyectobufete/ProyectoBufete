@@ -35,24 +35,50 @@ class PersonasController extends Controller
    * Lista de asesores
    *
    */
-  public function indexAsesoresAction()
+  public function indexAsesoresAction(Request $request)
   {
       $em = $this->getDoctrine()->getManager();
-
+      $searchQuery = $request->get('query');
+      $asesores = null;
       $rol = $this->getUser()->getRole();
+
       if ($rol == "ROLE_ADMIN") {
-        $query = $em->CreateQuery(
-            "SELECT p FROM BufeteBundle:Personas p
-            WHERE p.role LIKE 'ROLE_ASESOR'"
-          );
-        $asesores = $query->getResult();
+        if (!empty($searchQuery)) {
+          $repo = $em->getRepository("BufeteBundle:Personas");
+          $query = $repo->createQueryBuilder('p')
+          ->where('p.nombrePersona LIKE :param')
+          ->andWhere('p.role = :rol')
+          ->setParameter('rol', 'ROLE_ASESOR')
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $asesores = $query->getResult();
+        } else {
+          $query = $em->CreateQuery(
+              "SELECT p FROM BufeteBundle:Personas p
+              WHERE p.role LIKE 'ROLE_ASESOR'"
+            );
+          $asesores = $query->getResult();
+        }
       } elseif ($rol == "ROLE_SECRETARIO") {
         $bufete = $this->getUser()->getIdBufete();
-        $query = $em->CreateQuery(
-            "SELECT p FROM BufeteBundle:Personas p
-            WHERE p.role LIKE 'ROLE_ASESOR' and p.idBufete = :id"
-          )->setParameter('id', $bufete);
-        $asesores = $query->getResult();
+        if (!empty($searchQuery)) {
+          $repo = $em->getRepository("BufeteBundle:Personas");
+          $query = $repo->createQueryBuilder('p')
+          ->where('p.nombrePersona LIKE :param')
+          ->andWhere('p.idBufete = :id')
+          ->andWhere('p.role = :rol')
+          ->setParameter('rol', 'ROLE_ASESOR')
+          ->setParameter('id', $bufete)
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $asesores = $query->getResult();
+        } else {
+          $query = $em->CreateQuery(
+              "SELECT p FROM BufeteBundle:Personas p
+              WHERE p.role LIKE 'ROLE_ASESOR' and p.idBufete = :id"
+            )->setParameter('id', $bufete);
+          $asesores = $query->getResult();
+        }
       }
 
         return $this->render('personas/indexAsesores.html.twig', array(
@@ -64,17 +90,39 @@ class PersonasController extends Controller
    * Lista de casos laborales segun el asesor logueado
    *
    */
-  public function laboralesAsesorAction()
+  public function laboralesAsesorAction(Request $request)
   {
-      $idAsesor = $this->getUser()->getIdPersona();
       $em = $this->getDoctrine()->getManager();
-      $query = $em->createQuery(
-        "SELECT c FROM BufeteBundle:Casos c
-        INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
-        WHERE c.idPersona = :id
-        ORDER BY c.fechaCaso DESC"
-      )->setParameter('id', $idAsesor);
-      $casos = $query->getResult();
+      $idAsesor = $this->getUser()->getIdPersona();
+
+      $searchQuery = $request->get('query');
+      $casos = null;
+
+      if (!empty($searchQuery)) {
+        $repo = $em->getRepository("BufeteBundle:Casos");
+        $query = $repo->createQueryBuilder('c')
+        ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
+        ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+        ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = c.idEstudiante')
+        ->orWhere('c.noCaso LIKE :param')
+        ->orWhere('d.nombreDemandante LIKE :param')
+        ->orWhere('c.nombreDemandado LIKE :param')
+        ->orWhere('e.carneEstudiante LIKE :param')
+        ->andWhere('c.idPersona = :id')
+        ->setParameter('id', $idAsesor)
+        ->setParameter('param', '%'.$searchQuery.'%')
+        ->orderBy('c.fechaCaso', 'DESC')
+        ->getQuery();
+        $casos = $query->getResult();
+      } else {
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+          WHERE c.idPersona = :id
+          ORDER BY c.fechaCaso DESC"
+        )->setParameter('id', $idAsesor);
+        $casos = $query->getResult();
+      }
 
       return $this->render('casos/laboralesestudiante.html.twig', array(
           'casos' => $casos,
@@ -146,22 +194,39 @@ class PersonasController extends Controller
    * Lists all persona entities.
    *
    */
-  public function indexUsuariosAction()
+  public function indexUsuariosAction(Request $request)
   {
-
       $em = $this->getDoctrine()->getManager();
+      $personas = null;
+      $searchQuery = $request->get('query');
 
-      $query = $em->createQuery(
-        "SELECT p FROM BufeteBundle:Personas p
-        WHERE p.role LIKE :asesor OR p.role LIKE :admin OR p.role LIKE :director OR p.role LIKE :secretario
-        ORDER BY p.role"
-      )
-      ->setParameter('asesor', 'ROLE_ASESOR')
-      ->setParameter('admin', 'ROLE_ADMIN')
-      ->setParameter('director', 'ROLE_DIRECTOR')
-      ->setParameter('secretario', 'ROLE_SECRETARIO');
-      $personas = $query->getResult();
-      //$personas = $em->getRepository('BufeteBundle:Personas')->findAll();
+      if (!empty($searchQuery)) {
+        $repo = $em->getRepository("BufeteBundle:Personas");
+        $query = $repo->createQueryBuilder('p')
+        ->orWhere('p.role = :asesor')
+        ->orWhere('p.role = :admin')
+        ->orWhere('p.role = :secretario')
+        ->orWhere('p.role = :director')
+        ->andWhere('p.nombrePersona LIKE :param')
+        ->setParameter('asesor', 'ROLE_ASESOR')
+        ->setParameter('admin', 'ROLE_ADMIN')
+        ->setParameter('director', 'ROLE_DIRECTOR')
+        ->setParameter('secretario', 'ROLE_SECRETARIO')
+        ->setParameter('param', '%'.$searchQuery.'%')
+        ->getQuery();
+        $personas = $query->getResult();
+      } else {
+        $query = $em->createQuery(
+          "SELECT p FROM BufeteBundle:Personas p
+          WHERE p.role LIKE :asesor OR p.role LIKE :admin OR p.role LIKE :director OR p.role LIKE :secretario
+          ORDER BY p.role"
+        )
+        ->setParameter('asesor', 'ROLE_ASESOR')
+        ->setParameter('admin', 'ROLE_ADMIN')
+        ->setParameter('director', 'ROLE_DIRECTOR')
+        ->setParameter('secretario', 'ROLE_SECRETARIO');
+        $personas = $query->getResult();
+      }
 
       return $this->render('personas/index.html.twig', array(
           'personas' => $personas,
