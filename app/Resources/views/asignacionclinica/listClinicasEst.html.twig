@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
-{% block act6 %}active{% endblock %}
-{% block ac25 %}active{% endblock %}
+{% block act25 %}active{% endblock %}
+{% block ac31 %}active{% endblock %}
 {% block title %}
-  <h1>Listado de Estudiantes</h1>
+  <h1>Listado de Clinicas </h1>
 {% endblock %}
 {% block body %}
 <div class="portlet-body">
@@ -19,16 +19,6 @@
           </div>
         </form>
       </div>
-      <div class="col-md-6">
-        <div class="btn-group">
-          <a href="{{ path('asignacionclinica_new') }}">
-            <button id="sample_editable_1_new" class="btn green">
-              Asignar Clínica
-              <i class="fa fa-plus"></i>
-            </button>
-          </a>
-        </div>
-      </div>
       <br>
       <br>
   <div class="col-md-12 col-sm-12 col-xs-12" >
@@ -36,32 +26,22 @@
       <table class="table table-bordered ">
         <thead>
           <tr>
-              <th>Estudinate</th>
-              <th>Carné</th>
+              <th>Clínica</th>
+              <th>Asesor</th>
               <th>Nota</th>
               <th>Observaciones</th>
               <th>Estado</th>
-              <th></th>
           </tr>
         </thead>
         <tbody>
           {% for asignacionclinica in asignacionclinicas %}
           <tr>
-              <td>{{asignacionclinica.idEstudiante}}</td>
-              <td>{{asignacionclinica.idEstudiante.carneEstudiante}}</td>
+              <td>{{asignacionclinica.idClinica}}</td>
+              <td>{{asignacionclinica.idClinica.idPersona}}</td>
               <td>{{asignacionclinica.notaClinica}}</td>
               <td>{{ asignacionclinica.observacionesClinica }}</td>
               <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
-              <td>
-                  {% if asignacionclinica.notaClinica >= 61 %}
-                    <a href="#">
-                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Ganado
-                  {% endif %}
-                  {% if asignacionclinica.notaClinica < 61 %}
-                    <a href="#">
-                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>Perdido
-                  {% endif %}
-              </td>
+
           </tr>
           {% endfor %}
 
