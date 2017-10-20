@@ -263,7 +263,7 @@ class PersonasController extends Controller
             }
             else if($datos==10)
             {
-              $status = "EL ESTUDIANTE NO ESTA INSCRITO EN LA DIVICIONES DE CIENCIAS JURIDICAS Y SOCIALES";
+              $status = "EL ESTUDIANTE NO ESTA INSCRITO EN LA DIVISIÓN DE CIENCIAS JURIDICAS Y SOCIALES";
               $this->session->getFlashBag()->add("status", $status);
             }
             else if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
