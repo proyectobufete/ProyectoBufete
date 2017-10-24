@@ -80,18 +80,22 @@
 
                         {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
                           <li>
-
-                              <button onclick="location='{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}'" type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                            <form method="post" action="{{ path('revisiones_showRevision')}}" class="form-inline" role="search">
+                              <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                                 <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
                               </button>
+                            </form>
+
                           </li>
                           <li>
-                            <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
 
+                            <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
                               <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                                 <b>Editar Revisión </b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
                               </button>
-                              <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+
                             </form>
 
                           </li>
@@ -104,7 +108,7 @@
                           <li>
 
 
-                            {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
+                            {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null and revisione.fechaLimite > date('now') %}
                               <form id="myform" method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
                                   <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
                                     <b>Editar Entrega</b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
