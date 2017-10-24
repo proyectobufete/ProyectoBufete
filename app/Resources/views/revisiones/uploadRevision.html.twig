@@ -9,6 +9,44 @@
       <div id="form_sample_1" class="form-horizontal" >
         {{ form_start(form, {'enctype':'multipart/form-data'}) }}
 
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Titulo de Revisión</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+                  </div>
+              </div>
+            </div>
+              <div class="row">
+                  <div class="form-group">
+                  <label for="cname" class="control-label col-lg-2">Archivo</label>
+
+                    <div class="col-md-5">
+                      {{form_errors(form.rutaArchivo)}}
+                        {{form_widget(form.rutaArchivo) }}
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="form-group ">
+                    <label for="cname" class="control-label col-lg-2">Prioridad</label>
+                    <div class="col-md-5">
+                        {{form_widget(form.estadoRevision) }}
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group ">
+                    <label for="cname" class="control-label col-lg-2">Comentarios</label>
+                    <div class="col-md-5">
+                        {{form_widget(form.comentarios,{'attr':{'class' : 'form-control'}}) }}
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
         <div class="form-actions">
           <div class="row">
             <div class="col-md-offset-4 col-md-9">
