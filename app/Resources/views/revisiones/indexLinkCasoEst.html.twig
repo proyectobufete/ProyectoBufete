@@ -30,8 +30,8 @@
                   <td>
                     <h2 class="list-group-item-heading">
                       <b>
-                        {% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('d-m-Y') }}{% endif %} -
-                        {% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('d-m-Y') }}{% endif %}
+                        {{(revisione.fechaCreacion|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y"))}} -
+                            {{(revisione.fechaLimite|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y"))}}
                       </b>
                     </h2>
                     <p class="list-group-item-text">
@@ -98,9 +98,9 @@
 
                                         <form method="post" action="{{ path('revisiones_upload')}}">
                                           <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-                                            <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
-                                              Editar Envio
-                                            </button>
+                                          <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                            <b>Editar Envio</b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
+                                          </button>
                                         </form>
 
 

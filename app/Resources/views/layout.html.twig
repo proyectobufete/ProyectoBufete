@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
-<link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="img/favicon_1.ico">
 
         <title>Bufete Popular </title>
@@ -140,6 +140,13 @@
                       <ul class="list-unstyled">
                           <li class="{% block ac30 %}{% endblock %}"><a href="{{path("asignacionclinica_asesor")}}">Clínicas</a></li>
                       </ul>
+                  </li>
+                  {% endif %}
+                  {% if is_granted('ROLE_DIRECTOR')%}
+                  <li class="has-submenu {% block act26 %}{% endblock %}"><a href="#"><i class="ion-android-contact"></i> <span class="nav-label">Personas</span></a>
+                    <ul class="list-unstyled">
+                        <li class="{% block ac34 %}{% endblock %}"><a href="{{path("personas_indexAsesoresDir")}}">Asesores</a></li>
+                    </ul>
                   </li>
                   {% endif %}
                 </ul>

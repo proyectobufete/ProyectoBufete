@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class RevisionesType extends AbstractType
 {
     /**
@@ -19,7 +19,7 @@ class RevisionesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-      
+
       $this->fechLimEnvio = $options['fechLimEnvio'];
         $builder
           //->add('idPersona')
