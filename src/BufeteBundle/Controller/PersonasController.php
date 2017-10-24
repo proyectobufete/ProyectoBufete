@@ -832,10 +832,78 @@ class PersonasController extends Controller
          ));
      }
 
+     /**
+      * Lista de asesores para el Director
+      *
+      */
+     public function indexAsesoresDirAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $searchQuery = $request->get('query');
+         $searchBufete = $request->get('sbufete');
+         $asesores = null;
+         $rol = $this->getUser()->getRole();
 
+         if ($rol == "ROLE_DIRECTOR") {
+           if (!empty($searchQuery ||$searchBufete)) {
+             $repo = $em->getRepository("BufeteBundle:Personas");
+             $query = $repo->createQueryBuilder('p')
+             #->where('p.nombrePersona LIKE :param')
+             ->Where('p.idBufete = :searchbufete')
+             ->andWhere('p.role = :rol')
+             ->setParameter('rol', 'ROLE_ASESOR')
+             ->setParameter('searchbufete', $searchBufete)
+             #->setParameter('param', '%'.$searchQuery.'%')
+             ->getQuery();
+             $asesores = $query->getResult();
+             $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
+           } else {
+             $query = $em->CreateQuery(
+                 "SELECT p FROM BufeteBundle:Personas p
+                 WHERE p.role LIKE 'ROLE_ASESOR'"
+               );
+             $asesores = $query->getResult();
+             $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
+           }
+         }
 
+           return $this->render('personas/indexAsesorDir.html.twig', array(
+             'asesores' => $asesores,
+             'bufetes' => $bufetes,
+           ));
+     }
 
-
+     /**
+      * funcion para el historial de Asesor
+      *
+      */
+      public function HistorialAsesorAction(Request $request, Personas $persona)
+      {
+        $idas=  $request->get('id');
+        //$carne = $persona->getestudiantes()->getcarneEstudiante();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Civiles l WITH c = l.idCaso
+          WHERE c.idPersona = :id");
+        $query->setParameter('id', $idas);
+        $civiles = $query->getResult();
+        $query2 = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+          WHERE c.idPersona = :id");
+        $query2->setParameter('id', $idas);
+        $laborales = $query2->getResult();
+        $query3 = $em->createQuery(
+          "SELECT a FROM BufeteBundle:Clinicas a WHERE a.idPersona = :id");
+        $query3->setParameter('id', $idas);
+        $clinicas = $query3->getResult();
+        return $this->render('personas/HistorialAsesor.html.twig', array(
+            'civiles' => $civiles,
+            'laborales' => $laborales,
+            'clinicas' => $clinicas,
+        ));
+      }
 
 
 

@@ -337,39 +337,30 @@
           </div>
           <br>
 
-          <table>
+
             {% if is_granted('ROLE_ESTUDIANTE') %}
-              <tr>
-                <a href="{{ path('casos_casoslaborales') }}" class="btn default">Regresar</a>
-              </tr>
-
-              <tr>
-
-              </tr>
 
 
-              <tr>
+                <a href="{{ path('casos_casoslaborales') }}" class="btn btn-default w-xs m-b-5">Regresar</a>
+
                 <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
                     <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
                     <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
                 </form>
-              </tr>
+            
             {% endif %}
             {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
-              <tr>
-                <a href="{{ path('casos_indexlaborales') }}" class="btn default">Regresar</a>
-              </tr>
-              <tr>
-                <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso}) }}" class="btn blue">Editar</a>
-              </tr>
-              <tr>
-                <a href="{{ path('casos_printlaboral', {'idCaso': caso.idCaso }) }}" class="btn btn-purple">Imprimir</a>
-              </tr>
-              <tr>
-                <a href="{{ path('casos_transferirlaboral', { 'idCaso': caso.idCaso }) }}" class="btn yellow">Transferir</a>
-              </tr>
+
+                <a href="{{ path('casos_indexlaborales') }}" class="btn btn-default w-xs m-b-5">Regresar</a>
+
+                <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso}) }}"  class="btn blue w-xs m-b-5">Editar</a>
+
+                <a href="{{ path('casos_printlaboral', {'idCaso': caso.idCaso }) }}" class="btn btn-purple w-xs m-b-5">Imprimir</a>
+
+                <a href="{{ path('casos_transferirlaboral', { 'idCaso': caso.idCaso }) }}" class="btn btn-warning w-xs m-b-5">Transferir</a>
+
             {% endif %}
-          </table>
+
         </div>
       </div>
 {% endblock %}

@@ -83,3 +83,13 @@ personas_HistorialEstudiante:
     path:     /{id}/HistorialEstudiante
     defaults: { _controller: "BufeteBundle:Personas:HistorialEstudiante" }
     methods:  GET
+
+personas_indexAsesoresDir:
+    path:     /indexAsesoresDir
+    defaults: { _controller: "BufeteBundle:Personas:indexAsesoresDir" }
+    methods:  GET
+
+personas_HistorialAsesor:
+    path:     /{id}/HistorialAsesor
+    defaults: { _controller: "BufeteBundle:Personas:HistorialAsesor" }
+    methods:  GET
