@@ -95,15 +95,20 @@
                                 <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                                 <b>Editar Revisión </b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
                               </button>
-
                             </form>
 
                           </li>
                         {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null)or(revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
                           <li>
-                              <button onclick="location='{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}'" type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
-                                <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
-                              </button>
+
+
+                              <form method="post" action="{{ path('revisiones_showLink')}}" class="form-inline" role="search">
+                                <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                  <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                  <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
+                                </button>
+                              </form>
+
                           </li>
                           <li>
 

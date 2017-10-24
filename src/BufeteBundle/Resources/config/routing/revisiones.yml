@@ -1,8 +1,3 @@
-revisiones_indexLink:
-    path:     /indexLink
-    defaults: { _controller: "BufeteBundle:Revisiones:indexLink" }
-    methods:  [GET, POST]
-
 revisiones_indexLinkCaso:
     path:     /indexLinkCaso
     defaults: { _controller: "BufeteBundle:Revisiones:indexLinkCaso" }
@@ -11,6 +6,11 @@ revisiones_indexLinkCaso:
 revisiones_indexLinkCasoEst:
     path:     /indexLinkCasoEst
     defaults: { _controller: "BufeteBundle:Revisiones:indexLinkCasoEst" }
+    methods:  [GET, POST]
+
+revisiones_newLink:
+    path:     /newLink
+    defaults: { _controller: "BufeteBundle:Revisiones:newLink" }
     methods:  [GET, POST]
 
 revisiones_showInforme:
@@ -23,15 +23,10 @@ revisiones_showRevision:
     defaults: { _controller: "BufeteBundle:Revisiones:showRevision" }
     methods:  [GET, POST]
 
-revisiones_showRevisionEstudiante:
-    path:     /{idRevision}/showRevisionEstudiante
-    defaults: { _controller: "BufeteBundle:Revisiones:showRevisionEstudiante" }
-    methods:  GET
-
 revisiones_showLink:
-    path:     /{idRevision}/showLink
+    path:     /showLink
     defaults: { _controller: "BufeteBundle:Revisiones:showLink" }
-    methods:  GET
+    methods:  [GET, POST]
 
 revisiones_uploadRevision:
     path:     /uploadRevision
@@ -43,24 +38,19 @@ revisiones_upload:
     defaults: { _controller: "BufeteBundle:Revisiones:upload" }
     methods:  [GET, POST]
 
-revisiones_editRevision:
-    path:     /editRevision
-    defaults: { _controller: "BufeteBundle:Revisiones:editRevision" }
-    methods:  [GET, POST]
-
 revisiones_UploadEdit:
     path:     /UploadEdit
     defaults: { _controller: "BufeteBundle:Revisiones:UploadEdit" }
     methods:  [GET, POST]
 
+revisiones_editRevision:
+    path:     /editRevision
+    defaults: { _controller: "BufeteBundle:Revisiones:editRevision" }
+    methods:  [GET, POST]
+
 revisiones_editLink:
     path:     /editLink
     defaults: { _controller: "BufeteBundle:Revisiones:editLink" }
-    methods:  [GET, POST]
-
-revisiones_newLink:
-    path:     /newLink
-    defaults: { _controller: "BufeteBundle:Revisiones:newLink" }
     methods:  [GET, POST]
 
 revisiones_delete:
