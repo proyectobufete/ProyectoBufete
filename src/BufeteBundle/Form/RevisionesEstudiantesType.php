@@ -25,7 +25,8 @@ class RevisionesEstudiantesType extends AbstractType
               'data_class' => null,
             ))
           ->add('comentarios')
-          ->add('fechaEnvio')
+          ->add('fechaEnvio', HiddenType::class, array(
+                'data' => '2011/02/05',))
           ;
     }
 

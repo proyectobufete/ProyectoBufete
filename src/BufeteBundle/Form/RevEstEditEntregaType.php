@@ -21,7 +21,8 @@ class RevEstEditEntregaType extends AbstractType
       $this->rutaEnvio = $options['rutaEnvio'];
         $builder
           ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
-          ->add('fechaEnvio')
+          ->add('fechaEnvio', HiddenType::class, array(
+                'data' => '2011/02/05',))
           ;
     }
 
