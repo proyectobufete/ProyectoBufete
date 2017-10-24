@@ -1,18 +1,3 @@
-revisiones_envioCorreo:
-    path:     /envioCorreo
-    defaults: { _controller: "BufeteBundle:Revisiones:envioCorreo" }
-    methods:  GET
-
-revisiones_indexRevisiones:
-    path:     /indexRevisiones
-    defaults: { _controller: "BufeteBundle:Revisiones:indexRevisiones" }
-    methods:  GET
-
-revisiones_indexInformes:
-    path:     /indexInformes
-    defaults: { _controller: "BufeteBundle:Revisiones:indexInformes" }
-    methods:  GET
-
 revisiones_indexLink:
     path:     /indexLink
     defaults: { _controller: "BufeteBundle:Revisiones:indexLink" }
@@ -29,14 +14,14 @@ revisiones_indexLinkCasoEst:
     methods:  [GET, POST]
 
 revisiones_showInforme:
-    path:     /{idRevision}/showInforme
+    path:     /showInforme
     defaults: { _controller: "BufeteBundle:Revisiones:showInforme" }
-    methods:  GET
+    methods:  [GET, POST]
 
 revisiones_showRevision:
-    path:     /{idRevision}/showRevision
+    path:     /showRevision
     defaults: { _controller: "BufeteBundle:Revisiones:showRevision" }
-    methods:  GET
+    methods:  [GET, POST]
 
 revisiones_showRevisionEstudiante:
     path:     /{idRevision}/showRevisionEstudiante

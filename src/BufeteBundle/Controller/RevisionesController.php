@@ -265,8 +265,18 @@ class RevisionesController extends Controller
         ));
     }
 
-    public function showRevisionAction(Revisiones $revisione)
+    public function showRevisionAction(Request $request)
     {
+      $post=$request->get("idRevision");
+
+      $em = $this->getDoctrine()->getManager();
+      $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                   'idRevision' => $post
+      ));
+
+      
+
+
       $id = $revisione->getIdPersona();
       $em = $this->getDoctrine()->getManager();
       $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
@@ -332,7 +342,7 @@ class RevisionesController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-          
+
 
           $revisione->setTituloEntrega($editForm->get("tituloEntrega")->getData());
           $revisione->setComentarios($editForm->get("comentarios")->getData());
@@ -489,9 +499,12 @@ class RevisionesController extends Controller
         ));
     }
 
-    public function editRevisionAction(Request $request, Revisiones $revisione)
+    public function editRevisionAction(Request $request)
     {
+
+
         $post=$request->get("idRevision");
+
 
 
 
@@ -551,18 +564,20 @@ class RevisionesController extends Controller
         $form = $this->createForm('BufeteBundle\Form\RevisionesAsesorType', $revisione);
         $form->handleRequest($request);
 
-
                 $var=$request->request->get("idCaso");
                 $nuevavar = (int)$var;
                 $idrecibido=$var;
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+          $var=$request->request->get("idCaso");
+          $nuevavar = (int)$var;
+          $idrecibido=$var;
+
           $em = $this->getDoctrine()->getManager();
           $caso_repo = $em->getRepository("BufeteBundle:Casos");
           $idCaso = $caso_repo->find($idrecibido);
           $revisione->setIdCaso($idCaso);
-
 
           $revisione->SetIdPersona($idCaso->getIdPersona()->getIdPersona());
 
@@ -595,7 +610,7 @@ class RevisionesController extends Controller
 
         return $this->render('revisiones/uploadRevision.html.twig', array(
             'revisione' => $revisione,
-            'var'=> $var,
+            'var'=> $idrecibido,
 
             'form' => $form->createView(),
         ));

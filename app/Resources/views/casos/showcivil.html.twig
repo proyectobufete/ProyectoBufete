@@ -2,15 +2,33 @@
 {% block act3 %} active {% endblock %}
 {% block ac8 %} active {% endblock %}
 {% block title %}
+
+
 <div class="actions">
-  {% if is_granted('ROLE_ASESOR') %}
-  <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-      <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
-      <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-  </form>
+  {% if is_granted('ROLE_ESTUDIANTE') %}
+      <form method="post" action="{{ path('revisiones_indexLinkCasoEst')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
+          <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+      </form>
   {% endif %}
 
+
+
+  {% if is_granted('ROLE_ASESOR') %}
+      <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
+          <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+      </form>
+  {% endif %}
 </div>
+
+
+
+
+
+
+
+
   <h1>Detalles</h1>
 {% endblock %}
 {% block body %}
@@ -211,17 +229,7 @@
           <br>
             <div class="form-actions">
 
-                {% if is_granted('ROLE_ESTUDIANTE') %}
 
-
-                    <a href="{{ path('casos_casosciviles') }}" class="btn btn-default w-xs m-b-5">Regresar</a>
-
-                    <form method="post" action="{{ path('revisiones_indexLinkCasoEst')}}" class="form-inline" role="search">
-                        <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
-                        <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-                    </form>
-          
-                {% endif %}
                 {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
                   <tr>
                     <a href="{{ path('casos_indexciviles') }}" class="btn btn-default w-xs m-b-5">Regresar</a>
