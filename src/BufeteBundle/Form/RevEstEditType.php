@@ -28,7 +28,9 @@ class RevEstEditType extends AbstractType
               'required' => false,
             ))
           ->add('comentarios')
-          ->add('fechaEnvio')
+        
+          ->add('fechaEnvio', HiddenType::class, array(
+                'data' => '2011/02/05',))
           ;
     }
 

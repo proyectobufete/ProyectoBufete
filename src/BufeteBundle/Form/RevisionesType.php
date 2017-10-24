@@ -31,7 +31,8 @@ class RevisionesType extends AbstractType
             'widget' => 'single_text',
           ))
 
-          ->add('fechaCreacion')
+          ->add('fechaCreacion', HiddenType::class, array(
+                'data' => '2011/02/05',))
           //->add('nombreArchivo')
           //->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
 
