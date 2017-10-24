@@ -194,9 +194,16 @@ class RevisionesController extends Controller
      * Finds and displays a revisione entity.
      *
      */
-    public function showInformeAction(Revisiones $revisione)
+    public function showInformeAction(Request $request)
     {
 
+      $post=$request->get("idRevision");
+
+      $em = $this->getDoctrine()->getManager();
+      $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                   'idRevision' => $post
+      ));
+      
       $idcaso = $revisione->getIdcaso()->getIdcaso();
       $em = $this->getDoctrine()->getManager();
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
@@ -223,8 +230,15 @@ class RevisionesController extends Controller
         ));
     }
 
-    public function showLinkAction(Revisiones $revisione)
+    public function showLinkAction(Request $request)
     {
+
+      $post=$request->get("idRevision");
+
+      $em = $this->getDoctrine()->getManager();
+      $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                   'idRevision' => $post
+      ));
 
       $idestudiante = $revisione->getIdPersona();
       $em = $this->getDoctrine()->getManager();
@@ -273,9 +287,6 @@ class RevisionesController extends Controller
       $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
                    'idRevision' => $post
       ));
-
-      
-
 
       $id = $revisione->getIdPersona();
       $em = $this->getDoctrine()->getManager();

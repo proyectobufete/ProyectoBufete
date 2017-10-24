@@ -23,15 +23,10 @@ revisiones_showRevision:
     defaults: { _controller: "BufeteBundle:Revisiones:showRevision" }
     methods:  [GET, POST]
 
-revisiones_showRevisionEstudiante:
-    path:     /{idRevision}/showRevisionEstudiante
-    defaults: { _controller: "BufeteBundle:Revisiones:showRevisionEstudiante" }
-    methods:  GET
-
 revisiones_showLink:
-    path:     /{idRevision}/showLink
+    path:     /showLink
     defaults: { _controller: "BufeteBundle:Revisiones:showLink" }
-    methods:  GET
+    methods:  [GET, POST]
 
 revisiones_uploadRevision:
     path:     /uploadRevision
