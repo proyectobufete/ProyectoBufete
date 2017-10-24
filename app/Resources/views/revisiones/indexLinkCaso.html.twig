@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
     <div class="actions">
-          <form method="post" action="{{ path('9')}}" class="form-inline" role="search">
+          <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
               <button type="submit" name="buscar" class="button button1">Habilitar Entrega <i class="fa fa-plus"></i></button>
               <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
           </form>
