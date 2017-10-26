@@ -34,11 +34,11 @@
                           <th>No de caso</th>
                           <th>Fecha </th>
                           <th>Demandante</th>
-                          <th>Dorección Demandante</th>
+                          <th>Dirección Demandante</th>
                           <th>Nombre de demandado</th>
-                          <th>Direccion Demandado</th>
                           <th>Nombre Estudiante</th>
                           <th>Estado</th>
+                          <th>Opciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -49,12 +49,17 @@
                           <td>{{ caso.idDemandante.nombreDemandante }}</td>
                           <td>{{ caso.idDemandante.direccionDemandante  }}</td>
                           <td>{{ caso.nombreDemandado }}</td>
-                          <td>{{ caso.dirDemandado }}</td>
                           <td>{% if caso.idEstudiante != null %}
                                 {{ caso.idEstudiante.idPersona.nombrePersona }}
                               {% endif %}
                           </td>
                           <td>{{ caso.estadoCaso }}</td>
+                          <td>
+                            <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                                <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                                <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                            </form>
+                          </td>
                         </tr>
                         {% endfor %}
 
@@ -100,6 +105,7 @@
                        <th>Direccion Demandado</th>
                        <th>Nombre Estudiante</th>
                        <th>Estado</th>
+                       <th>Opciones</th>
                      </tr>
                    </thead>
                    <tbody>
@@ -116,6 +122,12 @@
                            {% endif %}
                        </td>
                        <td>{{ caso.estadoCaso }}</td>
+                       <td>
+                         <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
+                             <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                             <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                         </form>
+                       </td>
                      </tr>
                      {% endfor %}
                    </tbody>
@@ -153,17 +165,30 @@
                 <table class="table table-bordered ">
                   <thead>
                     <tr>
-                        <th>Clínica</th>
-                      <th>Estudinate</th>
+                        <th>Nombre</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Finalización</th>
                         <th>Asesor</th>
                         <th>Observaciones</th>
-                        <th>Nota</th>
-                        <th>Estado</th>
+                        <th>Estado </th>
+                        <th>Opciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    
-
+                    {% for clinica in clinicas %}
+                    <tr>
+                      <td>{{ clinica.nombreClinica }}</td>
+                      <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+                      <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                      <td>{{ clinica.idPersona }}</td>
+                      <td>{{ clinica.observaciones }}</td>
+                      <td>{{ clinica.estadoClinica }}</td>
+                        <td>
+                  
+                              <a href="{{ path('asignacionclinica_listEstudiantes', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>

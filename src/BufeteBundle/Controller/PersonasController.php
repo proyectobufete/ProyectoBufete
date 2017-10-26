@@ -895,7 +895,7 @@ class PersonasController extends Controller
         $query2->setParameter('id', $idas);
         $laborales = $query2->getResult();
         $query3 = $em->createQuery(
-          "SELECT a FROM BufeteBundle:Clinicas a WHERE a.idPersona = :id");
+          "SELECT c FROM BufeteBundle:Clinicas c WHERE c.idPersona = :id");
         $query3->setParameter('id', $idas);
         $clinicas = $query3->getResult();
         return $this->render('personas/HistorialAsesor.html.twig', array(
