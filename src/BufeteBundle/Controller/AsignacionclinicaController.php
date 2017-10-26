@@ -60,7 +60,7 @@ class AsignacionclinicaController extends Controller
         if($rol == "ROLE_ADMIN")
         {
             $asignacionclinicas = $em->getRepository('BufeteBundle:Asignacionclinica')->findAll();
-        } elseif ($rol == "ROLE_SECRETARIO" ||"ROLE_DIRECTOR") {
+        } elseif ($rol == "ROLE_SECRETARIO") {
             $bufete = $this->getUser()->getIdBufete()->getIdBufete();
             $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
             $query = $repo->createQueryBuilder('a')
