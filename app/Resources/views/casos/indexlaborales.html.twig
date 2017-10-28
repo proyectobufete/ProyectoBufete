@@ -2,23 +2,34 @@
 {% block act3 %} active {% endblock %}
 {% block ac9 %} active {% endblock %}
 {% block title %}
-  <h1>Listado de Casos laborales</h1>
+  <h1>Listado de Casos laborales pruebas</h1>
 {% endblock %}
 
 {% block body %}
  <div class="portlet-body">
    <div class="row">
+
+     <div class="col-md-2">
+       <form method="get" action="" class="form-inline" role="search">
+         <div class="input-group">
+           <span class="input-group-btn">
+             <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+               <i class="fa fa-search"></i>
+             </button>
+           </span>
+           <input type="text" name="query" class="form-control" placeholder="Buscar"/>
+         </div>
+       </form>
+     </div>
+
      <div class="col-md-3">
         <div class="btn-group">
-           <a href="{{ path('casos_newcivil') }}">
+           <a href="{{ path('casos_newlaboral') }}">
            <button id="sample_editable_1_new" class="btn green">
-             Agregar Caso Civil <i class="fa fa-plus"></i>
+             Agregar Caso Laboral <i class="fa fa-plus"></i>
            </button></a>
        </div>
      </div>
-
-
-
 
      <div class="col-md-offset-5">
        <div class="">

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Estudiantes" table="estudiantes">
+    <indexes>
+      <index name="IX_Relationship31" columns="Id_Persona"/>
+      <index name="IX_Relationship37" columns="idtipoPracticante"/>
+    </indexes>
+    <id name="idEstudiante" type="integer" column="Id_Estudiante">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="carneEstudiante" type="string" column="Carne_Estudiante" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cierrePensum" type="boolean" column="Cierre_Pensum" nullable="false"/>
+    <field name="estadoEstudiante" type="integer" column="Estado_Estudiante" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idPersona" target-entity="Personas" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Persona" referenced-column-name="Id_Persona"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idtipopracticante" target-entity="Tipoparcticante" fetch="LAZY">
+      <join-columns>
+        <join-column name="idtipoPracticante" referenced-column-name="idtipoPracticante"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

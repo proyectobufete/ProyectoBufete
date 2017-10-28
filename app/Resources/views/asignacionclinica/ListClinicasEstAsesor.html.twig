@@ -1,0 +1,110 @@
+{% extends 'layout.html.twig' %}
+{% block act6 %}active{% endblock %}
+{% block ac25 %}active{% endblock %}
+{% block title %}
+  <h1>Listado de estudiantes</h1>
+{% endblock %}
+{% block body %}
+
+<div class="portlet-body">
+    <div class="row">
+      <div class="row">
+        <div class="col-md-offset-4">
+        <div class="col-md-6">
+          {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-danger text-center">
+              <strong>¡Error! </strong>{{message}}
+            </div>
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+              <th>Estudinate</th>
+              <th>Carné</th>
+              <th>Nota</th>
+              <th>Observaciones</th>
+              <th>Estado</th>
+              <th>Asignar Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for asignacionclinica in asignacionclinicas %}
+          {% if asignacionclinica.idClinica.idPersona.idPersona == per %}
+          <tr>
+              <td>{{asignacionclinica.idEstudiante}}</td>
+              <td>{{asignacionclinica.idEstudiante.carneEstudiante}}</td>
+              <td>{{asignacionclinica.notaClinica}}</td>
+              <td>{{ asignacionclinica.observacionesClinica }}</td>
+              <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+              <td>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{asignacionclinica.idAsignacion}}{{asignacionclinica.notaClinica}}">Nota</button>
+                <div class="modal fade" id="myModal{{asignacionclinica.idAsignacion}}{{asignacionclinica.notaClinica}}" role="dialog">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Asignar Nota</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form class="" action="{{path('asignacionclinica_editNota', { 'idAsignacion': asignacionclinica.idAsignacion }) }}" method="get">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label for="nota">Nota</label>
+                              <input type="number" min="0" max="100" required id="nota" name="nota" value="{{asignacionclinica.notaClinica}}" class="form-control" autofocus>
+                              <input type="hidden" id="id" name="id" value="{{asignacionclinica.idAsignacion}}" class="form-control">
+                          </div>
+                          </div>
+                          <div class="form-actions">
+                            <div class="row">
+                              <div class="col-md-offset-4 col-md-5">
+                                  <button type="submit" name="Create" class="btn">Guardar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+          </tr>
+          {% else %}
+          <h2>Not Found</h2>
+          <a href="{{ path('errores_notfound') }}" class="btn blue">red</a>
+          <script>
+            var   segundos = 1;
+            function redireccion() { document.location.href="{{ path('errores_notfound') }}";}
+            setTimeout("redireccion()");
+          </script>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
+</div>
+
+{% endblock %}

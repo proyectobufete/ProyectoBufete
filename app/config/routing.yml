@@ -90,3 +90,7 @@ AsignarClinica:
 Practicas:
     resource: "@BufeteBundle/Resources/config/routing/practicas.yml"
     prefix:     /practicas
+
+Errores:
+    resource: "@BufeteBundle/Resources/config/routing/errores.yml"
+    prefix:     /errores
