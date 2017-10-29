@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AsignacionclinicaController extends Controller
 {
-
+ 
     /**
      * Lists all asignacionclinica entities.
      *
