@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Laborales" table="laborales">
+    <indexes>
+      <index name="IX_Relationship9" columns="Id_Trabajo"/>
+      <index name="IX_Relationship21" columns="Id_Caso"/>
+    </indexes>
+    <id name="idTipolaboral" type="integer" column="Id_TipoLaboral">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechaInicio" type="date" column="Fecha_Inicio" nullable="false"/>
+    <field name="fechaFin" type="date" column="Fecha_Fin" nullable="false"/>
+    <field name="salario" type="float" column="Salario" precision="10" scale="0" nullable="false"/>
+    <field name="vaciones" type="boolean" column="vaciones" nullable="false"/>
+    <field name="indemnizacion" type="boolean" column="indemnizacion" nullable="false"/>
+    <field name="diaseptimos" type="boolean" column="diaseptimos" nullable="false"/>
+    <field name="bonoanual" type="boolean" column="bonoanual" nullable="false"/>
+    <field name="horasextra" type="boolean" column="horasextra" nullable="false"/>
+    <field name="bonoincentivo" type="boolean" column="bonoincentivo" nullable="false"/>
+    <field name="diasasueto" type="boolean" column="diasasueto" nullable="false"/>
+    <field name="aguinaldo" type="boolean" column="aguinaldo" nullable="false"/>
+    <field name="reajustesalarial" type="boolean" column="reajustesalarial" nullable="false"/>
+    <field name="salariosretenidos" type="boolean" column="salariosretenidos" nullable="false"/>
+    <field name="otros" type="string" column="otros" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="otros2" type="string" column="otros2" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idCaso" target-entity="Casos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Caso" referenced-column-name="Id_Caso"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTrabajo" target-entity="Trabajos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Trabajo" referenced-column-name="Id_Trabajo"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

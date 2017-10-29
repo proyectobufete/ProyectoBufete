@@ -168,4 +168,3 @@ class Practicas
         return $this->idEstudiante;
     }
 }
-

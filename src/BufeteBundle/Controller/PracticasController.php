@@ -16,11 +16,26 @@ class PracticasController extends Controller
      * Lists all practica entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $practicas = $em->getRepository('BufeteBundle:Practicas')->findAll();
+        $searchQuery = $request->get('query');
+        $practicas = null;
+        if (!empty($searchQuery)) {
+          $repo = $em->getRepository("BufeteBundle:Practicas");
+          $query = $repo->createQueryBuilder('p')
+          ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = p.idEstudiante')
+          ->innerJoin('BufeteBundle:Personas', 'per', 'WITH', 'per.idPersona = e.idPersona')
+          ->where('per.nombrePersona LIKE :param')
+          ->orWhere('e.carneEstudiante LIKE :param')
+          ->orWhere('p.inicioPractica LIKE :param')
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $practicas = $query->getResult();
+        } else {
+          $practicas = $em->getRepository('BufeteBundle:Practicas')->findAll();
+        }
 
         return $this->render('practicas/index.html.twig', array(
             'practicas' => $practicas,

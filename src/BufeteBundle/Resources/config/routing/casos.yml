@@ -38,6 +38,16 @@ casos_vercivil:
     defaults: { _controller: "BufeteBundle:Casos:showCivil" }
     methods:  GET
 
+casos_printcivil:
+    path:     /{idCaso}/printcivil
+    defaults: { _controller: "BufeteBundle:Casos:printCivil" }
+    methods:  GET
+
+casos_printlaboral:
+    path:     /{idCaso}/printlaboral
+    defaults: { _controller: "BufeteBundle:Casos:printlaboral" }
+    methods:  GET
+
 casos_newlaboral:
     path:     /newlaboral
     defaults: { _controller: "BufeteBundle:Casos:newLaboral" }
@@ -58,7 +68,22 @@ casos_editcivil:
     defaults: { _controller: "BufeteBundle:Casos:editCivil" }
     methods:  [GET, POST]
 
+casos_transferirlaboral:
+    path:     /{idCaso}/transferirlaboral
+    defaults: { _controller: "BufeteBundle:Casos:transferirLaboral" }
+    methods:  [GET, POST]
+
+casos_transferircivil:
+    path:     /{idCaso}/transferircivil
+    defaults: { _controller: "BufeteBundle:Casos:transferirCivil" }
+    methods:  [GET, POST]
+
 casos_delete:
     path:     /{idCaso}/delete
     defaults: { _controller: "BufeteBundle:Casos:delete" }
     methods:  DELETE
+
+casos_printcivil:
+    path:     /{idCaso}/printcivil
+    defaults: { _controller: "BufeteBundle:Casos:printCivil" }
+    methods:  GET

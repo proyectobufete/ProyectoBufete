@@ -1,0 +1,206 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %}
+  <h1>Historial Asesor </h1>
+{% endblock %}
+
+{% block body %}
+<div class=" portlet-body form">
+<div class="form-body colporbody">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6" >
+        <div class="portlet">
+          <div class="portlet-heading ">
+            <h3 class="portlet-title text-dark text-uppercase">Casos Civiles</h3>
+            <div class="portlet-widgets">
+                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                <span class="divider"></span>
+                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet1"><i class="ion-minus-round"></i></a>
+                <span class="divider"></span>
+                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div id="portlet1" class="panel-collapse collapse in">
+            <div class="portlet-body">
+              <div class="row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12" >
+                  <div class="table-responsive">
+                    <table class="table table-bordered ">
+                      <thead>
+                        <tr role="row" class="">
+                          <th>No de caso</th>
+                          <th>Fecha </th>
+                          <th>Demandante</th>
+                          <th>Dirección Demandante</th>
+                          <th>Nombre de demandado</th>
+                          <th>Nombre Estudiante</th>
+                          <th>Estado</th>
+                          <th>Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for caso in civiles %}
+                        <tr>
+                          <td>{{ caso.noCaso }}</td>
+                          <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+                          <td>{{ caso.idDemandante.nombreDemandante }}</td>
+                          <td>{{ caso.idDemandante.direccionDemandante  }}</td>
+                          <td>{{ caso.nombreDemandado }}</td>
+                          <td>{% if caso.idEstudiante != null %}
+                                {{ caso.idEstudiante.idPersona.nombrePersona }}
+                              {% endif %}
+                          </td>
+                          <td>{{ caso.estadoCaso }}</td>
+                          <td>
+                            <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                                <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                                <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                            </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ </div>
+
+ <div class="row">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6" >
+     <div class="portlet">
+       <div class="portlet-heading ">
+         <h3 class="portlet-title text-dark text-uppercase">Casos Laborales</h3>
+         <div class="portlet-widgets">
+             <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+             <span class="divider"></span>
+             <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+             <span class="divider"></span>
+             <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+         </div>
+         <div class="clearfix"></div>
+       </div>
+       <div id="portlet2" class="panel-collapse collapse in">
+         <div class="portlet-body">
+           <div class="row">
+
+             <div class="col-md-12 col-sm-12 col-xs-12" >
+               <div class="table-responsive">
+                 <table class="table table-bordered ">
+                   <thead>
+                     <tr role="row" class="">
+                       <th>No de caso</th>
+                       <th>Fecha </th>
+                       <th>Demandante</th>
+                       <th>Dorección Demandante</th>
+                       <th>Nombre de demandado</th>
+                       <th>Direccion Demandado</th>
+                       <th>Nombre Estudiante</th>
+                       <th>Estado</th>
+                       <th>Opciones</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     {% for caso in laborales %}
+                     <tr>
+                       <td>{{ caso.noCaso }}</td>
+                       <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+                       <td>{{ caso.idDemandante.nombreDemandante }}</td>
+                       <td>{{ caso.idDemandante.direccionDemandante  }}</td>
+                       <td>{{ caso.nombreDemandado }}</td>
+                       <td>{{ caso.dirDemandado }}</td>
+                       <td>{% if caso.idEstudiante != null %}
+                             {{ caso.idEstudiante.idPersona.nombrePersona }}
+                           {% endif %}
+                       </td>
+                       <td>{{ caso.estadoCaso }}</td>
+                       <td>
+                         <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
+                             <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                             <input type="hidden" name="id" value="{{caso.idCaso}}"/>
+                         </form>
+                       </td>
+                     </tr>
+                     {% endfor %}
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6" >
+    <div class="portlet">
+      <div class="portlet-heading ">
+        <h3 class="portlet-title text-dark text-uppercase">Clínicas</h3>
+        <div class="portlet-widgets">
+            <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+            <span class="divider"></span>
+            <a data-toggle="collapse" data-parent="#accordion1" href="#portlet3"><i class="ion-minus-round"></i></a>
+            <span class="divider"></span>
+            <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div id="portlet3" class="panel-collapse collapse in">
+        <div class="portlet-body">
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12" >
+              <div class="table-responsive">
+                <table class="table table-bordered ">
+                  <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Finalización</th>
+                        <th>Asesor</th>
+                        <th>Observaciones</th>
+                        <th>Estado </th>
+                        <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for clinica in clinicas %}
+                    <tr>
+                      <td>{{ clinica.nombreClinica }}</td>
+                      <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+                      <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                      <td>{{ clinica.idPersona }}</td>
+                      <td>{{ clinica.observaciones }}</td>
+                      <td>{{ clinica.estadoClinica }}</td>
+                        <td>
+                  
+                              <a href="{{ path('asignacionclinica_listEstudiantes', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+{% endblock %}

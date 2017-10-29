@@ -1,26 +1,56 @@
-revisiones_index:
-    path:     /
-    defaults: { _controller: "BufeteBundle:Revisiones:index" }
-    methods:  GET
-
-revisiones_revisonestudiante:
-    path:     /revisonestudiante
-    defaults: { _controller: "BufeteBundle:Revisiones:revisonestudiante" }
-    methods:  GET
-
-revisiones_show:
-    path:     /{idRevision}/show
-    defaults: { _controller: "BufeteBundle:Revisiones:show" }
-    methods:  GET
-
-revisiones_new:
-    path:     /new
-    defaults: { _controller: "BufeteBundle:Revisiones:new" }
+revisiones_indexLinkCaso:
+    path:     /indexLinkCaso
+    defaults: { _controller: "BufeteBundle:Revisiones:indexLinkCaso" }
     methods:  [GET, POST]
 
-revisiones_edit:
-    path:     /{idRevision}/edit
-    defaults: { _controller: "BufeteBundle:Revisiones:edit" }
+revisiones_indexLinkCasoEst:
+    path:     /indexLinkCasoEst
+    defaults: { _controller: "BufeteBundle:Revisiones:indexLinkCasoEst" }
+    methods:  [GET, POST]
+
+revisiones_newLink:
+    path:     /newLink
+    defaults: { _controller: "BufeteBundle:Revisiones:newLink" }
+    methods:  [GET, POST]
+
+revisiones_showInforme:
+    path:     /showInforme
+    defaults: { _controller: "BufeteBundle:Revisiones:showInforme" }
+    methods:  [GET, POST]
+
+revisiones_showRevision:
+    path:     /showRevision
+    defaults: { _controller: "BufeteBundle:Revisiones:showRevision" }
+    methods:  [GET, POST]
+
+revisiones_showLink:
+    path:     /showLink
+    defaults: { _controller: "BufeteBundle:Revisiones:showLink" }
+    methods:  [GET, POST]
+
+revisiones_uploadRevision:
+    path:     /uploadRevision
+    defaults: { _controller: "BufeteBundle:Revisiones:uploadRevision" }
+    methods:  [GET, POST]
+
+revisiones_upload:
+    path:     /upload
+    defaults: { _controller: "BufeteBundle:Revisiones:upload" }
+    methods:  [GET, POST]
+
+revisiones_UploadEdit:
+    path:     /UploadEdit
+    defaults: { _controller: "BufeteBundle:Revisiones:UploadEdit" }
+    methods:  [GET, POST]
+
+revisiones_editRevision:
+    path:     /editRevision
+    defaults: { _controller: "BufeteBundle:Revisiones:editRevision" }
+    methods:  [GET, POST]
+
+revisiones_editLink:
+    path:     /editLink
+    defaults: { _controller: "BufeteBundle:Revisiones:editLink" }
     methods:  [GET, POST]
 
 revisiones_delete:

@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+{% block act3 %} active {% endblock %}
+{% block ac8 %} active {% endblock %}
+      {% block title %}
+        <h1>Transferir Casos Ramo Civil</h1>
+      {% endblock %}
+
+{% block body %}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-3">
+            <div class="row">
+              <div class="col-md-6">
+                {% for message in app.session.flashbag().get('status') %}
+                  <div class="alert alert-danger text-center">
+                    <strong>¡Error! </strong>{{message}}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="">Estudiante Actual: </label>
+                <input type="text" name="" disabled class="form-control" value="{{estudiante}}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                {{form_label(form.idEstudiante,'Estudiante')}}
+                {{form_widget(form.idEstudiante,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado'}) }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <button type="submit" name="Create" class="btn green">Transferir</button>
+              <a href="{{ path('casos_indexciviles') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+{% endblock %}

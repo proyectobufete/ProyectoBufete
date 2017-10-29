@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Revisiones" table="revisiones">
+    <indexes>
+      <index name="IX_Relationship23" columns="Id_Caso"/>
+    </indexes>
+    <id name="idRevision" type="integer" column="Id_Revision">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idPersona" type="integer" column="Id_Persona" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tituloEntrega" type="string" column="Titulo_Entrega" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaCreacion" type="datetime" column="Fecha_Creacion" nullable="false"/>
+    <field name="nombreArchivo" type="string" column="Nombre_Archivo" length="75" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="rutaArchivo" type="text" column="Ruta_Archivo" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaLimite" type="datetime" column="Fecha_Limite" nullable="true"/>
+    <field name="comentarios" type="text" column="Comentarios" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaEnvio" type="datetime" column="Fecha_Envio" nullable="true"/>
+    <field name="estadoRevision" type="integer" column="Estado_Revision" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idCaso" target-entity="Casos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Caso" referenced-column-name="Id_Caso"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

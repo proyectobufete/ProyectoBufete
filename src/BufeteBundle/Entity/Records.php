@@ -110,4 +110,3 @@ class Records
         return $this->idCaso;
     }
 }
-

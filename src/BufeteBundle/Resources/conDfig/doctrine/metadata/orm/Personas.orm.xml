@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Personas" table="personas">
+    <indexes>
+      <index name="IX_Relationship13" columns="Id_Bufete"/>
+    </indexes>
+    <id name="idPersona" type="integer" column="Id_Persona">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombrePersona" type="string" column="Nombre_Persona" length="75" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonoPersona" type="bigint" column="Telefono_Persona" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tel2Persona" type="bigint" column="tel2_persona" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dpiPersona" type="bigint" column="dpi_persona" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="direccionPersona" type="string" column="Direccion_Persona" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dir2Persona" type="string" column="dir2_persona" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="emailPersona" type="string" column="Email_Persona" length="75" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usuarioPersona" type="string" column="Usuario_Persona" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="passPersona" type="string" column="pass_Persona" length="254" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="foto" type="string" column="foto" length="220" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estadoPersona" type="boolean" column="Estado_Persona" nullable="false"/>
+    <field name="role" type="string" column="role" length="75" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idBufete" target-entity="Bufetes" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Bufete" referenced-column-name="Id_Bufete"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

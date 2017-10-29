@@ -139,4 +139,3 @@ class Infofinal
         return $this->idCaso;
     }
 }
-

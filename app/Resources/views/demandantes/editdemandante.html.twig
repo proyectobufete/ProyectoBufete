@@ -14,7 +14,7 @@
       <div id="form_sample_1" class="form-horizontal" >
         {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
         <div class="form-body">
-          <div class="col-md-offset-2">
+          <div class="col-md-offset-3">
             <div class="row">
               <div class="col-md-5">
                 {{form_label(edit_form.nombreDemandante,'Nombre')}}
@@ -74,7 +74,7 @@
         </div>
         <div class="form-actions">
           <div class="row">
-            <div class="col-md-offset-2 col-md-9">
+            <div class="col-md-offset-3 col-md-9">
               <input type="submit" value="Edit" class="btn blue" />
               <a href="{{ path('demandantes_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
             </div>

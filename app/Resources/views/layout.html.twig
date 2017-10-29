@@ -5,23 +5,11 @@
 <head>
 
 
-
-<!--Adder!-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            {% block stylesheets %}{% endblock %}
-            <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-            
-  </head>
-<!--Adder!-->
-
-
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
-<link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="img/favicon_1.ico">
 
         <title>Bufete Popular </title>
@@ -32,8 +20,11 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
 
 
+
         <link  href="{{asset('asst/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('asst/css/bootstrap-reset.css')}}" rel="stylesheet">
+
+
 
      <!-- Bootstrap  QUE descompone todo
         <link href="{{asset('asst/css/components.css')}}" id="style_components" rel="stylesheet" type="text/css"/>  -->
@@ -62,7 +53,7 @@
             <!-- brand -->
             <div class="logo">
                 <a href="index.html" class="logo-expanded">
-                    <img src="{{asset('asst/img/logo.png')}}" width="170px" height="60px" alt="logo">
+                    <img src="{{asset('asst/img/logo3.jpeg')}}" width="200px" height="80px" alt="logo">
                     <span class="nav-label"></span>
                 </a>
             </div>
@@ -83,10 +74,16 @@
                   {% endif %}
                   {% if is_granted('ROLE_SECRETARIO') %}
 
-                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac8 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
                             <li class="{% block ac9 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu  {% block act12 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Practicas</span></a>
+                        <ul class="list-unstyled">
+                          <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
+                          <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu  {% block act6 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Clínicas</span></a>
@@ -95,32 +92,41 @@
                             <li class="{% block ac25 %}{% endblock %}"><a href="{{path("asignacionclinica_index")}}">Asignar Clínicas</a></li>
                         </ul>
                     </li>
-                    <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-android-contact"></i> <span class="nav-label">Personas</span></a>
+                    <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-android-social"></i> <span class="nav-label">Personas</span></a>
                         <ul class="list-unstyled">
                           <li class="{% block ac16 %}{% endblock %}"><a href="{{path("demandantes_index")}}">Demandantes</a></li>
                             <li class="{% block ac12 %}{% endblock %}"><a href="{{path("personas_indexEstudiantes")}}">Estudiantes</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="{% block ac29 %}{% endblock %}"><a href="{{path("personas_index")}}">Usuarios</a></li>
+                            {% else %}
                             <li class="{% block ac13 %}{% endblock %}"><a href="{{path("personas_indexAsesores")}}">Asesores</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                     <li class="has-submenu {% block act2 %}{% endblock %}"><a href="#"><i class="ion-settings"></i> <span class="nav-label">Mantenimiento</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac4 %}{% endblock %}"><a href="{{path("trabajos_index")}}">Trabajos</a></li>
                             <li class="{% block ac5 %}{% endblock %}"><a href="{{path("tribunales_index")}}">Tribunales</a></li>
-                            <li class="{% block ac6 %}{% endblock %}"><a href="{{path("tipocaso_index")}}">Tipo de Caso</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                              <li class="{% block ac6 %}{% endblock %}"><a href="{{path("tipocaso_index")}}">Tipo de Caso</a></li>
+                            {% endif %}
                             <li class="{% block ac7 %}{% endblock %}"><a href="{{path("estadosciviles_index")}}">Estado Civil</a></li>
                             <li class="{% block ac23 %}{% endblock %}"><a href="{{path("tipoasunto_index")}}">Asunto</a></li>
-                            <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
-                            <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
-
                         </ul>
                     </li>
                   {% endif %}
                   {% if is_granted('ROLE_ESTUDIANTE')%}
-                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
                       <ul class="list-unstyled">
                           <li class="{% block ac21 %}{% endblock %}"><a href="{{path("casos_casoslaborales")}}">Laborales</a></li>
                           <li class="{% block ac22 %}{% endblock %}"><a href="{{path("casos_casosciviles")}}">Civiles</a></li>
                       </ul>
+
+                  </li>
+                  <li class="has-submenu {% block act25 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Clínicas</span></a>
+                    <ul class="list-unstyled">
+                        <li class="{% block ac31 %}{% endblock %}"><a href="{{path("asignacionclinica_listClinicasEst")}}">Clínicas asignadas</a></li>
+                    </ul>
                   </li>
                   {% endif %}
                   {% if is_granted('ROLE_ASESOR') %}
@@ -129,6 +135,18 @@
                           <li class="{% block ac26 %}{% endblock %}"><a href="{{path("personas_laboralesAsesor")}}">Laborales</a></li>
                           <li class="{% block ac27 %}{% endblock %}"><a href="{{path("personas_civilesAsesor")}}">Civiles</a></li>
                       </ul>
+                  </li>
+                  <li class="has-submenu  {% block act24 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Clínicas</span></a>
+                      <ul class="list-unstyled">
+                          <li class="{% block ac30 %}{% endblock %}"><a href="{{path("asignacionclinica_asesor")}}">Clínicas</a></li>
+                      </ul>
+                  </li>
+                  {% endif %}
+                  {% if is_granted('ROLE_DIRECTOR')%}
+                  <li class="has-submenu {% block act26 %}{% endblock %}"><a href="#"><i class="ion-android-social"></i> <span class="nav-label">Personas</span></a>
+                    <ul class="list-unstyled">
+                        <li class="{% block ac34 %}{% endblock %}"><a href="{{path("personas_indexAsesoresDir")}}">Asesores</a></li>
+                    </ul>
                   </li>
                   {% endif %}
                 </ul>
@@ -153,6 +171,7 @@
                 <ul class="list-inline navbar-right top-menu top-right-menu">
                   {% if app.user != null %}
                     <!-- user login dropdown start-->
+
                     <li class="dropdown text-center">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar-2.jpg" class="img-circle profile-img thumb-sm">
@@ -185,21 +204,12 @@
 					          {% endblock %}
 					        </div>
 					        {% block body %}
-					            Content default
-					        {% endblock %}
 
+					        {% endblock %}
 					      </div>
 
-
-                <!--Adder!-->
-                <div>
-                  {% block javascripts %}{% endblock %}
-                </div>
-                <!--Adder!-->
-
-
-
-
+                {% block body2 %}
+                {% endblock %}
 
             </div>
             <!-- Page Content Ends -->
@@ -223,6 +233,9 @@
         <script src="{{asset('asst/js/jquery.scrollTo.min.js')}}"></script>
         <script src="{{asset('asst/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
 
+
+
+
         <!-- Counter-up -->
         <script src="{{asset('asst/js/waypoints.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('asst/js/jquery.counterup.min.js')}}" type="text/javascript"></script>
@@ -232,6 +245,8 @@
         <!-- sweet alerts
         <script src="assets/sweet-alert/sweet-alert.min.js"></script>
         <script src="assets/sweet-alert/sweet-alert.init.js"></script>-->
+
+
 
         <script src="{{asset('asst/js/jquery.app.js')}}"></script>
         <!-- Chat -->

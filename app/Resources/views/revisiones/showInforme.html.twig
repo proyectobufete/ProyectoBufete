@@ -1,0 +1,79 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+  <h1><b>{{ revisione.tituloEntrega }}</b></h1>
+{% endblock %}
+{% block body %}
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-8">
+            <h2></h2>
+          <table class="table table-striped table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                  <th>Número de caso</th>
+                  <td>{{ nocasoEnvio }}</td>
+                </tr>
+                <tr>
+                    <th>Asesor</th>
+                    <td>{{ nombreEnvio }}</td>
+                </tr>
+                <tr>
+                  <th>Fecha de habilitación</th>
+                  <td>{{(revisione.fechaCreacion|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y '-' hh:mm aaa"))}}</td>
+                </tr>
+                <tr>
+                  <th>Fecha limite</th>
+                  <td>{{(revisione.fechaLimite|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y '-' hh:mm aaa"))}}</td>
+                </tr>
+                <tr>
+                    <th>Prioridad</th>
+                    <td>
+                      {% if revisione.estadoRevision == 3 %}
+                        <span class="label label-danger">Alta</span>
+                      {% elseif revisione.estadoRevision == 2 %}
+                        <span class="label label-warning">Media</span>
+                        {% elseif revisione.estadoRevision == 1 %}
+                          <span class="label label-info">Baja</span>
+                      {% endif %}
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <th>Archivos enviados</th>
+                    <td>
+                      {% if revisione.RutaArchivo != null %}
+                        <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                          <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                        </a>
+                      {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                    <th>Comentarios</th>
+                    <td>{{ revisione.comentarios }}</td>
+                </tr>
+              </tbody>
+          </table>
+
+          <table>
+            <tr>
+              <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Regresar</button>
+                  <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
+              </form>
+            </tr>
+            <tr>
+              {{ form_start(delete_form) }}
+                  <input type="submit" value="Delete">
+              {{ form_end(delete_form) }}
+            </tr>
+          </table>
+          </div>
+        </div>
+      </div>
+{% endblock %}

@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class AsignacionclinicaType extends AbstractType
 {

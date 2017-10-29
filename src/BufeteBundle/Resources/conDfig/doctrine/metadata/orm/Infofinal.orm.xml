@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Infofinal" table="infoFinal">
+    <indexes>
+      <index name="IX_Relationship33" columns="Id_Caso"/>
+    </indexes>
+    <id name="idIfno" type="integer" column="id_ifno">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechaInfo" type="date" column="fecha_info" nullable="false"/>
+    <field name="observaciones" type="text" column="observaciones" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="rutaInfo" type="text" column="ruta_info" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idCaso" target-entity="Casos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Caso" referenced-column-name="Id_Caso"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

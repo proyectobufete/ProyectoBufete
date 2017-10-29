@@ -16,22 +16,54 @@ class ClinicasController extends Controller
      * Lists all clinica entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+
+      $searchQuery = $request->get('query');
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
+
+        $searchQuery = $request->get('query');
+        $clinicas = null;
         if($rol == "ROLE_ADMIN")
         {
-            $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+            if (!empty($searchQuery)) {
+              $repo = $em->getRepository("BufeteBundle:Clinicas");
+              $query = $repo->createQueryBuilder('c')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+              ->Where('c.nombreClinica LIKE :param')
+              ->orWhere('c.fechaAsignacion LIKE :param')
+              ->orWhere('p.nombrePersona LIKE :param')
+              ->setParameter('param', '%'.$searchQuery.'%')
+              ->getQuery();
+              $clinicas = $query->getResult();
+            } else {
+              $clinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+            }
         } elseif ($rol == "ROLE_SECRETARIO") {
-            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
-            $repo = $em->getRepository("BufeteBundle:Clinicas");
-            $query = $repo->createQueryBuilder('c')
-            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
-            ->where('p.idBufete = :bufete')
-            ->setParameter('bufete', $bufete)
-            ->getQuery();
-            $clinicas = $query->getResult();
+          $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+            if (!empty($searchQuery)) {
+              $repo = $em->getRepository("BufeteBundle:Clinicas");
+              $query = $repo->createQueryBuilder('c')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+              ->Where('c.nombreClinica LIKE :param')
+              ->orWhere('c.fechaAsignacion LIKE :param')
+              ->orWhere('p.nombrePersona LIKE :param')
+              ->andWhere('p.idBufete = :bufete')
+              ->setParameter('bufete', $bufete)
+              ->setParameter('param', '%'.$searchQuery.'%')
+              ->getQuery();
+              $clinicas = $query->getResult();
+            } else {
+              $repo = $em->getRepository("BufeteBundle:Clinicas");
+              $query = $repo->createQueryBuilder('c')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+              ->where('p.idBufete = :bufete')
+              ->setParameter('bufete', $bufete)
+              ->getQuery();
+              $clinicas = $query->getResult();
+            }
+
           }
 
         return $this->render('clinicas/index.html.twig', array(

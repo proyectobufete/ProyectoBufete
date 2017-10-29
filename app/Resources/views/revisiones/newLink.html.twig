@@ -1,0 +1,77 @@
+{% extends 'layout.html.twig' %}
+
+      {% block title %}
+        <h1>Habilitar Entrega para caso No. {{comEnvio}}</h1>
+      {% endblock %}
+
+{% block body %}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="cmxform form-horizontal tasi-form" >
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Titulo de Revisión</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Prioridad</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.estadoRevision) }}
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de limite de Entrega</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.fechaLimite,{'attr':{'class' : 'form-control'}, 'type' : 'datetime-local'} ) }}
+                      <span class="help-block">
+                        <small>dia/mes/año hora:minutos</small>
+                      </span>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Creación</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.fechaCreacion) }}
+                  </div>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-4">
+
+              </div>
+            </div>
+
+            <input type="hidden" name="idCaso" value="{{var}}"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <a href=""><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+
+
+{% endblock %}
