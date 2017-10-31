@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
 class RevisionesAsesorType extends AbstractType
 {
     /**
@@ -25,14 +25,14 @@ class RevisionesAsesorType extends AbstractType
           //->add('idPersona')
           ->add('tituloEntrega',TextType::Class, array ("data"=>"CORRECCIÓN DE INFORME"))
 
-        
-            ->add('fechaCreacion', HiddenType::class, array(
-                  'data' => '2011/02/05',))
+            ->add('fechaCreacion', DateTimeType::class, array(
+              "data" => new \DateTime("now")
+            ))
 
           //->add('nombreArchivo')
           ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           //->add('fechaLimite')
-          ->add('comentarios')
+          //->add('comentarios')
           /*
           ->add('fechaEnvio', DateTimeType::class, array(
               "data" => new \DateTime("now")

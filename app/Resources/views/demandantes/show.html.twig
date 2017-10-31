@@ -52,7 +52,7 @@
     </table>
     <table>
       <tr>
-        <a href="{{ path('demandantes_index') }}" class="btn grey">Regresar</a>
+        <a href="{{ path('demandantes_index') }}" class="btn default">Regresar</a>
       </tr>
       <tr>
         {% if is_granted('ROLE_ADMIN') %}
@@ -61,7 +61,7 @@
           <a href="{{ path('demandantesecre_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
         {% endif %}
       </tr>
-
+      
     </table>
     </div>
   </div>

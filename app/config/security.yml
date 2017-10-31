@@ -28,7 +28,6 @@ security:
             logout:
                 path: /logout
                 target: /login
-            access_denied_handler: app.security.access_denied_handler
 
     access_control:
 
@@ -42,9 +41,6 @@ security:
         - { path: ^/personas/nueva, roles: ROLE_ADMIN}
 
         - { path: ^/bufetes, roles: ROLE_SECRETARIO}
-
-        - { path: ^/personas/indexAsesoresDir, roles: ROLE_DIRECTOR}
-        - { path: ^/personas/([0-9]+)/HistorialAsesor, roles: ROLE_DIRECTOR}
 
         - { path: ^/trabajos, roles: ROLE_SECRETARIO}
         - { path: ^/tribunales, roles: ROLE_SECRETARIO}
@@ -64,14 +60,12 @@ security:
         - { path: ^/casos/([0-9]+)/transferirlaboral, roles: ROLE_SECRETARIO}
 
         - { path: ^/clinicas, roles: ROLE_SECRETARIO}
-        - { path: ^/asignacionclinica/([0-9]+)/listEstudiantes, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/asignacionclinica/([0-9]+)/listEstudiantes, roles: ROLE_SECRETARIO}
         - { path: ^/asignacionclinica/new, roles: ROLE_SECRETARIO}
-        - { path: ^/asignacionclinica/([0-9]+)/show, roles: ROLE_SECRETARIO}
-        - { path: ^/asignacionclinica/([0-9]+)/edit, roles: ROLE_SECRETARIO}
 
         - { path: ^/personas/indexEstudiantes, roles: ROLE_SECRETARIO}
         - { path: ^/personas/registro, roles: ROLE_SECRETARIO}
-        - { path: ^/personas/([0-9]+)/detalle, roles:[ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/personas/([0-9]+)/detalle, roles: ROLE_SECRETARIO}
         - { path: ^/personas/([0-9]+)/editEstudiante, roles: ROLE_SECRETARIO}
         - { path: ^/personas/([0-9]+)/editpassestudiante, roles: ROLE_SECRETARIO}
         - { path: ^/personas/([0-9]+)/HistorialEstudiante, roles: ROLE_SECRETARIO}
@@ -89,9 +83,8 @@ security:
         - { path: ^/asignacionclinica/ClinicasAsesor, roles: ROLE_ASESOR}
         - { path: ^/asignacionclinica/([0-9]+)/ListClinicasEstAsesor, roles: ROLE_ASESOR}
 
-
-        - { path: ^/casos/showlaboral, roles: [ROLE_SECRETARIO, ROLE_ASESOR, ROLE_ESTUDIANTE,ROLE_DIRECTOR]}
-        - { path: ^/casos/showcivil, roles: [ROLE_SECRETARIO, ROLE_ASESOR, ROLE_ESTUDIANTE,ROLE_DIRECTOR]}
+        - { path: ^/casos/showlaboral, roles: [ROLE_SECRETARIO, ROLE_ASESOR, ROLE_ESTUDIANTE]}
+        - { path: ^/casos/showcivil, roles: [ROLE_SECRETARIO, ROLE_ASESOR, ROLE_ESTUDIANTE]}
 
         - { path: ^/home, roles: [ROLE_DIRECTOR, ROLE_ASESOR, ROLE_SECRETARIO, ROLE_ESTUDIANTE]}
 

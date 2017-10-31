@@ -22,15 +22,14 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
+        //$user = $this->security->getToken()->getUser();
 
-        $urls=  'bufete_homepage';
         if ($this->security->isGranted('ROLE_ADMIN')) {
-              $urls = 'casos_indexlaborales';
+            $response = new RedirectResponse($this->router->generate('bufete_paises'));
         }
         elseif ($this->security->isGranted('ROLE_SECRETARIO')) {
-            $urls = 'casos_indexciviles';
+            $response = new RedirectResponse($this->router->generate('bufete_bufetes'));
         }
-        $response = new RedirectResponse($this->router->generate($urls));
 
         return $response;
     }

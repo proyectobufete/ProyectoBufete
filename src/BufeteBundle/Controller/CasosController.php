@@ -35,10 +35,10 @@ class CasosController extends Controller
         $ciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $rol = $this->getUser()->getRole();
         $casos = null;
-        $searchQuery = $request->get('query');
         if($rol == "ROLE_SECRETARIO")
         {
-            if(!empty($searchQuery) && strlen($searchQuery) == 1){
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery)){
                 $repo = $em->getRepository("BufeteBundle:Casos");
                 $query = $repo->createQueryBuilder('c')
                 ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
@@ -47,24 +47,6 @@ class CasosController extends Controller
                 ->andWhere('c.estadoCaso = :opcion')
                 ->setParameter('ciudad', $ciudad)
                 ->setParameter('opcion', $searchQuery)
-                ->orderBy('c.fechaCaso', 'DESC')
-                ->getQuery();
-                $casos = $query->getResult();
-            } elseif (strlen($searchQuery) > 1) {
-                $repo = $em->getRepository("BufeteBundle:Casos");
-                $query = $repo->createQueryBuilder('c')
-                ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
-                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
-                ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'c.idEstudiante = e.idEstudiante')
-                ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = c.idPersona')
-                ->Where('c.noCaso LIKE :param')
-                ->orWhere('c.nombreDemandado LIKE :param')
-                ->orWhere('d.nombreDemandante LIKE :param')
-                ->orWhere('e.carneEstudiante LIKE :param')
-                ->orWhere('p.nombrePersona LIKE :param')
-                ->andWhere('d.idCiudad = :ciudad')
-                ->setParameter('param', '%'.$searchQuery.'%')
-                ->setParameter('ciudad', $ciudad)
                 ->orderBy('c.fechaCaso', 'DESC')
                 ->getQuery();
                 $casos = $query->getResult();
@@ -80,29 +62,14 @@ class CasosController extends Controller
                 $casos = $query->getResult();
             }
         } elseif ($rol == "ROLE_ADMIN") {
-            if(!empty($searchQuery) && strlen($searchQuery) == 1){
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery)){
                 $query = $em->createQuery(
                   "SELECT c FROM BufeteBundle:Casos c
                     INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
                     WHERE c.estadoCaso = :opcion
                     ORDER BY c.fechaCaso DESC");
                 $query->setParameter('opcion', $searchQuery);
-                $casos = $query->getResult();
-            } elseif (strlen($searchQuery) > 1) {
-                $repo = $em->getRepository("BufeteBundle:Casos");
-                $query = $repo->createQueryBuilder('c')
-                ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
-                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
-                ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'c.idEstudiante = e.idEstudiante')
-                ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = c.idPersona')
-                ->orWhere('c.noCaso LIKE :param')
-                ->orWhere('c.nombreDemandado LIKE :param')
-                ->orWhere('d.nombreDemandante LIKE :param')
-                ->orWhere('e.carneEstudiante LIKE :param')
-                ->orWhere('p.nombrePersona LIKE :param')
-                ->setParameter('param', '%'.$searchQuery.'%')
-                ->orderBy('c.fechaCaso', 'DESC')
-                ->getQuery();
                 $casos = $query->getResult();
             } else {
               $query = $em->createQuery(
@@ -129,10 +96,10 @@ class CasosController extends Controller
         $ciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $rol = $this->getUser()->getRole();
         $casos = null;
-        $searchQuery = $request->get('query');
         if($rol == "ROLE_SECRETARIO")
         {
-            if(!empty($searchQuery) && strlen($searchQuery) == 1)
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery))
             {
                 $repo = $em->getRepository("BufeteBundle:Casos");
                 $query = $repo->createQueryBuilder('c')
@@ -142,24 +109,6 @@ class CasosController extends Controller
                 ->andWhere('c.estadoCaso = :opcion')
                 ->setParameter('ciudad', $ciudad)
                 ->setParameter('opcion', $searchQuery)
-                ->orderBy('c.fechaCaso', 'DESC')
-                ->getQuery();
-                $casos = $query->getResult();
-            } elseif (strlen($searchQuery) > 1) {
-                $repo = $em->getRepository("BufeteBundle:Casos");
-                $query = $repo->createQueryBuilder('c')
-                ->innerJoin('BufeteBundle:Civiles', 'ci', 'WITH', 'c.idCaso = ci.idCaso')
-                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
-                ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'c.idEstudiante = e.idEstudiante')
-                ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = c.idPersona')
-                ->Where('c.noCaso LIKE :param')
-                ->orWhere('c.nombreDemandado LIKE :param')
-                ->orWhere('d.nombreDemandante LIKE :param')
-                ->orWhere('e.carneEstudiante LIKE :param')
-                ->orWhere('p.nombrePersona LIKE :param')
-                ->andWhere('d.idCiudad = :ciudad')
-                ->setParameter('param', '%'.$searchQuery.'%')
-                ->setParameter('ciudad', $ciudad)
                 ->orderBy('c.fechaCaso', 'DESC')
                 ->getQuery();
                 $casos = $query->getResult();
@@ -175,7 +124,8 @@ class CasosController extends Controller
                 $casos = $query->getResult();
             }
         } elseif ($rol == "ROLE_ADMIN") {
-            if(!empty($searchQuery) && strlen($searchQuery) == 1){
+            $searchQuery = $request->get('query');
+            if(!empty($searchQuery)){
               $query = $em->createQuery(
                 "SELECT c FROM BufeteBundle:Casos c
                   INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
@@ -183,22 +133,6 @@ class CasosController extends Controller
                   ORDER BY c.fechaCaso DESC");
               $query->setParameter('opcion', $searchQuery);
               $casos = $query->getResult();
-            } elseif (strlen($searchQuery) > 1) {
-                $repo = $em->getRepository("BufeteBundle:Casos");
-                $query = $repo->createQueryBuilder('c')
-                ->innerJoin('BufeteBundle:Civiles', 'ci', 'WITH', 'c.idCaso = ci.idCaso')
-                ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
-                ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'c.idEstudiante = e.idEstudiante')
-                ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = c.idPersona')
-                ->orWhere('c.noCaso LIKE :param')
-                ->orWhere('c.nombreDemandado LIKE :param')
-                ->orWhere('d.nombreDemandante LIKE :param')
-                ->orWhere('e.carneEstudiante LIKE :param')
-                ->orWhere('p.nombrePersona LIKE :param')
-                ->setParameter('param', '%'.$searchQuery.'%')
-                ->orderBy('c.fechaCaso', 'DESC')
-                ->getQuery();
-                $casos = $query->getResult();
             } else {
               $query = $em->createQuery(
                 "SELECT c FROM BufeteBundle:Casos c

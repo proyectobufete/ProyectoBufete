@@ -16,23 +16,11 @@ class CiudadController extends Controller
      * Lists all ciudad entities.
      *
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $searchQuery = $request->get('query');
-        $ciudads = null;
-        if (!empty($searchQuery)) {
-          $repo = $em->getRepository("BufeteBundle:Ciudad");
-          $query = $repo->createQueryBuilder('c')
-          ->innerJoin('BufeteBundle:Departamentos', 'd', 'WITH', 'd.idDepartamento = c.idDepartamento')
-          ->where('c.ciudad LIKE :param')
-          ->orWhere('d.departamento LIKE :param')
-          ->setParameter('param', '%'.$searchQuery.'%')
-          ->getQuery();
-          $ciudads = $query->getResult();
-        } else {
-          $ciudads = $em->getRepository('BufeteBundle:Ciudad')->findAll();
-        }
+
+        $ciudads = $em->getRepository('BufeteBundle:Ciudad')->findAll();
 
         return $this->render('ciudad/index.html.twig', array(
             'ciudads' => $ciudads,

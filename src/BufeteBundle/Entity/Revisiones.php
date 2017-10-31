@@ -13,7 +13,7 @@ class Revisiones
      * @Assert\File(
      *     maxSize = "5000k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF",
+     *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF"
      * )
      */
     protected $rutaArchivo;
@@ -154,8 +154,7 @@ class Revisiones
      */
     public function setFechaCreacion($fechaCreacion)
     {
-        $this->fechaCreacion = new \DateTime("now");
-        //$this->fechaCreacion = $fechaCreacion;
+        $this->fechaCreacion = $fechaCreacion;
 
         return $this;
     }
@@ -275,8 +274,7 @@ class Revisiones
      */
     public function setFechaEnvio($fechaEnvio)
     {
-        $this->fechaEnvio = new \DateTime("now");
-        //$this->fechaEnvio = $fechaEnvio;
+        $this->fechaEnvio = $fechaEnvio;
 
         return $this;
     }

@@ -3,13 +3,6 @@
 
 }
 
-
-.btn-trs {
-    color: #333;
-    background-color: rgba(195, 190, 190, 0);
-    border-color: rgba(204, 204, 204, 0);
-}
-
 .colorform{
   background-color: #F7F9F9;
 }
@@ -33,16 +26,6 @@
 	background-color: white;
 	border: 5px solid #A8A8A8;
 
-}
-
-.portlet > .portlet-title > .actions {
-  float: right;
-  display: inline-block;
-  padding: 6px 0;
-}
-
-.portlet.blue > .portlet-title > .actions {
-  padding: 18px 0 14px 0;
 }
 
 .portlet > .portlet-body.blue,
@@ -221,49 +204,6 @@
 .form .form-section:first-child {
   margin-top: 5px;
 }
-
-/***********
-Butons Colors
-************/
-.graysalsa.btn{
-  background-color: #ffffff;
-}
-
-.portlet.box.blue-sunglo > .portlet-title > .actions .btn-default {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 1px solid #ffffff;
-  color: #ffffff;
-}
-
-.button {
-    background-color: transparent !important;
-    border: 2px solid #ffffff;
-    border-radius: 4px;
-    color: white;
-    padding: 5px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 2px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-.button1 {
-    background-color: transparent !important;
-    color: #d9eafa;
-    border: 2px solid #d9eafa;
-}
-
-.button1:hover {
-    background-color: transparent !important;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-}
-
 /***********
 Green Colors
 ************/
@@ -307,52 +247,6 @@ Green Colors
 .portlet.green {
   background-color: #26a69a;
 }
-
-
-/***********
-Grey Colors
-************/
-.grey.btn {
-  color: #FFFFFF;
-  background-color: #b2c0c7;
-}
-.grey.btn:hover, .grey.btn:focus, .grey.btn:active, .grey.btn.active {
-  color: #FFFFFF;
-  background-color: #b2c0c7;
-}
-.open .grey.btn.dropdown-toggle {
-  color: #FFFFFF;
-  background-color: #b2c0c7;
-}
-.grey.btn:active, .grey.btn.active {
-  background-image: none;
-  background-color: #b2c0c7;
-}
-.grey.btn:active:hover, .grey.btn.active:hover {
-  background-color: #b2c0c7;
-}
-.open .grey.btn.dropdown-toggle {
-  background-image: none;
-}
-.grey.btn.disabled, .grey.btn.disabled:hover, .grey.btn.disabled:focus, .grey.btn.disabled:active, .grey.btn.disabled.active, .grey.btn[disabled], .grey.btn[disabled]:hover, .grey.btn[disabled]:focus, .grey.btn[disabled]:active, .grey.btn[disabled].active, fieldset[disabled] .grey.btn, fieldset[disabled] .grey.btn:hover, fieldset[disabled] .grey.btn:focus, fieldset[disabled] .grey.btn:active, fieldset[disabled] .grey.btn.active {
-  background-color: #b2c0c7;
-}
-.grey.btn .badge {
-  color: #b2c0c7;
-  background-color: #FFFFFF;
-}
-
-/* Button Strip */
-.btn.grey-stripe {
-  border-left: 3px solid #b2c0c7;
-}
-
-/* Portlet */
-.portlet > .portlet-body.grey,
-.portlet.grey {
-  background-color: #b2c0c7;
-}
-
 /**********
 Blue Colors
 ***********/
@@ -400,35 +294,35 @@ Yellow Colors
 /* Button */
 .yellow.btn {
   color: #FFFFFF;
-  background-color: #e0c750;
+  background-color: #c49f47;
 }
 .yellow.btn:hover, .yellow.btn:focus, .yellow.btn:active, .yellow.btn.active {
   color: #FFFFFF;
-  background-color: #e0c750;
+  background-color: #af8c38;
 }
 .open .yellow.btn.dropdown-toggle {
   color: #FFFFFF;
-  background-color: #e0c750;
+  background-color: #af8c38;
 }
 .yellow.btn:active, .yellow.btn.active {
   background-image: none;
-  background-color: #e0c750;
+  background-color: #9c7c32;
 }
 .yellow.btn:active:hover, .yellow.btn.active:hover {
-  background-color: #e0c750;
+  background-color: #a48334;
 }
 .open .yellow.btn.dropdown-toggle {
   background-image: none;
 }
 .yellow.btn.disabled, .yellow.btn.disabled:hover, .yellow.btn.disabled:focus, .yellow.btn.disabled:active, .yellow.btn.disabled.active, .yellow.btn[disabled], .yellow.btn[disabled]:hover, .yellow.btn[disabled]:focus, .yellow.btn[disabled]:active, .yellow.btn[disabled].active, fieldset[disabled] .yellow.btn, fieldset[disabled] .yellow.btn:hover, fieldset[disabled] .yellow.btn:focus, fieldset[disabled] .yellow.btn:active, fieldset[disabled] .yellow.btn.active {
-  background-color: #e0c750;
+  background-color: #c49f47;
 }
 .yellow.btn .badge {
-  color: #e0c750;
+  color: #c49f47;
   background-color: #FFFFFF;
 }
 
 /* Button Strip */
 .btn.yellow-stripe {
-  border-left: 3px solid #e0c750;
+  border-left: 3px solid #c49f47;
 }

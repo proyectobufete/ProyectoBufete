@@ -2,35 +2,38 @@
 {% block act3 %} active {% endblock %}
 {% block ac9 %} active {% endblock %}
 {% block title %}
-<div class="actions">
-  {% if is_granted('ROLE_ASESOR') %}
-  <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-      <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
-      <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-  </form>
-  {% endif %}
-
-  {% if is_granted('ROLE_ESTUDIANTE') %}
-      <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-          <button type="submit" name="buscar" class="button button1">Entregas del caso</button>
-          <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-      </form>
-  {% endif %}
-
-</div>
   <h1>Detalles</h1>
-
 {% endblock %}
 {% block body %}
-
       <div class="portlet-body">
         <div class="col-md-offset-3">
+          {% if is_granted('ROLE_ASESOR') %}
+          <table>
+
+
+            <tr>
+
+            </tr>
+            <tr>
+              <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
+                  <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+              </form>
+            </tr>
+
+
+            <tr>
+              <a href="{{ path('personas_laboralesAsesor') }}"> Regresar </a>
+            </tr>
+
+          </table>
+          {% endif %}
           <div class="row">
               <div class="col-md-6">
               <label for="" class=" control-label"><h4><b>Lugar y Fecha</b></h4></label>
                 <input disabled type="text" style="font-size:14px;"  class="form-control input-lg " value="{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{(caso.fechaCaso|localizeddate('long', 'none', 'es'))}}{% endif %}">
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
               <label for="" class=" control-label"><h4><b>No. Caso</b></h4></b></label>
               <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.noCaso }}">
               </div>
@@ -344,20 +347,39 @@
           </div>
           <br>
 
+          <table>
+            {% if is_granted('ROLE_ESTUDIANTE') %}
+              <tr>
+                <a href="{{ path('casos_casoslaborales') }}" class="btn default">Regresar</a>
+              </tr>
+
+              <tr>
+
+              </tr>
 
 
-            {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
-
-                <a href="{{ path('casos_indexlaborales') }}" class="btn grey w-xs m-b-5">Regresar</a>
-
-                <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso}) }}"  class="btn blue w-xs m-b-5">Editar</a>
-
-                <a href="{{ path('casos_printlaboral', {'idCaso': caso.idCaso }) }}" class="btn btn-purple w-xs m-b-5">Imprimir</a>
-
-                <a href="{{ path('casos_transferirlaboral', { 'idCaso': caso.idCaso }) }}" class="btn btn-warning w-xs m-b-5">Transferir</a>
-
+              <tr>
+                <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+                    <button type="submit" name="buscar" class="btn blue">Entregas del caso</button>
+                    <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+                </form>
+              </tr>
             {% endif %}
-
+            {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
+              <tr>
+                <a href="{{ path('casos_indexlaborales') }}" class="btn default">Regresar</a>
+              </tr>
+              <tr>
+                <a href="{{ path('casos_editlaboral', { 'idCaso': caso.idCaso}) }}" class="btn blue">Editar</a>
+              </tr>
+              <tr>
+                <a href="{{ path('casos_printlaboral', {'idCaso': caso.idCaso }) }}" class="btn btn-purple">Imprimir</a>
+              </tr>
+              <tr>
+                <a href="{{ path('casos_transferirlaboral', { 'idCaso': caso.idCaso }) }}" class="btn yellow">Transferir</a>
+              </tr>
+            {% endif %}
+          </table>
         </div>
       </div>
 {% endblock %}

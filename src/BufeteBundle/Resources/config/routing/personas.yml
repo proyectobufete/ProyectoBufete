@@ -84,17 +84,6 @@ personas_HistorialEstudiante:
     defaults: { _controller: "BufeteBundle:Personas:HistorialEstudiante" }
     methods:  GET
 
-
-personas_indexAsesoresDir:
-    path:     /indexAsesoresDir
-    defaults: { _controller: "BufeteBundle:Personas:indexAsesoresDir" }
-    methods:  GET
-
-personas_HistorialAsesor:
-    path:     /{id}/HistorialAsesor
-    defaults: { _controller: "BufeteBundle:Personas:HistorialAsesor" }
-    methods:  GET
-
 personas_HistorialEstudianteCivil:
     path:     /{id}/HistorialEstudianteCivil
     defaults: { _controller: "BufeteBundle:Personas:HistorialEstudianteCivil" }
@@ -108,6 +97,4 @@ personas_HistorialEstudianteLaboral:
 personas_HistorialEstudianteClinicas:
     path:     /{id}/HistorialEstudianteClinicas
     defaults: { _controller: "BufeteBundle:Personas:HistorialEstudianteClinicas" }
-    methods:  GET
-
     methods:  GET
