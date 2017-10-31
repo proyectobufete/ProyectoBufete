@@ -33,6 +33,16 @@ asignacionclinica_listEstudiantes:
     defaults: { _controller: "BufeteBundle:Asignacionclinica:listEstudiantes" }
     methods:  GET
 
+asignacionclinica_printlistaEstudiantes:
+    path:     /{idAsignacion}/printlistaEstudiantes
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:printlistaEstudiantes" }
+    methods:  GET
+
+asignacionclinica_printnotaEstudiantes:
+    path:     /{idAsignacion}/printnotaEstudiantes
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:printnotaEstudiantes" }
+    methods:  GET
+
 asignacionclinica_listClinicasEstAsesor:
     path:     /{idAsignacion}/ListClinicasEstAsesor
     defaults: { _controller: "BufeteBundle:Asignacionclinica:ListClinicasEstAsesor" }

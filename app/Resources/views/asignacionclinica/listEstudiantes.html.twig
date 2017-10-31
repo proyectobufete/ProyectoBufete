@@ -16,10 +16,11 @@
               </button>
             </span>
             <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+
           </div>
         </form>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-2">
         <div class="btn-group">
           <a href="{{ path('asignacionclinica_new') }}">
             <button id="sample_editable_1_new" class="btn green">
@@ -29,6 +30,20 @@
           </a>
         </div>
       </div>
+      <div class="col-md-2">
+          <div class="btn-group">
+            <button type="submit" onclick="location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}'" name="imprimir" class="btn btn-purple">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado PDF </i>
+            </button>
+          </div>
+      </div>
+      <div class="col-md-2">
+          <div class="btn-group">
+            <button type="submit" onclick="location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}'" name="imprimir" class="btn">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado con notas PDF </i>
+            </button>
+          </div>
+      </div>
       <br>
       <br>
   <div class="col-md-12 col-sm-12 col-xs-12" >
@@ -36,7 +51,7 @@
       <table class="table table-bordered ">
         <thead>
           <tr>
-              <th>Estudinate</th>
+              <th>Estudiante</th>
               <th>Carné</th>
               <th>Nota</th>
               <th>Observaciones</th>

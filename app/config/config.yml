@@ -37,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+      pathToWeb: "%kernel.root_dir%/../web"
 
 
 # Doctrine Configuration
@@ -76,9 +78,9 @@ swiftmailer:
 knp_snappy:
     pdf:
         enabled:    true
-        binary:     /usr/local/bin/wkhtmltopdf
+        binary:     %kernel.root_dir%/../vendor/bin/wkhtmltopdf
         options:    []
     image:
         enabled:    true
-        binary:     /usr/local/bin/wkhtmltoimage
+        binary:     %kernel.root_dir%/../vendor/bin/wkhtmltoimage
         options:    []

@@ -35,7 +35,7 @@
                           <th>No de caso</th>
                           <th>Fecha </th>
                           <th>Demandante</th>
-                          <th>Dorección Demandante</th>
+                          <th>Dirección Demandante</th>
                           <th>Nombre de demandado</th>
                           <th>Direccion Demandado</th>
                           <th>Nombre Estudiante</th>
@@ -46,7 +46,7 @@
                         {% for caso in civiles %}
                         <tr>
                           <td>{{ caso.noCaso }}</td>
-                          <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+                          <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|localizeddate('long', 'none', 'es') }}{% endif %}</td>
                           <td>{{ caso.idDemandante.nombreDemandante }}</td>
                           <td>{{ caso.idDemandante.direccionDemandante  }}</td>
                           <td>{{ caso.nombreDemandado }}</td>
@@ -56,13 +56,24 @@
                               {% endif %}
                           </td>
                           <td>{{ caso.estadoCaso }}</td>
+                          <tr>
+                            <div class="col-md-2">
+
+                                <div class="btn-group">
+                                  <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteCivil', { 'id': caso.idEstudiante.idEstudiante }) }}'" name="imprimir" class="btn btn-purple">
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Civil PDF </i>
+                                  </button>
+                                </div>
+                            </div>
+                          </tr>
                         </tr>
                         {% endfor %}
 
                       </tbody>
                     </table>
-                  </div>
+                    </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -96,7 +107,7 @@
                        <th>No de caso</th>
                        <th>Fecha </th>
                        <th>Demandante</th>
-                       <th>Dorección Demandante</th>
+                       <th>Dirección Demandante</th>
                        <th>Nombre de demandado</th>
                        <th>Direccion Demandado</th>
                        <th>Nombre Estudiante</th>
@@ -107,7 +118,7 @@
                      {% for caso in laborales %}
                      <tr>
                        <td>{{ caso.noCaso }}</td>
-                       <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+                       <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|localizeddate('long', 'none', 'es')}}{% endif %}</td>
                        <td>{{ caso.idDemandante.nombreDemandante }}</td>
                        <td>{{ caso.idDemandante.direccionDemandante  }}</td>
                        <td>{{ caso.nombreDemandado }}</td>
@@ -117,6 +128,17 @@
                            {% endif %}
                        </td>
                        <td>{{ caso.estadoCaso }}</td>
+                       <td>{{ caso.estadoCaso }}</td>
+                       <tr>
+                         <div class="col-md-2">
+
+                             <div class="btn-group">
+                               <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteLaboral', { 'id': caso.idEstudiante.idEstudiante }) }}'" name="imprimir" class="btn btn-purple">
+                                 <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Laboral PDF </i>
+                               </button>
+                             </div>
+                         </div>
+                       </tr>
                      </tr>
                      {% endfor %}
                    </tbody>
@@ -155,7 +177,7 @@
                   <thead>
                     <tr>
                         <th>Clínica</th>
-                        <th>Estudinate</th>
+                        <th>Estudiante</th>
                         <th>Asesor</th>
                         <th>Observaciones</th>
                         <th>Nota</th>
@@ -165,12 +187,23 @@
                   <tbody>
                     {% for asignacionclinica in clinicas %}
                     <tr>
+                      {{dump(asignacionclinica)}}
+
                         <td>{{asignacionclinica.idClinica}}</td>
                         <td>{{asignacionclinica.idEstudiante}}</td>
                         <td>{{asignacionclinica.idClinica.idPersona}}</td>
                         <td>{{ asignacionclinica.observacionesClinica }}</td>
                         <td>{{ asignacionclinica.notaClinica }}</td>
                         <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+                    </tr>
+                    <tr>
+                      <div class="col-md-2">
+                          <div class="btn-group">
+                            <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion}) }}'" name="imprimir" class="btn btn-purple">
+                              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Clínicas PDF </i>
+                            </button>
+                          </div>
+                      </div>
                     </tr>
                     {% endfor %}
 
