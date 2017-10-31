@@ -16,10 +16,7 @@
     <div class="col-md-4">
     <table class="table table-striped table-bordered table-hover dataTable no-footer">
         <tbody>
-          <tr>
-              <th>Id Demandante</th>
-              <td>{{ demandante.idDemandante }}</td>
-          </tr>
+          
           <tr>
               <th>Nombre</th>
               <td>{{ demandante.nombreDemandante }}</td>
@@ -61,7 +58,7 @@
           <a href="{{ path('demandantesecre_edit', { 'idDemandante': demandante.idDemandante }) }}" class="btn blue">Editar</a>
         {% endif %}
       </tr>
-      
+
     </table>
     </div>
   </div>

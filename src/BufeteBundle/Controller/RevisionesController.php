@@ -501,6 +501,7 @@ class RevisionesController extends Controller
 
           $revisioneCopia = $revisione;
 
+
           $em = $this->getDoctrine()->getManager();
           $em->persist($revisioneCopia);
           $em->flush();
