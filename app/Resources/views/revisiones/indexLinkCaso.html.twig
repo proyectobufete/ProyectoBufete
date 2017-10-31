@@ -1,28 +1,27 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
+    <div class="actions">
+          <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
+              <button type="submit" name="buscar" class="button button1">Habilitar Entrega <i class="fa fa-plus"></i></button>
+              <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
+          </form>
+    </div>
   <h1>Entregas del caso No. {{casoEnvio.noCaso}}</h1>
 {% endblock %}
 {% block body %}
 <div class="portlet-body">
     <div class="row">
-      <div class="col-md-2">
 
-      </div>
-      <div class="col-md-6">
-        <div class="btn-group">
-          <form method="post" action="{{ path('revisiones_newLink')}}" class="form-inline" role="search">
-              <button type="submit" name="buscar" class="btn green">Habilitar Entrega <i class="fa fa-plus"></i></button>
-              <input type="hidden" name="idCaso" value="{{casoEnvio.idCaso}}"/>
-          </form>
+      <div class="col-md-offset-11">
+        <div class="col-md-2">
           <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
               <button type="submit" name="buscar" class="btn yellow">Regresar</button>
               <input type="hidden" name="id" value="{{casoEnvio.idCaso}}"/>
           </form>
-
         </div>
       </div>
-      <br>
-      <br>
+
+
       <div class="col-md-12 col-sm-12 col-xs-12">
 
         <table class="table table-striped">
@@ -38,14 +37,15 @@
 
             {% for revisione in revisiones %}
               {% if varEnvio == revisione.idCaso.idCaso %}
+              {% set counter = counter - 1 %}
                 <tr>
                   <td>
-                    <h2 class="list-group-item-heading">
+                    <h3 class="list-group-item-heading">
                       <b>
-                        {% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('d-m-Y') }}{% endif %} -
-                        {% if revisione.fechaLimite %}{{ revisione.fechaLimite|date('d-m-Y') }}{% endif %}
+                    {{(revisione.fechaCreacion|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y"))}} -
+                        {{(revisione.fechaLimite|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y"))}}
                       </b>
-                    </h2>
+                    </h3>
                     <p class="list-group-item-text">
                       <a href="#">
                       <h4><img src="{{ asset ('asst/img/revision.png')}}" width="28" height="28">{{ revisione.tituloEntrega }}</h4>
@@ -60,11 +60,17 @@
                     <div align="right">
                       {% if revisione.tituloEntrega != 'CORRECCIÓN DE INFORME' %}
                         {% if revisione.fechaLimite | date('Y-m-d H:i:s') > revisione.fechaEnvio | date('Y-m-d H:i:s')and revisione.fechaEnvio != null %}
-                        <h4><span class="label label-success">Entregado</span></h4>
+                          <h4>
+                            <span class="label label-success">Entregado</span>
+                          </h4>
                         {% elseif revisione.fechaLimite|date('Y-m-d H:i:s') < revisione.fechaEnvio|date('Y-m-d H:i:s') or revisione.fechaLimite|date('Y-m-d H:i:s') == revisione.fechaEnvio|date('Y-m-d H:i:s') and revisione.fechaEnvio != null%}
-                          <h4><span class="label label-warning">Retrasada</span></h4>
+                          <h4>
+                            <span class="label label-warning">Retrasada</span>
+                          </h4>
                         {% elseif revisione.fechaEnvio == null %}
-                          <h4><span class="label label-info">Pendiente</span></h4>
+                          <h4>
+                            <span class="label label-info">Pendiente</span>
+                          </h4>
                         {% endif %}
                       {% endif %}
                     </div>
@@ -74,45 +80,66 @@
 
                         {% if revisione.fechaLimite == null and revisione.fechaEnvio == null %}
                           <li>
-                            <a href="{{ path('revisiones_showRevision', { 'idRevision': revisione.idRevision }) }}">
-                              <img src="{{ asset ('asst/img/ver.png')}}" width="25" height="25">Detalle</a>
+                            <form method="post" action="{{ path('revisiones_showRevision')}}" class="form-inline" role="search">
+                              <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
+                              </button>
+                            </form>
+
                           </li>
                           <li>
 
                             <form method="post" action="{{ path('revisiones_editRevision')}}" class="form-inline" role="search">
-                              <button type="submit" name="buscar" class="btn blue">Editar Revisión</button>
-                              <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                              <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                <b>Editar Revisión </b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
+                              </button>
                             </form>
 
                           </li>
                         {% elseif (revisione.fechaLimite != null or revisione.fechaEnvio != null)or(revisione.fechaLimite != null or revisione.fechaEnvio == null) %}
                           <li>
-                            <a href="{{ path('revisiones_showLink', { 'idRevision': revisione.idRevision }) }}">Detalles
-                              <img src="{{ asset ('asst/img/ver.png')}}" width="25" height="25"></a>
+
+
+                              <form method="post" action="{{ path('revisiones_showLink')}}" class="form-inline" role="search">
+                                <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                  <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                                  <b>Detalles</b>   <img src="{{ asset ('asst/img/ver.png')}}" width="22" height="22">
+                                </button>
+                              </form>
+
                           </li>
                           <li>
-                            {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
+
+
+                            {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null and revisione.fechaLimite > date('now') %}
                               <form id="myform" method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
-                                <a href="#" onclick="document.getElementById('myform').submit()">Editar Entrega
-                                  <img src="{{ asset ('asst/img/edit.png')}}" width="25" height="25"></a>
+                                  <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                    <b>Editar Entrega</b>   <img src="{{ asset ('asst/img/edit.png')}}" width="22" height="22">
+                                  </button>
                                 <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
                               </form>
                             {% endif %}
-                            {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and(counterF == counter + 1) %}
 
-                              <form method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
-                                <button type="submit" name="buscar" class="btn blue">Agregar Revision *</button>
+                            {% if revisione.fechaEnvio != null and revisione.nombreArchivo != null and revisione.tituloEntrega != "CORRECCIÓN DE INFORME" and revisione.RutaArchivo != null and(counterF == counter + 1) %}
+                              <form id="myform2" method="post" action="{{ path('revisiones_uploadRevision')}}" class="form-inline" role="search">
+                                  <button type="submit" name="buscar" class="btn btn-trs  btn-sm  ">
+                                    <b>Agregar Revisión</b>   <img src="{{ asset ('asst/img/add.png')}}" width="22" height="22">
+                                  </button>
                                 <input type="hidden" name="idCaso" value="{{varEnvio}}"/>
                               </form>
                             {% endif %}
+
+
                           </li>
                         {% endif %}
 
                       </ul>
                     </div>
-                  </td>
+                </td>
                 </tr>
-              {% endif %}
+            {% endif %}
             {% endfor %}
 
           </tbody>

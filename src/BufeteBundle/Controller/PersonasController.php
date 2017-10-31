@@ -34,24 +34,50 @@ class PersonasController extends Controller
    * Lista de asesores
    *
    */
-  public function indexAsesoresAction()
+  public function indexAsesoresAction(Request $request)
   {
       $em = $this->getDoctrine()->getManager();
-
+      $searchQuery = $request->get('query');
+      $asesores = null;
       $rol = $this->getUser()->getRole();
+
       if ($rol == "ROLE_ADMIN") {
-        $query = $em->CreateQuery(
-            "SELECT p FROM BufeteBundle:Personas p
-            WHERE p.role LIKE 'ROLE_ASESOR'"
-          );
-        $asesores = $query->getResult();
+        if (!empty($searchQuery)) {
+          $repo = $em->getRepository("BufeteBundle:Personas");
+          $query = $repo->createQueryBuilder('p')
+          ->where('p.nombrePersona LIKE :param')
+          ->andWhere('p.role = :rol')
+          ->setParameter('rol', 'ROLE_ASESOR')
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $asesores = $query->getResult();
+        } else {
+          $query = $em->CreateQuery(
+              "SELECT p FROM BufeteBundle:Personas p
+              WHERE p.role LIKE 'ROLE_ASESOR'"
+            );
+          $asesores = $query->getResult();
+        }
       } elseif ($rol == "ROLE_SECRETARIO") {
         $bufete = $this->getUser()->getIdBufete();
-        $query = $em->CreateQuery(
-            "SELECT p FROM BufeteBundle:Personas p
-            WHERE p.role LIKE 'ROLE_ASESOR' and p.idBufete = :id"
-          )->setParameter('id', $bufete);
-        $asesores = $query->getResult();
+        if (!empty($searchQuery)) {
+          $repo = $em->getRepository("BufeteBundle:Personas");
+          $query = $repo->createQueryBuilder('p')
+          ->where('p.nombrePersona LIKE :param')
+          ->andWhere('p.idBufete = :id')
+          ->andWhere('p.role = :rol')
+          ->setParameter('rol', 'ROLE_ASESOR')
+          ->setParameter('id', $bufete)
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $asesores = $query->getResult();
+        } else {
+          $query = $em->CreateQuery(
+              "SELECT p FROM BufeteBundle:Personas p
+              WHERE p.role LIKE 'ROLE_ASESOR' and p.idBufete = :id"
+            )->setParameter('id', $bufete);
+          $asesores = $query->getResult();
+        }
       }
 
         return $this->render('personas/indexAsesores.html.twig', array(
@@ -63,17 +89,39 @@ class PersonasController extends Controller
    * Lista de casos laborales segun el asesor logueado
    *
    */
-  public function laboralesAsesorAction()
+  public function laboralesAsesorAction(Request $request)
   {
-      $idAsesor = $this->getUser()->getIdPersona();
       $em = $this->getDoctrine()->getManager();
-      $query = $em->createQuery(
-        "SELECT c FROM BufeteBundle:Casos c
-        INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
-        WHERE c.idPersona = :id
-        ORDER BY c.fechaCaso DESC"
-      )->setParameter('id', $idAsesor);
-      $casos = $query->getResult();
+      $idAsesor = $this->getUser()->getIdPersona();
+
+      $searchQuery = $request->get('query');
+      $casos = null;
+
+      if (!empty($searchQuery)) {
+        $repo = $em->getRepository("BufeteBundle:Casos");
+        $query = $repo->createQueryBuilder('c')
+        ->innerJoin('BufeteBundle:Laborales', 'l', 'WITH', 'c.idCaso = l.idCaso')
+        ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+        ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = c.idEstudiante')
+        ->orWhere('c.noCaso LIKE :param')
+        ->orWhere('d.nombreDemandante LIKE :param')
+        ->orWhere('c.nombreDemandado LIKE :param')
+        ->orWhere('e.carneEstudiante LIKE :param')
+        ->andWhere('c.idPersona = :id')
+        ->setParameter('id', $idAsesor)
+        ->setParameter('param', '%'.$searchQuery.'%')
+        ->orderBy('c.fechaCaso', 'DESC')
+        ->getQuery();
+        $casos = $query->getResult();
+      } else {
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+          WHERE c.idPersona = :id
+          ORDER BY c.fechaCaso DESC"
+        )->setParameter('id', $idAsesor);
+        $casos = $query->getResult();
+      }
 
       return $this->render('casos/laboralesestudiante.html.twig', array(
           'casos' => $casos,
@@ -145,22 +193,39 @@ class PersonasController extends Controller
    * Lists all persona entities.
    *
    */
-  public function indexUsuariosAction()
+  public function indexUsuariosAction(Request $request)
   {
-
       $em = $this->getDoctrine()->getManager();
+      $personas = null;
+      $searchQuery = $request->get('query');
 
-      $query = $em->createQuery(
-        "SELECT p FROM BufeteBundle:Personas p
-        WHERE p.role LIKE :asesor OR p.role LIKE :admin OR p.role LIKE :director OR p.role LIKE :secretario
-        ORDER BY p.role"
-      )
-      ->setParameter('asesor', 'ROLE_ASESOR')
-      ->setParameter('admin', 'ROLE_ADMIN')
-      ->setParameter('director', 'ROLE_DIRECTOR')
-      ->setParameter('secretario', 'ROLE_SECRETARIO');
-      $personas = $query->getResult();
-      //$personas = $em->getRepository('BufeteBundle:Personas')->findAll();
+      if (!empty($searchQuery)) {
+        $repo = $em->getRepository("BufeteBundle:Personas");
+        $query = $repo->createQueryBuilder('p')
+        ->orWhere('p.role = :asesor')
+        ->orWhere('p.role = :admin')
+        ->orWhere('p.role = :secretario')
+        ->orWhere('p.role = :director')
+        ->andWhere('p.nombrePersona LIKE :param')
+        ->setParameter('asesor', 'ROLE_ASESOR')
+        ->setParameter('admin', 'ROLE_ADMIN')
+        ->setParameter('director', 'ROLE_DIRECTOR')
+        ->setParameter('secretario', 'ROLE_SECRETARIO')
+        ->setParameter('param', '%'.$searchQuery.'%')
+        ->getQuery();
+        $personas = $query->getResult();
+      } else {
+        $query = $em->createQuery(
+          "SELECT p FROM BufeteBundle:Personas p
+          WHERE p.role LIKE :asesor OR p.role LIKE :admin OR p.role LIKE :director OR p.role LIKE :secretario
+          ORDER BY p.role"
+        )
+        ->setParameter('asesor', 'ROLE_ASESOR')
+        ->setParameter('admin', 'ROLE_ADMIN')
+        ->setParameter('director', 'ROLE_DIRECTOR')
+        ->setParameter('secretario', 'ROLE_SECRETARIO');
+        $personas = $query->getResult();
+      }
 
       return $this->render('personas/index.html.twig', array(
           'personas' => $personas,
@@ -302,7 +367,7 @@ public function HistorialEstudianteClinicasAction(Request $request, Personas $pe
 
 
   public function registroAction(Request $request)
-  {
+{
           $persona = new Personas();
           $estudiantes = new Estudiantes();
           $persona->setEstudiantes($estudiantes);
@@ -325,14 +390,44 @@ public function HistorialEstudianteClinicasAction(Request $request, Personas $pe
 
           $nomComp =""; $carrera =""; $telefono=""; $correo=""; $direccion=""; $muni_dep="";
 
-          if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
+          $permiso = false;
+          if(isset($datos))
           {
-              $carne = $datos->DATOS[0]->CARNET;
-              $nomComp =$datos->DATOS[0]->NOM1." ".$datos->DATOS[0]->NOM2." ".$datos->DATOS[0]->NOM3." ".$datos->DATOS[0]->APE1." ".$datos->DATOS[0]->APE2;
-              $telefono=$datos->DATOS->TELEFONO;
-              $correo=$datos->DATOS->CORREO;
-              $direccion=$datos->DATOS->DIRECCION;
-              $muni_dep=$datos->DATOS->MUNICIPIO." ".$datos->DATOS->DEPARTAMENTO;
+            if($datos == 1)
+            {
+              $status = "ERROR DE CONEXIÓN";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if($datos==6)
+            {
+              $status = "CARNE INCORRECTO";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if($datos==16)
+            {
+              $status = "EL ESTUDIANTE NO SE ENCUENTRA INSCRITO";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if($datos==10)
+            {
+              $status = "EL ESTUDIANTE NO ESTA INSCRITO EN LA DIVISIÓN DE CIENCIAS JURIDICAS Y SOCIALES";
+              $this->session->getFlashBag()->add("status", $status);
+            }
+            else if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
+            {
+              if($datos->STATUS==1 )
+              {
+                $carne = $datos->DATOS[0]->CARNET;
+                $nomComp =$datos->DATOS[0]->NOM1." ".$datos->DATOS[0]->NOM2." ".$datos->DATOS[0]->NOM3." ".$datos->DATOS[0]->APE1." ".$datos->DATOS[0]->APE2;
+                $telefono=$datos->DATOS->TELEFONO;
+                $correo=$datos->DATOS->CORREO;
+                $direccion=$datos->DATOS->DIRECCION;
+                $muni_dep=$datos->DATOS->MUNICIPIO." ".$datos->DATOS->DEPARTAMENTO;
+              }
+            }
+            else {
+              $status = "NO ENCONTRADO";
+            }
           }
 
           $form = $this->createForm('BufeteBundle\Form\PersonasEstudianteType', $persona,
@@ -344,8 +439,6 @@ public function HistorialEstudianteClinicasAction(Request $request, Personas $pe
                     'correoEnvio'=>$correo,
                     'passEnvio' =>$pass,
                   ));
-
-
 
           $form->handleRequest($request);
           $confirm = null;
@@ -821,10 +914,78 @@ public function HistorialEstudianteClinicasAction(Request $request, Personas $pe
          ));
      }
 
+     /**
+      * Lista de asesores para el Director
+      *
+      */
+     public function indexAsesoresDirAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $searchQuery = $request->get('query');
+         $searchBufete = $request->get('sbufete');
+         $asesores = null;
+         $rol = $this->getUser()->getRole();
 
+         if ($rol == "ROLE_DIRECTOR") {
+           if (!empty($searchQuery ||$searchBufete)) {
+             $repo = $em->getRepository("BufeteBundle:Personas");
+             $query = $repo->createQueryBuilder('p')
+             #->where('p.nombrePersona LIKE :param')
+             ->Where('p.idBufete = :searchbufete')
+             ->andWhere('p.role = :rol')
+             ->setParameter('rol', 'ROLE_ASESOR')
+             ->setParameter('searchbufete', $searchBufete)
+             #->setParameter('param', '%'.$searchQuery.'%')
+             ->getQuery();
+             $asesores = $query->getResult();
+             $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
+           } else {
+             $query = $em->CreateQuery(
+                 "SELECT p FROM BufeteBundle:Personas p
+                 WHERE p.role LIKE 'ROLE_ASESOR'"
+               );
+             $asesores = $query->getResult();
+             $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
+           }
+         }
 
+           return $this->render('personas/indexAsesorDir.html.twig', array(
+             'asesores' => $asesores,
+             'bufetes' => $bufetes,
+           ));
+     }
 
-
+     /**
+      * funcion para el historial de Asesor
+      *
+      */
+      public function HistorialAsesorAction(Request $request, Personas $persona)
+      {
+        $idas=  $request->get('id');
+        //$carne = $persona->getestudiantes()->getcarneEstudiante();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Civiles l WITH c = l.idCaso
+          WHERE c.idPersona = :id");
+        $query->setParameter('id', $idas);
+        $civiles = $query->getResult();
+        $query2 = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+          WHERE c.idPersona = :id");
+        $query2->setParameter('id', $idas);
+        $laborales = $query2->getResult();
+        $query3 = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Clinicas c WHERE c.idPersona = :id");
+        $query3->setParameter('id', $idas);
+        $clinicas = $query3->getResult();
+        return $this->render('personas/HistorialAsesor.html.twig', array(
+            'civiles' => $civiles,
+            'laborales' => $laborales,
+            'clinicas' => $clinicas,
+        ));
+      }
 
 
 

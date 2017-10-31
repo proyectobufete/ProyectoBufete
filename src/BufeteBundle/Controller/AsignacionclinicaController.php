@@ -55,7 +55,7 @@ class AsignacionclinicaController extends Controller
      */
       public function listEstudiantesAction(Request $request)
       {
-        $clin = $request->get('idAsignacion');;
+        $clin = $request->get('idAsignacion');
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
         if($rol == "ROLE_ADMIN")
@@ -179,7 +179,6 @@ class AsignacionclinicaController extends Controller
               ->getQuery();
               $asignacionclinicas = $query->getResult();
           }
-
           return $this->render('asignacionclinica/ListClinicasEstAsesor.html.twig', array(
               'asignacionclinicas' => $asignacionclinicas,
               'per' => $per,
@@ -329,6 +328,27 @@ class AsignacionclinicaController extends Controller
             'edit_form' => $editForm->createView(),
         ));
     }*/
+
+
+    /**
+     * Listado de Estudiantes por Clinica para vista asesor
+     *
+     */
+      public function ListClinicasEstAction()
+      {
+        $em = $this->getDoctrine()->getManager();
+        $rol = $this->getUser()->getRole();
+        $per = $this->getUser()->getEstudiantes()->getIdEstudiante();
+
+            $query = $em->createQuery(
+              "SELECT a FROM BufeteBundle:Asignacionclinica a WHERE a.idEstudiante = :est");
+            $query->setParameter('est', $per);
+            $asignacionclinicas = $query->getResult();
+
+        return $this->render('asignacionclinica/listClinicasEst.html.twig', array(
+            'asignacionclinicas' => $asignacionclinicas,
+        ));
+      }
 
     /**
      * Deletes a asignacionclinica entity.

@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
-<link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="img/favicon_1.ico">
 
         <title>Bufete Popular </title>
@@ -19,7 +19,7 @@
         <!-- Google-Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600,700,900,400italic' rel='stylesheet'>
 
-        
+
 
         <link  href="{{asset('asst/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('asst/css/bootstrap-reset.css')}}" rel="stylesheet">
@@ -53,7 +53,7 @@
             <!-- brand -->
             <div class="logo">
                 <a href="index.html" class="logo-expanded">
-                    <img src="{{asset('asst/img/logo.png')}}" width="170px" height="60px" alt="logo">
+                    <img src="{{asset('asst/img/logo3.jpeg')}}" width="200px" height="80px" alt="logo">
                     <span class="nav-label"></span>
                 </a>
             </div>
@@ -74,13 +74,13 @@
                   {% endif %}
                   {% if is_granted('ROLE_SECRETARIO') %}
 
-                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac8 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
                             <li class="{% block ac9 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
                         </ul>
                     </li>
-                    <li class="has-submenu  {% block act12 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Practicas</span></a>
+                    <li class="has-submenu  {% block act12 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Practicas</span></a>
                         <ul class="list-unstyled">
                           <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
                           <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
@@ -92,7 +92,7 @@
                             <li class="{% block ac25 %}{% endblock %}"><a href="{{path("asignacionclinica_index")}}">Asignar Clínicas</a></li>
                         </ul>
                     </li>
-                    <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-android-contact"></i> <span class="nav-label">Personas</span></a>
+                    <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-android-social"></i> <span class="nav-label">Personas</span></a>
                         <ul class="list-unstyled">
                           <li class="{% block ac16 %}{% endblock %}"><a href="{{path("demandantes_index")}}">Demandantes</a></li>
                             <li class="{% block ac12 %}{% endblock %}"><a href="{{path("personas_indexEstudiantes")}}">Estudiantes</a></li>
@@ -116,15 +116,21 @@
                     </li>
                   {% endif %}
                   {% if is_granted('ROLE_ESTUDIANTE')%}
-                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
                       <ul class="list-unstyled">
                           <li class="{% block ac21 %}{% endblock %}"><a href="{{path("casos_casoslaborales")}}">Laborales</a></li>
                           <li class="{% block ac22 %}{% endblock %}"><a href="{{path("casos_casosciviles")}}">Civiles</a></li>
                       </ul>
+
+                  </li>
+                  <li class="has-submenu {% block act25 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Clínicas</span></a>
+                    <ul class="list-unstyled">
+                        <li class="{% block ac31 %}{% endblock %}"><a href="{{path("asignacionclinica_listClinicasEst")}}">Clínicas asignadas</a></li>
+                    </ul>
                   </li>
                   {% endif %}
                   {% if is_granted('ROLE_ASESOR') %}
-                  <li class="has-submenu {% block act23 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                  <li class="has-submenu {% block act23 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
                       <ul class="list-unstyled">
                           <li class="{% block ac26 %}{% endblock %}"><a href="{{path("personas_laboralesAsesor")}}">Laborales</a></li>
                           <li class="{% block ac27 %}{% endblock %}"><a href="{{path("personas_civilesAsesor")}}">Civiles</a></li>
@@ -134,6 +140,13 @@
                       <ul class="list-unstyled">
                           <li class="{% block ac30 %}{% endblock %}"><a href="{{path("asignacionclinica_asesor")}}">Clínicas</a></li>
                       </ul>
+                  </li>
+                  {% endif %}
+                  {% if is_granted('ROLE_DIRECTOR')%}
+                  <li class="has-submenu {% block act26 %}{% endblock %}"><a href="#"><i class="ion-android-social"></i> <span class="nav-label">Personas</span></a>
+                    <ul class="list-unstyled">
+                        <li class="{% block ac34 %}{% endblock %}"><a href="{{path("personas_indexAsesoresDir")}}">Asesores</a></li>
+                    </ul>
                   </li>
                   {% endif %}
                 </ul>
@@ -158,6 +171,7 @@
                 <ul class="list-inline navbar-right top-menu top-right-menu">
                   {% if app.user != null %}
                     <!-- user login dropdown start-->
+
                     <li class="dropdown text-center">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar-2.jpg" class="img-circle profile-img thumb-sm">

@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class RevisionesEstudiantesType extends AbstractType
 {
     /**
@@ -20,23 +20,13 @@ class RevisionesEstudiantesType extends AbstractType
     {
       $this->rutaEnvio = $options['rutaEnvio'];
         $builder
-          //->add('idPersona')
           ->add('tituloEntrega')
-          /*
-            ->add('fechaCreacion', DateTimeType::class, array(
-              "data" => new \DateTime("now")
+          ->add('rutaArchivo',FileType::class, array(
+              'data_class' => null,
             ))
-          */
-          //->add('nombreArchivo')
-          ->add('rutaArchivo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
-          //->add('fechaLimite')
           ->add('comentarios')
-          ->add('fechaEnvio', DateTimeType::class, array(
-              "data" => new \DateTime("now")
-          ))
-          //->add('estadoRevision')
-          //->add('idCaso')
-          //->add(‘idRevisado’)
+          ->add('fechaEnvio', HiddenType::class, array(
+                'data' => '2011/02/05',))
           ;
     }
 
