@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+{% block act24 %}active{% endblock %}
+{% block ac30 %}active{% endblock %}
+{% block title %}
+  <h1>Listado de Clínicas</h1>
+{% endblock %}
+{% block body %}
+<div class="portlet-body">
+    <div class="row">
+      <div class="col-md-2">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"/>
+          </div>
+        </form>
+      </div>
+      <br>
+      <br>
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="table-responsive">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Fecha de Inicio</th>
+              <th>Fecha de Finalización</th>
+              <th>Observaciones</th>
+              <th>Estado </th>
+              <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for clinica in clinicas %}
+          <tr>
+            <td>{{ clinica.nombreClinica }}</td>
+            <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+            <td>{{ clinica.observaciones }}</td>
+            <td>{{ clinica.estadoClinica }}</td>
+              <td>
+                  <a href="{{ path('asignacionclinica_listClinicasEstAsesor', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
+              </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

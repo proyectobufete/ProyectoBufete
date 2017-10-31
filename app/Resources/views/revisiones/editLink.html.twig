@@ -1,0 +1,69 @@
+{% extends 'layout.html.twig' %}
+
+      {% block title %}
+        <h1>Editar Link</h1>
+      {% endblock %}
+
+{% block body %}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="cmxform form-horizontal tasi-form" >
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Titulo de Revisión</label>
+                  <div class="col-md-5">
+                      {{form_widget(edit_form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Entrega</label>
+                  <div class="col-md-5">
+
+                      {{form_widget(edit_form.fechaLimite,{'value' : fechaHoraLimEnvio, 'attr':{'class' : 'form-control'}, 'type' : 'datetime-local'} ) }}
+                      <span class="help-block">
+                        <small>dia/mes/año hora:minutos</small>
+                      </span>
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Prioridad</label>
+                  <div class="col-md-5">
+                      {{form_widget(edit_form.estadoRevision) }}
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Fecha de Creación</label>
+                  <div class="col-md-5">
+                      {{form_widget(edit_form.fechaCreacion) }}
+                  </div>
+              </div>
+            </div>
+            <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Editar</button>
+              <a href=""><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
+
+
+
+{% endblock %}

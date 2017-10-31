@@ -37,10 +37,9 @@
         <thead>
           <tr>
               <th>Clínica</th>
-              <th>Estudinate</th>
-              <th>Carné</th>
               <th>Asesor</th>
-              <th>Observaciones</th>
+              <th>Fecha de Inicio</th>
+              <th>Fecha de Finalización</th>
               <th>Estado</th>
               <th>Opciones</th>
           </tr>
@@ -48,15 +47,13 @@
         <tbody>
           {% for asignacionclinica in asignacionclinicas %}
           <tr>
-              <td>{{asignacionclinica.idClinica}}</td>
-              <td>{{asignacionclinica.idEstudiante}}</td>
-              <td>{{asignacionclinica.idEstudiante.carneEstudiante}}</td>
-              <td>{{asignacionclinica.idClinica.idPersona}}</td>
-              <td>{{ asignacionclinica.observacionesClinica }}</td>
-              <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+              <td>{{asignacionclinica.nombreClinica}}</td>
+              <td>{{asignacionclinica.idPersona}}</td>
+              <td>{% if asignacionclinica.fechaAsignacion %}{{ asignacionclinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+              <td>{% if asignacionclinica.fechaFin %}{{ asignacionclinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+              <td>{% if asignacionclinica.estadoClinica %}Activo{% else %}No{% endif %}</td>
               <td>
-                  <a href="{{ path('asignacionclinica_show', { 'idAsignacion': asignacionclinica.idAsignacion }) }}" class="btn yellow" >Ver</a>
-                  <a href="{{ path('asignacionclinica_edit', { 'idAsignacion': asignacionclinica.idAsignacion }) }}" class="btn blue">Editar</a>
+                  <a href="{{ path('asignacionclinica_listEstudiantes', { 'idAsignacion': asignacionclinica.idClinica }) }}" class="btn yellow" >Listado</a>
               </td>
           </tr>
           {% endfor %}

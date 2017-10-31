@@ -1,0 +1,76 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+  <h1><b>Detalles de Revisión</b></h1>
+{% endblock %}
+{% block body %}
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-8">
+            <h2></h2>
+          <table class="table table-striped table-hover dataTable no-footer">
+              <tbody>
+                <tr>
+                  <th>Asesor</th>
+                  <td>{{ asesorEnvio }}</td>
+                </tr>
+                <tr>
+                  <th>Número de caso</th>
+                  <td>{{ nocasoEnvio }}</td>
+                </tr>
+                <tr>
+                  <th>Fecha de envio</th>
+                  <td>{{(revisione.fechaCreacion|localizeddate('long', 'none', 'es', null, "cccc, d MMMM Y '-' hh:mm aaa"))}}</td>
+                </tr>
+                <tr>
+                    <th>Prioridad</th>
+                    <td>
+                      {% if revisione.estadoRevision == 3 %}
+                        <span class="label label-danger">Alta</span>
+                      {% elseif revisione.estadoRevision == 2 %}
+                        <span class="label label-warning">Media</span>
+                        {% elseif revisione.estadoRevision == 1 %}
+                          <span class="label label-info">Baja</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if revisione.idPersona == 3 %}
+                        {{ "Alta"  }}
+                      {% elseif revisione.idPersona == 2 %}
+                        {{"Media"}}
+                      {% elseif revisione.idPersona == 1 %}
+                        {{"Baja"}}
+                      {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Archivo enviado</th>
+                    <td>
+                      {% if revisione.RutaArchivo != null %}
+                        <a href="{{ asset (ruta~revisione.RutaArchivo) }}" download>
+                          <img src="{{ asset (ruta~'/pdf.png')}}" width="28" height="30">{{ revisione.nombreArchivo }}
+                        </a>
+                      {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                    <th>Comentarios</th>
+                    <td>{{ revisione.comentarios }}</td>
+                </tr>
+              </tbody>
+          </table>
+
+          <div class="form-actions">
+
+              <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn btn-default w-xs m-b-5">Regresar</button>
+                  <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
+              </form>
+               {{ form_start(delete_form) }}
+              <input type="submit" value="Delete" class="btn btn-danger w-xs m-b-5">
+              {{ form_end(delete_form) }}
+          </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

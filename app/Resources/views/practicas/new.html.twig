@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
-{% block act2 %}active{% endblock %}
+{% block act12 %}active{% endblock %}
 {% block ac28 %}active{% endblock %}
       {% block title %}
         <h1>Asignar Práctica</h1>
@@ -24,7 +24,7 @@
             <div class="row">
               <div class="col-md-6">
                 {{form_label(form.idEstudiante,'Estudiante')}}
-                {{ form_widget(form.idEstudiante,{'attr':{'class' : 'form-control'}}) }}
+                {{ form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
               </div>
             </div>
             <div class="row">

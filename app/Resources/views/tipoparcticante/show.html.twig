@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
-{% block act2 %} active {% endblock %}
+{% block act12 %} active {% endblock %}
 {% block ac24 %} active {% endblock %}
 {% block title %}
   <h1>Detalles</h1>
@@ -23,15 +23,10 @@
 
           <table>
             <tr>
-              <a href="{{ path('tipoparcticante_index') }}" class="btn default">Regresar</a>
+              <a href="{{ path('tipoparcticante_index') }}" class="btn grey">Regresar</a>
             </tr>
             <tr>
               <a href="{{ path('tipoparcticante_edit', { 'idtipopracticante': tipoparcticante.idtipopracticante }) }}" class="btn blue">Editar</a>
-            </tr>
-            <tr>
-              {{ form_start(delete_form) }}
-                  <button type="submit" class="btn red" name="Delete">Eliminar</button>
-              {{ form_end(delete_form) }}
             </tr>
           </table>
           </div>

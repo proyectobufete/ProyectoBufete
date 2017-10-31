@@ -11,21 +11,53 @@ class Revisiones
 
     /**
      * @Assert\File(
-     *     maxSize = "10000k",
+     *     maxSize = "5000k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF"
+     *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF",
      * )
      */
-    protected $ruta;
+    protected $rutaArchivo;
+
+
     /**
      * @var integer
      */
     private $idRevision;
 
     /**
+     * @var integer
+     */
+    private $idPersona;
+
+    /**
      * @var string
      */
-    private $observaciones;
+    private $tituloEntrega;
+
+    /**
+     * @var \DateTime
+     */
+    private $fechaCreacion;
+
+    /**
+     * @var string
+     */
+    private $nombreArchivo;
+
+    /**
+     * @var string
+     */
+    //private $rutaArchivo;
+
+    /**
+     * @var \DateTime
+     */
+    private $fechaLimite;
+
+    /**
+     * @var string
+     */
+    private $comentarios;
 
     /**
      * @var \DateTime
@@ -33,19 +65,26 @@ class Revisiones
     private $fechaEnvio;
 
     /**
-     * @var \DateTime
+     * @var integer
      */
-    private $fechaRevision;
-
-    /**
-     * @var string
-     */
-    private $ruta1;
+    private $estadoRevision;
 
     /**
      * @var \BufeteBundle\Entity\Casos
      */
     private $idCaso;
+
+
+
+
+
+    /**
+     * @var integer
+     */
+    private $idRevisado;
+
+
+
 
 
     /**
@@ -59,27 +98,172 @@ class Revisiones
     }
 
     /**
-     * Set observaciones
+     * Set idPersona
      *
-     * @param string $observaciones
+     * @param integer $idPersona
      *
      * @return Revisiones
      */
-    public function setObservaciones($observaciones)
+    public function setIdPersona($idPersona)
     {
-        $this->observaciones = $observaciones;
+        $this->idPersona = $idPersona;
 
         return $this;
     }
 
     /**
-     * Get observaciones
+     * Get idPersona
+     *
+     * @return integer
+     */
+    public function getIdPersona()
+    {
+        return $this->idPersona;
+    }
+
+    /**
+     * Set tituloEntrega
+     *
+     * @param string $tituloEntrega
+     *
+     * @return Revisiones
+     */
+    public function setTituloEntrega($tituloEntrega)
+    {
+        $this->tituloEntrega = $tituloEntrega;
+
+        return $this;
+    }
+
+    /**
+     * Get tituloEntrega
      *
      * @return string
      */
-    public function getObservaciones()
+    public function getTituloEntrega()
     {
-        return $this->observaciones;
+        return $this->tituloEntrega;
+    }
+
+    /**
+     * Set fechaCreacion
+     *
+     * @param \DateTime $fechaCreacion
+     *
+     * @return Revisiones
+     */
+    public function setFechaCreacion($fechaCreacion)
+    {
+        $this->fechaCreacion = new \DateTime("now");
+        //$this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaCreacion
+     *
+     * @return \DateTime
+     */
+    public function getFechaCreacion()
+    {
+        return $this->fechaCreacion;
+    }
+
+    /**
+     * Set nombreArchivo
+     *
+     * @param string $nombreArchivo
+     *
+     * @return Revisiones
+     */
+    public function setNombreArchivo($nombreArchivo)
+    {
+        $this->nombreArchivo = $nombreArchivo;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreArchivo
+     *
+     * @return string
+     */
+    public function getNombreArchivo()
+    {
+        return $this->nombreArchivo;
+    }
+
+    /**
+     * Set rutaArchivo
+     *
+     * @param string $rutaArchivo
+     *
+     * @return Revisiones
+     */
+    public function setRutaArchivo($rutaArchivo)
+    {
+        $this->rutaArchivo = $rutaArchivo;
+
+        return $this;
+    }
+
+    /**
+     * Get rutaArchivo
+     *
+     * @return string
+     */
+    public function getRutaArchivo()
+    {
+        return $this->rutaArchivo;
+    }
+
+    /**
+     * Set fechaLimite
+     *
+     * @param \DateTime $fechaLimite
+     *
+     * @return Revisiones
+     */
+    public function setFechaLimite($fechaLimite)
+    {
+        $this->fechaLimite = $fechaLimite;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaLimite
+     *
+     * @return \DateTime
+     */
+    public function getFechaLimite()
+    {
+        return $this->fechaLimite;
+    }
+
+    /**
+     * Set comentarios
+     *
+     * @param string $comentarios
+     *
+     * @return Revisiones
+     */
+    public function setComentarios($comentarios)
+    {
+        $this->comentarios = $comentarios;
+
+        return $this;
+    }
+
+    /**
+     * Get comentarios
+     *
+     * @return string
+     */
+    public function getComentarios()
+    {
+        return $this->comentarios;
     }
 
     /**
@@ -91,7 +275,8 @@ class Revisiones
      */
     public function setFechaEnvio($fechaEnvio)
     {
-        $this->fechaEnvio = $fechaEnvio;
+        $this->fechaEnvio = new \DateTime("now");
+        //$this->fechaEnvio = $fechaEnvio;
 
         return $this;
     }
@@ -107,51 +292,27 @@ class Revisiones
     }
 
     /**
-     * Set fechaRevision
+     * Set estadoRevision
      *
-     * @param \DateTime $fechaRevision
+     * @param integer $estadoRevision
      *
      * @return Revisiones
      */
-    public function setFechaRevision($fechaRevision)
+    public function setEstadoRevision($estadoRevision)
     {
-        $this->fechaRevision = $fechaRevision;
+        $this->estadoRevision = $estadoRevision;
 
         return $this;
     }
 
     /**
-     * Get fechaRevision
+     * Get estadoRevision
      *
-     * @return \DateTime
+     * @return integer
      */
-    public function getFechaRevision()
+    public function getEstadoRevision()
     {
-        return $this->fechaRevision;
-    }
-
-    /**
-     * Set ruta
-     *
-     * @param string $ruta
-     *
-     * @return Revisiones
-     */
-    public function setRuta($ruta)
-    {
-        $this->ruta = $ruta;
-
-        return $this;
-    }
-
-    /**
-     * Get ruta
-     *
-     * @return string
-     */
-    public function getRuta()
-    {
-        return $this->ruta;
+        return $this->estadoRevision;
     }
 
     /**
@@ -176,5 +337,30 @@ class Revisiones
     public function getIdCaso()
     {
         return $this->idCaso;
+    }
+
+
+    /**
+     * Set idRevisado
+     *
+     * @param integer $idRevisado
+     *
+     * @return Revisiones
+     */
+    public function setIdRevisado($idRevisado)
+    {
+        $this->idRevisado = $idRevisado;
+
+        return $this;
+    }
+
+    /**
+     * Get idRevisado
+     *
+     * @return integer
+     */
+    public function getIdRevisado()
+    {
+        return $this->idRevisado;
     }
 }

@@ -3,6 +3,11 @@ asignacionclinica_index:
     defaults: { _controller: "BufeteBundle:Asignacionclinica:index" }
     methods:  GET
 
+asignacionclinica_asesor:
+    path:     /ClinicasAsesor
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:clinicasAsesor" }
+    methods:  GET
+
 asignacionclinica_show:
     path:     /{idAsignacion}/show
     defaults: { _controller: "BufeteBundle:Asignacionclinica:show" }
@@ -22,3 +27,23 @@ asignacionclinica_delete:
     path:     /{idAsignacion}/delete
     defaults: { _controller: "BufeteBundle:Asignacionclinica:delete" }
     methods:  DELETE
+
+asignacionclinica_listEstudiantes:
+    path:     /{idAsignacion}/listEstudiantes
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:listEstudiantes" }
+    methods:  GET
+
+asignacionclinica_listClinicasEstAsesor:
+    path:     /{idAsignacion}/ListClinicasEstAsesor
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:ListClinicasEstAsesor" }
+    methods:  [GET, POST]
+
+asignacionclinica_editNota:
+    path:     /{idAsignacion}/asignarNota
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:editNota" }
+    methods:  [GET, POST]
+
+asignacionclinica_listClinicasEst:
+    path:     /ListClinicasEst
+    defaults: { _controller: "BufeteBundle:Asignacionclinica:ListClinicasEst" }
+    methods:  GET

@@ -1,0 +1,112 @@
+{% extends 'layout.html.twig' %}
+
+      {% block title %}
+        <h1>Crear Revisión</h1>
+      {% endblock %}
+
+{% block body %}
+
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(form, {'enctype':'multipart/form-data'}) }}
+
+        <div class="form-body colorform">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="form-group ">
+                  <label for="cname" class="control-label col-lg-2">Titulo de Revisión</label>
+                  <div class="col-md-5">
+                      {{form_widget(form.tituloEntrega,{'attr':{'class' : 'form-control'}}) }}
+                  </div>
+              </div>
+            </div>
+              <div class="row">
+                  <div class="form-group">
+                  <label for="cname" class="control-label col-lg-2">Archivo</label>
+
+                    <div class="col-md-5">
+                      {{form_errors(form.rutaArchivo)}}
+                        {{form_widget(form.rutaArchivo) }}
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="form-group ">
+                    <label for="cname" class="control-label col-lg-2">Prioridad</label>
+                    <div class="col-md-5">
+                        {{form_widget(form.estadoRevision) }}
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group ">
+                    <label for="cname" class="control-label col-lg-2">Comentarios</label>
+                    <div class="col-md-5">
+                        {{form_widget(form.comentarios,{'attr':{'class' : 'form-control'}}) }}
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+              <button type="submit" name="Create" class="btn green">Crear</button>
+              <input type="hidden" name="idCaso" value="{{var}}"/>
+              <a href=""><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+
+    <script>
+    $("#input-ficons-2").fileinput({
+        uploadUrl: "/file-upload-batch/2",
+        uploadAsync: false,
+        previewFileIcon: '<i class="fa fa-file"></i>',
+        allowedPreviewTypes: null, // set to empty, null or false to disable preview for all types
+        previewFileIconSettings: {
+            'doc': '<i class="fa fa-file-word-o text-primary"></i>',
+            'xls': '<i class="fa fa-file-excel-o text-success"></i>',
+            'ppt': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+            'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+            'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+            'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+            'htm': '<i class="fa fa-file-code-o text-info"></i>',
+            'txt': '<i class="fa fa-file-text-o text-info"></i>',
+            'mov': '<i class="fa fa-file-movie-o text-warning"></i>',
+            'mp3': '<i class="fa fa-file-audio-o text-warning"></i>',
+        },
+        previewFileExtSettings: {
+            'doc': function(ext) {
+                return ext.match(/(doc|docx)$/i);
+            },
+            'xls': function(ext) {
+                return ext.match(/(xls|xlsx)$/i);
+            },
+            'ppt': function(ext) {
+                return ext.match(/(ppt|pptx)$/i);
+            },
+            'zip': function(ext) {
+                return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
+            },
+            'htm': function(ext) {
+                return ext.match(/(php|js|css|htm|html)$/i);
+            },
+            'txt': function(ext) {
+                return ext.match(/(txt|ini|md)$/i);
+            },
+            'mov': function(ext) {
+                return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
+            },
+            'mp3': function(ext) {
+                return ext.match(/(mp3|wav)$/i);
+            },
+        }
+    });
+    </script>
+
+{% endblock %}
