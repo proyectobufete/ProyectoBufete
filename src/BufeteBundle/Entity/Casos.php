@@ -522,7 +522,8 @@ class Casos
 
     public function __toString()
     {
-        return $this->pruebasCaso;
+        $numcaso = $this->noCaso;
+        return $numcaso . " ";
     }
 
 

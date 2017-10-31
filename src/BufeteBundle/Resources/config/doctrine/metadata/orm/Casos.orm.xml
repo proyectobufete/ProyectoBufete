@@ -12,7 +12,7 @@
     <id name="idCaso" type="integer" column="Id_Caso">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="noCaso" type="integer" column="No_Caso" nullable="true">
+    <field name="noCaso" type="bigint" column="No_Caso" nullable="true">
       <options>
         <option name="unsigned"/>
       </options>

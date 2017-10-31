@@ -32,7 +32,7 @@ BufeteBundle\Entity\Casos:
                 strategy: IDENTITY
     fields:
         noCaso:
-            type: integer
+            type: bigint
             nullable: true
             options:
                 unsigned: false
