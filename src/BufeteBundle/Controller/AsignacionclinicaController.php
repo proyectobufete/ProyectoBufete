@@ -110,7 +110,7 @@ class AsignacionclinicaController extends Controller
         $snappy->setOption('footer-right','Página [page] de [topage]');
         $snappy->setOption('footer-font-size','10');
             $html = $this->renderView('asignacionclinica/printnotaestudiantes.html.twig', array('asignacionclinicas' => $asignacionclinicas));
-            $filename = 'Listado'.$asignacionclinicas.get;
+            $filename = 'Listado';
             return new Response(
                 $snappy->getOutputFromHtml($html),
                 200,
