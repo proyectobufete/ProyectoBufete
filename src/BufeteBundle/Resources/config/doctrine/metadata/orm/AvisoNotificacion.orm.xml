@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AvisoNotificacion" table="aviso_notificacion">
+    <indexes>
+      <index name="IX_Relationship39" columns="Id_Caso"/>
+      <index name="IX_Relationship40" columns="Id_Estudiante"/>
+      <index name="IX_Relationship41" columns="Id_Demandante"/>
+      <index name="IX_Relationship42" columns="Id_Persona"/>
+    </indexes>
+    <id name="idAviso" type="integer" column="id_aviso">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechaVisita" type="datetime" column="fecha_visita" nullable="false"/>
+    <field name="horaVisita" type="datetime" column="hora_visita" nullable="false"/>
+    <field name="descripcion" type="string" column="descripcion" length="250" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="vista" type="boolean" column="vista" nullable="true"/>
+    <many-to-one field="idCaso" target-entity="Casos" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Caso" referenced-column-name="Id_Caso"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEstudiante" target-entity="Estudiantes" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Estudiante" referenced-column-name="Id_Estudiante"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idDemandante" target-entity="Demandantes" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Demandante" referenced-column-name="Id_Demandante"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPersona" target-entity="Personas" fetch="LAZY">
+      <join-columns>
+        <join-column name="Id_Persona" referenced-column-name="Id_Persona"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

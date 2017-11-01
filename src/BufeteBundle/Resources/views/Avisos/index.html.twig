@@ -1,0 +1,136 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+  <h1>Notificaciones</h1>
+{% endblock %}
+
+{% block body %}
+<div class="portlet-body">
+<div class="row">
+  <div class="col-lg-12">
+
+      {% if flag == 1%}
+      <form action="{{path('avisos_index')}}" method="POST">
+      <select name = "res" id="countries" class="selectpicker" data-live-search="true">
+  	{% for aviso in av %}
+                  <option value="{{aviso.no_caso}}" class="btn">{{aviso.no_caso}}</option>
+              {% endfor %}
+      </select>
+          <input type="Submit" Value="Buscar" class="btn btn-primary">
+      </form>
+
+  <br/>
+      {% endif %}
+
+      <a title="Clic para agregar un nuevo aviso" href="{{path("avisos_buscar")}}" class="btn btn-danger">Añadir Notificación</a>
+
+          {% if flag == 1%}
+            <a title="Imprimir Informe PDF" href="{{path("avisos_pdf")}}" target="_blank"  class="btn btn-success">Imprimir</a>
+
+          {% endif %}
+
+          {% if flag == 2%}
+
+             {% set break = false %}
+            {% for av in avisos if not break%}
+
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfest", {"estu":av.nombre_persona})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              {% set break = true %}
+              {% endfor %}
+
+          {% endif %}
+
+          {% if flag == 3%}
+          {% set break = false %}
+            {% for av in avisos if not break%}
+
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfcaso", {"caso":av.no_caso})}}" target="_blank" class="btn btn-success">Imprimir</a>
+               {% set break = true %}
+              {% endfor %}
+          {% endif %}
+
+          {% if flag == 4%}
+              {% set break = false %}
+            {% for av in avisos if not break%}
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfec", {"fec1":fec1, "fec2":fec2})}}" target="_blank" class="btn btn-success">Imprimir</a>
+  {% set break = true %}
+              {% endfor %}
+          {% endif %}
+
+          {% if flag == 5%}
+           {% set break = false %}
+            {% for av in avisos if not break%}
+
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfdema", {"dem":av.nombre_demandante})}}" target="_blank" class="btn btn-success">Imprimir</a>
+
+               {% set break = true %}
+              {% endfor %}
+          {% endif %}
+
+          {% if flag == 6%}
+               {% set break = false %}
+            {% for av in avisos if not break%}
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfdemdo", {"demo":av.nombre_demandado})}}" target="_blank" class="btn btn-success">Imprimir</a>
+               {% set break = true %}
+              {% endfor %}
+
+          {% endif %}
+
+          {% if flag == 7%}
+            <a title="Imprimir Informe PDF" href="{{path("avisos_pdf")}}" class="btn btn-success">Imprimir</a>
+          {% endif %}
+  <hr/>
+
+   </div>
+   <div class="col-lg-12">
+          {% for message in app.session.flashBag().get('status')%}
+              <div class="alert alert-success">{{message}} </div>
+          {% endfor %}
+
+           {% if avisos is empty %}
+                  <div class="alert alert-danger text text-center">¡Error! No existen registros</div>
+                  <a title="Clic para regresar al menú principal" href="{{path("avisos_index")}}"><span class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left"> Regresar</span></span></a>
+              {% else %}
+          <table class="table table-striped table-bordered table-hovegt6r">
+              <tr>
+                  <th  class="text-center ">No Caso</th>
+                  <th class="text-center">Estudiante</th>
+                  <th class="text-center">Demandante</th>
+                  <th class="text-center">Demandado</th>
+                  <th class="text-center">Enviada</th>
+                  <th class="text-center">Notificación</th>
+                  <th class="text-center">Proceso</th>
+                  <th class="text-center">Estado</th>
+                  <th class="text-center">Eliminar</th>
+              </tr>
+              {% for aviso in avisos %}
+                  <tr>
+                      <td class="text-center">{{aviso.no_caso}}</td>
+                      <td>{{aviso.nombre_persona}}</td>
+                      <td>{{aviso.nombre_demandante}}</td>
+                      <td>{{aviso.nombre_demandado}}</td>
+                      <td class="text-center">{{aviso.fecha_visita}}</td>
+                      <td class="text-center"><a class="fa fa-file-pdf-o" title = "Clic para Abrir Notificación" href="{{asset('uploads/'~aviso.descripcion)}}" target="_blank"></a></td>
+                      <td class="text-center">{{aviso.tipo}}</td>
+
+                      {% if aviso.vista == 0 %}
+                      <td title="" class="text-center"><span class="btn btn-danger fa fa-check-circle-o">No Visto</span></td>
+                      {% endif %}
+                          {% if aviso.vista == 1 %}
+                      <td title="{{aviso.hora_visita}}" class="text-center"><span class="btn btn-success fa fa-check fa fa-check"> Visto</span></td>
+                      {% endif %}
+                      <td class="text-center"><a title="Clic si desea Eliminar" href="{{path('avisos_eliminar',{"id":aviso.id_aviso})}}" class="glyphicon glyphicon-trash" onclick="return confirm('¿Está seguro que desea Eliminar?')"></a></td>
+                  </tr>
+              {% endfor %}
+          </table>
+          {% if flag !=1 %}
+          <a href="{{path('avisos_index')}}" title="Pulsa para ir al Menú Principal" class="btn btn-danger glyphicon glyphicon-arrow-left"> Salir</a>
+          {% endif %}
+          {% endif %}
+      </div>
+
+
+</div>
+</div>
+
+{% endblock %}
