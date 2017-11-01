@@ -104,3 +104,7 @@ bufete_revisiones:
 bufete_errores:
         resource: "@BufeteBundle/Resources/config/routing/errores.yml"
         prefix:   /errores
+
+bufete_avisos:
+        resource: "@BufeteBundle/Resources/config/routing/avisos.yml"
+        prefix:   /avisos

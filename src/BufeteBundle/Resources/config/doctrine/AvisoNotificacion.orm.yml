@@ -1,0 +1,86 @@
+BufeteBundle\Entity\AvisoNotificacion:
+    type: entity
+    table: aviso_notificacion
+    indexes:
+        IX_Relationship39:
+            columns:
+                - Id_Caso
+        IX_Relationship40:
+            columns:
+                - Id_Estudiante
+        IX_Relationship41:
+            columns:
+                - Id_Demandante
+        IX_Relationship42:
+            columns:
+                - Id_Persona
+    id:
+        idAviso:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_aviso
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaVisita:
+            type: datetime
+            nullable: false
+            column: fecha_visita
+        horaVisita:
+            type: datetime
+            nullable: false
+            column: hora_visita
+        descripcion:
+            type: string
+            nullable: true
+            length: 250
+            options:
+                fixed: true
+        vista:
+            type: boolean
+            nullable: true
+    manyToOne:
+        idCaso:
+            targetEntity: Casos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Caso:
+                    referencedColumnName: Id_Caso
+            orphanRemoval: false
+        idEstudiante:
+            targetEntity: Estudiantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Estudiante:
+                    referencedColumnName: Id_Estudiante
+            orphanRemoval: false
+        idDemandante:
+            targetEntity: Demandantes
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Demandante:
+                    referencedColumnName: Id_Demandante
+            orphanRemoval: false
+        idPersona:
+            targetEntity: Personas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Id_Persona:
+                    referencedColumnName: Id_Persona
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
