@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use BufeteBundle\Form\AsignarNotaClinicaType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Asignacionclinica controller.
@@ -77,10 +78,88 @@ class AsignacionclinicaController extends Controller
 
         return $this->render('asignacionclinica/listEstudiantes.html.twig', array(
             'asignacionclinicas' => $asignacionclinicas,
+            'idAsignacion'=>$clin,
         ));
 
       }
+      public function printnotaEstudiantesAction(Request $request)
+      {
+        $clin = $request->get('idAsignacion');
+        $em = $this->getDoctrine()->getManager();
+        $rol = $this->getUser()->getRole();
+        if($rol == "ROLE_ADMIN")
+        {
+            $asignacionclinicas = $em->getRepository('BufeteBundle:Asignacionclinica')->findAll();
+        } elseif ($rol == "ROLE_SECRETARIO") {
+            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+            $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+            $query = $repo->createQueryBuilder('a')
+            ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+            ->where('p.idBufete = :bufete')
+            ->andWhere('c.idClinica = :cli')
+            ->setParameter('bufete', $bufete)
+            ->setParameter('cli', $clin)
+            ->orderBy('a.idEstudiante', 'ASC')
+            ->getQuery();
+            $asignacionclinicas = $query->getResult();
+          }
+        $snappy = $this->get('knp_snappy.pdf');
+        $snappy->setOption('no-outline', false);
+        $snappy->setOption('encoding', 'UTF-8');
+        $snappy->setOption('page-size','LEGAL');
+        $snappy->setOption('footer-right','Página [page] de [topage]');
+        $snappy->setOption('footer-font-size','10');
+            $html = $this->renderView('asignacionclinica/printnotaestudiantes.html.twig', array('asignacionclinicas' => $asignacionclinicas));
+            $filename = 'Listado';
+            return new Response(
+                $snappy->getOutputFromHtml($html),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
 
+
+      }
+      public function printlistaEstudiantesAction(Request $request)
+      {
+        $clin = $request->get('idAsignacion');
+        $em = $this->getDoctrine()->getManager();
+        $rol = $this->getUser()->getRole();
+        if($rol == "ROLE_ADMIN")
+        {
+            $asignacionclinicas = $em->getRepository('BufeteBundle:Asignacionclinica')->findAll();
+        } elseif ($rol == "ROLE_SECRETARIO") {
+            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+            $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+            $query = $repo->createQueryBuilder('a')
+            ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+            ->where('p.idBufete = :bufete')
+            ->andWhere('c.idClinica = :cli')
+            ->setParameter('bufete', $bufete)
+            ->setParameter('cli', $clin)
+            ->orderBy('a.idEstudiante', 'ASC')
+            ->getQuery();
+            $asignacionclinicas = $query->getResult();
+          }
+        $snappy = $this->get('knp_snappy.pdf');
+        $snappy->setOption('no-outline', false);
+        $snappy->setOption('encoding', 'UTF-8');
+        $snappy->setOption('page-size','LEGAL');
+        $snappy->setOption('footer-right','Página [page] de [topage]');
+        $snappy->setOption('footer-font-size','10');
+            $html = $this->renderView('asignacionclinica/printlistaestudiantes.html.twig', array('asignacionclinicas' => $asignacionclinicas));
+            $filename = 'CasoPDF';
+            return new Response(
+                $snappy->getOutputFromHtml($html),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
+
+
+      }
       /**
        * Listado de Estudiantes por Clinica para vista asesor
        *
@@ -305,4 +384,5 @@ class AsignacionclinicaController extends Controller
             ->getForm()
         ;
     }
+
 }

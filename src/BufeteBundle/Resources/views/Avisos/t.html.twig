@@ -1,0 +1,27 @@
+{% extends "AppBundle:Default:layout.html.twig" %}
+
+{% block title %}
+            <h2 class="title"><span class="glyphicon glyphicon-bell"></span>   Notificaciones</h2></div>    
+{% endblock %}
+
+{% block content %}
+
+<div class="col-lg-12">       
+<script src="{{asset('http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')}}"></script>
+
+<link href="{{asset('asst/js/select2.css')}}" rel="stylesheet"/>
+<script src="{{asset('asst/js/select2.js')}}"></script>
+
+<script>
+//Codigo de la lista
+$(document).ready(function(){ $("#countries").select2();});
+</script>
+
+<input type="hidden" id="t"/>
+<select id="countries" class="">	
+	{% for aviso in avisos %}
+                <option value="">{{aviso.nombre_demandante}}</option>     
+            {% endfor %}         
+</select>
+</div>
+{% endblock %}

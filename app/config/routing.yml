@@ -3,7 +3,7 @@ bufete:
     prefix:   /
 
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@BufeteBundle/Controller/"
     type:     annotation
 
 
@@ -94,3 +94,7 @@ Practicas:
 Errores:
     resource: "@BufeteBundle/Resources/config/routing/errores.yml"
     prefix:     /errores
+
+Avisos:
+    resource: "@BufeteBundle/Resources/config/routing/avisos.yml"
+    prefix:     /avisos

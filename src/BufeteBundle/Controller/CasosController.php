@@ -79,7 +79,7 @@ class CasosController extends Controller
                 ->getQuery();
                 $casos = $query->getResult();
             }
-        } elseif ($rol == "ROLE_ADMIN") {
+        } elseif ($rol == "ROLE_ADMIN" ||"ROLE_DIRECTOR" ) {
             if(!empty($searchQuery) && strlen($searchQuery) == 1){
                 $query = $em->createQuery(
                   "SELECT c FROM BufeteBundle:Casos c
@@ -174,7 +174,7 @@ class CasosController extends Controller
                 ->getQuery();
                 $casos = $query->getResult();
             }
-        } elseif ($rol == "ROLE_ADMIN") {
+        } elseif ($rol == "ROLE_ADMIN"||"ROLE_DIRECTOR") {
             if(!empty($searchQuery) && strlen($searchQuery) == 1){
               $query = $em->createQuery(
                 "SELECT c FROM BufeteBundle:Casos c
@@ -827,28 +827,7 @@ class CasosController extends Controller
 
     /**
 
-* @param User $entity
-*
-* @Route("/{id}/entity-remove", requirements={"id" = "\d+"}, name="print_route_name")
-* @return RedirectResponse
-*
-*/
-   public function printcivil(User $entity)
-   {
-     $snappy = $this->get('knp_snappy.pdf');
-     $html= $this->renderView('civiles/show.html.twig');
-      $filename = 'myFirstSnappyPDF';
-      return new Response(
-          $snappy->getOutputFromHtml($html),
-          200,
-          array(
-              'Content-Type'          => 'application/pdf',
-              'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
-          )
-      );
-   }
 
-    /**
 
      * Creates a form to delete a caso entity.
      *

@@ -32,8 +32,9 @@ BufeteBundle\Entity\Casos:
                 strategy: IDENTITY
     fields:
         noCaso:
-            type: integer
+            type: string
             nullable: true
+            length: 80
             options:
                 unsigned: false
             column: No_Caso

@@ -114,6 +114,20 @@
                             <li class="{% block ac23 %}{% endblock %}"><a href="{{path("tipoasunto_index")}}">Asunto</a></li>
                         </ul>
                     </li>
+                    <li class="has-submenu {% block act28 %}{% endblock %}"><a href="#"><i class="glyphicon glyphicon-bell"></i> <span class="nav-label">Notificaciones</span></a>
+                        <ul class="list-unstyled">
+                            <li class="has-submenu"><a href="{{path("avisos_index")}}"><i class="glyphicon glyphicon-bell"></i><span class="nav-label">Ver</span></a>
+                            <li class=""><a href="{{path("avisos_buscar")}}"><i class="glyphicon glyphicon-plus"></i>Crear</a></li>
+                        <ul class="list-unstyled">
+                            <li class=""><a href="{{path("avisos_indexbuscar")}}"><i class=""></i>Estudiante</a></li>
+                            <li class=""><a href="{{path("avisos_casobuscar")}}"><i class=""></i>Caso</a></li>
+                            <li class=""><a href="{{path("avisos_fechabuscar")}}"><i class=""></i>Fecha</a></li>
+                            <li class=""><a href="{{path("avisos_dembuscar")}}"><i class=""></i>Demandante</a></li>
+                            <li class=""><a href="{{path("avisos_demandadobuscar")}}"><i class=""></i>Demandado</a></li>
+                        </ul>
+                   </li>
+                        </ul>
+                    </li>
                   {% endif %}
                   {% if is_granted('ROLE_ESTUDIANTE')%}
                   <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
@@ -146,7 +160,14 @@
                   <li class="has-submenu {% block act26 %}{% endblock %}"><a href="#"><i class="ion-android-social"></i> <span class="nav-label">Personas</span></a>
                     <ul class="list-unstyled">
                         <li class="{% block ac34 %}{% endblock %}"><a href="{{path("personas_indexAsesoresDir")}}">Asesores</a></li>
+                        <li class="{% block ac35 %}{% endblock %}"><a href="{{path("personas_indexEstudiantes")}}">Estudiantes</a></li>
                     </ul>
+                  </li>
+                  <li class="has-submenu  {% block act27 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
+                      <ul class="list-unstyled">
+                          <li class="{% block ac36 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
+                          <li class="{% block ac37 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
+                      </ul>
                   </li>
                   {% endif %}
                 </ul>
