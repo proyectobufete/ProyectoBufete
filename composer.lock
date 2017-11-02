@@ -1395,6 +1395,7 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2017-10-29T18:48:08+00:00"
+
         },
         {
             "name": "swiftmailer/swiftmailer",
