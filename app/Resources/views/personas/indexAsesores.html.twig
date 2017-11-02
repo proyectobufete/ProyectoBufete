@@ -1,10 +1,10 @@
 {% extends 'layout.html.twig' %}
 
-{% block act5 %} active {% endblock %}
-{% block ac13 %} active {% endblock %}
+{% block act26 %} active {% endblock %}
+{% block ac34 %} active {% endblock %}
 
 {% block title %}
-  <h1>Listado de Asesores</h1>
+  <h1>Listado de Asesores Director</h1>
 {% endblock %}
 {% block body %}
 <div class="portlet-body">
@@ -30,6 +30,21 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+          <div class="form-group">
+                <label for="bufete">Bufete</label>
+                <form method="get" action="" class="form-inline" role="search">
+                <select onchange="this.form.submit()" name="sbufete" id="sbufete" class="form-control selectpicker" data-live-search="true">
+                      <option value="" selected>SELECCIONE UN BUFETE</option>
+                      {% for bufete in bufetes %}
+                       <option value="{{ bufete.idBufete }}">{{ bufete.nombreBufete }}</option>
+                       {% endfor %}
+                  </select>
+                  </form>
+              </div>
+        </div>
+      </div>
 
   <div class="col-md-12 col-sm-12 col-xs-6">
       <table class="table table-bordered ">
@@ -53,13 +68,7 @@
                 <td>{{ persona.idBufete }}</td>
                   <td>
                     <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}" class="btn yellow" >Ver</a>
-
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('personas_editPersona', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
-                    {% else %}
-                        <a href="{{ path('personas_editAsesor', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
-                    {% endif %}
-
+                    <a href="{{ path('personas_HistorialAsesor', { 'id': persona.idPersona })}}" class="btn yellow">Historial</a>
                   </td>
               </tr>
           {% endfor %}

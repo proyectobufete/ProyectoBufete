@@ -35,6 +35,7 @@
       <table class="table table-bordered ">
         <thead>
           <tr role="row" class="">
+            <th></th>
             <th>Nombre</th>
             <th>Carné</th>
             <th>Teléfono</th>
@@ -46,19 +47,31 @@
         <tbody>
           {% for persona in estudiantes %}
             <tr>
+              <td><img alt="" src="{{asset ('uploads/profile/'~ persona.foto) }}" class="img-circle profile-img thumb-sm"></td>
               <td>{{ persona.nombrePersona }}</td>
               <td>{{ persona.estudiantes.carneEstudiante }}</td>
               <td>{{ persona.telefonoPersona }}</td>
               <td>{{ persona.direccionPersona }}</td>
               <td>{{ persona.emailPersona }}</td>
               <td>
-                <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}" class="btn yellow">Ver</a>
+
+                <form method="post" action="{{ path('personas_perfil')}}" class="form-inline" role="search">
+                    <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                    <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                </form>
+
                 {% if persona.role == "ROLE_ESTUDIANTE" %}
-                  <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
+
+                <form method="post" action="{{ path('personas_editEstudiante')}}" class="form-inline" role="search">
+                    <button type="submit" name="buscar" class="btn blue">Editar</button>
+                    <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                </form>
+
 
                 {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
                   <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
                 {% endif %}
+
               </td>
             </tr>
           {% endfor %}
