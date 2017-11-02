@@ -79,7 +79,7 @@ class CasosController extends Controller
                 ->getQuery();
                 $casos = $query->getResult();
             }
-        } elseif ($rol == "ROLE_ADMIN") {
+        } elseif ($rol == "ROLE_ADMIN" ||"ROLE_DIRECTOR" ) {
             if(!empty($searchQuery) && strlen($searchQuery) == 1){
                 $query = $em->createQuery(
                   "SELECT c FROM BufeteBundle:Casos c
@@ -174,7 +174,7 @@ class CasosController extends Controller
                 ->getQuery();
                 $casos = $query->getResult();
             }
-        } elseif ($rol == "ROLE_ADMIN") {
+        } elseif ($rol == "ROLE_ADMIN"||"ROLE_DIRECTOR") {
             if(!empty($searchQuery) && strlen($searchQuery) == 1){
               $query = $em->createQuery(
                 "SELECT c FROM BufeteBundle:Casos c

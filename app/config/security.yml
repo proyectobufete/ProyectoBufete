@@ -54,11 +54,11 @@ security:
         - { path: ^/practicas, roles: ROLE_SECRETARIO}
         - { path: ^/demandantes, roles: ROLE_SECRETARIO}
 
-        - { path: ^/casos/civiles, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/civiles, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/casos/newcivil, roles: ROLE_SECRETARIO}
         - { path: ^/casos/([0-9]+)/editcivil, roles: ROLE_SECRETARIO}
         - { path: ^/casos/([0-9]+)/transferircivil, roles: ROLE_SECRETARIO}
-        - { path: ^/casos/laborales, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/laborales, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/casos/newlaboral, roles: ROLE_SECRETARIO}
         - { path: ^/casos/([0-9]+)/editlaboral, roles: ROLE_SECRETARIO}
         - { path: ^/casos/([0-9]+)/transferirlaboral, roles: ROLE_SECRETARIO}
@@ -69,12 +69,12 @@ security:
         - { path: ^/asignacionclinica/([0-9]+)/show, roles: ROLE_SECRETARIO}
         - { path: ^/asignacionclinica/([0-9]+)/edit, roles: ROLE_SECRETARIO}
 
-        - { path: ^/personas/indexEstudiantes, roles: ROLE_SECRETARIO}
+        - { path: ^/personas/indexEstudiantes, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/personas/registro, roles: ROLE_SECRETARIO}
         - { path: ^/personas/([0-9]+)/detalle, roles:[ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/personas/([0-9]+)/editEstudiante, roles: ROLE_SECRETARIO}
         - { path: ^/personas/([0-9]+)/editpassestudiante, roles: ROLE_SECRETARIO}
-        - { path: ^/personas/([0-9]+)/HistorialEstudiante, roles: ROLE_SECRETARIO}
+        - { path: ^/personas/([0-9]+)/HistorialEstudiante, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/personas/indexAsesores, roles: ROLE_SECRETARIO}
         - { path: ^/personas/newpersonal, roles: ROLE_SECRETARIO}
         - { path: ^/personas/([0-9]+)/editAsesor, roles: ROLE_SECRETARIO}
