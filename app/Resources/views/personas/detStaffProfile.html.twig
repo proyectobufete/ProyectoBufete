@@ -1,0 +1,82 @@
+{% extends 'layout.html.twig' %}
+{% block act5 %} active {% endblock %}
+{% block title %}
+  <h1>Perfil del {{rolEnvio}}</h1>
+{% endblock %}
+{% block body %}
+  <div class="portlet-body ">
+    <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+      <div class="col-md-4">
+        <table class="table table-striped table-bordered table-hover dataTable no-footer">
+          <tbody>
+
+            <tr>
+              <img alt="" src="{{asset ('uploads/profile/'~ app.user.foto) }}" width="300" height="250"/>
+            <tr>
+
+            <tr>
+              <th>Nombre</th>
+              <td>{{ persona.nombrePersona }}</td>
+            </tr>
+            <tr>
+              <th>Teléfono</th>
+              <td>{{ persona.telefonoPersona }}</td>
+            </tr>
+            <tr>
+              <th>Direccion</th>
+              <td>{{ persona.direccionPersona }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ persona.emailPersona }}</td>
+            </tr>
+            <tr>
+              <th>Bufete</th>
+              <td>{{ persona.idBufete }}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <table>
+          <tr>
+
+            {% if persona.role == "ROLE_ESTUDIANTE" %}
+              <a href="{{ path('personas_indexEstudiantes') }}" class="btn default">Regresar</a>
+            {% elseif persona.role == "ROLE_ASESOR" %}
+              <a href="{{ path('personas_indexAsesores') }}" class="btn default">Regresar</a>
+            {% endif %}
+          </tr>
+          <tr>
+
+            
+            {% if persona.role == "ROLE_ASESOR" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ADMIN" %}
+
+            <tr>
+              <form method="post" action="{{ path('personas_editnUsuario')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn yellow">Cambiar Usuario</button>
+                  <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+              </form>
+            </tr>
+            <tr>
+            <form method="post" action="{{ path('personas_editcUsuario')}}" class="form-inline" role="search">
+                <button type="submit" name="buscar" class="btn blue">Cambiar Contraseña</button>
+                <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+            </form>
+            </tr>
+            <tr>
+              <a href="{{ path('bufete_homepage') }}" class="btn default">Regresar</a>
+            </tr>
+
+            {% endif %}
+
+          </tr>
+          <tr>
+
+          </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  {% endblock %}
