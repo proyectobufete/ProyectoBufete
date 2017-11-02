@@ -17,7 +17,7 @@ class Casos
     private $idCaso;
 
     /**
-     * @var integer
+     * @var string
      */
     private $noCaso;
 
@@ -115,7 +115,7 @@ class Casos
     /**
      * Set noCaso
      *
-     * @param integer $noCaso
+     * @param string $noCaso
      *
      * @return Casos
      */
@@ -129,7 +129,7 @@ class Casos
     /**
      * Get noCaso
      *
-     * @return integer
+     * @return string
      */
     public function getNoCaso()
     {
@@ -522,7 +522,8 @@ class Casos
 
     public function __toString()
     {
-        return $this->pruebasCaso;
+        $numcaso = $this->noCaso;
+        return $numcaso . " ";
     }
 
 

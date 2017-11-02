@@ -1,0 +1,31 @@
+{# empty Twig template #}
+
+<table border=1 cellspacing=0 cellpadding=2 bordercolor="666633" >
+            <tr>
+                <th>Caso</th>
+                <th>Estudiante</th>
+                <th>Demandante</th>
+                <th>Demandado</th>
+                <th>Tipo Caso</th>
+                <th>Enviada</th>
+                <th>Estado</th>
+                <th>Leída</th>
+            </tr>
+            {% for aviso in avisos %}
+                <tr>
+                    <td>{{aviso.no_caso}}</td>
+                    <td>{{aviso.nombre_persona}}</td>
+                    <td>{{aviso.nombre_demandante}}</td>
+                    <td>{{aviso.nombre_demandado}}</td>
+                    <td>{{aviso.tipo}}</td>
+                    <td>{{aviso.fecha_visita}}</td>
+                    {% if aviso.vista == 0 %}
+                    <td>No Visto</span></td>
+                    {% endif %}
+                        {% if aviso.vista == 1 %}
+                    <td> Visto</span></td>
+                    {% endif %}
+                    <td>{{aviso.hora_visita}}</td>
+                </tr>
+            {% endfor %}
+        </table>

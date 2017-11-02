@@ -7,16 +7,37 @@
     <id name="idRevision" type="integer" column="Id_Revision">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="observaciones" type="text" column="Observaciones" length="65535" nullable="true">
+    <field name="tituloEntrega" type="string" column="Titulo_Entrega" length="100" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="fechaEnvio" type="date" column="fecha_envio" nullable="true"/>
-    <field name="fechaRevision" type="date" column="Fecha_Revision" nullable="true"/>
-    <field name="ruta" type="text" column="Ruta" length="65535" nullable="false">
+    <field name="comentarios" type="text" column="Comentarios" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idPersona" type="integer" column="Id_Persona" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechaEnvio" type="datetime" column="Fecha_Envio" nullable="true"/>
+    <field name="fechaCreacion" type="datetime" column="Fecha_Creacion" nullable="true"/>
+    <field name="rutaArchivo" type="text" column="Ruta_Archivo" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaLimite" type="datetime" column="Fecha_Limite" nullable="true"/>
+    <field name="nombreArchivo" type="string" column="Nombre_Archivo" length="75" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estadoRevision" type="integer" column="Estado_Revision" nullable="true">
+      <options>
+        <option name="unsigned"/>
       </options>
     </field>
     <many-to-one field="idCaso" target-entity="Casos" fetch="LAZY">

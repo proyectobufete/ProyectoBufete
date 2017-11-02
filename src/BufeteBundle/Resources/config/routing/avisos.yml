@@ -1,0 +1,94 @@
+avisos_index:
+    path: /avisos
+    defaults: {_controller: BufeteBundle:Avisos:index}
+
+avisos_indexbuscar:
+    path: /avisos/busqueda
+    defaults: {_controller: BufeteBundle:Avisos:indexBuscar}
+
+avisos_casobuscar:
+    path: /avisos/busquedacaso
+    defaults: {_controller: BufeteBundle:Avisos:indexCaso}
+
+avisos_fechabuscar:
+    path: /avisos/busquedafecha
+    defaults: {_controller: BufeteBundle:Avisos:indexFecha}
+
+avisos_dembuscar:
+    path: /avisos/busquedademandante
+    defaults: {_controller: BufeteBundle:Avisos:indexDemandante}
+
+avisos_demandadobuscar:
+    path: /avisos/busquedademandado
+    defaults: {_controller: BufeteBundle:Avisos:indexDemandado}
+
+avisos_add:
+    path: /avisos/add/{idcaso}/{idest}/{iddem}/{pdf}
+    methods: [GET,POST]
+    defaults: {_controller: BufeteBundle:Avisos:add}
+
+avisos_edit:
+    path: /avisos/edit/{id}
+    defaults: {_controller: BufeteBundle:Avisos:edit}
+
+avisos_buscar:
+    path: /avisos/buscar
+    defaults: {_controller: BufeteBundle:Avisos:busc}
+
+avisos_pdf:
+    path: /avisos/pdf
+    defaults: {_controller: BufeteBundle:Avisos:pdf}
+
+avisos_pdfest:
+    path: /avisos/pdfest/{estu}
+    methods: GET
+    defaults: {_controller: BufeteBundle:Avisos:pdfestu}
+
+avisos_pdfcaso:
+    path: /avisos/pdfcaso/{caso}
+    methods: GET
+    defaults: {_controller: BufeteBundle:Avisos:pdfcaso}
+
+avisos_pdfec:
+    path: /avisos/pdfec/{fec1}/{fec2}
+    methods: GET
+    defaults: {_controller: BufeteBundle:Avisos:pdfec}
+
+avisos_pdfdema:
+    path: /avisos/pdfdema/{dem}
+    methods: GET
+    defaults: {_controller: BufeteBundle:Avisos:pdfdema}
+
+
+avisos_pdfdemdo:
+    path: /avisos/pdfdemdo/{demo}
+    methods: GET
+    defaults: {_controller: BufeteBundle:Avisos:pdfde}
+
+avisos_ajax:
+    path: /avisos/bus
+    defaults: {_controller: BufeteBundle:Avisos:formu}
+
+avisos_redirection:
+    path: /avisos/redirection
+    defaults: {_controller: BufeteBundle:Avisos:redirection }
+
+avisos_sendMail:
+    path: /avisos/sendMail
+    defaults: {_controller: BufeteBundle:Avisos:sendMail }
+
+avisos_jquery:
+    path: /avisos/probar
+    defaults: {_controller: BufeteBundle:Avisos:proba }
+
+avisos_prueba:
+    path: /avisos/javas
+    defaults: {_controller: BufeteBundle:Avisos:buscarPorNombreAjax }
+
+avisos_prueba1:
+    path: /avisos/form
+    defaults: {_controller: BufeteBundle:Avisos:redirection}
+
+avisos_eliminar:
+    path: /avisos/del/{id}
+    defaults: {_controller: BufeteBundle:Avisos:eliminar}
