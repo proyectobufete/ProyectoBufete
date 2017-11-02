@@ -23,6 +23,10 @@ class PersonasAsesorType extends AbstractType
     {
       $this->passEnvio = $options['passEnvio'];
         $builder
+        ->add('idPersona',HiddenType::class, array(
+
+              'required' => false,
+            ))
             ->add('nombrePersona')
             ->add('telefonoPersona')
             ->add('tel2Persona')

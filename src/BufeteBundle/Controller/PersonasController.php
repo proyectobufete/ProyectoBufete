@@ -201,10 +201,21 @@ class PersonasController extends Controller
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   public function perfilAction(Request $request)
   {
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     $var=$request->request->get("idPersona");
 
     $post = Request::createFromGlobals();
     $var2 = $post->request->get('idPersona5');
+
+    $post = Request::createFromGlobals();
+    $var3 = $post->query->get('var');
 
     if($var == null)
     {
@@ -215,11 +226,29 @@ class PersonasController extends Controller
       $post = Request::createFromGlobals();
       $var = $post->request->get('idPersona5');
     }
+    if(isset($var3))
+    {
+      $var = $var3;
+    }
+
+
+
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                  'idPersona' => $var
     ));
+
+
+
+
+    if($persona == null)
+    {
+      return $this->redirectToRoute('errores_notfound');
+    }
+
       $rolPersona = $persona->getRole();
+
+
       if($rolPersona == "ROLE_ESTUDIANTE")
       {
         return $this->render('personas/perfilEstudiante.html.twig', array(
@@ -261,7 +290,7 @@ class PersonasController extends Controller
         ));
       }
       // **DESCOMENTAR PARA MOSTRAR PAGINA DE ERRORES
-      //return $this->redirectToRoute('errores_notfound');
+      return $this->redirectToRoute('errores_notfound');
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -620,19 +649,14 @@ class PersonasController extends Controller
               }
               if ($confirm) {
 
-                $envio = $persona->getIdPersona();
+                $var=$persona->getIdPersona();
 
 
-                $persona1 = new Personas();
+
                 $em = $this->getDoctrine()->getManager();
-                $persona1 = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                             'idPersona' => $envio
+                $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+                             'idPersona' => $var
                 ));
-
-                return $this->redirectToRoute('personas_perfil',
-                   [
-                     'var' => $persona1
-                   ], 307);
 
               }else {
                 $this->session->getFlashBag()->add("status", $status);
@@ -1363,7 +1387,7 @@ public function showPersonasAction(Personas $persona)
 
           // return $this->redirectToRoute('personas_editpassestudiante');
 
-           return $this->redirectToRoute('personas_editpasspersonal',
+           return $this->redirectToRoute('personas_editcUsuario',
               [
                 'id' => $persona
               ], 307);
@@ -1602,6 +1626,7 @@ if ($form->isSubmitted()){
                          $persona->setFoto($fileName);
                        }
 
+
        $em->persist($persona);
        $flush = $em->flush();
        if ($flush == null) {
@@ -1617,9 +1642,21 @@ if ($form->isSubmitted()){
      $status = "El formulario no es valido";
  }
  if ($confirm) {
+   $var=$persona->getIdPersona();
+
+
+
+   $em = $this->getDoctrine()->getManager();
+   $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+                'idPersona' => $var
+   ));
+
+   //dump($persona);
+   //die();
+
    return $this->redirectToRoute('personas_perfil',
       [
-        'var' => $persona
+        'var' => $var
       ], 307);
  }else {
    $this->session->getFlashBag()->add("status", $status);

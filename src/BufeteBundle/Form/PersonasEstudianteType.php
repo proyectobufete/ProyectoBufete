@@ -34,7 +34,10 @@ class PersonasEstudianteType extends AbstractType
       $builder
 
       //form DATOS PERSONALES
+      ->add('idPersona',HiddenType::class, array(
 
+            'required' => false,
+          ))
         ->add('nombrePersona',TextType::Class, array ("data"=>$this->nomEnvio))
         ->add('telefonoPersona',TextType::Class, array ("data"=>$this->telEnvio))
         ->add('tel2Persona')
@@ -64,7 +67,7 @@ class PersonasEstudianteType extends AbstractType
                 'label'=>' ',
                 'carneEnvio' =>$this->carneEnvio,
             ))
-            
+
             ->add('foto',FileType::class, array(
                 'label' => 'Foto de Perfil',
                 'attr' =>array('class'=>'form-control'),
