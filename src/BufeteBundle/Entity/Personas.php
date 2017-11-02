@@ -3,6 +3,7 @@
 namespace BufeteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Personas
@@ -10,6 +11,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Personas implements UserInterface
 {
 
+
+  /**
+   * @Assert\File(
+   *
+   *     mimeTypes = {"image/gif", "image/png"},
+   *     mimeTypesMessage = "Por favor seleccione una imagen",
+   * )
+   */
+    protected $foto;
   /**
    * @ORM\OneToOne(targetEntity="Estudiantes", mappedBy="personas")
    *
@@ -70,7 +80,7 @@ class Personas implements UserInterface
     /**
      * @var string
      */
-    private $foto;
+  //  private $foto;
 
     /**
      * @var boolean

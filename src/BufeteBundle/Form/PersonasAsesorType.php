@@ -10,6 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class PersonasAsesorType extends AbstractType
 {
     /**
@@ -27,7 +30,8 @@ class PersonasAsesorType extends AbstractType
             ->add('direccionPersona')
             ->add('emailPersona')
             ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
-            ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
+            ->add('passPersona',TextType::Class, array (
+                   "data"=>"$this->passEnvio"))
             ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
@@ -39,8 +43,13 @@ class PersonasAsesorType extends AbstractType
             ))
             //->add('role')
             ->add('role', HiddenType::class, array(
-    'data' => 'ROLE_ASESOR',))
-
+              'data' => 'ROLE_ASESOR',))
+            ->add('foto',FileType::class, array(
+                  'label' => 'Foto de Perfil',
+                  'attr' =>array('class'=>'form-control'),
+                  'data_class' => null,
+                  'required' => false,
+                ))
 
 
           ;
