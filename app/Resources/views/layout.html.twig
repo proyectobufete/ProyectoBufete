@@ -175,7 +175,20 @@
                     <li class="dropdown text-center">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="{{asset ('uploads/profile/'~ app.user.foto) }}" class="img-circle profile-img thumb-sm">
-                            <span class="username"><h7><b>{{app.user.nombrePersona}}</b></h7></span> <span class="caret"></span>
+                            <span class="username">
+                              <h7><b>{{app.user.nombrePersona}}
+                                {% if app.user.role == "ROLE_SECRETARIO" %}
+                                  (Secretario)
+                                {% elseif app.user.role == "ROLE_ASESOR" %}
+                                  (Asesor)
+                                {% elseif app.user.role == "ROLE_DIRECTOR" %}
+                                  (Director)
+                                {% elseif app.user.role == "ROLE_ESTUDIANTE" %}
+                                  (Estudiante)
+                                {% elseif app.user.role == "ROLE_ADMIN" %}
+                                  (Administrador)
+                                {% endif %}
+                              </b></h7></span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu pro-menu fadeInUp animated " tabindex="5003" style="overflow: hidden; outline: none;">
 
