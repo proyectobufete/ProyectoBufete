@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block act5 %} active {% endblock %}
 {% block title %}
-  <h1>Perfil del {{rolEnvio}} </h1>
+  <h1>Perfil del {{rolEnvio}}</h1>
 {% endblock %}
 {% block body %}
   <div class="portlet-body ">
@@ -9,6 +9,11 @@
       <div class="col-md-4">
         <table class="table table-striped table-bordered table-hover dataTable no-footer">
           <tbody>
+
+            <tr>
+              <img alt="" src="{{asset ('uploads/profile/'~ persona.foto) }}" width="300" height="250"/>
+            <tr>
+
             <tr>
               <th>Nombre</th>
               <td>{{ persona.nombrePersona }}</td>
@@ -55,7 +60,7 @@
               <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
             {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR"%}
               <a href="{{ path('personas_index') }}" class="btn default">Regresar</a>
-              <a href="{{ path('personas_editPersona', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
+              <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
             {% endif %}
           </tr>
           <tr>

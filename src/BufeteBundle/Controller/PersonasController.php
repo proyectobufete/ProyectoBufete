@@ -202,18 +202,24 @@ class PersonasController extends Controller
   public function perfilAction(Request $request)
   {
     $var=$request->request->get("idPersona");
+
+    $post = Request::createFromGlobals();
+    $var2 = $post->request->get('idPersona5');
+
     if($var == null)
     {
       $post = Request::createFromGlobals();
       $var = $post->request->get('idPersona2');
+    }
+    if(isset($var2)){
+      $post = Request::createFromGlobals();
+      $var = $post->request->get('idPersona5');
     }
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                  'idPersona' => $var
     ));
       $rolPersona = $persona->getRole();
-      dump($rolPersona);
-      die();
       if($rolPersona == "ROLE_ESTUDIANTE")
       {
         return $this->render('personas/perfilEstudiante.html.twig', array(
@@ -237,6 +243,25 @@ class PersonasController extends Controller
             //'delete_form' => $deleteForm->createView(),
         ));
       }
+      else if($rolPersona == "ROLE_ADMIN")
+      {
+        $rolEnvio = 'Administrador';
+        return $this->render('personas/perfilPersonal.html.twig', array(
+            'persona' => $persona,
+            'rolEnvio' => $rolEnvio,
+        ));
+      }
+      else if($rolPersona == "ROLE_DIRECTOR")
+      {
+        $rolEnvio = 'Director';
+        return $this->render('personas/perfilPersonal.html.twig', array(
+            'persona' => $persona,
+            'rolEnvio' => $rolEnvio,
+            //'delete_form' => $deleteForm->createView(),
+        ));
+      }
+      // **DESCOMENTAR PARA MOSTRAR PAGINA DE ERRORES
+      //return $this->redirectToRoute('errores_notfound');
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -344,7 +369,26 @@ class PersonasController extends Controller
             //'delete_form' => $deleteForm->createView(),
         ));
       }
-
+      else if($rolPersona == "ROLE_ADMIN")
+      {
+        $rolEnvio = 'Administrador';
+        return $this->render('personas/detStaffProfile.html.twig', array(
+            'persona' => $persona,
+            'rolEnvio' => $rolEnvio,
+            //'delete_form' => $deleteForm->createView(),
+        ));
+      }
+      else if($rolPersona == "ROLE_DIRECTOR")
+      {
+        $rolEnvio = 'Director';
+        return $this->render('personas/detStaffProfile.html.twig', array(
+            'persona' => $persona,
+            'rolEnvio' => $rolEnvio,
+            //'delete_form' => $deleteForm->createView(),
+        ));
+      }
+      // **DESCOMENTAR PARA MOSTRAR PAGINA DE ERRORES
+      //return $this->redirectToRoute('errores_notfound');
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -833,6 +877,7 @@ class PersonasController extends Controller
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           public function editcUsuarioAction(Request $request, Request $request2)
           {
+
                                   $var=$request2->request->get("idPersona");
 
                                   $em = $this->getDoctrine()->getManager();
@@ -877,6 +922,7 @@ class PersonasController extends Controller
                                     }
 
                                      //$deleteForm = $this->createDeleteForm($persona);
+
 
                                     //if ($edit_form->isSubmitted() && $edit_form->isValid())
                                     if ($edit_form->isSubmitted())

@@ -11,7 +11,7 @@
           <tbody>
 
             <tr>
-              <img alt="" src="{{asset ('uploads/profile/'~ app.user.foto) }}" width="300" height="200"/>
+              <img alt="" src="{{asset ('uploads/profile/'~ app.user.foto) }}" width="300" height="250"/>
             <tr>
 
             <tr>
@@ -49,8 +49,8 @@
           </tr>
           <tr>
 
-
-            {% if persona.role == "ROLE_ASESOR" or persona.role == "ROLE_SECRETARIO" %}
+            
+            {% if persona.role == "ROLE_ASESOR" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ADMIN" %}
 
             <tr>
               <form method="post" action="{{ path('personas_editnUsuario')}}" class="form-inline" role="search">
@@ -68,10 +68,8 @@
               <a href="{{ path('bufete_homepage') }}" class="btn default">Regresar</a>
             </tr>
 
-            {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR"%}
-              <a href="{{ path('personas_index') }}" class="btn default">Regresar</a>
-              <a href="{{ path('personas_editPersona', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
             {% endif %}
+
           </tr>
           <tr>
 

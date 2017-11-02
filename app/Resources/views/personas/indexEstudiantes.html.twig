@@ -35,6 +35,7 @@
       <table class="table table-bordered ">
         <thead>
           <tr role="row" class="">
+            <th></th>
             <th>Nombre</th>
             <th>Carné</th>
             <th>Teléfono</th>
@@ -46,6 +47,7 @@
         <tbody>
           {% for persona in estudiantes %}
             <tr>
+              <td><img alt="" src="{{asset ('uploads/profile/'~ persona.foto) }}" class="img-circle profile-img thumb-sm"></td>
               <td>{{ persona.nombrePersona }}</td>
               <td>{{ persona.estudiantes.carneEstudiante }}</td>
               <td>{{ persona.telefonoPersona }}</td>
@@ -69,7 +71,7 @@
                 {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
                   <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
                 {% endif %}
-                
+
               </td>
             </tr>
           {% endfor %}

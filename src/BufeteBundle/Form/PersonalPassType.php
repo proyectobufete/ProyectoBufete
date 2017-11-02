@@ -29,7 +29,7 @@ class PersonalPassType extends AbstractType
       //form DATOS PERSONALES
         ->add('usuarioPersona')
         ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
-          ;
+      ;
     }
 
 

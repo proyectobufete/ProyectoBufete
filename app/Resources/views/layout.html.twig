@@ -187,7 +187,7 @@
                                   <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>
                                 </form>
 
-                              {% elseif app.user.role == "ROLE_ASESOR" or app.user.role == "ROLE_SECRETARIO"  %}
+                              {% elseif app.user.role == "ROLE_ASESOR" or app.user.role == "ROLE_SECRETARIO" or app.user.role == "ROLE_ADMIN" or app.user.role == "ROLE_DIRECTOR" %}
                                 <form method="post" action="{{ path('personas_staffProfile')}}" class="form-inline" role="search">
                                   <button type="submit" name="buscar" class="btn yellow">Perfil</button>
                                   <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>

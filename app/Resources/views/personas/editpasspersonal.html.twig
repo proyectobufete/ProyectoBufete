@@ -2,7 +2,7 @@
 {% block act5 %} active {% endblock %}
 {% block ac29 %} active {% endblock %}
 {% block title %}
-  <h1>Editar Asesor</h1>
+  <h1>Cambiar Contraseña</h1>
 {% endblock %}
 
 {% block body %}
@@ -18,7 +18,7 @@
             <div class="col-md-6 col-md-offset-2">
               <label for="">
                 <h4>
-                  <b>Datos Personales</b>
+                  <b></b>
                 </h4>
               </label>
             </div>
@@ -33,10 +33,20 @@
               {{form_widget(edit_form.usuarioPersona,{'attr':{'readonly':'readonly','class' : 'form-control'}}) }}
             </div>
             <div class="col-md-3">
-              {{form_label(edit_form.passPersona,'Contraseña')}}
+              {{form_label(edit_form.passPersona,'Nueva contraseña')}}
               {{form_widget(edit_form.passPersona,{'attr':{'readonly':'readonly','class' : 'form-control'}}) }}
             </div>
+
+
+
+
+
+            
           </div>
+
+
+
+
 
 
         </div>
