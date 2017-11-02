@@ -68,14 +68,18 @@
               <td>{{ asignacionclinica.observacionesClinica }}</td>
               <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
               <td>
+                {% if asignacionclinica.notaClinica != null %}
                   {% if asignacionclinica.notaClinica >= 61 %}
                     <a href="#">
-                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Ganado
+                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Aprobado
                   {% endif %}
                   {% if asignacionclinica.notaClinica < 61 %}
                     <a href="#">
-                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>Perdido
+                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>No aprobado
                   {% endif %}
+                {% else %}
+                No asignado
+                {% endif %}
               </td>
           </tr>
           {% endfor %}
