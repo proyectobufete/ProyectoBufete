@@ -15,7 +15,7 @@ class Personas implements UserInterface
   /**
    * @Assert\File(
    *
-   *     mimeTypes = {"image/gif", "image/png"},
+   *     mimeTypes = {"image/jpeg", "image/png"},
    *     mimeTypesMessage = "Por favor seleccione una imagen",
    * )
    */
