@@ -32,7 +32,7 @@ class editpersonaType extends AbstractType
                 "label" => "Estado",
                     "choices"=> array(
                         "ACTIVO" =>1,
-                        "INACTIVO" =>2,
+                        "INACTIVO" =>0,
               ),
                 'expanded'  => true,
                 'multiple'  => false,
@@ -49,6 +49,10 @@ class editpersonaType extends AbstractType
                 'multiple'  => false,
             ))
             ->add('idBufete')
+
+            ->add('save', SubmitType::class, array(
+              'attr' => array('class' => 'save')
+              ))
           ;
     }
 

@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class PersonasEstudianteType extends AbstractType
 {
     /**
@@ -31,7 +34,7 @@ class PersonasEstudianteType extends AbstractType
       $builder
 
       //form DATOS PERSONALES
-        
+
         ->add('nombrePersona',TextType::Class, array ("data"=>$this->nomEnvio))
         ->add('telefonoPersona',TextType::Class, array ("data"=>$this->telEnvio))
         ->add('tel2Persona')
@@ -52,7 +55,7 @@ class PersonasEstudianteType extends AbstractType
             ))
 
             ->add('role', HiddenType::class, array(
-    'data' => 'ROLE_ESTUDIANTE',))
+                'data' => 'ROLE_ESTUDIANTE',))
 
             //->add('idBufete')
 
@@ -61,6 +64,13 @@ class PersonasEstudianteType extends AbstractType
                 'label'=>' ',
                 'carneEnvio' =>$this->carneEnvio,
             ))
+
+            ->add('foto',FileType::class, array(
+                'label' => 'Foto de Perfil',
+                'attr' =>array('class'=>'form-control'),
+                'data_class' => null,
+                'required' => false,
+              ))
 
           ;
     }

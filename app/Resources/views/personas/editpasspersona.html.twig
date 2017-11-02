@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% block act5 %} active {% endblock %}
-{% block ac29 %} active {% endblock %}
+{% block ac13 %} active {% endblock %}
 {% block title %}
   <h1>Editar Asesor</h1>
 {% endblock %}
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-md-6">
               {{form_label(edit_form.nombrePersona,'Nombre')}}
-              {{form_widget(edit_form.nombrePersona,{'attr':{'readonly':'readonly', 'class' : 'form-control'}, 'type':'hidden'}) }}
+              {{form_widget(edit_form.nombrePersona,{'attr':{'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
 
           </div>
@@ -35,10 +35,6 @@
             <div class="col-md-2">
                 {{form_label(edit_form.tel2Persona,'Teléfono 2')}}
                 {{form_widget(edit_form.tel2Persona,{'attr':{'readonly':'readonly','class' : 'form-control'}}) }}
-            </div>
-            <div class="col-md-2">
-                {{form_label(edit_form.idBufete,'Bufete')}}
-                {{form_widget(edit_form.idBufete,{'attr':{'readonly':'readonly','class' : 'form-control'}}) }}
             </div>
           </div>
           <div class="row">
@@ -80,12 +76,14 @@
 
         </div>
       </div>
+
+
       <div class="form-actions">
         <div class="row">
           <div class="col-md-offset-3 col-md-9">
             <button type="submit" name="Create" class="btn green">Cambiar</button>
-            <a href="{{ path('personas_index') }}">
-              <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+            <a href="{{ path('personas_indexAsesores') }}">
+              <button type="button" name="cancelar" class="btn default">Cancelar</button>
             </a>
           </div>
         </div>

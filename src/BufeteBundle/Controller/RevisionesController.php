@@ -203,7 +203,7 @@ class RevisionesController extends Controller
       $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
                    'idRevision' => $post
       ));
-      
+
       $idcaso = $revisione->getIdcaso()->getIdcaso();
       $em = $this->getDoctrine()->getManager();
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
@@ -458,21 +458,54 @@ class RevisionesController extends Controller
 
     public function editLinkAction(Request $request)
     {
+
         $post=$request->get("idRevision");
 
+        /*
+        $revisioneCopia = new Revisiones();
+
+        $post=$request->get("idRevision");
         $em = $this->getDoctrine()->getManager();
-        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
+        $datos_revision = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                     'idRevision' => $post
+        ));
+        */
+
+        $em = $this->getDoctrine()->getManager();
         $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
                      'idRevision' => $post
         ));
 
-          //recuperar la fecha limite y enviarla a la vista//
-          $fechaHoraLimGuardada = $revisione->getFechaLimite()->format('Y-m-d') .'T'. $revisione->getFechaLimite()->format('H:i');
+        $fechaHoraLimGuardada = $revisione->getFechaLimite()->format('Y-m-d') .'T'. $revisione->getFechaLimite()->format('H:i');
 
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $editForm->handleRequest($request);
 
+
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+
+          $post=$request->get("idRevision");
+          $em = $this->getDoctrine()->getManager();
+          $datos_revision = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
+                       'idRevision' => $post
+          ));
+
+          //dump($editForm->get("idRevision")->getData());
+          //die($datos_revision);
+
+          /*
+          dump($editForm->get("tituloEntrega")->getData());
+          die();
+
+          $revisioneCopia = $revisione;
+
+
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($revisioneCopia);
+          $em->flush();
+          */
 
           $file = $revisione->getRutaArchivo();
 
@@ -495,6 +528,13 @@ class RevisionesController extends Controller
           }
 
             $this->getDoctrine()->getManager()->flush();
+
+            //$editForm->handleRequest($request);
+            //$revisione = new Revisiones();
+            //$editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
+            //}$editForm->handleRequest($request);
+
+
 
             return $this->redirectToRoute('revisiones_showLink', array('idRevision' => $revisione->getIdrevision()));
         }

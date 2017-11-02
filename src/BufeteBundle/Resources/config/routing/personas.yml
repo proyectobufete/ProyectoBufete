@@ -3,44 +3,9 @@ personas_index:
     defaults: { _controller: "BufeteBundle:Personas:indexUsuarios" }
     methods:  GET
 
-personas_new:
-    path:     /nueva
-    defaults: { _controller: "BufeteBundle:Personas:new" }
-    methods:  [GET, POST]
-
-personas_newpersonal:
-    path:     /newpersonal
-    defaults: { _controller: "BufeteBundle:Personas:newpersonal" }
-    methods:  [GET, POST]
-
-personas_editEstudiante:
-    path:     /{idPersona}/editEstudiante
-    defaults: { _controller: "BufeteBundle:Personas:editEstudiante" }
-    methods:  [GET, POST]
-
-personas_editAsesor:
-    path:     /{idPersona}/editAsesor
-    defaults: { _controller: "BufeteBundle:Personas:editAsesor" }
-    methods:  [GET, POST]
-
-personas_editPersona:
-    path:     /{idPersona}/editPersona
-    defaults: { _controller: "BufeteBundle:Personas:editPersona" }
-    methods:  [GET, POST]
-
-personas_delete:
-    path:     /{idPersona}/delete
-    defaults: { _controller: "BufeteBundle:Personas:delete" }
-    methods:  DELETE
-
-personas_registro:
-    path: /registro
-    defaults: {_controller: "BufeteBundle:Personas:registro"}
-    methods: [GET, POST]
-
-personas_detalle:
-    path:     /{idPersona}/detalle
-    defaults: { _controller: "BufeteBundle:Personas:detalle" }
+personas_indexAsesoresDir:
+    path:     /indexAsesoresDir
+    defaults: { _controller: "BufeteBundle:Personas:indexAsesoresDir" }
     methods:  GET
 
 personas_indexAsesores:
@@ -53,10 +18,64 @@ personas_indexEstudiantes:
     defaults: { _controller: "BufeteBundle:Personas:indexEstudiantes" }
     methods:  GET
 
+personas_new:
+    path:     /nueva
+    defaults: { _controller: "BufeteBundle:Personas:new" }
+    methods:  [GET, POST]
+
+personas_newpersonal:
+    path:     /newpersonal
+    defaults: { _controller: "BufeteBundle:Personas:newpersonal" }
+    methods:  [GET, POST]
+
+personas_registro:
+    path: /registro
+    defaults: {_controller: "BufeteBundle:Personas:registro"}
+    methods: [GET, POST]
+
+
+
+
+
+
+personas_editPersonal:
+    path:     /editPersonal
+    defaults: { _controller: "BufeteBundle:Personas:editPersonal" }
+    methods:  [GET, POST]
+
+personas_editpasspersonal:
+    path:     /editpasspersonal
+    defaults: { _controller: "BufeteBundle:Personas:editpasspersonal" }
+    methods:  [GET, POST]
+
+personas_edituserpersonal:
+    path:     /edituserpersonal
+    defaults: { _controller: "BufeteBundle:Personas:edituserpersonal" }
+    methods:  [GET, POST]
+
+
+
+
+
+
+personas_editEstudiante:
+    path:     /editEstudiante
+    defaults: { _controller: "BufeteBundle:Personas:editEstudiante" }
+    methods:  [GET, POST]
 
 personas_editpassestudiante:
-    path:     /{idPersona}/editpassestudiante
+    path:     /editpassestudiante
     defaults: { _controller: "BufeteBundle:Personas:editpassestudiante" }
+    methods:  [GET, POST]
+
+personas_edituserestudiante:
+    path:     /edituserestudiante
+    defaults: { _controller: "BufeteBundle:Personas:edituserestudiante" }
+    methods:  [GET, POST]
+
+personas_editAsesor:
+    path:     /{idPersona}/editAsesor
+    defaults: { _controller: "BufeteBundle:Personas:editAsesor" }
     methods:  [GET, POST]
 
 personas_editpassasesor:
@@ -64,10 +83,25 @@ personas_editpassasesor:
     defaults: { _controller: "BufeteBundle:Personas:editpassasesor" }
     methods:  [GET, POST]
 
-personas_editpasspersona:
-    path:     /{idPersona}/editpasspersona
-    defaults: { _controller: "BufeteBundle:Personas:editpasspersona" }
+personas_perfil:
+    path:     /perfil
+    defaults: { _controller: "BufeteBundle:Personas:perfil" }
     methods:  [GET, POST]
+
+personas_studentProfile:
+    path:     /studentProfile
+    defaults: { _controller: "BufeteBundle:Personas:studentProfile" }
+    methods:  [GET, POST]
+
+personas_staffProfile:
+    path:     /staffProfile
+    defaults: { _controller: "BufeteBundle:Personas:staffProfile" }
+    methods:  [GET, POST]
+
+personas_delete:
+    path:     /{idPersona}/delete
+    defaults: { _controller: "BufeteBundle:Personas:delete" }
+    methods:  DELETE
 
 personas_laboralesAsesor:
     path:     /laboralesasesor
@@ -84,15 +118,14 @@ personas_HistorialEstudiante:
     defaults: { _controller: "BufeteBundle:Personas:HistorialEstudiante" }
     methods:  GET
 
-
-personas_indexAsesoresDir:
-    path:     /indexAsesoresDir
-    defaults: { _controller: "BufeteBundle:Personas:indexAsesoresDir" }
-    methods:  GET
-
 personas_HistorialAsesor:
     path:     /{id}/HistorialAsesor
     defaults: { _controller: "BufeteBundle:Personas:HistorialAsesor" }
+    methods:  GET
+
+personas_HistorialEstudianteClinicas:
+    path:     /{id}/HistorialEstudianteClinicas
+    defaults: { _controller: "BufeteBundle:Personas:HistorialEstudianteClinicas" }
     methods:  GET
 
 personas_HistorialEstudianteCivil:
@@ -105,9 +138,15 @@ personas_HistorialEstudianteLaboral:
     defaults: { _controller: "BufeteBundle:Personas:HistorialEstudianteLaboral" }
     methods:  GET
 
-personas_HistorialEstudianteClinicas:
-    path:     /{id}/HistorialEstudianteClinicas
-    defaults: { _controller: "BufeteBundle:Personas:HistorialEstudianteClinicas" }
-    methods:  GET
 
-    methods:  GET
+#ruta para editar CONTRASEÑA
+personas_editcUsuario:
+    path:     /editcUsuario
+    defaults: { _controller: "BufeteBundle:Personas:editcUsuario" }
+    methods:  [GET, POST]
+
+#ruta para editar USUARIO
+personas_editnUsuario:
+    path:     /editnUsuario
+    defaults: { _controller: "BufeteBundle:Personas:editnUsuario" }
+    methods:  [GET, POST]
