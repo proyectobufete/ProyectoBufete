@@ -68,19 +68,8 @@
                     <input type="hidden" name="idPersona5" value="{{persona.idPersona}}"/>
                 </form>
 
-                {% if persona.role == "ROLE_ESTUDIANTE" %}
-
-                  <form method="post" action="{{ path('personas_studentProfile')}}" class="form-inline" role="search">
-                    <button type="submit" name="buscar" class="btn yellow">Perfil</button>
-                    <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-                  </form>
-
-                  <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
-
-
-
-                {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
-                  <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
+                {% if is_granted("ROLE_ADMIN") %}
+                  <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
                       <button type="submit" name="buscar" class="btn blue">Editar</button>
                       <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
                   </form>

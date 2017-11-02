@@ -1367,7 +1367,7 @@ public function showPersonasAction(Personas $persona)
 
          //$deleteForm = $this->createDeleteForm($persona);
 
-         $edit_form = $this->createForm('BufeteBundle\Form\editpersonaType', $persona);
+         $edit_form = $this->createForm('BufeteBundle\Form\editpersonalType', $persona);
 
 
          $edit_form->handleRequest($request);

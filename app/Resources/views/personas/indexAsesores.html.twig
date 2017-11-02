@@ -57,11 +57,17 @@
                         <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
                     </form>
 
-                    {% if persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+                    {% if  is_granted("ROLE_SECRETARIO") or is_granted("ROLE_DIRECTOR") %}
                       <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
                           <button type="submit" name="buscar" class="btn blue">Editar</button>
                           <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
                       </form>
+
+                    {% elseif is_granted('ROLE_ADMIN') %}
+                    <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
+                        <button type="submit" name="buscar" class="btn blue">Editar</button>
+                        <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                    </form>
                     {% endif %}
 
                   </td>

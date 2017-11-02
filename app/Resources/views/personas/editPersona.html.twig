@@ -66,7 +66,10 @@
               </div>
             </div>
             <div class="row">
-              
+              <div class="col-md-5">
+
+                {{form_widget(edit_form.role)}}
+              </div>
             </div>
             <div class="row">
               <div class="col-md-3">
@@ -82,25 +85,14 @@
       <div class="form-actions">
         <div class="row">
           <div class="col-md-offset-2 col-md-9">
+            <button type="submit" name="Create" class="btn green">Guardar</button>
 
-
-
-
-            <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
-            <button type="submit" name="Create" class="btn green">Editar</button>
-
-
-
-
-            {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña' }) }}
-            <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-
-
-
-
+            
+              <button type="button" name="cancelar" class="btn default">Cambiar Contraseña</button>
+            </a>
 
             <a href="{{ path('personas_index') }}">
-              <button type="button" name="cancelar" class="btn default">Cancelar</button>
+              <button type="button" name="cancelar" class="btn grey">Cancelar</button>
             </a>
           </div>
         </div>
