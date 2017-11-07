@@ -41,15 +41,11 @@
         <table>
           <tr>
 
-            {% if persona.role == "ROLE_ESTUDIANTE" %}
-              <a href="{{ path('personas_indexEstudiantes') }}" class="btn default">Regresar</a>
-            {% elseif persona.role == "ROLE_ASESOR" %}
-              <a href="{{ path('personas_indexAsesores') }}" class="btn default">Regresar</a>
-            {% endif %}
+
           </tr>
           <tr>
 
-            
+
             {% if persona.role == "ROLE_ASESOR" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ADMIN" %}
 
             <tr>

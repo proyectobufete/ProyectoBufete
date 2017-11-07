@@ -208,8 +208,15 @@ class PersonasController extends Controller
     ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
+$post = Request::createFromGlobals();
+$var = $post;
+dump($var);
+die();
+*/
     $var=$request->request->get("idPersona");
+
+
 
     $post = Request::createFromGlobals();
     $var2 = $post->request->get('idPersona5');
@@ -657,6 +664,12 @@ class PersonasController extends Controller
                 $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                              'idPersona' => $var
                 ));
+
+                return $this->redirectToRoute('personas_perfil',
+                   [
+                     'var' => $var
+                   ], 307);
+
 
               }else {
                 $this->session->getFlashBag()->add("status", $status);
@@ -1493,7 +1506,23 @@ public function showPersonasAction(Personas $persona)
            $status = "El formulario no es valido";
        }
        if ($confirm) {
-         return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
+
+         $var=$persona->getIdPersona();
+
+
+
+         $em = $this->getDoctrine()->getManager();
+         $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+                      'idPersona' => $var
+         ));
+
+         return $this->redirectToRoute('personas_perfil',
+            [
+              'var' => $var
+            ], 307);
+
+
+
        }else {
          $this->session->getFlashBag()->add("status", $status);
        }
