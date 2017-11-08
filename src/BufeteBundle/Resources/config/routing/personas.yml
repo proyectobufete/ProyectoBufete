@@ -150,3 +150,8 @@ personas_editnUsuario:
     path:     /editnUsuario
     defaults: { _controller: "BufeteBundle:Personas:editnUsuario" }
     methods:  [GET, POST]
+
+personas_editPersona:
+    path:     /editPersona
+    defaults: { _controller: "BufeteBundle:Personas:editPersona" }
+    methods:  [GET, POST]
