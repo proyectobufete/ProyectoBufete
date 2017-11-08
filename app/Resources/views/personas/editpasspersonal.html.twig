@@ -41,7 +41,7 @@
 
 
 
-            
+
           </div>
 
 
@@ -59,22 +59,24 @@
             <button type="submit" name="Create" class="btn green">Guardar</button>
 
 
+        {{ form_end(edit_form) }}
 
             {% if persona.role == "ROLE_SECRETARIO" %}
               <a href="{{ path('personas_indexEstudiantes') }}">
                 <button type="button" name="cancelar" class="btn default">Cancelar</button>
               </a>
             {% elseif persona.role == "ROLE_ASESOR" %}
-              <a href="{{ path('personas_indexEstudiantes') }}">
-                <button type="button" name="cancelar" class="btn default">Cancelar (AUN NO SIRVE**)</button>
-              </a>
+            <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
+                <button type="submit" name="buscar" class="btn gray">Cancelar</button>
+                <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+            </form>
             {% endif %}
 
 
           </div>
         </div>
       </div>
-      {{ form_end(edit_form) }}
+
     </div>
   </div>
 

@@ -54,21 +54,25 @@
 
               <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
               <button type="submit" name="Create" class="btn green">Guardar</button>
+              {{ form_end(edit_form) }}
+
+
 
               {% if persona.role == "ROLE_SECRETARIO" %}
 
               {% elseif persona.role == "ROLE_ESTUDIANTE" %}
-                <form method="post" action="{{ path('personas_studentProfile')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn gray">Cancelar **</button>
-                  <input type="hidden" name="idPersona4" value="{{app.user.idPersona}}"/>
-                </form>
+              <form method="post" action="{{ path('personas_editEstudiante')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn gray">Cancelar</button>
+                  <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+              </form>
+
               {% endif %}
 
 
             </div>
           </div>
         </div>
-        {{ form_end(edit_form) }}
+
       </div>
     </div>
 
