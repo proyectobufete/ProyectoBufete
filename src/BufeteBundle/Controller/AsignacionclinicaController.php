@@ -57,24 +57,71 @@ class AsignacionclinicaController extends Controller
       public function listEstudiantesAction(Request $request)
       {
         $clin = $request->get('idAsignacion');
+        $searchQuery = $request->get('query');
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
+        $asignacionclinicas = null;
         if($rol == "ROLE_ADMIN")
         {
-            $asignacionclinicas = $em->getRepository('BufeteBundle:Asignacionclinica')->findAll();
-        } elseif ($rol == "ROLE_SECRETARIO") {
-            $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+          if (strlen($searchQuery) > 1) {
             $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
             $query = $repo->createQueryBuilder('a')
             ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
-            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
-            ->where('p.idBufete = :bufete')
+            ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = a.idEstudiante')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = e.idPersona')
+            ->Where('p.nombrePersona LIKE :param')
+            ->orWhere('e.carneEstudiante LIKE :param')
             ->andWhere('c.idClinica = :cli')
-            ->setParameter('bufete', $bufete)
             ->setParameter('cli', $clin)
+            ->setParameter('param', '%'.$searchQuery.'%')
+            ->orderBy('p.nombrePersona', 'asc')
+            ->getQuery();
+            $asignacionclinicas = $query->getResult();
+          } else {
+            $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+            $query = $repo->createQueryBuilder('a')
+            ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+            ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = a.idEstudiante')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = e.idPersona')
+            ->andWhere('c.idClinica = :cli')
+            ->setParameter('cli', $clin)
+            ->orderBy('p.nombrePersona', 'asc')
             ->getQuery();
             $asignacionclinicas = $query->getResult();
           }
+        } elseif ($rol == "ROLE_SECRETARIO") {
+          $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+          if (strlen($searchQuery) > 1) {
+            $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+            $query = $repo->createQueryBuilder('a')
+            ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+            ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = a.idEstudiante')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = e.idPersona')
+            ->Where('p.nombrePersona LIKE :param')
+            ->orWhere('e.carneEstudiante LIKE :param')
+            ->andWhere('p.idBufete = :bufete')
+            ->andWhere('c.idClinica = :cli')
+            ->setParameter('bufete', $bufete)
+            ->setParameter('cli', $clin)
+            ->setParameter('param', '%'.$searchQuery.'%')
+            ->orderBy('p.nombrePersona', 'asc')
+            ->getQuery();
+            $asignacionclinicas = $query->getResult();
+          } else {
+            $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+            $query = $repo->createQueryBuilder('a')
+            ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+            ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = a.idEstudiante')
+            ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = e.idPersona')
+            ->andWhere('p.idBufete = :bufete')
+            ->andWhere('c.idClinica = :cli')
+            ->setParameter('bufete', $bufete)
+            ->setParameter('cli', $clin)
+            ->orderBy('p.nombrePersona', 'asc')
+            ->getQuery();
+            $asignacionclinicas = $query->getResult();
+          }
+        }
 
         return $this->render('asignacionclinica/listEstudiantes.html.twig', array(
             'asignacionclinicas' => $asignacionclinicas,
@@ -166,19 +213,39 @@ class AsignacionclinicaController extends Controller
        */
         public function ListClinicasEstAsesorAction(Request $request)
         {
-          $clin = $request->get('idAsignacion');;
+          $clin = $request->get('idAsignacion');
+          $searchQuery = $request->get('query');
           $em = $this->getDoctrine()->getManager();
           $rol = $this->getUser()->getRole();
           $per = $this->getUser()->getIdPersona();
+          $asignacionclinicas = null;
           if ($rol == "ROLE_ASESOR") {
+            if (strlen($searchQuery) > 1) {
               $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
               $query = $repo->createQueryBuilder('a')
               ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
-              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
-              ->Where('c.idClinica = :cli')
+              ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = a.idEstudiante')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = e.idPersona')
+              ->Where('p.nombrePersona LIKE :param')
+              ->orWhere('e.carneEstudiante LIKE :param')
+              ->andWhere('c.idClinica = :cli')
               ->setParameter('cli', $clin)
+              ->setParameter('param', '%'.$searchQuery.'%')
+              ->orderBy('p.nombrePersona', 'asc')
               ->getQuery();
               $asignacionclinicas = $query->getResult();
+            } else {
+              $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
+              $query = $repo->createQueryBuilder('a')
+              ->innerJoin('BufeteBundle:Clinicas', 'c', 'WITH', 'c.idClinica = a.idClinica')
+              ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = a.idEstudiante')
+              ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'p.idPersona = e.idPersona')
+              ->Where('c.idClinica = :cli')
+              ->setParameter('cli', $clin)
+              ->orderBy('p.nombrePersona', 'asc')
+              ->getQuery();
+              $asignacionclinicas = $query->getResult();
+            }
           }
           return $this->render('asignacionclinica/ListClinicasEstAsesor.html.twig', array(
               'asignacionclinicas' => $asignacionclinicas,
@@ -277,7 +344,7 @@ class AsignacionclinicaController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $nota = $request->get('nota');
-//      $obs = $request->get('obs');
+
       $id = $request->get('id');
       $asignacion_repo = $em->getRepository("BufeteBundle:Asignacionclinica");
       $asignacionclinica = $asignacion_repo->findOneBy(array('idAsignacion' => $id));
@@ -292,19 +359,8 @@ class AsignacionclinicaController extends Controller
         $this->getDoctrine()->getManager()->flush();
       }
 
-  //    $asignacionclinica->setObservacionesClinica($obs);
-
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $this->getDoctrine()->getManager()->flush();
-//
-            //return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
-  //      }
     return $this->redirectToRoute('asignacionclinica_listClinicasEstAsesor', array('idAsignacion' => $asignacionclinica->getIdClinica()->getIdClinica()));
 
-    //  return $this->render('asignacionclinica/editNota.html.twig', array(
-  //      'asignacionclinica' => $asignacionclinica,
-    //        'edit_form' => $editForm->createView(),
-      //  ));
     }
 
 

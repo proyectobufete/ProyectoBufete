@@ -19,7 +19,7 @@
         </div>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-5">
         <form method="get" action="" class="form-inline" role="search">
           <div class="input-group">
             <span class="input-group-btn">
@@ -43,7 +43,7 @@
               <th>Nota</th>
               <th>Observaciones</th>
               <th>Estado</th>
-              <th></th>
+              <th>Estado Nota</th>
               <th>Asignar Nota</th>
           </tr>
         </thead>
@@ -86,13 +86,7 @@
                               <label for="nota">Nota</label>
                               <input type="number" min="0" max="100" required id="nota" name="nota" value="{{asignacionclinica.notaClinica}}" class="form-control" autofocus>
                               <input type="hidden" id="id" name="id" value="{{asignacionclinica.idAsignacion}}" class="form-control">
-                          </div>
-                          </div>
-                          <div class="form-actions">
-                            <div class="row">
-                              <div class="col-md-offset-4 col-md-5">
-                                  <button type="submit" name="Create" class="btn">Guardar</button>
-                              </div>
+                              <button type="submit" name="Create" class="btn">Guardar</button>
                             </div>
                           </div>
                         </form>
