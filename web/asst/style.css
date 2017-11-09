@@ -2,7 +2,14 @@
         background-color:#4f0101;
 
 }
-
+.circulo {
+     width: 300px;
+     height: 300px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     border: 2px solid #D5D8DC;
+}
 
 .btn-trs {
     color: #333;
