@@ -1473,8 +1473,11 @@ public function showPersonasAction(Personas $persona)
 
  public function editPersonaAction(Request $request)
  {
+
+   $post = Request::createFromGlobals();
    $var=$request->request->get("idPersona");
-   if($var == null)
+
+   if( ($var == null) && isset( $post->request->get('editpersona')['idPersona'] ))
    {
      $post = Request::createFromGlobals();
      $var= $post->request->get('editpersona')['idPersona'];

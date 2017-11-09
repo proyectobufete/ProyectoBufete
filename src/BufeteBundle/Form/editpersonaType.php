@@ -21,6 +21,7 @@ class editpersonaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('idPersona')
             ->add('nombrePersona')
             ->add('telefonoPersona')
             ->add('tel2Persona')
