@@ -55,13 +55,13 @@ security:
         - { path: ^/demandantes, roles: ROLE_SECRETARIO}
 
         - { path: ^/casos/civiles, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
-        - { path: ^/casos/newcivil, roles: ROLE_SECRETARIO}
-        - { path: ^/casos/([0-9]+)/editcivil, roles: ROLE_SECRETARIO}
-        - { path: ^/casos/([0-9]+)/transferircivil, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/newcivil, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/casos/([0-9]+)/editcivil, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/casos/([0-9]+)/transferircivil, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/casos/laborales, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
-        - { path: ^/casos/newlaboral, roles: ROLE_SECRETARIO}
-        - { path: ^/casos/([0-9]+)/editlaboral, roles: ROLE_SECRETARIO}
-        - { path: ^/casos/([0-9]+)/transferirlaboral, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/newlaboral, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/casos/([0-9]+)/editlaboral, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/casos/([0-9]+)/transferirlaboral, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
 
         - { path: ^/clinicas, roles: ROLE_SECRETARIO}
         - { path: ^/asignacionclinica/([0-9]+)/listEstudiantes, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
