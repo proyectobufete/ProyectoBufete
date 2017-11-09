@@ -19,7 +19,7 @@
         </div>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-5">
         <form method="get" action="" class="form-inline" role="search">
           <div class="input-group">
             <span class="input-group-btn">
@@ -43,6 +43,7 @@
               <th>Nota</th>
               <th>Observaciones</th>
               <th>Estado</th>
+              <th>Estado Nota</th>
               <th>Asignar Nota</th>
           </tr>
         </thead>
@@ -55,6 +56,20 @@
               <td>{{asignacionclinica.notaClinica}}</td>
               <td>{{ asignacionclinica.observacionesClinica }}</td>
               <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+              <td>
+                {% if asignacionclinica.notaClinica != null %}
+                  {% if asignacionclinica.notaClinica >= 61 %}
+                    <a href="#">
+                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Aprobado
+                  {% endif %}
+                  {% if asignacionclinica.notaClinica < 61 %}
+                    <a href="#">
+                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>No aprobado
+                  {% endif %}
+                {% else %}
+                No asignado
+                {% endif %}
+              </td>
               <td>
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{asignacionclinica.idAsignacion}}{{asignacionclinica.notaClinica}}">Nota</button>
                 <div class="modal fade" id="myModal{{asignacionclinica.idAsignacion}}{{asignacionclinica.notaClinica}}" role="dialog">
@@ -71,13 +86,7 @@
                               <label for="nota">Nota</label>
                               <input type="number" min="0" max="100" required id="nota" name="nota" value="{{asignacionclinica.notaClinica}}" class="form-control" autofocus>
                               <input type="hidden" id="id" name="id" value="{{asignacionclinica.idAsignacion}}" class="form-control">
-                          </div>
-                          </div>
-                          <div class="form-actions">
-                            <div class="row">
-                              <div class="col-md-offset-4 col-md-5">
-                                  <button type="submit" name="Create" class="btn">Guardar</button>
-                              </div>
+                              <button type="submit" name="Create" class="btn">Guardar</button>
                             </div>
                           </div>
                         </form>

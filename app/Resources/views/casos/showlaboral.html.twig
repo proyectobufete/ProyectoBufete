@@ -3,16 +3,16 @@
 {% block ac9 %} active {% endblock %}
 {% block title %}
 <div class="actions">
-  {% if is_granted('ROLE_ASESOR') %}
-  <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-      <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
-      <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
-  </form>
-  {% endif %}
 
-  {% if is_granted('ROLE_ESTUDIANTE') %}
+
+  {% if is_granted('ROLE_ESTUDIANTE') or is_granted('ROLE_ASESOR') %}
       <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-          <button type="submit" name="buscar" class="button button1">Entregas del caso</button>
+          <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
+          <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
+      </form>
+  {% elseif is_granted('ROLE_ESTUDIANTE') %}
+      <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
           <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
       </form>
   {% endif %}
@@ -30,7 +30,7 @@
               <label for="" class=" control-label"><h4><b>Lugar y Fecha</b></h4></label>
                 <input disabled type="text" style="font-size:14px;"  class="form-control input-lg " value="{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{(caso.fechaCaso|localizeddate('long', 'none', 'es'))}}{% endif %}">
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
               <label for="" class=" control-label"><h4><b>No. Caso</b></h4></b></label>
               <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.noCaso }}">
               </div>
