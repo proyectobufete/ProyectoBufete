@@ -224,7 +224,7 @@
 
                 {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
                   <tr>
-                    <a href="{{ path('casos_indexciviles') }}" class="btn btn-default w-xs m-b-5">Regresar</a>
+                    <a href="{{ path('casos_indexciviles') }}" class="btn grey w-xs m-b-5">Regresar</a>
                   </tr>
 
                     <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso }) }}" class="btn blue w-xs m-b-5">Editar</a>

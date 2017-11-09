@@ -214,21 +214,26 @@
                         <ul class="dropdown-menu pro-menu fadeInUp animated " tabindex="5003" style="overflow: hidden; outline: none;">
                           <li>
                               {% if app.user.role == "ROLE_ESTUDIANTE" %}
-
+                              <li>
+                                <a>
                                 <form method="post" action="{{ path('personas_studentProfile')}}" class="form-inline" role="search">
-                                  <button type="submit" name="buscar" class="btn yellow">Perfil</button>
+                                  <button type="submit" name="buscar" class="btn btn-trs"><i class="ion-person"></i>  Perfil</button>
+                                  <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>
+                                </form>
+                              </a>
+                              </li>
+                              {% elseif app.user.role == "ROLE_ASESOR" or app.user.role == "ROLE_SECRETARIO" or app.user.role == "ROLE_ADMIN" or app.user.role == "ROLE_DIRECTOR" %}
+                                <li>
+                                  <a>
+                                <form method="post" action="{{ path('personas_staffProfile')}}" class="form-inline" role="search">
+                                  <button type="submit" name="buscar" class="btn btn-trs"><i class="ion-person"></i>Perfil</button>
                                   <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>
                                 </form>
 
-                              {% elseif app.user.role == "ROLE_ASESOR" or app.user.role == "ROLE_SECRETARIO" or app.user.role == "ROLE_ADMIN" or app.user.role == "ROLE_DIRECTOR" %}
-                                <form method="post" action="{{ path('personas_staffProfile')}}" class="form-inline" role="search">
-                                  <button type="submit" name="buscar" class="btn yellow">Perfil</button>
-                                  <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>
-                                </form>
                               {% endif %}
                             </li>
 
-                            <li><a href="{{path("logout")}}"><i class="ion-log-out"></i> Cerrar Sesión</a></li>
+                            <li><a href="{{path("logout")}}"><i class="ion-log-out"> </i> Cerrar Sesión</a></li>
 
 
                         </ul>
