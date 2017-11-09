@@ -64,7 +64,10 @@
                 <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
               {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR"%}
                 <a href="{{ path('personas_index') }}" class="btn grey">Regresar</a>
-                <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
+                <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
+                    <button type="submit" name="buscar" class="btn blue">Editar</button>
+                    <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                </form>
               {% endif %}
             </tr>
             <tr>
