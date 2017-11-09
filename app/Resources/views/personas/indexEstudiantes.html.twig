@@ -1,6 +1,11 @@
 {% extends 'layout.html.twig' %}
-{% block act5 %} active {% endblock %}
-{% block ac12 %} active {% endblock %}
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act26 %} active {% endblock %}
+  {% block ac35 %} active {% endblock %}
+{% else %}
+  {% block act5 %} active {% endblock %}
+  {% block ac12 %} active {% endblock %}
+{% endif %}
 
 {% block title %}
   <h1>Listado de Estudiantes</h1>
