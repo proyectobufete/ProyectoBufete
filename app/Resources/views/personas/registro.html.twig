@@ -14,9 +14,9 @@
   <div class="portlet-body form">
     <div id="form_sample_1" class="form-horizontal">
       <div class="form-body colorform">
-        <div class="col-md-offset-2">
+        <div class="col-md-offset-3">
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               {% for message in app.session.flashbag().get('status') %}
                 <div class="alert alert-danger text-center">
                   <strong>¡Error! </strong>{{message}}
@@ -25,7 +25,7 @@
 
 
               <form action="registro">
-                <label>BUSCAR ESTUDIANTE
+                <label>Buscar estudiante
                 </label><br>
                 <label>Carné:
                 </label>
@@ -42,7 +42,7 @@
           </div>
           {{ form_start(form, {'enctype':'multipart/form-data'}) }}
           <div class="row">
-            <div class="col-md-6 col-md-offset-2">
+            <div class="col-md-6 col-md-offset-3">
               <label for="">
                 <h4>
                   <b>Datos Personales</b>
@@ -51,43 +51,43 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               {{form_label(form.nombrePersona,'Nombre Estudiante')}}
               {{form_widget(form.nombrePersona,{'attr':{'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{form_label(form.telefonoPersona,'Número de Teléfono 1')}}
               {{form_widget(form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{form_label(form.tel2Persona,'Número de Teléfono 2')}}
               {{form_widget(form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{form_label(form.dpiPersona,'DPI')}}
               {{form_widget(form.dpiPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{form_label(form.emailPersona,'Correo Electrónico')}}
               {{form_widget(form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               {{form_label(form.direccionPersona,'Dirección')}}
               {{form_widget(form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4">
               {{form_label(form.usuarioPersona,'Nombre de Usuario')}}
               {{form_widget(form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
             </div>
@@ -97,7 +97,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               {{form_label(form.foto,'Foto de perfil')}}
               {{form_widget(form.foto) }}
             </div>
@@ -122,11 +122,11 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{form_label(form.estudiantes.carneEstudiante,'No. Carné')}}
               {{form_widget(form.estudiantes.carneEstudiante,{'attr':{ 'readonly':'readonly', 'class' : 'form-control'}}) }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               {{form_label(form.estudiantes.idtipopracticante,'Tipo de Practica')}}
               {{form_widget(form.estudiantes.idtipopracticante,{'attr':{'class' : 'form-control'}}) }}
             </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="form-actions">
         <div class="row">
-          <div class="col-md-offset-2 col-md-9">
+          <div class="col-md-offset-3 col-md-9">
             <button type="submit" name="Create" class="btn green">Crear</button>
             <a href="{{ path('personas_indexEstudiantes') }}">
               <button type="button" name="cancelar" class="btn grey">Cancelar</button>
