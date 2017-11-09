@@ -87,13 +87,14 @@
           <div class="col-md-offset-2 col-md-9">
 
 
-              
+
 
               <button type="submit" name="Create" class="btn green">Guardar</button>
 
 
 
-
+              {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña' }) }}
+              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
 
 
 
