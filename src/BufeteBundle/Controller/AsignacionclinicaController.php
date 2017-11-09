@@ -27,14 +27,39 @@ class AsignacionclinicaController extends Controller
      * Lists all asignacionclinica entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+      $searchQuery = $request->get('query');
       $em = $this->getDoctrine()->getManager();
       $rol = $this->getUser()->getRole();
-      if($rol == "ROLE_ADMIN")
+      if($rol == "ROLE_ADMIN" || $rol == "ROLE_DIRECTOR")
       {
+        if (strlen($searchQuery) > 1) {
+          $repo = $em->getRepository("BufeteBundle:Clinicas");
+          $query = $repo->createQueryBuilder('c')
+          ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+          ->Where('p.nombrePersona LIKE :param')
+          ->orWhere('c.nombreClinica LIKE :param')
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->getQuery();
+          $asignacionclinicas = $query->getResult();
+        } else {
           $asignacionclinicas = $em->getRepository('BufeteBundle:Clinicas')->findAll();
+        }
       } elseif ($rol == "ROLE_SECRETARIO") {
+        if (strlen($searchQuery) > 1) {
+          $bufete = $this->getUser()->getIdBufete()->getIdBufete();
+          $repo = $em->getRepository("BufeteBundle:Clinicas");
+          $query = $repo->createQueryBuilder('c')
+          ->innerJoin('BufeteBundle:Personas', 'p', 'WITH', 'c.idPersona = p.idPersona')
+          ->Where('p.nombrePersona LIKE :param')
+          ->orWhere('c.nombreClinica LIKE :param')
+          ->andWhere('p.idBufete = :bufete')
+          ->setParameter('param', '%'.$searchQuery.'%')
+          ->setParameter('bufete', $bufete)
+          ->getQuery();
+          $asignacionclinicas = $query->getResult();
+        } else {
           $bufete = $this->getUser()->getIdBufete()->getIdBufete();
           $repo = $em->getRepository("BufeteBundle:Clinicas");
           $query = $repo->createQueryBuilder('c')
@@ -44,6 +69,7 @@ class AsignacionclinicaController extends Controller
           ->getQuery();
           $asignacionclinicas = $query->getResult();
         }
+      }
 
         return $this->render('asignacionclinica/index.html.twig', array(
             'asignacionclinicas' => $asignacionclinicas,
@@ -61,7 +87,7 @@ class AsignacionclinicaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rol = $this->getUser()->getRole();
         $asignacionclinicas = null;
-        if($rol == "ROLE_ADMIN")
+        if($rol == "ROLE_ADMIN" || $rol == "ROLE_DIRECTOR")
         {
           if (strlen($searchQuery) > 1) {
             $repo = $em->getRepository("BufeteBundle:Asignacionclinica");
