@@ -63,11 +63,11 @@ security:
         - { path: ^/casos/([0-9]+)/editlaboral, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/casos/([0-9]+)/transferirlaboral, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
 
-        - { path: ^/clinicas, roles: ROLE_SECRETARIO}
+        - { path: ^/clinicas, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/asignacionclinica/([0-9]+)/listEstudiantes, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
-        - { path: ^/asignacionclinica/new, roles: ROLE_SECRETARIO}
-        - { path: ^/asignacionclinica/([0-9]+)/show, roles: ROLE_SECRETARIO}
-        - { path: ^/asignacionclinica/([0-9]+)/edit, roles: ROLE_SECRETARIO}
+        - { path: ^/asignacionclinica/new, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/asignacionclinica/([0-9]+)/show, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
+        - { path: ^/asignacionclinica/([0-9]+)/edit, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
 
         - { path: ^/personas/indexEstudiantes, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/personas/registro, roles: ROLE_SECRETARIO}
