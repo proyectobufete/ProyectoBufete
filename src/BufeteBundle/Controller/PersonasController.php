@@ -685,15 +685,23 @@ die();
          $rol = $this->getUser()->getRole();
 
          if ($rol == "ROLE_DIRECTOR") {
-           if (!empty($searchQuery ||$searchBufete)) {
+           if (!empty($searchBufete)) {
              $repo = $em->getRepository("BufeteBundle:Personas");
              $query = $repo->createQueryBuilder('p')
-             #->where('p.nombrePersona LIKE :param')
              ->Where('p.idBufete = :searchbufete')
              ->andWhere('p.role = :rol')
              ->setParameter('rol', 'ROLE_ASESOR')
              ->setParameter('searchbufete', $searchBufete)
-             #->setParameter('param', '%'.$searchQuery.'%')
+             ->getQuery();
+             $asesores = $query->getResult();
+             $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
+           } elseif (strlen($searchQuery) > 1) {
+             $repo = $em->getRepository("BufeteBundle:Personas");
+             $query = $repo->createQueryBuilder('p')
+             ->where('p.nombrePersona LIKE :param')
+             ->andWhere('p.role = :rol')
+             ->setParameter('rol', 'ROLE_ASESOR')
+             ->setParameter('param', '%'.$searchQuery.'%')
              ->getQuery();
              $asesores = $query->getResult();
              $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
