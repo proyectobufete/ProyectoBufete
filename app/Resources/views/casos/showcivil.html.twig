@@ -1,10 +1,15 @@
 {% extends 'layout.html.twig' %}
-{% block act3 %} active {% endblock %}
-{% block ac8 %} active {% endblock %}
+
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act27 %} active {% endblock %}
+  {% block ac36 %} active {% endblock %}
+{% else %}
+  {% block act3 %} active {% endblock %}
+  {% block ac8 %} active {% endblock %}
+{% endif %}
 {% block title %}
-
-
 <div class="actions">
+
   {% if is_granted('ROLE_ESTUDIANTE') or is_granted('ROLE_ASESOR') %}
       <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
           <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
@@ -17,11 +22,9 @@
       </form>
   {% endif %}
 
-
 </div>
-
-
   <h1>Detalles</h1>
+
 {% endblock %}
 {% block body %}
       <div class="portlet-body">
@@ -32,7 +35,7 @@
               <label for="" class=" control-label"><h4><b>Lugar y Fecha</b></h4></label>
                 <input disabled type="text" style="font-size:14px;"  class="form-control input-lg " value="{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{(caso.fechaCaso|localizeddate('long', 'none', 'es'))}}{% endif %}">
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
               <label for="" class=" control-label"><h4><b>No. Caso</b></h4></b></label>
               <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.noCaso }}">
               </div>
