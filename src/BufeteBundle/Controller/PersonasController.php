@@ -1107,108 +1107,6 @@ public function showPersonasAction(Personas $persona)
               ));
           }
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-          ////////////////////////////////////////////////////////////////////////////////////
-          /*  EDITAR USUARIO DEL ESTUDIANTE */
-
-          /*
-               public function edituserestudianteAction(Request $request)
-               {
-
-                 $var=$request->request->get("idPersona");
-
-                 if(isset($var))
-                 {
-                   $em = $this->getDoctrine()->getManager();
-                   $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                                'idPersona' => $var
-                   ));
-                 }
-                 else
-                 {
-                     $var2=$request->request->get("idPersona2");
-                     $em = $this->getDoctrine()->getManager();
-                     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                                  'idPersona' => $var2
-                     ));
-                 }
-
-                   $pass = $persona->getpassPersona();
-                   $edit_form = $this->createForm('BufeteBundle\Form\EstudianteUserType', $persona, array(
-                            'PassPersona' => $pass,
-                       ));
-
-                   $edit_form->handleRequest($request);
-                   $confirm = null;
-                   $status=null;
-
-                   if ($edit_form->isSubmitted() )
-                   {
-                     //if($edit_form->isValid())
-                     {
-                       //$this->getDoctrine()->getManager()->flush();
-                       $em = $this->getDoctrine()->getManager();
-
-                       $persona_repo = $em->getRepository("BufeteBundle:Personas");
-                       $pe = $persona_repo->findOneBy(array('usuarioPersona' => $edit_form->get("usuarioPersona")->getData()));
-
-
-
-                           if(count($pe) == 0)
-                           {
-                               $em->persist($persona);
-                               $flush = $em->flush();
-
-                               if ($flush == null)
-                               {
-                                   $this->session->getFlashBag()->add("status", $status);
-                                   $status = "El usuario se ha creado correctamente";
-                                   $confirm = true;
-                               } else {
-                                 $status = "El usuario no se pudo registrar";
-                               }
-                           }
-                           else{
-                               $status = "el nombre de usuario ya existe";
-                           }
-
-                         }
-
-                           if ($confirm)
-                           {
-                             return $this->redirectToRoute('personas_studentProfile',
-                                [
-                                  'var' => $persona
-                                ], 307);
-                                //$confirm=null;
-                           }
-                           else
-                           {
-                             $this->session->getFlashBag()->add("status", $status);
-                           }
-
-                   }
-
-                   return $this->render('personas/edituserestudiante.html.twig', array(
-                       'persona' => $persona,
-                       'PassPersona' => $pass,
-                       'edit_form' => $edit_form->createView(),
-                       //'delete_form' => $deleteForm->createView(),
-                   ));
-               }
-
-              */
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 ////////////////////////////////////////////////////////////////////////////////////
 /*  EDITAR DATOS DEL ESTUDIANTE */
  public function editEstudianteAction(Request $request)
@@ -1432,6 +1330,26 @@ public function showPersonasAction(Personas $persona)
              $encoder = $factory->getEncoder($persona);
              $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
              $persona->setPassPersona($password);
+
+             $file = $persona->getFoto();
+
+             if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+             {
+               $validator = $this->get('validator');
+               $errors = $validator->validate($persona);
+               if (count($errors) > 0)
+               {
+                 $errorsString = (string) $errors;
+                 return new Response($errorsString);
+               }
+
+               $fileName = md5(uniqid()).'.'.$file->guessExtension();
+               $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/profile';
+               $file->move($cvDir, $fileName);
+               $persona->setFoto($fileName);
+             }
+
+
              //$em = $this->getDoctrine()->getManager();
              $em->persist($persona);
              $flush = $em->flush();
