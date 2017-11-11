@@ -32,9 +32,7 @@ security:
 
     access_control:
 
-        - { path: ^/paises, roles: ROLE_ADMIN}
-        - { path: ^/departamentos, roles: ROLE_ADMIN}
-        - { path: ^/ciudad, roles: ROLE_ADMIN}
+
         - { path: ^/tipocaso, roles: ROLE_ADMIN}
         - { path: ^/personas/indexUsuarios, roles: ROLE_ADMIN}
         - { path: ^/personas/([0-9]+)/editPersona, roles: ROLE_ADMIN}
