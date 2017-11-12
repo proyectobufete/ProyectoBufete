@@ -7,10 +7,10 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-        <meta name="author" content="Coderthemes">
+        <meta name="description" content="Sistema de gestion de casos para el Bufete Popular adscrito al Centro Universitario de Occidente">
+        <meta name="author" content="Jimmy Barrios, Pablo Cifuentes, Adder Orozco, Fernando Reyes">
         <link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" href="img/favicon_1.ico">
+      <!--  <link rel="shortcut icon" href="img/favicon_1.ico">-->
 
         <title>Bufete Popular </title>
         <link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css')}} " />
@@ -52,7 +52,7 @@
 
             <!-- brand -->
             <div class="logo">
-                <a href="index.html" class="logo-expanded">
+                <a href="{{path("bufete_homepage")}}" class="logo-expanded">
                     <img src="{{asset('asst/img/logo3.jpeg')}}" width="200px" height="80px" alt="logo">
                     <span class="nav-label"></span>
                 </a>
@@ -167,6 +167,12 @@
                       <ul class="list-unstyled">
                           <li class="{% block ac36 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
                           <li class="{% block ac37 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
+                      </ul>
+                  </li>
+                  <li class="has-submenu  {% block act29 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Clínicas</span></a>
+                      <ul class="list-unstyled">
+                          <li class="{% block ac38 %}{% endblock %}"><a href="{{path("clinicas_index")}}">Clínicas</a></li>
+                          <li class="{% block ac39 %}{% endblock %}"><a href="{{path("asignacionclinica_index")}}">Asignar Clínicas</a></li>
                       </ul>
                   </li>
                   {% endif %}

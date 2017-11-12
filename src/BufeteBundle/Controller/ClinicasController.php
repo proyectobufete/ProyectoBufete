@@ -25,7 +25,7 @@ class ClinicasController extends Controller
 
         $searchQuery = $request->get('query');
         $clinicas = null;
-        if($rol == "ROLE_ADMIN")
+        if($rol == "ROLE_ADMIN" || $rol == "ROLE_DIRECTOR")
         {
             if (!empty($searchQuery)) {
               $repo = $em->getRepository("BufeteBundle:Clinicas");
