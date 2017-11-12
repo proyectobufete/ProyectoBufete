@@ -54,15 +54,12 @@ class RevisionesController extends Controller
 
         return $this->render('revisiones/indexLink.html.twig', array(
             'revisiones' => $revisiones,
-
         ));
     }
 
     public function indexLinkCasoAction(Request $request)
     {
       $var=$request->request->get("idCaso");
-
-
 
       $em = $this->getDoctrine()->getManager();
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
@@ -86,8 +83,6 @@ class RevisionesController extends Controller
         }
         elseif ($rol=='ROLE_ESTUDIANTE')
         {
-
-
           return $this->render('revisiones/indexLinkCasoEst.html.twig', array(
               'revisiones' => $revisiones,
               'ruta'=> 'uploads/final/',
@@ -96,30 +91,6 @@ class RevisionesController extends Controller
           ));
         }
     }
-
-/*
-    public function indexLinkCasoEstAction(Request $request)
-    {
-      $var=$request->request->get("idCaso");
-
-      $em = $this->getDoctrine()->getManager();
-      $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
-                   'idCaso' => $var
-      ));
-
-        $em = $this->getDoctrine()->getManager();
-        $revisiones = $em->getRepository('BufeteBundle:Revisiones')->findBy(
-          array(), array('idRevision' => 'DESC')
-        );
-
-          return $this->render('revisiones/indexLinkCasoEst.html.twig', array(
-              'revisiones' => $revisiones,
-              'ruta'=> 'uploads/final/',
-              'varEnvio' =>$var,
-              'casoEnvio'=>$caso_datos,
-          ));
-    }
-*/
 
     /**
      * Creates a new revisione entity.
@@ -154,30 +125,28 @@ class RevisionesController extends Controller
 
           $revisione->setIdRevisado(111);
 
-
-
           $revisione->SetIdPersona($idCaso->getIdEstudiante()->getIdEstudiante());
 
 
             $file = $revisione->getRutaArchivo();
 
-                            if(($file instanceof UploadedFile) && ($file->getError() == '0'))
-                            {
-                              $validator = $this->get('validator');
-                              $errors = $validator->validate($revisione);
-                              if (count($errors) > 0)
-                              {
+            if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+            {
+              $validator = $this->get('validator');
+              $errors = $validator->validate($revisione);
+              if (count($errors) > 0)
+              {
 
-                                $errorsString = (string) $errors;
-                                return new Response($errorsString);
-                              }
+                $errorsString = (string) $errors;
+                return new Response($errorsString);
+              }
 
-                              $revisione->setNombreArchivo($file->getClientOriginalName());
-                              $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                              $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
-                              $file->move($cvDir, $fileName);
-                              $revisione->setRutaArchivo($fileName);
-                            }
+              $revisione->setNombreArchivo($file->getClientOriginalName());
+              $fileName = md5(uniqid()).'.'.$file->guessExtension();
+              $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+              $file->move($cvDir, $fileName);
+              $revisione->setRutaArchivo($fileName);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($revisione);
@@ -203,7 +172,6 @@ class RevisionesController extends Controller
 
       $post=$request->get("idRevision");
 
-      
 
       $em = $this->getDoctrine()->getManager();
       $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
@@ -271,12 +239,7 @@ class RevisionesController extends Controller
       $carne = (string)$estudiante_datos->getCarneEstudiante();
       $numcaso = $caso_datos->getNoCaso();
 
-
-
-
         $deleteForm = $this->createDeleteForm($revisione);
-
-
 
         return $this->render('revisiones/showLink.html.twig', array(
             'revisione' => $revisione,
@@ -357,11 +320,7 @@ class RevisionesController extends Controller
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesEstudiantesType', $revisione);
         $editForm->handleRequest($request);
 
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-
 
           $revisione->setTituloEntrega($editForm->get("tituloEntrega")->getData());
           $revisione->setComentarios($editForm->get("comentarios")->getData());
@@ -395,15 +354,10 @@ class RevisionesController extends Controller
             $revisione->setRutaArchivo(null);
           }
 
-
-
-                  return $this->redirectToRoute('revisiones_showInforme',
-                   [
-                     'idRevision' => $revisione
-                   ], 307);
-
-
-                //return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+          return $this->redirectToRoute('revisiones_showInforme',
+           [
+             'idRevision' => $revisione
+           ], 307);
 
         }
 
@@ -415,29 +369,7 @@ class RevisionesController extends Controller
 
         ));
     }
-/*
-    public function UploadEditAction(Request $request, Revisiones $revisione)
-    {
-        $post=$request->get("idRevision");
-        $em = $this->getDoctrine()->getManager();
-        //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
-        $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
-                     'idRevision' => $post
-        ));
-        $editForm = $this->createForm('BufeteBundle\Form\RevEstEditType', $revisione);
-        $editForm->handleRequest($request);
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-                $this->getDoctrine()->getManager()->flush();
-                return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
-        }
-        return $this->render('revisiones/UploadEdit.html.twig', array(
-            'envio'=> $revisione,
-            'revisione' => $revisione,
-              'ruta'=> 'uploads/final/',
-            'edit_form' => $editForm->createView(),
-        ));
-    }
-*/
+
     public function UploadEditAction(Request $request)
     {
         $IdRevisionRecibido=$request->get("idRevision");
@@ -451,13 +383,7 @@ class RevisionesController extends Controller
 
         $rutaguardada = $revisione->getRutaArchivo();
 
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-
-
-
 
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
@@ -475,16 +401,6 @@ class RevisionesController extends Controller
 
         $post=$request->get("idRevision");
 
-        /*
-        $revisioneCopia = new Revisiones();
-
-        $post=$request->get("idRevision");
-        $em = $this->getDoctrine()->getManager();
-        $datos_revision = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
-                     'idRevision' => $post
-        ));
-        */
-
         $em = $this->getDoctrine()->getManager();
         $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
                      'idRevision' => $post
@@ -495,31 +411,13 @@ class RevisionesController extends Controller
         $editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
         $editForm->handleRequest($request);
 
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
 
           $post=$request->get("idRevision");
           $em = $this->getDoctrine()->getManager();
           $datos_revision = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
                        'idRevision' => $post
           ));
-
-          //dump($editForm->get("idRevision")->getData());
-          //die($datos_revision);
-
-          /*
-          dump($editForm->get("tituloEntrega")->getData());
-          die();
-
-          $revisioneCopia = $revisione;
-
-
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($revisioneCopia);
-          $em->flush();
-          */
 
           $file = $revisione->getRutaArchivo();
 
@@ -543,17 +441,8 @@ class RevisionesController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            //$editForm->handleRequest($request);
-            //$revisione = new Revisiones();
-            //$editForm = $this->createForm('BufeteBundle\Form\RevisionesType', $revisione);
-            //}$editForm->handleRequest($request);
-
-
-
             return $this->redirectToRoute('revisiones_showLink', array('idRevision' => $revisione->getIdrevision()));
         }
-
-
 
         return $this->render('revisiones/editLink.html.twig', array(
             'envio'=> $revisione,
@@ -566,12 +455,7 @@ class RevisionesController extends Controller
 
     public function editRevisionAction(Request $request)
     {
-
-
         $post=$request->get("idRevision");
-
-
-
 
         $em = $this->getDoctrine()->getManager();
         //$revisione = $em->getRepository('BufeteBundle:Revisiones')->find($post);
@@ -648,23 +532,23 @@ class RevisionesController extends Controller
 
             $file = $revisione->getRutaArchivo();
 
-                            if(($file instanceof UploadedFile) && ($file->getError() == '0'))
-                            {
-                              $validator = $this->get('validator');
-                              $errors = $validator->validate($revisione);
-                              if (count($errors) > 0)
-                              {
+            if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+            {
+              $validator = $this->get('validator');
+              $errors = $validator->validate($revisione);
+              if (count($errors) > 0)
+              {
 
-                                $errorsString = (string) $errors;
-                                return new Response($errorsString);
-                              }
+                $errorsString = (string) $errors;
+                return new Response($errorsString);
+              }
 
-                              $revisione->setNombreArchivo($file->getClientOriginalName());
-                              $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                              $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
-                              $file->move($cvDir, $fileName);
-                              $revisione->setRutaArchivo($fileName);
-                            }
+              $revisione->setNombreArchivo($file->getClientOriginalName());
+              $fileName = md5(uniqid()).'.'.$file->guessExtension();
+              $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
+              $file->move($cvDir, $fileName);
+              $revisione->setRutaArchivo($fileName);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($revisione);
@@ -683,44 +567,6 @@ class RevisionesController extends Controller
 
     public function envioCorreoAction()
     {
-
-
-  /*
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('a.j.orozco038@gmail.com')
-            ->setTo('a.j.orozco038@gmail.com')
-            ->setBody(
-                $this->renderView(
-                    'revisiones/envioCorreo.html.twig',
-                    array('name' => "adder",)
-                )
-            )
-        ;
-        $this->get('mailer')
-        ->send($message);
-*/
-
-
-
-
-        $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('grupo15carrera@gmial.com')
-                ->setTo('a.j.orozco038@gmail.com')
-                ->setBody(
-                    $this->renderView(
-                      'revisiones/envioCorreo.html.twig',
-                      array('name' => "adder",)
-                )
-              );
-        $this->get('mailer')
-        ->send($message);
-
-
-        return $this->render('revisiones/envioCorreo.html.twig', array(
-          'name' => "no",
-
-        ));
 
 
     }

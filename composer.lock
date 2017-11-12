@@ -4,9 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
+    "hash": "e1584011a8a1ac935af773653fe4a0ff",
     "content-hash": "53bbbf21f5c835fa542854c28fc0c034",
-
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1007,7 +1006,7 @@
                 "pager",
                 "paginator"
             ],
-            "time": "2017-09-15T12:50:01+00:00"
+            "time": "2017-09-15 12:50:01"
         },
         {
             "name": "knplabs/knp-paginator-bundle",
@@ -1069,7 +1068,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2017-03-21T09:45:46+00:00"
+            "time": "2017-03-21 09:45:46"
         },
         {
             "name": "knplabs/knp-snappy",
@@ -1531,9 +1530,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-
-            "time": "2017-10-29T18:48:08+00:00"
-
+            "time": "2017-10-29 18:48:08"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1662,9 +1659,7 @@
                 "l10n",
                 "localization"
             ],
-
-            "time": "2017-11-10T19:02:53+00:00"
-
+            "time": "2017-11-10 19:02:53"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2436,9 +2431,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-
-            "time": "2017-11-07T14:16:22+00:00"
-
+            "time": "2017-11-07 14:16:22"
         }
     ],
     "aliases": [],
