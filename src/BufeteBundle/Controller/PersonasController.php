@@ -1433,6 +1433,24 @@ public function showPersonasAction(Personas $persona)
              $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
              $persona->setPassPersona($password);
              //$em = $this->getDoctrine()->getManager();
+
+             $file = $persona->getFoto();
+               if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+               {
+                 $validator = $this->get('validator');
+                 $errors = $validator->validate($persona);
+                 if (count($errors) > 0)
+                 {
+                   $errorsString = (string) $errors;
+                   return new Response($errorsString);
+                 }
+
+                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                 $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/profile';
+                 $file->move($cvDir, $fileName);
+                 $persona->setFoto($fileName);
+               }
+
              $em->persist($persona);
              $flush = $em->flush();
              if ($flush == null) {
@@ -1593,23 +1611,21 @@ if ($form->isSubmitted()){
        //$em = $this->getDoctrine()->getManager();
 
        $file = $persona->getFoto();
+         if(($file instanceof UploadedFile) && ($file->getError() == '0'))
+         {
+           $validator = $this->get('validator');
+           $errors = $validator->validate($persona);
+           if (count($errors) > 0)
+           {
+             $errorsString = (string) $errors;
+             return new Response($errorsString);
+           }
 
-                       if(($file instanceof UploadedFile) && ($file->getError() == '0'))
-                       {
-                         $validator = $this->get('validator');
-                         $errors = $validator->validate($persona);
-                         if (count($errors) > 0)
-                         {
-                           $errorsString = (string) $errors;
-                           return new Response($errorsString);
-                         }
-
-                         $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                         $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/profile';
-                         $file->move($cvDir, $fileName);
-                         $persona->setFoto($fileName);
-                       }
-
+           $fileName = md5(uniqid()).'.'.$file->guessExtension();
+           $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/profile';
+           $file->move($cvDir, $fileName);
+           $persona->setFoto($fileName);
+         }
 
        $em->persist($persona);
        $flush = $em->flush();
