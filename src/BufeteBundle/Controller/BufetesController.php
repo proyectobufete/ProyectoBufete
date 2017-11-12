@@ -16,14 +16,19 @@ class BufetesController extends Controller
      * Lists all bufete entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
 
+        $paginator = $this->get('knp_paginator');
+        $bufetespg = $paginator->paginate(
+            $bufetes,
+            $request->query->getInt('page', 1), 6 );
+
         return $this->render('bufetes/index.html.twig', array(
-            'bufetes' => $bufetes,
+            'bufetes' => $bufetespg,
         ));
     }
 
