@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% block act5 %} active {% endblock %}
-{% block ac12 %} active {% endblock %}
+
       {% block title %}
         <h1>Editar Contraseña</h1>
       {% endblock %}
@@ -58,8 +58,11 @@
 
 
 
-              {% if persona.role == "ROLE_SECRETARIO" %}
-
+              {% if persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_ASESOR" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ADMIN" %}
+              <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn grey">Regresar</button>
+                  <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+              </form>
               {% elseif persona.role == "ROLE_ESTUDIANTE" %}
               <form method="post" action="{{ path('personas_editEstudiante')}}" class="form-inline" role="search">
                   <button type="submit" name="buscar" class="btn gray">Cancelar</button>
