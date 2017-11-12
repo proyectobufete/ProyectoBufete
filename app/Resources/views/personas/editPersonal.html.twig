@@ -65,12 +65,7 @@
                 {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-5">
 
-                {{form_widget(edit_form.role)}}
-              </div>
-            </div>
             <div class="row">
               <div class="col-md-3">
                 <div class="">
@@ -89,18 +84,21 @@
 
 
 
-              <button type="submit" name="Create" class="btn green">Guardar</button>
-
-
-
-              {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña' }) }}
-              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+            <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
+            <button type="submit" name="Create" class="btn green">Editar</button>
 
 
 
 
-            <a href="{{ path('personas_index') }}">
-              <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+            {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña' }) }}
+            <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+
+
+
+
+
+            <a href="{{ path('personas_indexAsesores') }}">
+              <button type="button" name="cancelar" class="btn default">Cancelar</button>
             </a>
           </div>
         </div>

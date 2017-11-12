@@ -11,7 +11,8 @@ class Revisiones
 
     /**
      * @Assert\File(
-     *     maxSize = "5000k",
+     *     maxSize = "10M",
+     *     maxSizeMessage="El archivo es muy grande. Maximo permitido 10MB",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF",
      * )

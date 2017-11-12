@@ -201,13 +201,6 @@ class PersonasController extends Controller
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   public function perfilAction(Request $request)
   {
-<<<<<<< HEAD
-    $var=$request->request->get("idPersona");
-
-    $post = Request::createFromGlobals();
-    $var2 = $post->request->get('idPersona5');
-
-=======
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,7 +224,6 @@ die();
     $post = Request::createFromGlobals();
     $var3 = $post->query->get('var');
 
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
     if($var == null)
     {
       $post = Request::createFromGlobals();
@@ -241,8 +233,6 @@ die();
       $post = Request::createFromGlobals();
       $var = $post->request->get('idPersona5');
     }
-<<<<<<< HEAD
-=======
     if(isset($var3))
     {
       $var = $var3;
@@ -250,14 +240,10 @@ die();
 
 
 
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                  'idPersona' => $var
     ));
-<<<<<<< HEAD
-      $rolPersona = $persona->getRole();
-=======
 
 
 
@@ -270,7 +256,6 @@ die();
       $rolPersona = $persona->getRole();
 
 
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
       if($rolPersona == "ROLE_ESTUDIANTE")
       {
         return $this->render('personas/perfilEstudiante.html.twig', array(
@@ -312,11 +297,7 @@ die();
         ));
       }
       // **DESCOMENTAR PARA MOSTRAR PAGINA DE ERRORES
-<<<<<<< HEAD
-      //return $this->redirectToRoute('errores_notfound');
-=======
       return $this->redirectToRoute('errores_notfound');
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -632,7 +613,6 @@ die();
                         $persona->setPassPersona($password);
                         $persona->setIdBufete($this->getUser()->getIdBufete());
 
-<<<<<<< HEAD
 
 
                         $file = $persona->getFoto();
@@ -658,25 +638,6 @@ die();
 
                                         //dump($persona->getFoto());
                                         //die();
-=======
-                        $file = $persona->getFoto();
-
-                        if(($file instanceof UploadedFile) && ($file->getError() == '0'))
-                        {
-                          $validator = $this->get('validator');
-                          $errors = $validator->validate($persona);
-                          if (count($errors) > 0)
-                          {
-                            $errorsString = (string) $errors;
-                            return new Response($errorsString);
-                          }
-
-                          $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                          $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/profile';
-                          $file->move($cvDir, $fileName);
-                          $persona->setFoto($fileName);
-                        }
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
                         $em->persist($persona);
                         $flush = $em->flush();
@@ -695,47 +656,36 @@ die();
               }
               if ($confirm) {
 
-<<<<<<< HEAD
-                $envio = $persona->getIdPersona();
-
-
-                $persona1 = new Personas();
-                $em = $this->getDoctrine()->getManager();
-                $persona1 = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                             'idPersona' => $envio
-                ));
-
-                return $this->redirectToRoute('personas_perfil',
-                   [
-                     'var' => $persona1
-                   ], 307);
-
-=======
                 $var=$persona->getIdPersona();
+
+
 
                 $em = $this->getDoctrine()->getManager();
                 $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                              'idPersona' => $var
                 ));
-                  return $this->redirectToRoute('personas_perfil',
+
+                return $this->redirectToRoute('personas_perfil',
                    [
-                     'var' => $persona->getIdPersona()
+                     'var' => $var
                    ], 307);
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
+
+
               }else {
                 $this->session->getFlashBag()->add("status", $status);
               }
           }
 
+
           return $this->render('personas/registro.html.twig', array(
               'persona' => $persona,
               'form' => $form->createView(),
-              'carne' => $carne,
-              'nombre' => $nomComp,
-              'carrera' => $carrera,
-              'telefono' => $telefono,
-              'correo' => $correo,
-              'direccion' => $direccion." ".$muni_dep,
+                  'carne' => $carne,
+                  'nombre' => $nomComp,
+                  'carrera' => $carrera,
+                  'telefono' => $telefono,
+                  'correo' => $correo,
+                  'direccion' => $direccion." ".$muni_dep,
               ));
     }
 
@@ -783,7 +733,6 @@ die();
      }
 
 
-<<<<<<< HEAD
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
               /*                                                           *
@@ -915,117 +864,6 @@ die();
                         }
 
 
-=======
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-              /*                                                           *
-               *              PARA EL HISTORIA DEL ASESOR                  *
-               *                                                           */
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      public function HistorialAsesorAction(Request $request, Personas $persona)
-      {
-        $idas=  $request->get('id');
-        //$carne = $persona->getestudiantes()->getcarneEstudiante();
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Civiles l WITH c = l.idCaso
-          WHERE c.idPersona = :id");
-        $query->setParameter('id', $idas);
-        $civiles = $query->getResult();
-        $query2 = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
-          WHERE c.idPersona = :id");
-        $query2->setParameter('id', $idas);
-        $laborales = $query2->getResult();
-        $query3 = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Clinicas c WHERE c.idPersona = :id");
-        $query3->setParameter('id', $idas);
-        $clinicas = $query3->getResult();
-        return $this->render('personas/HistorialAsesor.html.twig', array(
-            'civiles' => $civiles,
-            'laborales' => $laborales,
-            'clinicas' => $clinicas,
-        ));
-      }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-              /*                                                                     *
-               *        EDITAR NOMBRES DE USUARIO DEL PERSONA Y ESTUDIANTES          *
-               *                                                                     */
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function editnUsuarioAction(Request $request)
-    {
-      $var=$request->request->get("idPersona");
-
-      if(isset($var))
-      {
-        $em = $this->getDoctrine()->getManager();
-        $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                     'idPersona' => $var
-        ));
-      }
-      else
-      {
-          $var2=$request->request->get("idPersona2");
-          $em = $this->getDoctrine()->getManager();
-          $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                       'idPersona' => $var2
-          ));
-      }
-
-        $pass = $persona->getpassPersona();
-
-        $edit_form = $this->createForm('BufeteBundle\Form\PersonasEditUserType', $persona, array(
-                 'PassPersona' => $pass,
-            ));
-
-        $edit_form->handleRequest($request);
-
-        $confirm = null;
-        $status=null;
-        if ($edit_form->isSubmitted() )
-        {
-        //if($edit_form->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-
-            $persona_repo = $em->getRepository("BufeteBundle:Personas");
-            $pe = $persona_repo->findOneBy(array('usuarioPersona' => $edit_form->get("usuarioPersona")->getData()));
-            if(count($pe) == 0)
-            {
-              $em->persist($persona);
-              $flush = $em->flush();
-              if ($flush == null) {
-                  $this->session->getFlashBag()->add("status", $status);
-                  $status = "El usuario se ha creado correctamente";
-                  $confirm = true;
-              } else {
-                $status = "El usuario no se pudo registrar";
-              }
-            }else {
-              $status = "el nombre de usuario ya existe";
-            }
-        }
-          if ($confirm) {
-            return $this->redirectToRoute('personas_staffProfile',
-               [
-                 'var' => $persona
-               ], 307);
-               $confirm=null;
-          }else {
-            $this->session->getFlashBag()->add("status", $status);
-          }
-        }
-
-        return $this->render('personas/edituserpersonal.html.twig', array(
-            'persona' => $persona,
-            'PassPersona' => $pass,
-            'edit_form' => $edit_form->createView(),
-        ));
-    }
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -1033,7 +871,6 @@ die();
  *
  */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
         public function deleteAction(Request $request, Personas $persona)
         {
           $form = $this->createDeleteForm($persona);
@@ -1047,21 +884,6 @@ die();
 
           return $this->redirectToRoute('personas_index');
         }
-=======
-    public function deleteAction(Request $request, Personas $persona)
-    {
-      $form = $this->createDeleteForm($persona);
-      $form->handleRequest($request);
-
-      if ($form->isSubmitted() && $form->isValid()) {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($persona);
-        $em->flush();
-      }
-
-      return $this->redirectToRoute('personas_index');
-    }
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -1072,7 +894,6 @@ die();
  * @return \Symfony\Component\Form\Form The form
  */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
                           private function createDeleteForm(Personas $persona)
                       {
                           return $this->createFormBuilder()
@@ -1085,22 +906,12 @@ die();
 
 
 
-=======
-    private function createDeleteForm(Personas $persona)
-    {
-      return $this->createFormBuilder()
-          ->setAction($this->generateUrl('personas_delete', array('idPersona' => $persona->getIdpersona())))
-          ->setMethod('DELETE')
-          ->getForm();
-    }
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
               /*                                                           *
                *        EDITAR CONTRASEÑA DEL PERSONA Y ESTUDIANTES        *
                *                                                           */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
           public function editcUsuarioAction(Request $request, Request $request2)
           {
 
@@ -1189,89 +1000,6 @@ die();
                                     ));
                                 }
 
-=======
-    public function editcUsuarioAction(Request $request, Request $request2)
-    {
-      $var=$request2->request->get("idPersona");
-
-      $em = $this->getDoctrine()->getManager();
-      $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                   'idPersona' => $var
-      ));
-
-      if($var!=null)
-      {
-        //GENERAR CONTRASEÑA
-        $autocont = $this->get("app.autocont");
-        $pass = $autocont->obtener();
-        $usu = $persona->getusuarioPersona();
-
-        $persona->setpassPersona($pass);
-
-        $edit_form = $this->createForm('BufeteBundle\Form\PersonalPassType', $persona, array(
-               'PassPersona' => $pass,
-          ));
-        }
-        else {
-
-          //dump($request->request);
-          //dump($request->request->get('bufetebundle_personas') );
-
-          $post = Request::createFromGlobals();
-          //dump($post->request->get('bufetebundle_personas')['passPersona']);
-          $pass = $post->request->get('bufetebundle_personas')['passPersona'];
-
-
-          $var2=$request2->request->get("idPersona2");
-
-          $em = $this->getDoctrine()->getManager();
-          $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                       'idPersona' => $var2
-          ));
-
-          $edit_form = $this->createForm('BufeteBundle\Form\PersonalPassType', $persona, array(
-                 'PassPersona' => $pass,
-            ));
-            $edit_form->handleRequest($request);
-        }
-
-       //if ($edit_form->isSubmitted() && $edit_form->isValid())
-       if ($edit_form->isSubmitted())
-       {
-
-         $var2=$request2->request->get("idPersona2");
-
-         $em = $this->getDoctrine()->getManager();
-         $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                      'idPersona' => $var2
-         ));
-
-
-           $factory = $this->get("security.encoder_factory");
-           $encoder = $factory->getEncoder($persona);
-           $password = $encoder->encodePassword($edit_form->get("passPersona")->getData(), $persona->getSalt());
-
-           $persona->setPassPersona($password);
-
-
-           $em->persist($persona);
-           $flush = $em->flush();
-
-           //return $this->redirectToRoute('personas_indexEstudiantes', array('idPersona' => $persona->getIdpersona()));
-           return $this->redirectToRoute('personas_perfil',
-              [
-                'var' => $persona
-              ], 307);
-       }
-
-       return $this->render('personas/editpasspersonal.html.twig', array(
-           'persona' => $persona,
-           'PassPersona' => $pass,
-           'edit_form' => $edit_form->createView(),
-
-       ));
-   }
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1299,21 +1027,12 @@ public function showPersonasAction(Personas $persona)
      public function editpassestudianteAction(Request $request, Request $request2)
      {
        $var=$request2->request->get("idPersona");
-<<<<<<< HEAD
 
        $em = $this->getDoctrine()->getManager();
        $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                     'idPersona' => $var
        ));
 
-=======
-
-       $em = $this->getDoctrine()->getManager();
-       $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                    'idPersona' => $var
-       ));
-
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
        if($var!=null)
        {
          //GENERAR CONTRASEÑA
@@ -1433,7 +1152,6 @@ public function showPersonasAction(Personas $persona)
               ));
           }
 
-<<<<<<< HEAD
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1536,8 +1254,6 @@ public function showPersonasAction(Personas $persona)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-=======
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 ////////////////////////////////////////////////////////////////////////////////////
 /*  EDITAR DATOS DEL ESTUDIANTE */
  public function editEstudianteAction(Request $request)
@@ -1593,12 +1309,7 @@ public function showPersonasAction(Personas $persona)
      ));
    }
 
-<<<<<<< HEAD
    if ($edit_form->isSubmitted() && $edit_form->isValid()) {
-=======
-   if ($edit_form->isSubmitted()){
-        //($edit_form->isValid()) {
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
          $post=$request->get("idPersona2");
          $em = $this->getDoctrine()->getManager();
          $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
@@ -1610,7 +1321,6 @@ public function showPersonasAction(Personas $persona)
                       'idPersona' => $post
          ));
 
-<<<<<<< HEAD
          /*
          dump($edit_form);
 
@@ -1626,8 +1336,6 @@ public function showPersonasAction(Personas $persona)
          //die();
          //$persona->set();
          */
-=======
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
          $persona->setTelefonoPersona($edit_form->get("telefonoPersona")->getData());
          $persona->setTel2Persona($edit_form->get("tel2Persona")->getData());
          $persona->setDpiPersona($edit_form->get("dpiPersona")->getData());
@@ -1649,10 +1357,7 @@ public function showPersonasAction(Personas $persona)
     return $this->render('personas/editEstudiante.html.twig', array(
         'persona' => $persona,
         'edit_form' => $edit_form->createView(),
-<<<<<<< HEAD
         //'delete_form' => $deleteForm->createView(),
-=======
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
     ));
 }
 
@@ -1675,11 +1380,7 @@ public function showPersonasAction(Personas $persona)
 
          //$deleteForm = $this->createDeleteForm($persona);
 
-<<<<<<< HEAD
-         $edit_form = $this->createForm('BufeteBundle\Form\editpersonaType', $persona);
-=======
          $edit_form = $this->createForm('BufeteBundle\Form\editpersonalType', $persona);
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
 
          $edit_form->handleRequest($request);
@@ -1699,11 +1400,7 @@ public function showPersonasAction(Personas $persona)
 
           // return $this->redirectToRoute('personas_editpassestudiante');
 
-<<<<<<< HEAD
-           return $this->redirectToRoute('personas_editpasspersonal',
-=======
            return $this->redirectToRoute('personas_editcUsuario',
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
               [
                 'id' => $persona
               ], 307);
@@ -1728,13 +1425,7 @@ public function showPersonasAction(Personas $persona)
 
 
 
-<<<<<<< HEAD
          if ($edit_form->isSubmitted() && $edit_form->isValid()) {
-=======
-         if ($edit_form->isSubmitted())
-         {
-         //&& $edit_form->isValid()) {
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
                $post=$request->get("idPersona2");
                $em = $this->getDoctrine()->getManager();
                $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
@@ -1763,7 +1454,6 @@ public function showPersonasAction(Personas $persona)
          'edit_form' => $edit_form->createView(),
          //'delete_form' => $deleteForm->createView(),
      ));
-<<<<<<< HEAD
 
 }
 
@@ -1779,23 +1469,6 @@ public function showPersonasAction(Personas $persona)
 ////////////////////////////////////////////////////////////////////////////////////
 /*  AGREGAR CUALQUIER TIPO DE PERSONA POR EL ADMINISTRADOR */
 
-=======
-
-}
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////
-/*  AGREGAR CUALQUIER TIPO DE PERSONA POR EL ADMINISTRADOR */
-
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
  public function newAction(Request $request)
  {
      $persona = new Personas();
@@ -1817,29 +1490,6 @@ public function showPersonasAction(Personas $persona)
              $encoder = $factory->getEncoder($persona);
              $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
              $persona->setPassPersona($password);
-<<<<<<< HEAD
-=======
-
-             $file = $persona->getFoto();
-
-             if(($file instanceof UploadedFile) && ($file->getError() == '0'))
-             {
-               $validator = $this->get('validator');
-               $errors = $validator->validate($persona);
-               if (count($errors) > 0)
-               {
-                 $errorsString = (string) $errors;
-                 return new Response($errorsString);
-               }
-
-               $fileName = md5(uniqid()).'.'.$file->guessExtension();
-               $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/profile';
-               $file->move($cvDir, $fileName);
-               $persona->setFoto($fileName);
-             }
-
-
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
              //$em = $this->getDoctrine()->getManager();
              $em->persist($persona);
              $flush = $em->flush();
@@ -1856,9 +1506,6 @@ public function showPersonasAction(Personas $persona)
            $status = "El formulario no es valido";
        }
        if ($confirm) {
-<<<<<<< HEAD
-         return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
-=======
 
          $var=$persona->getIdPersona();
 
@@ -1873,7 +1520,9 @@ public function showPersonasAction(Personas $persona)
             [
               'var' => $var
             ], 307);
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
+
+
+
        }else {
          $this->session->getFlashBag()->add("status", $status);
        }
@@ -1887,7 +1536,6 @@ public function showPersonasAction(Personas $persona)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -1910,58 +1558,11 @@ public function showPersonasAction(Personas $persona)
      $editForm->handleRequest($request);
      $confirm = null;
      if ($editForm->isSubmitted() && $editForm->isValid()) {
-=======
-
-////////////////////////////////////////////////////////////////////////////////////
-/*  EDITAR DATOS DE CUALQUIER TIPO DE PERSONA POR EL ADMINISTRADOR */
-
- public function editPersonaAction(Request $request)
- {
-
-   $post = Request::createFromGlobals();
-   $var=$request->request->get("idPersona");
-
-   if( ($var == null) && isset( $post->request->get('editpersona')['idPersona'] ))
-   {
-     $post = Request::createFromGlobals();
-     $var= $post->request->get('editpersona')['idPersona'];
-   }
-
-   $em = $this->getDoctrine()->getManager();
-   $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                'idPersona' => $var
-   ));
-
-     $confirm = null;
-     $editForm = $this->createForm('BufeteBundle\Form\editpersonaType', $persona);
-     $editForm->handleRequest($request);
-
-     if ($editForm->get('save')->isClicked()) {
-       $post=$request->get("idPersona2");
-       $em = $this->getDoctrine()->getManager();
-       $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
-                    'idPersona' => $post
-       ));
-
-       return $this->redirectToRoute('personas_editpassestudiante',
-          [
-            'id' => $persona
-          ], 307);
-        }
-
-     if ($editForm->isSubmitted()) {
-       //($editForm->isValid()) {
-
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
        $em = $this->getDoctrine()->getManager();
        $username = $editForm->get("usuarioPersona")->getData();
        $persona_repo = $em->getRepository("BufeteBundle:Personas");
        $pe = $persona_repo->findOneBy(array('usuarioPersona' => $editForm->get("usuarioPersona")->getData()));
-<<<<<<< HEAD
        if($usuario == $username)
-=======
-       if($pe->getusuarioPersona() == $username)
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
        {
          $em->persist($persona);
          $flush = $em->flush();
@@ -1990,20 +1591,14 @@ public function showPersonasAction(Personas $persona)
        }else {
          $this->session->getFlashBag()->add("status", $status);
        }
-<<<<<<< HEAD
          //$this->getDoctrine()->getManager()->flush();
          //return $this->redirectToRoute('personas_editPersona', array('idPersona' => $persona->getIdpersona()));
-=======
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
      }
 
      return $this->render('personas/editPersona.html.twig', array(
          'persona' => $persona,
          'edit_form' => $editForm->createView(),
-<<<<<<< HEAD
          'delete_form' => $deleteForm->createView(),
-=======
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
      ));
  }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2060,10 +1655,7 @@ if ($form->isSubmitted()){
                          $persona->setFoto($fileName);
                        }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
        $em->persist($persona);
        $flush = $em->flush();
        if ($flush == null) {
@@ -2079,24 +1671,6 @@ if ($form->isSubmitted()){
      $status = "El formulario no es valido";
  }
  if ($confirm) {
-<<<<<<< HEAD
-   return $this->redirectToRoute('personas_perfil',
-      [
-        'var' => $persona
-      ], 307);
- }else {
-   $this->session->getFlashBag()->add("status", $status);
- }
-}
-
-return $this->render('personas/newpersonal.html.twig', array(
-   'persona' => $persona,
-   'form' => $form->createView(),
-));
-}
-
-
-=======
    $var=$persona->getIdPersona();
 
 
@@ -2125,7 +1699,6 @@ return $this->render('personas/newpersonal.html.twig', array(
 }
 
 
->>>>>>> 5f82ea68357256fef37bbc03e116b5bb2a99ab52
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

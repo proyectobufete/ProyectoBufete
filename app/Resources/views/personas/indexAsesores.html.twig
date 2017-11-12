@@ -35,6 +35,7 @@
       <table class="table table-bordered ">
         <thead>
           <tr role="row" class="">
+            <th></th>
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Dirección</th>
@@ -46,18 +47,23 @@
         <tbody>
           {% for persona in asesores %}
               <tr>
+                <td><img alt="" src="{{asset ('uploads/profile/'~ persona.foto) }}" class="img-circle profile-img thumb-sm"></td>
                 <td>{{ persona.nombrePersona }}</td>
                 <td>{{ persona.telefonoPersona }}</td>
                 <td>{{ persona.direccionPersona }}</td>
                 <td>{{ persona.emailPersona }}</td>
                 <td>{{ persona.idBufete }}</td>
                   <td>
-                    <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}" class="btn yellow" >Ver</a>
+                    <form method="post" action="{{ path('personas_perfil')}}" class="form-inline" role="search">
+                        <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                        <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                    </form>
 
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('personas_editPersona', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
-                    {% else %}
-                        <a href="{{ path('personas_editAsesor', { 'idPersona': persona.idPersona }) }}"  class="btn blue">Editar</a>
+                    {% if persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+                      <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
+                          <button type="submit" name="buscar" class="btn blue">Editar</button>
+                          <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                      </form>
                     {% endif %}
 
                   </td>

@@ -5,22 +5,21 @@
 
 
 <div class="actions">
-  {% if is_granted('ROLE_ESTUDIANTE') %}
-      <form method="post" action="{{ path('revisiones_indexLinkCasoEst')}}" class="form-inline" role="search">
+  {% if is_granted('ROLE_ESTUDIANTE') or is_granted('ROLE_ASESOR') %}
+      <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
           <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
           <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
       </form>
-  {% endif %}
-
-
-
-  {% if is_granted('ROLE_ASESOR') %}
+  {% elseif is_granted('ROLE_ESTUDIANTE') %}
       <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
           <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
           <input type="hidden" name="idCaso" value="{{caso.idCaso}}"/>
       </form>
   {% endif %}
+
+
 </div>
+
 
   <h1>Detalles</h1>
 {% endblock %}
