@@ -98,7 +98,7 @@
 
           <table>
             <tr>
-              {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null%}
+              {% if revisione.fechaEnvio == null and revisione.nombreArchivo == null and revisione.RutaArchivo == null and  date('now') == revisione.fechaLimite|date('Y-m-d H:i:s') %}
               <form method="post" action="{{ path('revisiones_editLink')}}" class="form-inline" role="search">
                   <button type="submit" name="buscar" class="btn blue">Editar Entrega</button>
                   <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
