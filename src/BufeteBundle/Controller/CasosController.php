@@ -114,8 +114,13 @@ class CasosController extends Controller
             }
         }
 
+        $paginator = $this->get('knp_paginator');
+        $casospg = $paginator->paginate(
+            $casos,
+            $request->query->getInt('page', 1), 10 );
+
         return $this->render('casos/indexlaborales.html.twig', array(
-            'casos' => $casos,
+            'casos' => $casospg,
         ));
     }
 
@@ -209,8 +214,13 @@ class CasosController extends Controller
             }
         }
 
+        $paginator = $this->get('knp_paginator');
+        $casospg = $paginator->paginate(
+            $casos,
+            $request->query->getInt('page', 1), 10 );
+
         return $this->render('casos/indexciviles.html.twig', array(
-            'casos' => $casos,
+            'casos' => $casospg,
         ));
     }
 
@@ -218,7 +228,7 @@ class CasosController extends Controller
      * Listar los casos laborales segun el estudiante logueado
      *
      */
-    public function laboralesEstudianteAction()
+    public function laboralesEstudianteAction(Request $request)
     {
         $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
         $em = $this->getDoctrine()->getManager();
@@ -229,8 +239,13 @@ class CasosController extends Controller
         )->setParameter('id', $idEstudiante);
         $casos = $query->getResult();
 
+        $paginator = $this->get('knp_paginator');
+        $casospg = $paginator->paginate(
+            $casos,
+            $request->query->getInt('page', 1), 5 );
+
         return $this->render('casos/laboralesestudiante.html.twig', array(
-            'casos' => $casos,
+            'casos' => $casospg,
         ));
     }
 
@@ -238,7 +253,7 @@ class CasosController extends Controller
      * Listar los casos civiles segun el estudiante logueado
      *
      */
-    public function civilesEstudianteAction()
+    public function civilesEstudianteAction(Request $request)
     {
         $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
         $em = $this->getDoctrine()->getManager();
@@ -249,8 +264,13 @@ class CasosController extends Controller
         )->setParameter('id', $idEstudiante);
         $casos = $query->getResult();
 
+        $paginator = $this->get('knp_paginator');
+        $casospg = $paginator->paginate(
+            $casos,
+            $request->query->getInt('page', 1), 5 );
+
         return $this->render('casos/civilesestudiante.html.twig', array(
-            'casos' => $casos,
+            'casos' => $casospg,
         ));
     }
 
