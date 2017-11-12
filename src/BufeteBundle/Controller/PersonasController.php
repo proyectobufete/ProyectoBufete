@@ -359,15 +359,12 @@ die();
 
     $var=$request->request->get("idPersona");
 
-
-
     /*
     $post = Request::createFromGlobals();
     $var = $post->request->get('idPersona2');
     dump($var);
     die();
     */
-
 
     if($var == null)
     {

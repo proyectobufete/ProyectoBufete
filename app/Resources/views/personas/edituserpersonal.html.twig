@@ -71,14 +71,14 @@
         {% if is_granted('ROLE_SECRETARIO') or  is_granted('ROLE_ADMIN')  or is_granted('ROLE_ASESOR') or  is_granted('ROLE_DIRECTOR') %}
 
         <form method="post" action="{{ path('personas_staffProfile')}}" class="form-inline" role="search">
-          <button type="submit" name="buscar" class="btn gray">Cancelar STAFF</button>
+          <button type="submit" name="buscar" class="btn gray">Cancelar</button>
           <input type="hidden" name="idPersona5" value="{{app.user.idPersona}}"/>
         </form>
 
         {% elseif is_granted('ROLE_ESTUDIANTE') %}
 
         <form method="post" action="{{ path('personas_studentProfile')}}" class="form-inline" role="search">
-          <button type="submit" name="buscar" class="btn gray">Cancelar ALUMNOS</button>
+          <button type="submit" name="buscar" class="btn gray">Cancelar</button>
           <input type="hidden" name="idPersona5" value="{{app.user.idPersona}}"/>
         </form>
 
