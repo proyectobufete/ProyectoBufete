@@ -35,7 +35,7 @@ class CiudadController extends Controller
         }
               $paginator = $this->get('knp_paginator');
               $ciudads = $paginator->paginate(
-                  $ciudads1, 
+                  $ciudads1,
                   $request->query->getInt('page', 1), 5 );
 
         return $this->render('ciudad/index.html.twig', array(
