@@ -62,6 +62,8 @@ class RevisionesController extends Controller
     {
       $var=$request->request->get("idCaso");
 
+
+
       $em = $this->getDoctrine()->getManager();
       $caso_datos = $em->getRepository('BufeteBundle:Casos')->findOneBy(array(
                    'idCaso' => $var
@@ -84,6 +86,8 @@ class RevisionesController extends Controller
         }
         elseif ($rol=='ROLE_ESTUDIANTE')
         {
+          
+
           return $this->render('revisiones/indexLinkCasoEst.html.twig', array(
               'revisiones' => $revisiones,
               'ruta'=> 'uploads/final/',
