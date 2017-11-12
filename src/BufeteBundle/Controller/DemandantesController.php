@@ -55,8 +55,13 @@ class DemandantesController extends Controller
           }
         }
 
+        $paginator = $this->get('knp_paginator');
+        $demandantespg = $paginator->paginate(
+            $demandantes,
+            $request->query->getInt('page', 1), 10 );
+
         return $this->render('demandantes/index.html.twig', array(
-            'demandantes' => $demandantes,
+            'demandantes' => $demandantespg,
         ));
     }
 
