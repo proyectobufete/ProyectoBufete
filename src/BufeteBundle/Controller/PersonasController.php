@@ -315,6 +315,12 @@ die();
       $var = $post->request->get('idPersona2');
     }
 
+    if($var == null)
+    {
+      $post = Request::createFromGlobals();
+      $var = $post->request->get('idPersona5');
+    }
+
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                  'idPersona' => $var
@@ -369,6 +375,12 @@ die();
       $var = $post->request->get('idPersona2');
 
     }
+    if($var == null)
+    {
+      $post = Request::createFromGlobals();
+      $var = $post->request->get('idPersona5');
+    }
+
 
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
