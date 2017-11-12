@@ -1,5 +1,8 @@
 {% extends 'layout.html.twig' %}
-
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act26 %} active {% endblock %}
+  {% block ac34 %} active {% endblock %}
+{% endif %}
 
 {% block title %}
   <h1>Historial Asesor </h1>
@@ -184,7 +187,7 @@
                       <td>{{ clinica.observaciones }}</td>
                       <td>{{ clinica.estadoClinica }}</td>
                         <td>
-                  
+
                               <a href="{{ path('asignacionclinica_listEstudiantes', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
                         </td>
                     </tr>

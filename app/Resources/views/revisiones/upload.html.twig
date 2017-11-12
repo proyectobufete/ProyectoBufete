@@ -65,6 +65,12 @@
           </div>
         </div>
         {{ form_end(edit_form) }}
+
+        <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
+            <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
+            <input type="hidden" name="idCaso" value="{{revisione.idCaso}}"/>
+        </form>
+
       </div>
     </div>
 {% endblock %}

@@ -40,7 +40,6 @@ class EstudiantesType extends AbstractType
 
             'data_class' => 'BufeteBundle\Entity\Estudiantes',
             'carneEnvio'=> null,
-
         ));
     }
 

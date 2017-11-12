@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class PersonasPersonaType extends AbstractType
@@ -54,6 +56,12 @@ class PersonasPersonaType extends AbstractType
                 'multiple'  => false,
             ))
             ->add('idBufete')
+            ->add('foto',FileType::class, array(
+                'label' => 'Foto de Perfil',
+                'attr' =>array('class'=>'form-control'),
+                'data_class' => null,
+                'required' => false,
+              ))
           ;
     }
 
