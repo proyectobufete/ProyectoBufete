@@ -24,6 +24,7 @@
         "knplabs/knp-snappy-bundle": "^1.4",
         "twig/extensions": "^1.5",
         "symfony/intl": "^3.3",
+        "knplabs/knp-paginator-bundle": "2.5.*",
         "symfony/assetic-bundle": "^2.8"
 
     },

@@ -29,20 +29,17 @@
         </form>
       </div>
       <div class="col-md-12 col-sm-12 col-xs-6" >
-          <table class="table table-bordered ">
+        <div class="table-responsive">
+          <table class="table table-striped ">
             <thead>
               <tr role="row" class="">
                 <th>No.</th>
                 <th>Fecha </th>
                 <th>Demandante</th>
-
-
-
                 <th>Nombre Estudiante</th>
                 <th>Carné Estudiante</th>
                 <th>Estado</th>
                 <th colspan="2"> Opciones</th>
-
               </tr>
             </thead>
             <tbody>
@@ -51,9 +48,6 @@
                 <td>{{ caso.noCaso }}</td>
                 <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ caso.idDemandante.nombreDemandante }}</td>
-
-
-
                 <td>{{ caso.idEstudiante.idPersona.nombrePersona }}</td>
                 <td>{{ caso.idEstudiante.carneEstudiante }}</td>
                 <td>{{ caso.estadoCaso }}</td>
@@ -76,6 +70,7 @@
 
             </tbody>
           </table>
+            </div>
       </div>
  </div>
 </div>
