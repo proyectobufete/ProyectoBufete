@@ -130,8 +130,13 @@ class PersonasController extends Controller
         $casos = $query->getResult();
       }
 
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
+
       return $this->render('casos/laboralesestudiante.html.twig', array(
-          'casos' => $casos,
+          'casos' => $casospg,
       ));
   }
 
@@ -141,7 +146,7 @@ class PersonasController extends Controller
                *   LISTA DE CASOS CIVILES SEGÚN EL ASESOR LOGUEADO         *
                *                                                           */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  public function civilesAsesorAction()
+  public function civilesAsesorAction(Request $request)
   {
       $idAsesor = $this->getUser()->getIdPersona();
       $em = $this->getDoctrine()->getManager();
@@ -153,8 +158,13 @@ class PersonasController extends Controller
       )->setParameter('id', $idAsesor);
       $casos = $query->getResult();
 
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
+
       return $this->render('casos/civilesestudiante.html.twig', array(
-          'casos' => $casos,
+          'casos' => $casospg,
       ));
   }
 
