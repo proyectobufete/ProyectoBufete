@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
 
+
     "content-hash": "53bbbf21f5c835fa542854c28fc0c034",
 
     "packages": [
@@ -935,6 +936,7 @@
                 "sql"
             ],
             "time": "2014-01-12 16:20:24"
+
         },
         {
             "name": "knplabs/knp-components",
@@ -1070,6 +1072,7 @@
                 "paginator"
             ],
             "time": "2017-03-21T09:45:46+00:00"
+
         },
         {
             "name": "knplabs/knp-snappy",
@@ -1533,7 +1536,6 @@
             "description": "A security checker for your composer.lock",
 
             "time": "2017-10-29T18:48:08+00:00"
-
         },
         {
             "name": "swiftmailer/swiftmailer",
