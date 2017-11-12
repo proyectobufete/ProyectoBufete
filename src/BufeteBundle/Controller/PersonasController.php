@@ -85,8 +85,13 @@ class PersonasController extends Controller
         }
       }
 
+      $paginator = $this->get('knp_paginator');
+      $asesorespg = $paginator->paginate(
+          $asesores,
+          $request->query->getInt('page', 1), 10 );
+
         return $this->render('personas/indexAsesores.html.twig', array(
-          'asesores' => $asesores,
+          'asesores' => $asesorespg,
         ));
   }
 
@@ -197,8 +202,14 @@ class PersonasController extends Controller
         );
         $estudiantes = $query->getResult();
     }
+
+    $paginator = $this->get('knp_paginator');
+    $estudiantespg = $paginator->paginate(
+        $estudiantes,
+        $request->query->getInt('page', 1), 8 );
+
     return $this->render('personas/indexEstudiantes.html.twig', array(
-        'estudiantes' => $estudiantes,
+        'estudiantes' => $estudiantespg,
     ));
   }
 
@@ -522,8 +533,13 @@ die();
         $personas = $query->getResult();
       }
 
+      $paginator = $this->get('knp_paginator');
+      $personaspg = $paginator->paginate(
+          $personas,
+          $request->query->getInt('page', 1), 8 );
+
       return $this->render('personas/index.html.twig', array(
-          'personas' => $personas,
+          'personas' => $personaspg,
       ));
   }
 
@@ -734,8 +750,13 @@ die();
            }
          }
 
+         $paginator = $this->get('knp_paginator');
+         $asesorespg = $paginator->paginate(
+             $asesores,
+             $request->query->getInt('page', 1), 8 );
+
            return $this->render('personas/indexAsesorDir.html.twig', array(
-             'asesores' => $asesores,
+             'asesores' => $asesorespg,
              'bufetes' => $bufetes,
            ));
      }
