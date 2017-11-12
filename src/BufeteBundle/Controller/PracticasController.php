@@ -37,8 +37,13 @@ class PracticasController extends Controller
           $practicas = $em->getRepository('BufeteBundle:Practicas')->findAll();
         }
 
+        $paginator = $this->get('knp_paginator');
+        $practicaspg = $paginator->paginate(
+            $practicas,
+            $request->query->getInt('page', 1), 10 );
+
         return $this->render('practicas/index.html.twig', array(
-            'practicas' => $practicas,
+            'practicas' => $practicaspg,
         ));
     }
 
