@@ -33,8 +33,13 @@ class EstadoscivilesController extends Controller
            $estadosciviles = $em->getRepository('BufeteBundle:Estadosciviles')->findAll();
          }
 
+         $paginator = $this->get('knp_paginator');
+         $estadoscivilespg = $paginator->paginate(
+             $estadosciviles,
+             $request->query->getInt('page', 1), 5 );
+
          return $this->render('estadosciviles/index.html.twig', array(
-             'estadosciviles' => $estadosciviles,
+             'estadosciviles' => $estadoscivilespg,
          ));
      }
 

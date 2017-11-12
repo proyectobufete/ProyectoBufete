@@ -85,8 +85,13 @@ class PersonasController extends Controller
         }
       }
 
+      $paginator = $this->get('knp_paginator');
+      $asesorespg = $paginator->paginate(
+          $asesores,
+          $request->query->getInt('page', 1), 10 );
+
         return $this->render('personas/indexAsesores.html.twig', array(
-          'asesores' => $asesores,
+          'asesores' => $asesorespg,
         ));
   }
 
@@ -130,8 +135,13 @@ class PersonasController extends Controller
         $casos = $query->getResult();
       }
 
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
+
       return $this->render('casos/laboralesestudiante.html.twig', array(
-          'casos' => $casos,
+          'casos' => $casospg,
       ));
   }
 
@@ -141,7 +151,7 @@ class PersonasController extends Controller
                *   LISTA DE CASOS CIVILES SEGÚN EL ASESOR LOGUEADO         *
                *                                                           */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  public function civilesAsesorAction()
+  public function civilesAsesorAction(Request $request)
   {
       $idAsesor = $this->getUser()->getIdPersona();
       $em = $this->getDoctrine()->getManager();
@@ -153,8 +163,13 @@ class PersonasController extends Controller
       )->setParameter('id', $idAsesor);
       $casos = $query->getResult();
 
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
+
       return $this->render('casos/civilesestudiante.html.twig', array(
-          'casos' => $casos,
+          'casos' => $casospg,
       ));
   }
 
@@ -187,8 +202,14 @@ class PersonasController extends Controller
         );
         $estudiantes = $query->getResult();
     }
+
+    $paginator = $this->get('knp_paginator');
+    $estudiantespg = $paginator->paginate(
+        $estudiantes,
+        $request->query->getInt('page', 1), 8 );
+
     return $this->render('personas/indexEstudiantes.html.twig', array(
-        'estudiantes' => $estudiantes,
+        'estudiantes' => $estudiantespg,
     ));
   }
 
@@ -315,6 +336,12 @@ die();
       $var = $post->request->get('idPersona2');
     }
 
+    if($var == null)
+    {
+      $post = Request::createFromGlobals();
+      $var = $post->request->get('idPersona5');
+    }
+
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
                  'idPersona' => $var
@@ -353,8 +380,6 @@ die();
 
     $var=$request->request->get("idPersona");
 
-
-
     /*
     $post = Request::createFromGlobals();
     $var = $post->request->get('idPersona2');
@@ -362,13 +387,18 @@ die();
     die();
     */
 
-
     if($var == null)
     {
       $post = Request::createFromGlobals();
       $var = $post->request->get('idPersona2');
 
     }
+    if($var == null)
+    {
+      $post = Request::createFromGlobals();
+      $var = $post->request->get('idPersona5');
+    }
+
 
     $em = $this->getDoctrine()->getManager();
     $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
@@ -503,8 +533,13 @@ die();
         $personas = $query->getResult();
       }
 
+      $paginator = $this->get('knp_paginator');
+      $personaspg = $paginator->paginate(
+          $personas,
+          $request->query->getInt('page', 1), 8 );
+
       return $this->render('personas/index.html.twig', array(
-          'personas' => $personas,
+          'personas' => $personaspg,
       ));
   }
 
@@ -715,8 +750,13 @@ die();
            }
          }
 
+         $paginator = $this->get('knp_paginator');
+         $asesorespg = $paginator->paginate(
+             $asesores,
+             $request->query->getInt('page', 1), 8 );
+
            return $this->render('personas/indexAsesorDir.html.twig', array(
-             'asesores' => $asesores,
+             'asesores' => $asesorespg,
              'bufetes' => $bufetes,
            ));
      }
