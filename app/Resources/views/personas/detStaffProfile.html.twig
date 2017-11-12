@@ -6,15 +6,17 @@
 {% block body %}
   <div class="portlet-body ">
     <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
-      <div class="col-md-offset-2">
+      <div class="col-md-offset-3">
         <div class="col-md-6">
           <table class="table table-striped table-hover dataTable no-footer">
             <tbody>
 
+              <tr >
+                <div class="col-md-offset-3">
+                  <img class="circulo " src="{{asset ('uploads/profile/'~ app.user.foto) }}" width="100%" height="100%" />
+                </div>
               <tr>
-                <img alt="" src="{{asset ('uploads/profile/'~ app.user.foto) }}" width="300" height="250"/>
-              <tr>
-
+                <br>
               <tr>
                 <th>Nombre</th>
                 <td>{{ persona.nombrePersona }}</td>

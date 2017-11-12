@@ -1,6 +1,13 @@
 {% extends 'layout.html.twig' %}
-{% block act3 %} active {% endblock %}
-{% block ac9 %} active {% endblock %}
+
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act27 %} active {% endblock %}
+  {% block ac37 %} active {% endblock %}
+{% else %}
+  {% block act3 %} active {% endblock %}
+  {% block ac9 %} active {% endblock %}
+{% endif %}
+
 {% block title %}
   <h1>Listado de Casos laborales pruebas</h1>
 {% endblock %}
@@ -88,7 +95,7 @@
    <div class="row">
      <div class="col-md-12 col-sm-12 col-xs-12" >
        <div class="table-responsive">
-         <table class="table table-bordered ">
+         <table class="table table-striped">
            <thead>
              <tr role="row" class="">
                <th>No de caso</th>

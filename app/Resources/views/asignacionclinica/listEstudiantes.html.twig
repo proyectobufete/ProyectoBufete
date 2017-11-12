@@ -1,6 +1,13 @@
 {% extends 'layout.html.twig' %}
-{% block act6 %}active{% endblock %}
-{% block ac25 %}active{% endblock %}
+
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act29 %} active {% endblock %}
+  {% block ac39 %} active {% endblock %}
+{% else %}
+  {% block act6 %}active{% endblock %}
+  {% block ac25 %}active{% endblock %}
+{% endif %}
+
 {% block title %}
   <h1>Listado de Estudiantes</h1>
 {% endblock %}
@@ -31,8 +38,10 @@
       </div>
       <div class="col-md-2">
           <div class="btn-group">
+
             <button type="button" target="_blank" onclick="window.open(location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir"  class="btn btn-purple">
               <i class="fa fa-file-pdf-o" aria-hidden="true" > Generar Listado PDF </i>
+
             </button>
           </div>
       </div>
@@ -47,7 +56,7 @@
       <br>
   <div class="col-md-12 col-sm-12 col-xs-12" >
     <div class="table-responsive">
-      <table class="table table-bordered ">
+      <table class="table table-striped">
         <thead>
           <tr>
               <th>Estudiante</th>
