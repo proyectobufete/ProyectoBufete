@@ -1,6 +1,12 @@
 {% extends 'layout.html.twig' %}
-{% block act6 %}active{% endblock %}
-{% block ac17 %}active{% endblock %}
+
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act29 %} active {% endblock %}
+  {% block ac38 %} active {% endblock %}
+{% else %}
+  {% block act6 %}active{% endblock %}
+  {% block ac17 %}active{% endblock %}
+{% endif %}
 
       {% block title %}
         <h1>Crear Clínica</h1>

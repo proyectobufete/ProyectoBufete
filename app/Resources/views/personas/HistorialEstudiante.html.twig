@@ -187,8 +187,6 @@
                   <tbody>
                     {% for asignacionclinica in clinicas %}
                     <tr>
-                      {{dump(asignacionclinica)}}
-
                         <td>{{asignacionclinica.idClinica}}</td>
                         <td>{{asignacionclinica.idEstudiante}}</td>
                         <td>{{asignacionclinica.idClinica.idPersona}}</td>
@@ -199,7 +197,7 @@
                     <tr>
                       <div class="col-md-2">
                           <div class="btn-group">
-                            <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion}) }}'" name="imprimir" class="btn btn-purple">
+                            <button type="submit" onclick="windows.open(location='{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion}) }}'") name="imprimir" class="btn btn-purple">
                               <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Clínicas PDF </i>
                             </button>
                           </div>
