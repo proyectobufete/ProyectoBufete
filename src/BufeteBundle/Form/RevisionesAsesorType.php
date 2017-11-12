@@ -25,7 +25,7 @@ class RevisionesAsesorType extends AbstractType
           //->add('idPersona')
           ->add('tituloEntrega',TextType::Class, array ("data"=>"CORRECCIÓN DE INFORME"))
 
-        
+
             ->add('fechaCreacion', HiddenType::class, array(
                   'data' => '2011/02/05',))
 
@@ -38,16 +38,8 @@ class RevisionesAsesorType extends AbstractType
               "data" => new \DateTime("now")
           ))
           */
-          ->add('estadoRevision',ChoiceType::class,array(
-                  "label" => "Prioridad",
-                      "choices"=> array(
-                          "Alta" =>3,
-                          "Media" =>2,
-                          "Baja" =>1,
-                ),
-                  'expanded'  => true,
-                  'multiple'  => false,
-              ))
+          ->add('estadoRevision', HiddenType::class, array(
+                'data' => 3,))
           //->add(‘idRevisado’)
           //->add('idCaso')
           ;
