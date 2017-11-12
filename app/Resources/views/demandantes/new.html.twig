@@ -21,24 +21,24 @@
     <div class="form-body colorform">
       <div class="col-md-offset-2">
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-6">
             {{form_label(form.nombreDemandante,'Nombre')}}
             {{form_errors(form) }}
             {{form_widget(form.nombreDemandante,{'attr':{'class' : 'form-control'}}) }}
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             {{form_label(form.edadDemandante,'Edad')}}
             {{form_errors(form) }}
             {{form_widget(form.edadDemandante,{'attr':{'class' : 'form-control'}}) }}
           </div>
         </div>
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3">
             {{form_label(form.telefonoDemandante,'Teléfono')}}
             {{ form_errors(form) }}
             {{ form_widget(form.telefonoDemandante,{'attr':{'class' : 'form-control'}}) }}
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             {{form_label(form.dpiDemandante,'DPI')}}
             {{ form_errors(form) }}
             {{ form_widget(form.dpiDemandante,{'attr':{'class' : 'form-control'}})}}
@@ -50,21 +50,21 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             {{form_label(form.direccionDemandante,'Dirección')}}
             {{ form_errors(form) }}
             {{ form_widget(form.direccionDemandante,{'attr':{'class':'form-control'}}) }}
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             {{form_label(form.dirtrabajoDemandante,'Direccion de Trabajo')}}
             {{ form_errors(form) }}
             {{ form_widget(form.dirtrabajoDemandante,{'attr':{'class' : 'form-control'}}) }}
           </div>
         </div>
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3">
             {{form_label(form.idCiudad,'Ciudad')}}
             {{ form_errors(form) }}
             {{ form_widget(form.idCiudad,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
@@ -74,7 +74,7 @@
             {{ form_errors(form) }}
             {{ form_widget(form.idEstadocivil,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             {{form_label(form.idTrabajo,'Profesión u Oficio')}}
             {{ form_errors(form) }}
             {{ form_widget(form.idTrabajo,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
