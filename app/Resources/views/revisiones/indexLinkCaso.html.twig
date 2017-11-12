@@ -12,14 +12,9 @@
 <div class="portlet-body">
     <div class="row">
 
-      <div class="col-md-offset-11">
-        <div class="col-md-2">
-          <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
-              <button type="submit" name="buscar" class="btn yellow">Regresar</button>
-              <input type="hidden" name="id" value="{{casoEnvio.idCaso}}"/>
-          </form>
-        </div>
-      </div>
+
+
+
 
 
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -47,9 +42,9 @@
                       </b>
                     </h3>
                     <p class="list-group-item-text">
-                      <a href="#">
+
                       <h4><img src="{{ asset ('asst/img/revision.png')}}" width="28" height="28">{{ revisione.tituloEntrega }}</h4>
-                      </a>
+
                       <span class="help-block">
                         <small>Subido {% if revisione.fechaCreacion %}{{ revisione.fechaCreacion|date('d-m-Y H:i') }}{% endif %}</small>
                       </span>

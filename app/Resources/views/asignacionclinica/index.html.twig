@@ -1,6 +1,13 @@
 {% extends 'layout.html.twig' %}
-{% block act6 %}active{% endblock %}
-{% block ac25 %}active{% endblock %}
+
+{% if is_granted('ROLE_DIRECTOR')%}
+  {% block act29 %} active {% endblock %}
+  {% block ac39 %} active {% endblock %}
+{% else %}
+  {% block act6 %}active{% endblock %}
+  {% block ac25 %}active{% endblock %}
+{% endif %}
+
 {% block title %}
   <h1>Listado de Asignaciones</h1>
 {% endblock %}
@@ -33,7 +40,7 @@
       <br>
   <div class="col-md-12 col-sm-12 col-xs-12" >
     <div class="table-responsive">
-      <table class="table table-bordered ">
+      <table class="table table-striped ">
         <thead>
           <tr>
               <th>Clínica</th>

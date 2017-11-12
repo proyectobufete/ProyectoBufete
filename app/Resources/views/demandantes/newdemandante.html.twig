@@ -29,14 +29,14 @@
           <div class="col-md-1">
             {{form_label(form.edadDemandante,'Edad')}}
             {{form_errors(form) }}
-            {{form_widget(form.edadDemandante,{'attr':{'class' : 'form-control'}}) }}
+            {{form_widget(form.edadDemandante,{'attr':{'class' : 'form-control'},'data-mask' : '9999-9999'}) }}
           </div>
         </div>
         <div class="row">
           <div class="col-md-2">
             {{form_label(form.telefonoDemandante,'Teléfono')}}
             {{ form_errors(form) }}
-            {{ form_widget(form.telefonoDemandante,{'attr':{'class' : 'form-control'},'data-mask' : '(999) 9999-9999'}) }}
+            {{ form_widget(form.telefonoDemandante,{'attr':{'class' : 'form-control'},'data-mask' : '9999-9999'}) }}
           </div>
           <div class="col-md-2">
             {{form_label(form.dpiDemandante,'DPI')}}
@@ -46,7 +46,8 @@
           <div class="col-md-2">
             {{form_label(form.cedulaDemandante,'Cedula')}}
             {{ form_errors(form) }}
-            {{ form_widget(form.cedulaDemandante,{'attr':{'class' : 'form-control'}}) }}
+            {{ form_widget(form.cedulaDemandante,{'attr':{'class' : 'form-control'},'data-mask' : '(999) 9999-9999'}) }}
+
           </div>
         </div>
         <div class="row">
