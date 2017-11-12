@@ -31,14 +31,14 @@
       </div>
       <div class="col-md-2">
           <div class="btn-group">
-            <button type="button" onclick="location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}'" name="imprimir" class="btn btn-purple">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado PDF </i>
+            <button type="button" target="_blank" onclick="window.open(location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir"  class="btn btn-purple">
+              <i class="fa fa-file-pdf-o" aria-hidden="true" > Generar Listado PDF </i>
             </button>
           </div>
       </div>
       <div class="col-md-2">
           <div class="btn-group">
-            <button type="submit" onclick="location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}'" name="imprimir" class="btn">
+            <button type="submit" onclick="window.open(location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir" class="btn">
               <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado con notas PDF </i>
             </button>
           </div>
