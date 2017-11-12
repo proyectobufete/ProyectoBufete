@@ -86,7 +86,7 @@ class RevisionesController extends Controller
         }
         elseif ($rol=='ROLE_ESTUDIANTE')
         {
-          
+
 
           return $this->render('revisiones/indexLinkCasoEst.html.twig', array(
               'revisiones' => $revisiones,
@@ -203,6 +203,8 @@ class RevisionesController extends Controller
 
       $post=$request->get("idRevision");
 
+      
+
       $em = $this->getDoctrine()->getManager();
       $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
                    'idRevision' => $post
@@ -238,6 +240,8 @@ class RevisionesController extends Controller
     {
 
       $post=$request->get("idRevision");
+
+
 
       $em = $this->getDoctrine()->getManager();
       $revisione = $em->getRepository('BufeteBundle:Revisiones')->findOneBy(array(
@@ -390,8 +394,17 @@ class RevisionesController extends Controller
           else {
             $revisione->setRutaArchivo(null);
           }
-                $this->getDoctrine()->getManager()->flush();
-                return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+
+
+
+                  return $this->redirectToRoute('revisiones_showInforme',
+                   [
+                     'idRevision' => $revisione
+                   ], 307);
+
+
+                //return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
+
         }
 
         return $this->render('revisiones/upload.html.twig', array(
@@ -438,17 +451,14 @@ class RevisionesController extends Controller
 
         $rutaguardada = $revisione->getRutaArchivo();
 
-        dump($rutaguardada);
-        //die();
+
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            dump($revisione);
-            die();
 
 
-            dump($revisione->getRutaArchivo());
-            //die();
+
+
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('revisiones_showInforme', array('idRevision' => $revisione->getIdrevision()));
         }
