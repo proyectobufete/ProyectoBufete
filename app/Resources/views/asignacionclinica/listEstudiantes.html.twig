@@ -14,7 +14,7 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <form method="get" action="" class="form-inline" role="search">
           <div class="input-group">
             <span class="input-group-btn">
@@ -38,19 +38,29 @@
       </div>
       <div class="col-md-2">
           <div class="btn-group">
-
-            <button type="button" target="_blank" onclick="window.open(location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir"  class="btn btn-purple">
-              <i class="fa fa-file-pdf-o" aria-hidden="true" > Generar Listado PDF </i>
-
+            <button type="button" target="_blank" onclick="window.open(location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir"  class="btn yellow m-b-5">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado</i>
             </button>
           </div>
       </div>
       <div class="col-md-2">
           <div class="btn-group">
-            <button type="submit" onclick="window.open(location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir" class="btn">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado con notas PDF </i>
+            <button type="submit"  onclick="window.open(location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir" class="btn">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado con notas </i>
             </button>
           </div>
+      </div>
+      <div class="col-md-2">
+        <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dropdown <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <button type="submit" onclick="window.open(location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir" class="">
+                  Listado con notas
+                </button>
+              </li>
+                </ul>
+                </div>
       </div>
       <br>
       <br>
