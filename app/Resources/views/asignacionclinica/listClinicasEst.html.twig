@@ -7,20 +7,7 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
-      <div class="col-md-2">
-        <form method="get" action="" class="form-inline" role="search">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
-                <i class="fa fa-search"></i>
-              </button>
-            </span>
-            <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
-          </div>
-        </form>
-      </div>
-      <br>
-      <br>
+
   <div class="col-md-12 col-sm-12 col-xs-12" >
     <div class="table-responsive">
       <table class="table table-bordered ">
@@ -31,6 +18,7 @@
               <th>Nota</th>
               <th>Observaciones</th>
               <th>Estado</th>
+              <th>Estado Nota</th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +29,20 @@
               <td>{{asignacionclinica.notaClinica}}</td>
               <td>{{ asignacionclinica.observacionesClinica }}</td>
               <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
-
+              <td>
+                {% if asignacionclinica.notaClinica != null %}
+                  {% if asignacionclinica.notaClinica >= 61 %}
+                    <a href="#">
+                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Aprobado
+                  {% endif %}
+                  {% if asignacionclinica.notaClinica < 61 %}
+                    <a href="#">
+                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>No aprobado
+                  {% endif %}
+                {% else %}
+                No asignado
+                {% endif %}
+              </td>
           </tr>
           {% endfor %}
 

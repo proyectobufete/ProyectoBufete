@@ -7,7 +7,7 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <form method="get" action="" class="form-inline" role="search">
           <div class="input-group">
             <span class="input-group-btn">
@@ -16,7 +16,6 @@
               </button>
             </span>
             <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
-
           </div>
         </form>
       </div>
@@ -32,7 +31,7 @@
       </div>
       <div class="col-md-2">
           <div class="btn-group">
-            <button type="submit" onclick=window.open("location='{{ path('asignacionclinica_printlistaEstudiantes'), { 'idAsignacion': idAsignacion }) }}'" name="imprimir" class="btn btn-purple">
+            <button type="button" onclick="location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}'" name="imprimir" class="btn btn-purple">
               <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado PDF </i>
             </button>
           </div>
@@ -56,7 +55,7 @@
               <th>Nota</th>
               <th>Observaciones</th>
               <th>Estado</th>
-              <th></th>
+              <th>Estado Nota</th>
           </tr>
         </thead>
         <tbody>
@@ -68,14 +67,18 @@
               <td>{{ asignacionclinica.observacionesClinica }}</td>
               <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
               <td>
+                {% if asignacionclinica.notaClinica != null %}
                   {% if asignacionclinica.notaClinica >= 61 %}
                     <a href="#">
-                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Ganado
+                    <img src="{{ asset ('asst/img/check.png')}}" width="25" height="25"></a>Aprobado
                   {% endif %}
                   {% if asignacionclinica.notaClinica < 61 %}
                     <a href="#">
-                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>Perdido
+                    <img src="{{ asset ('asst/img/x.png')}}" width="25" height="25"></a>No aprobado
                   {% endif %}
+                {% else %}
+                No asignado
+                {% endif %}
               </td>
           </tr>
           {% endfor %}

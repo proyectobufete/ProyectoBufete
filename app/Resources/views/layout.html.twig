@@ -160,7 +160,14 @@
                   <li class="has-submenu {% block act26 %}{% endblock %}"><a href="#"><i class="ion-android-social"></i> <span class="nav-label">Personas</span></a>
                     <ul class="list-unstyled">
                         <li class="{% block ac34 %}{% endblock %}"><a href="{{path("personas_indexAsesoresDir")}}">Asesores</a></li>
+                        <li class="{% block ac35 %}{% endblock %}"><a href="{{path("personas_indexEstudiantes")}}">Estudiantes</a></li>
                     </ul>
+                  </li>
+                  <li class="has-submenu  {% block act27 %}{% endblock %}"><a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">Casos</span></a>
+                      <ul class="list-unstyled">
+                          <li class="{% block ac36 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
+                          <li class="{% block ac37 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
+                      </ul>
                   </li>
                   {% endif %}
                 </ul>
@@ -188,12 +195,46 @@
 
                     <li class="dropdown text-center">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="img/avatar-2.jpg" class="img-circle profile-img thumb-sm">
-                            <span class="username"><h7><b>{{app.user.nombrePersona}}</b></h7></span> <span class="caret"></span>
+                          <img alt="" src="{{asset ('uploads/profile/'~ app.user.foto) }}" class="img-circle profile-img thumb-sm">
+                            <span class="username">
+                              <h7><b>{{app.user.nombrePersona}}
+                                {% if app.user.role == "ROLE_SECRETARIO" %}
+                                  (Secretario)
+                                {% elseif app.user.role == "ROLE_ASESOR" %}
+                                  (Asesor)
+                                {% elseif app.user.role == "ROLE_DIRECTOR" %}
+                                  (Director)
+                                {% elseif app.user.role == "ROLE_ESTUDIANTE" %}
+                                  (Estudiante)
+                                {% elseif app.user.role == "ROLE_ADMIN" %}
+                                  (Administrador)
+                               {% endif %}
+                              </b></h7></span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu pro-menu fadeInUp animated " tabindex="5003" style="overflow: hidden; outline: none;">
-                            <li><a href="profile.html"><i class="ion-person-stalker"></i> Perfil</a></li>
-                            <li><a href="{{path("logout")}}"><i class="ion-log-out"></i> Log Out</a></li>
+                          <li>
+                              {% if app.user.role == "ROLE_ESTUDIANTE" %}
+                              <li>
+                                <a>
+                                <form method="post" action="{{ path('personas_studentProfile')}}" class="form-inline" role="search">
+                                  <button type="submit" name="buscar" class="btn btn-trs"><i class="ion-person"></i>  Perfil</button>
+                                  <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>
+                                </form>
+                              </a>
+                              </li>
+                              {% elseif app.user.role == "ROLE_ASESOR" or app.user.role == "ROLE_SECRETARIO" or app.user.role == "ROLE_ADMIN" or app.user.role == "ROLE_DIRECTOR" %}
+                                <li>
+                                  <a>
+                                <form method="post" action="{{ path('personas_staffProfile')}}" class="form-inline" role="search">
+                                  <button type="submit" name="buscar" class="btn btn-trs"><i class="ion-person"></i>Perfil</button>
+                                  <input type="hidden" name="idPersona" value="{{app.user.idPersona}}"/>
+                                </form>
+
+                              {% endif %}
+                            </li>
+
+                            <li><a href="{{path("logout")}}"><i class="ion-log-out"> </i> Cerrar Sesión</a></li>
+
 
                         </ul>
                     </li>

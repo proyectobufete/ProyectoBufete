@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 
-class editpersonaType extends AbstractType
+class editpersonalType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,7 +21,6 @@ class editpersonaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idPersona')
             ->add('nombrePersona')
             ->add('telefonoPersona')
             ->add('tel2Persona')
@@ -34,17 +33,6 @@ class editpersonaType extends AbstractType
                     "choices"=> array(
                         "ACTIVO" =>1,
                         "INACTIVO" =>0,
-              ),
-                'expanded'  => true,
-                'multiple'  => false,
-            ))
-            ->add('role', ChoiceType::class,array(
-                "label" => "Roles",
-                    "choices"=> array(
-                        "Administrador" =>"ROLE_ADMIN",
-                        "Asesor" =>"ROLE_ASESOR",
-                        "Secretario" =>"ROLE_SECRETARIO",
-                        "Director" =>"ROLE_DIRECTOR",
               ),
                 'expanded'  => true,
                 'multiple'  => false,

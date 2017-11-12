@@ -21,6 +21,10 @@ bufete_homepage:
     path:     /home
     defaults: { _controller: BufeteBundle:Default:index }
 
+bufete_home:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
 bufete_personas:
         resource: "@BufeteBundle/Resources/config/routing/personas.yml"
         prefix:   /personas

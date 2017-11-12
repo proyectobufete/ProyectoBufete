@@ -2,7 +2,7 @@
 {% block act5 %} active {% endblock %}
 {% block ac12 %} active {% endblock %}
       {% block title %}
-        <h1>Editar Contraseña</h1>
+        <h1>Editar Nombre de Usuario</h1>
       {% endblock %}
 
 {% block body %}
@@ -14,15 +14,20 @@
           <div class="col-md-offset-3">
 
 
+            {% for message in app.session.flashbag().get('status') %}
+              <div class="alert alert-danger text-center">
+                <strong>¡Error! </strong>{{message}}
+              </div>
+            {% endfor %}
+
             <div class="row">
               <div class="col-md-3">
                 {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
-                {{form_widget(edit_form.usuarioPersona,{'attr':{'readonly':'readonly','class' : 'form-control'}}) }}
+                {{form_widget(edit_form.usuarioPersona,{'attr':{'write':'readonly','class' : 'form-control'}}) }}
               </div>
 
               <div class="col-md-3">
-                {{form_label(edit_form.passPersona,'Contraseña')}}
-                {{form_widget(edit_form.passPersona,{'attr':{'readonly':'readonly', 'class' : 'form-control'}}) }}
+
               </div>
               <br>
 
@@ -51,28 +56,27 @@
 
 
 
-
-              <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
+              <input type="hidden" name="idPersona2" value="{{app.user.idPersona}}"/>
               <button type="submit" name="Create" class="btn green">Guardar</button>
-              {{ form_end(edit_form) }}
-
-
 
               {% if persona.role == "ROLE_SECRETARIO" %}
-
+                <a href="{{ path('personas_indexEstudiantes') }}">
+                  <button type="button" name="cancelar" class="btn default">Cancelar</button>
+                </a>
               {% elseif persona.role == "ROLE_ESTUDIANTE" %}
-              <form method="post" action="{{ path('personas_editEstudiante')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn gray">Cancelar</button>
-                  <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-              </form>
 
+
+                <form method="post" action="{{ path('personas_studentProfile')}}" class="form-inline" role="search">
+                  <button type="submit" name="buscar" class="btn gray">Cancelar *</button>
+                  <input type="hidden" name="idPersona4" value="{{app.user.idPersona}}"/>
+                </form>
               {% endif %}
 
 
             </div>
           </div>
         </div>
-
+        {{ form_end(edit_form) }}
       </div>
     </div>
 

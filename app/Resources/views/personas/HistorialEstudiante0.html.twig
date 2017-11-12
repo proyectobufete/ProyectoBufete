@@ -1,0 +1,224 @@
+{% extends 'layout.html.twig' %}
+{% block act5 %} active {% endblock %}
+{% block ac12 %} active {% endblock %}
+
+{% block title %}
+  <h1>Historial </h1>
+{% endblock %}
+
+{% block body %}
+<div class=" portlet-body form">
+<div class="form-body colporbody">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6" >
+        <div class="portlet">
+          <div class="portlet-heading ">
+            <h3 class="portlet-title text-dark text-uppercase">Casos Civiles</h3>
+            <div class="portlet-widgets">
+                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                <span class="divider"></span>
+                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet1"><i class="ion-minus-round"></i></a>
+                <span class="divider"></span>
+                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div id="portlet1" class="panel-collapse collapse in">
+            <div class="portlet-body">
+              <div class="row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12" >
+                  <div class="table-responsive">
+                    <table class="table table-bordered ">
+                      <thead>
+                        <tr role="row" class="">
+                          <th>No de caso</th>
+                          <th>Fecha </th>
+                          <th>Demandante</th>
+                          <th>Dirección Demandante</th>
+                          <th>Nombre de demandado</th>
+                          <th>Direccion Demandado</th>
+                          <th>Nombre Estudiante</th>
+                          <th>Estado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for caso in civiles %}
+                        <tr>
+                          <td>{{ caso.noCaso }}</td>
+                          <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|localizeddate('long', 'none', 'es') }}{% endif %}</td>
+                          <td>{{ caso.idDemandante.nombreDemandante }}</td>
+                          <td>{{ caso.idDemandante.direccionDemandante  }}</td>
+                          <td>{{ caso.nombreDemandado }}</td>
+                          <td>{{ caso.dirDemandado }}</td>
+                          <td>{% if caso.idEstudiante != null %}
+                                {{ caso.idEstudiante.idPersona.nombrePersona }}
+                              {% endif %}
+                          </td>
+                          <td>{{ caso.estadoCaso }}</td>
+                          <tr>
+                            <div class="col-md-2">
+
+                                <div class="btn-group">
+                                  <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteCivil', { 'id': caso.idEstudiante.idEstudiante }) }}'" name="imprimir" class="btn btn-purple">
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Civil PDF </i>
+                                  </button>
+                                </div>
+                            </div>
+                          </tr>
+                        </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ </div>
+
+ <div class="row">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6" >
+     <div class="portlet">
+       <div class="portlet-heading ">
+         <h3 class="portlet-title text-dark text-uppercase">Casos Laborales</h3>
+         <div class="portlet-widgets">
+             <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+             <span class="divider"></span>
+             <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+             <span class="divider"></span>
+             <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+         </div>
+         <div class="clearfix"></div>
+       </div>
+       <div id="portlet2" class="panel-collapse collapse in">
+         <div class="portlet-body">
+           <div class="row">
+
+             <div class="col-md-12 col-sm-12 col-xs-12" >
+               <div class="table-responsive">
+                 <table class="table table-bordered ">
+                   <thead>
+                     <tr role="row" class="">
+                       <th>No de caso</th>
+                       <th>Fecha </th>
+                       <th>Demandante</th>
+                       <th>Dirección Demandante</th>
+                       <th>Nombre de demandado</th>
+                       <th>Direccion Demandado</th>
+                       <th>Nombre Estudiante</th>
+                       <th>Estado</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     {% for caso in laborales %}
+                     <tr>
+                       <td>{{ caso.noCaso }}</td>
+                       <td>{% if caso.fechaCaso %}{{ caso.fechaCaso|localizeddate('long', 'none', 'es')}}{% endif %}</td>
+                       <td>{{ caso.idDemandante.nombreDemandante }}</td>
+                       <td>{{ caso.idDemandante.direccionDemandante  }}</td>
+                       <td>{{ caso.nombreDemandado }}</td>
+                       <td>{{ caso.dirDemandado }}</td>
+                       <td>{% if caso.idEstudiante != null %}
+                             {{ caso.idEstudiante.idPersona.nombrePersona }}
+                           {% endif %}
+                       </td>
+                       <td>{{ caso.estadoCaso }}</td>
+                       <td>{{ caso.estadoCaso }}</td>
+                       <tr>
+                         <div class="col-md-2">
+
+                             <div class="btn-group">
+                               <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteLaboral', { 'id': caso.idEstudiante.idEstudiante }) }}'" name="imprimir" class="btn btn-purple">
+                                 <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Laboral PDF </i>
+                               </button>
+                             </div>
+                         </div>
+                       </tr>
+                     </tr>
+                     {% endfor %}
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6" >
+    <div class="portlet">
+      <div class="portlet-heading ">
+        <h3 class="portlet-title text-dark text-uppercase">Clínicas</h3>
+        <div class="portlet-widgets">
+            <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+            <span class="divider"></span>
+            <a data-toggle="collapse" data-parent="#accordion1" href="#portlet3"><i class="ion-minus-round"></i></a>
+            <span class="divider"></span>
+            <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div id="portlet3" class="panel-collapse collapse in">
+        <div class="portlet-body">
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12" >
+              <div class="table-responsive">
+                <table class="table table-bordered ">
+                  <thead>
+                    <tr>
+                        <th>Clínica</th>
+                        <th>Estudiante</th>
+                        <th>Asesor</th>
+                        <th>Observaciones</th>
+                        <th>Nota</th>
+                        <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for asignacionclinica in clinicas %}
+                    <tr>
+                      {{dump(asignacionclinica)}}
+
+                        <td>{{asignacionclinica.idClinica}}</td>
+                        <td>{{asignacionclinica.idEstudiante}}</td>
+                        <td>{{asignacionclinica.idClinica.idPersona}}</td>
+                        <td>{{ asignacionclinica.observacionesClinica }}</td>
+                        <td>{{ asignacionclinica.notaClinica }}</td>
+                        <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+                    </tr>
+                    <tr>
+                      <div class="col-md-2">
+                          <div class="btn-group">
+                            <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion}) }}'" name="imprimir" class="btn btn-purple">
+                              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Clínicas PDF </i>
+                            </button>
+                          </div>
+                      </div>
+                    </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+{% endblock %}
