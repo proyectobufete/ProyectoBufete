@@ -26,6 +26,7 @@
           </div>
         </form>
       </div>
+
       <div class="col-md-2">
         <div class="btn-group">
           <a href="{{ path('asignacionclinica_new') }}">
@@ -36,32 +37,22 @@
           </a>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="">
+        <div class="col-md-2">
           <div class="btn-group">
-            <button type="button" target="_blank" onclick="window.open(location='{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir"  class="btn yellow m-b-5">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado</i>
-            </button>
-          </div>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Exportar <i class="fa fa-file-pdf-o"></i> <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a title="Generar Listado"  href="{{ path('asignacionclinica_printlistaEstudiantes', { 'idAsignacion': idAsignacion }) }}" target="_blank" >Genera listado</a>
+                </li>
+                <li>
+                  <a title="Generar Listado con notas"  href="{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}" target="_blank" >Generar listado con notas</a>
+                </li>
+                  </ul>
+                  </div>
+        </div>
       </div>
-      <div class="col-md-2">
-          <div class="btn-group">
-            <button type="submit"  onclick="window.open(location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir" class="btn">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Listado con notas </i>
-            </button>
-          </div>
-      </div>
-      <div class="col-md-2">
-        <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dropdown <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <button type="submit" onclick="window.open(location='{{ path('asignacionclinica_printnotaEstudiantes', { 'idAsignacion': idAsignacion }) }}')" name="imprimir" class="">
-                  Listado con notas
-                </button>
-              </li>
-                </ul>
-                </div>
-      </div>
+
       <br>
       <br>
   <div class="col-md-12 col-sm-12 col-xs-12" >
