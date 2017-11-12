@@ -33,8 +33,13 @@ class DepartamentosController extends Controller
           $departamentos = $em->getRepository('BufeteBundle:Departamentos')->findAll();
         }
 
+        $paginator = $this->get('knp_paginator');
+        $departamentospg = $paginator->paginate(
+            $departamentos,
+            $request->query->getInt('page', 1), 5 );
+
         return $this->render('departamentos/index.html.twig', array(
-            'departamentos' => $departamentos,
+            'departamentos' => $departamentospg,
         ));
     }
 
