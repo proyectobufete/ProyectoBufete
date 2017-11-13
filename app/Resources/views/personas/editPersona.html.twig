@@ -2,7 +2,7 @@
 {% block act5 %} active {% endblock %}
 {% block ac29 %} active {% endblock %}
       {% block title %}
-        <h1>Editar usuario</h1>
+        <h1>Editar uasuario</h1>
       {% endblock %}
 
 {% block body %}
@@ -93,30 +93,30 @@
               <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
               <button type="submit" name="Create" class="btn green">Guardar</button>
             </div>
+              <div class="col-md-1">
+                {% if is_granted('ROLE_ADMIN') %}    <a href="{{ path('personas_index') }}">
+                  <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+                </a>
+                {% elseif is_granted('ROLE_SECRETARIO') %}    <a href="{{ path('personas_index') }}">
+                  <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+                </a>
+                {% endif %}
+              </div>
+
             <div class="col-md-2">
               {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
               <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
             </div>
     {{ form_end(edit_form) }}
-
-
-
-
-    <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
-        <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
-        <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-    </form>
-
-
-    {% if is_granted('ROLE_ADMIN') %}    <a href="{{ path('personas_index') }}">
-      <button type="button" name="cancelar" class="btn grey">Cancelar</button>
-    </a>
-    {% elseif is_granted('ROLE_SECRETARIO') %}    <a href="{{ path('personas_index') }}">
-      <button type="button" name="cancelar" class="btn grey">Cancelar</button>
-    </a>
-    {% endif %}
-
+    <div class="">
+      <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="btn yellow ">Cambiar Usuario</button>
+          <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+      </form>
+    </div>
     </div>
   </div>
-
+</div>
+</div>
+</div>
 {% endblock %}

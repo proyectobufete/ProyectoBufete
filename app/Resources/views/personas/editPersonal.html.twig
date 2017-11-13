@@ -80,35 +80,33 @@
       <div class="form-actions">
         <div class="row">
           <div class="col-md-offset-3 col-md-9">
+            <div class="col-md-1">
+              <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
+              <button type="submit" name="Create" class="btn green">Editar</button>
+            </div>
+            <div class="col-md-1">
+              <a href="{{ path('personas_indexAsesores') }}">
+                <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+              </a>
+            </div>
 
-
-
-
-            <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
-            <button type="submit" name="Create" class="btn green">Editar</button>
-
-
-
-
-            {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
-            <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-
-
-
-
-          </div>
-        </div>
-      </div>
+            <div class="col-md-2">
+              {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
+              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+            </div>
     {{ form_end(edit_form) }}
+    <div class="col-md-2">
+      <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
+          <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+      </form>
+    </div>
 
-    <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
-        <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
-        <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-    </form>
 
-    <a href="{{ path('personas_indexAsesores') }}">
-      <button type="button" name="cancelar" class="btn default">Cancelar</button>
-    </a>
+
+  </div>
+</div>
+</div>
     </div>
   </div>
 
