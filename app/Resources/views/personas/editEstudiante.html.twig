@@ -70,10 +70,7 @@
 
             </div>
             <div class="row">
-              <div class="col-md-3">
-                {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
-                {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
-              </div>
+
               <div class="col-md-3">
                 {{form_label(edit_form.estadoPersona,'Estado')}}
                 {{form_widget(edit_form.estadoPersona) }}
@@ -125,7 +122,7 @@
 
 
               <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
-              <button type="submit" name="Create" class="btn green">Editar</button>
+              <button type="submit" name="Create" class="btn green">Guardar</button>
 
 
 
@@ -134,13 +131,20 @@
               <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
 
 
-              <a href="{{ path('personas_indexEstudiantes') }}">
-                <button type="button" name="cancelar" class="btn default">Cancelar</button>
-              </a>
+
             </div>
           </div>
         </div>
         {{ form_end(edit_form) }}
+
+        <form method="post" action="{{ path('personas_editnUsuario')}}" class="form-inline" role="search">
+            <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
+            <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+        </form>
+        <a href="{{ path('personas_indexEstudiantes') }}">
+          <button type="button" name="cancelar" class="btn default">Cancelar</button>
+        </a>
+
       </div>
     </div>
 
