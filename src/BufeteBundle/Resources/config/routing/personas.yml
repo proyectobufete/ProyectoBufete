@@ -64,9 +64,15 @@ personas_editEstudiante:
     methods:  [GET, POST]
 
 personas_editpassestudiante:
-    path:     /editpassestudiante
+    path:     /editcStaff
     defaults: { _controller: "BufeteBundle:Personas:editpassestudiante" }
     methods:  [GET, POST]
+
+personas_edituserAdmin:
+    path:     /editnStaff
+    defaults: { _controller: "BufeteBundle:Personas:edituserAdmin" }
+    methods:  [GET, POST]
+
 
 personas_edituserestudiante:
     path:     /edituserestudiante

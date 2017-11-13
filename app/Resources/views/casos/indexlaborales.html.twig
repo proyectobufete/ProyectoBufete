@@ -127,7 +127,23 @@
                      {{ caso.idEstudiante.carneEstudiante }}
                    {% endif %}
                </td>
-               <td>{{ caso.estadoCaso }}</td>
+               <td>
+                 {% if caso.estadoCaso == 1 %}
+                  No asignado
+                 {% endif %}
+                 {% if caso.estadoCaso == 2 %}
+                  Asignado
+                 {% endif %}
+                 {% if caso.estadoCaso == 3 %}
+                  Descargado
+                 {% endif %}
+                 {% if caso.estadoCaso == 4 %}
+                  Fenecido
+                 {% endif %}
+                 {% if caso.estadoCaso == 5 %}
+                  Transferido
+                 {% endif %}
+               </td>
                  <td>
                    <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
                        <button type="submit" name="buscar" class="btn yellow">Ver</button>

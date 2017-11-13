@@ -1,0 +1,114 @@
+﻿/*
+Created: 6/11/2017
+Modified: 6/11/2017
+Model: MySQL 5.6
+Database: MySQL 5.6
+*/
+
+
+-- Create tables section -------------------------------------------------
+
+-- Table aviones
+
+CREATE TABLE `aviones`
+(
+  `Id_Avion` Int NOT NULL AUTO_INCREMENT,
+  `NombreAvion` Char(200) NOT NULL,
+  `Modelo` Char(200) NOT NULL,
+  `Capacidad` Int NOT NULL,
+  PRIMARY KEY (`Id_Avion`)
+)
+;
+
+-- Table pasajeros
+
+CREATE TABLE `pasajeros`
+(
+  `Id_Pasajero` Int NOT NULL AUTO_INCREMENT,
+  `NombrePasajero` Char(200) NOT NULL,
+  `Edad` Int NOT NULL,
+  `Dpi` Tinyint NOT NULL,
+  `telefono` Tinyint NOT NULL,
+  `Correo` Char(200) NOT NULL,
+  `Sexo` Char(20) NOT NULL,
+  PRIMARY KEY (`Id_Pasajero`)
+)
+;
+
+-- Table vuelos
+
+CREATE TABLE `vuelos`
+(
+  `Id_Vuelo` Int NOT NULL AUTO_INCREMENT,
+  `Aerolinea` Char(200) NOT NULL,
+  `Hora` Datetime NOT NULL,
+  `Destino` Char(200) NOT NULL,
+  `Id_Pasajero` Int,
+  `Id_Avion` Int,
+  PRIMARY KEY (`Id_Vuelo`)
+)
+;
+
+CREATE INDEX `IX_Relationship1` ON `vuelos` (`Id_Avion`)
+;
+
+CREATE INDEX `IX_Relationship2` ON `vuelos` (`Id_Pasajero`)
+;
+
+-- Table viajar
+
+CREATE TABLE `viajar`
+(
+  `Id_Viaje` Int NOT NULL AUTO_INCREMENT,
+  `Id_Vuelo` Int NOT NULL,
+  `Id_Pasajero` Int NOT NULL,
+  PRIMARY KEY (`Id_Viaje`)
+)
+;
+
+CREATE INDEX `IX_Relationship3` ON `viajar` (`Id_Vuelo`)
+;
+
+CREATE INDEX `IX_Relationship4` ON `viajar` (`Id_Pasajero`)
+;
+
+-- Table boletos
+
+CREATE TABLE `boletos`
+(
+  `Id_Boleto` Int NOT NULL AUTO_INCREMENT,
+  `Clase` Char(200) NOT NULL,
+  `Costo` Int NOT NULL,
+  `NumeroAsiento` Int NOT NULL,
+  `Id_Pasajero` Int,
+  `Id_Vuelo` Int,
+  PRIMARY KEY (`Id_Boleto`)
+)
+;
+
+CREATE INDEX `IX_Relationship5` ON `boletos` (`Id_Vuelo`)
+;
+
+CREATE INDEX `IX_Relationship6` ON `boletos` (`Id_Pasajero`)
+;
+
+-- Create relationships section ------------------------------------------------- 
+
+ALTER TABLE `vuelos` ADD CONSTRAINT `Relationship1` FOREIGN KEY (`Id_Avion`) REFERENCES `aviones` (`Id_Avion`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `vuelos` ADD CONSTRAINT `Relationship2` FOREIGN KEY (`Id_Pasajero`) REFERENCES `pasajeros` (`Id_Pasajero`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `viajar` ADD CONSTRAINT `Relationship3` FOREIGN KEY (`Id_Vuelo`) REFERENCES `vuelos` (`Id_Vuelo`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `viajar` ADD CONSTRAINT `Relationship4` FOREIGN KEY (`Id_Pasajero`) REFERENCES `pasajeros` (`Id_Pasajero`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `boletos` ADD CONSTRAINT `Relationship5` FOREIGN KEY (`Id_Vuelo`) REFERENCES `vuelos` (`Id_Vuelo`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `boletos` ADD CONSTRAINT `Relationship6` FOREIGN KEY (`Id_Pasajero`) REFERENCES `pasajeros` (`Id_Pasajero`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
