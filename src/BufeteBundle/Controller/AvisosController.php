@@ -245,7 +245,7 @@ class AvisosController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $db = $em->getConnection();
 
-        $query = "Select p.nombre_persona from estudiantes as e inner join personas as p on e.id_persona = p.id_persona";
+        $query = "Select carne_estudiante from aviso_notificacion as a inner join casos as c on (a.id_caso=c.id_caso) inner join estudiantes as e on (c.id_estudiante=e.id_estudiante)";
         $stmt = $db->prepare($query);
         $params = array();
         $stmt->execute($params);
@@ -258,7 +258,7 @@ class AvisosController extends Controller
              $id = $request->get('bus');
                 $em = $this->getDoctrine()->getEntityManager();
                 $db = $em->getConnection();
-                $query = "SELECT id_aviso, c.no_caso, p.nombre_persona, d.nombre_demandante, fecha_visita, hora_visita, vista, descripcion, t.tipo, c.nombre_demandado from aviso_notificacion as a inner join casos as c on (a.id_caso=c.id_caso) inner join tipocaso as t on (c.id_tipo=t.id_tipo) inner join demandantes as d on a.id_demandante=d.id_demandante inner join estudiantes as e on (a.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona=p.id_persona) where p.nombre_persona='$id' ORDER BY id_aviso DESC";
+                $query = "SELECT id_aviso, c.no_caso, p.nombre_persona, e.carne_estudiante, d.nombre_demandante, fecha_visita, hora_visita, vista, descripcion, t.tipo, c.nombre_demandado from aviso_notificacion as a inner join casos as c on (a.id_caso=c.id_caso) inner join tipocaso as t on (c.id_tipo=t.id_tipo) inner join demandantes as d on a.id_demandante=d.id_demandante inner join estudiantes as e on (a.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona=p.id_persona) where e.carne_estudiante='$id' ORDER BY id_aviso DESC";
                 $stmt = $db->prepare($query);
                 $params = array();
                 $stmt->execute($params);
@@ -280,7 +280,7 @@ class AvisosController extends Controller
 
          $em = $this->getDoctrine()->getEntityManager();
          $db = $em->getConnection();
-         $query = "SELECT id_aviso, c.no_caso, p.nombre_persona, d.nombre_demandante, fecha_visita, hora_visita, vista, descripcion, t.tipo, c.nombre_demandado from aviso_notificacion as a inner join casos as c on (a.id_caso=c.id_caso) inner join tipocaso as t on (c.id_tipo=t.id_tipo) inner join demandantes as d on a.id_demandante=d.id_demandante inner join estudiantes as e on (a.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona=p.id_persona) where p.nombre_persona='$estu'";
+         $query = "SELECT id_aviso, c.no_caso, p.nombre_persona, e.carne_estudiante, d.nombre_demandante, fecha_visita, hora_visita, vista, descripcion, t.tipo, c.nombre_demandado from aviso_notificacion as a inner join casos as c on (a.id_caso=c.id_caso) inner join tipocaso as t on (c.id_tipo=t.id_tipo) inner join demandantes as d on a.id_demandante=d.id_demandante inner join estudiantes as e on (a.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona = p.id_persona) where e.carne_estudiante='$estu'";
          $stmt = $db->prepare($query);
          $params = array();
          $stmt->execute($params);
