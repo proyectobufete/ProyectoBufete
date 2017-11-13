@@ -1102,8 +1102,6 @@ Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                    [
                      'var' => $persona
                    ], 307);
-              
-
 
                $confirm=null;
           }else {
@@ -1512,7 +1510,7 @@ Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
 
           // return $this->redirectToRoute('personas_editpassestudiante');
 
-           return $this->redirectToRoute('personas_editcUsuario',
+           return $this->redirectToRoute('personas_editpassestudiante',
               [
                 'id' => $persona
               ], 307);
