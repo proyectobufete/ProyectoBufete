@@ -71,8 +71,13 @@ class AsignacionclinicaController extends Controller
         }
       }
 
+      $paginator = $this->get('knp_paginator');
+      $asignacionclinicaspg = $paginator->paginate(
+          $asignacionclinicas,
+          $request->query->getInt('page', 1), 10 );
+
         return $this->render('asignacionclinica/index.html.twig', array(
-            'asignacionclinicas' => $asignacionclinicas,
+            'asignacionclinicas' => $asignacionclinicaspg,
         ));
     }
 
