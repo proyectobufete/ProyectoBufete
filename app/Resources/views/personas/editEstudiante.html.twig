@@ -126,12 +126,10 @@
                   <button type="button" name="cancelar" class="btn default">Cancelar</button>
                 </a>
               </div>
-
-              {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
-              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-
-
-
+              <div class="col-md-2">
+                {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
+                <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+              </div>
         {{ form_end(edit_form) }}
                 <form method="post" action="{{ path('personas_edituserAdmin')}}"  >
                   <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
