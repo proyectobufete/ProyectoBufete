@@ -16,7 +16,7 @@
                   <option value="{{aviso.no_caso}}" class="btn">{{aviso.no_caso}}</option>
               {% endfor %}
       </select>
-          <input type="Submit" Value="Buscar" class="btn btn-primary">
+          <input type="Submit" Value="Buscar Caso" class="btn btn-primary">
       </form>
 
   <br/>
@@ -34,7 +34,7 @@
              {% set break = false %}
             {% for av in avisos if not break%}
 
-              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfest", {"estu":av.nombre_persona})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfest", {"estu":av.carne_estudiante})}}" target="_blank" class="btn btn-success">Imprimir</a>
               {% set break = true %}
               {% endfor %}
 
