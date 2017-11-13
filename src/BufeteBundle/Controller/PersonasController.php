@@ -460,6 +460,92 @@ die();
      ));
    }
 
+
+   //////////////////////////////////////////////////////////////////////////////////
+    /*QUERY PARA EL RECORD DE UN ESTUDIANTE SEGUN CASOS CIVILES*/
+    public function HistorialEstudianteCivilAction(Request $request, Personas $persona)
+    {
+      $carne=  $request->get('id');
+      //$carne = $persona->getestudiantes()->getcarneEstudiante();
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery(
+        "SELECT c FROM BufeteBundle:Casos c
+        INNER JOIN BufeteBundle:Civiles l WITH c = l.idCaso
+        WHERE c.idEstudiante = :id");
+      $query->setParameter('id', $carne);
+      $civiles = $query->getResult();
+      $snappy = $this->get('knp_snappy.pdf');
+      $snappy->setOption('no-outline', false);
+      $snappy->setOption('encoding', 'UTF-8');
+      $snappy->setOption('orientation', 'Landscape');
+      $snappy->setOption('page-size','LEGAL');
+      $snappy->setOption('footer-right','Página [page] de [topage]');
+      $snappy->setOption('footer-font-size','10');
+          $html = $this->renderView('personas/HistorialEstudianteCivil.html.twig', array('civiles' => $civiles));
+          $filename = 'HistorialCivil';
+          return new Response(
+              $snappy->getOutputFromHtml($html),
+              200,
+              array(
+                  'Content-Type'          => 'application/pdf',
+                  'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
+    }
+ ////////////////////////////////////////////////////////////////////////////////////
+ public function HistorialEstudianteClinicasAction(Request $request, Personas $persona)
+ {
+   $carne=  $request->get('id');
+   //$carne = $persona->getestudiantes()->getcarneEstudiante();
+   $em = $this->getDoctrine()->getManager();
+   $query3 = $em->createQuery(
+     "SELECT a FROM BufeteBundle:Asignacionclinica a WHERE a.idEstudiante = :id");
+   $query3->setParameter('id', $carne);
+   $clinicas = $query3->getResult();
+   $snappy = $this->get('knp_snappy.pdf');
+   $snappy->setOption('no-outline', false);
+   $snappy->setOption('encoding', 'UTF-8');
+   $snappy->setOption('orientation', 'Landscape');
+   $snappy->setOption('page-size','LEGAL');
+   $snappy->setOption('footer-right','Página [page] de [topage]');
+   $snappy->setOption('footer-font-size','10');
+       $html = $this->renderView('personas/HistorialEstudianteClinicas.html.twig', array('clinicas' => $clinicas));
+       $filename = 'Historialclinicas'.$carne;
+       return new Response(
+           $snappy->getOutputFromHtml($html),
+           200,
+           array(
+               'Content-Type'          => 'application/pdf',
+               'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
+ }
+ ////////////////////////////////////////////////////////////////////////////////////
+ /*  AGREGAR ESTUDIANTE */
+ public function HistorialEstudianteLaboralAction(Request $request, Personas $persona)
+ {
+   $carne=  $request->get('id');
+   //$carne = $persona->getestudiantes()->getcarneEstudiante();
+   $em = $this->getDoctrine()->getManager();
+   $query2 = $em->createQuery(
+     "SELECT c FROM BufeteBundle:Casos c
+     INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+     WHERE c.idEstudiante = :id");
+   $query2->setParameter('id', $carne);
+   $laborales = $query2->getResult();
+   $snappy = $this->get('knp_snappy.pdf');
+   $snappy->setOption('no-outline', false);
+   $snappy->setOption('encoding', 'UTF-8');
+   $snappy->setOption('orientation', 'Landscape');
+   $snappy->setOption('page-size','LEGAL');
+   $snappy->setOption('footer-right','Página [page] de [topage]');
+   $snappy->setOption('footer-font-size','10');
+       $html = $this->renderView('personas/HistorialEstudianteLaboral.html.twig', array('laborales' => $laborales));
+       $filename = 'HistorialLaboral'.$carne;
+       return new Response(
+           $snappy->getOutputFromHtml($html),
+           200,
+           array(
+               'Content-Type'          => 'application/pdf',
+               'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'));
+ }
+ ////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

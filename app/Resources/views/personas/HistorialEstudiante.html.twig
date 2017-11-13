@@ -26,7 +26,6 @@
           <div id="portlet1" class="panel-collapse collapse in">
             <div class="portlet-body">
               <div class="row">
-
                 <div class="col-md-12 col-sm-12 col-xs-12" >
                   <div class="table-responsive">
                     <table class="table table-bordered ">
@@ -58,13 +57,13 @@
                           <td>{{ caso.estadoCaso }}</td>
                           <tr>
                             <div class="col-md-2">
-
                                 <div class="btn-group">
-                                  <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteCivil', { 'id': caso.idEstudiante.idEstudiante }) }}'" name="imprimir" class="btn btn-purple">
-                                    <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Civil PDF </i>
-                                  </button>
+                                  <a href="{{ path('personas_HistorialEstudianteCivil', { 'id': caso.idEstudiante.idEstudiante }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
+                                    <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Civil a PDF</i>
+                                  </a>
                                 </div>
                             </div>
+
                           </tr>
                         </tr>
                         {% endfor %}
@@ -131,11 +130,10 @@
                        <td>{{ caso.estadoCaso }}</td>
                        <tr>
                          <div class="col-md-2">
-
                              <div class="btn-group">
-                               <button type="submit" onclick="location='{{ path('personas_HistorialEstudianteLaboral', { 'id': caso.idEstudiante.idEstudiante }) }}'" name="imprimir" class="btn btn-purple">
-                                 <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Laboral PDF </i>
-                               </button>
+                               <a href="{{ path('personas_HistorialEstudianteLaboral', { 'id': caso.idEstudiante.idEstudiante }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
+                                 <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Laboral a PDF</i>
+                               </a>
                              </div>
                          </div>
                        </tr>
@@ -196,11 +194,12 @@
                     </tr>
                     <tr>
                       <div class="col-md-2">
-                          <div class="btn-group">
-                            <button type="submit" onclick="windows.open(location='{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion}) }}'") name="imprimir" class="btn btn-purple">
-                              <i class="fa fa-file-pdf-o" aria-hidden="true"> Generar Record Clínicas PDF </i>
-                            </button>
-                          </div>
+                        <div class="btn-group">
+                          <a href="{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
+                            <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Laboral a PDF</i>
+                            {{dump(asignacionclinica)}}
+                          </a>
+                        </div>
                       </div>
                     </tr>
                     {% endfor %}
