@@ -52,7 +52,7 @@
                 <tr>
                   <td>{{ tipocaso.tipo }}</td>
                   <td>
-                    {% if tipocaso.estadoTipo %}Activo{% else %}No{% endif %}
+                    {% if tipocaso.estadoTipo %}Activo{% else %}Inactivo{% endif %}
                   </td>
                   <td>
                     <a href="{{ path('tipocaso_show', { 'idTipo': tipocaso.idTipo }) }}" class="btn yellow">Ver</a>

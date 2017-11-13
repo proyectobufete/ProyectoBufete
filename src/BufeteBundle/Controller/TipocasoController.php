@@ -90,7 +90,7 @@ class TipocasoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tipocaso_edit', array('idTipo' => $tipocaso->getIdtipo()));
+            return $this->redirectToRoute('tipocaso_show', array('idTipo' => $tipocaso->getIdtipo()));
         }
 
         return $this->render('tipocaso/edit.html.twig', array(

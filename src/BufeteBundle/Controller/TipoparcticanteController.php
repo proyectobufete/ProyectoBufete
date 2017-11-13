@@ -90,7 +90,7 @@ class TipoparcticanteController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tipoparcticante_edit', array('idtipopracticante' => $tipoparcticante->getIdtipopracticante()));
+            return $this->redirectToRoute('tipoparcticante_show', array('idtipopracticante' => $tipoparcticante->getIdtipopracticante()));
         }
 
         return $this->render('tipoparcticante/edit.html.twig', array(

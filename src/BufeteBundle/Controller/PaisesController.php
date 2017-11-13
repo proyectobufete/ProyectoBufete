@@ -83,7 +83,7 @@ class PaisesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('paises_edit', array('idPais' => $paise->getIdpais()));
+            return $this->redirectToRoute('paises_show', array('idPais' => $paise->getIdpais()));
         }
 
         return $this->render('paises/edit.html.twig', array(

@@ -69,7 +69,14 @@
                     <td>{{ bufete.telefono2 }}</td>
                     <td>{{ bufete.emailBufete }}</td>
                     <td>{{ bufete.direccionBufete }}</td>
-                    <td>{{ bufete.estadoBufete }}</td>
+                    <td>
+                      {% if bufete.estadoBufete == 1 %}
+                        Activo
+                      {% endif %}
+                      {% if bufete.estadoBufete == 0 %}
+                        Inactivo
+                      {% endif %}
+                    </td>
                     <td>
                       <a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}" class="btn yellow">Ver</a>
                       <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}" class="btn blue">Editar</a>
