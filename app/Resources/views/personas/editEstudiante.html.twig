@@ -137,7 +137,7 @@
         </div>
         {{ form_end(edit_form) }}
 
-        <form method="post" action="{{ path('personas_editnUsuario')}}" class="form-inline" role="search">
+        <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
             <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
             <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
         </form>

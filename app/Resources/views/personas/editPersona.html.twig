@@ -106,12 +106,21 @@
         </form>
       </div>
 
-    <a href="{{ path('personas_index') }}">
+
+    <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
+        <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
+        <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+    </form>
+
+
+    {% if is_granted('ROLE_ADMIN') %}    <a href="{{ path('personas_index') }}">
       <button type="button" name="cancelar" class="btn grey">Cancelar</button>
     </a>
-  </div>
-</div>
-</div>
+    {% elseif is_granted('ROLE_SECRETARIO') %}    <a href="{{ path('personas_index') }}">
+      <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+    </a>
+    {% endif %}
+
     </div>
   </div>
 

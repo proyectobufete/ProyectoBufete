@@ -17,6 +17,22 @@
 <div class="portlet-body">
 
     <div class="row">
+
+      {% if is_granted('ROLE_ASESOR')%}
+          <div class="col-md-4">
+            <form method="get" action="" class="form-inline" role="search">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+                <input type="text" name="query" value="" class="form-control" placeholder="Buscar"/>
+              </div>
+            </form>
+          </div>
+      {% endif %}
+
   <div class="col-md-12 col-sm-12 col-xs-12" >
     <div class="table-responsive">
       <table class="table table-striped ">
@@ -45,7 +61,23 @@
 
             <td>{{ caso.idEstudiante.idPersona.nombrePersona }}</td>
             <td>{{ caso.idEstudiante.carneEstudiante }}</td>
-            <td>{{ caso.estadoCaso }}</td>
+            <td>
+              {% if caso.estadoCaso == 1 %}
+               No asignado
+              {% endif %}
+              {% if caso.estadoCaso == 2 %}
+               Asignado
+              {% endif %}
+              {% if caso.estadoCaso == 3 %}
+               Descargado
+              {% endif %}
+              {% if caso.estadoCaso == 4 %}
+               Fenecido
+              {% endif %}
+              {% if caso.estadoCaso == 5 %}
+               Transferido
+              {% endif %}
+            </td>
               <td>
                 <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
                     <button type="submit" name="buscar" class="btn yellow">Ver</button>
