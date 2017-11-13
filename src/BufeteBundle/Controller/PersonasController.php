@@ -190,6 +190,11 @@ class PersonasController extends Controller
           $casos,
           $request->query->getInt('page', 1), 10 );
 
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
+
       return $this->render('casos/civilesestudiante.html.twig', array(
           'casos' => $casospg,
       ));
