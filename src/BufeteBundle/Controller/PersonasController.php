@@ -1022,12 +1022,109 @@ public function showPersonasAction(Personas $persona)
     ));
 }
 
+/*
+Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+Iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+              /*                                                           *
+               *   EDITAR CONTRASEÑA PARA EL ADMINISTRADOR O SECRETARIO    *
+               *                                                           */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function edituserAdminAction(Request $request, Request $request2)
+    {
+      $var=$request->request->get("idPersona");
+
+      if(isset($var))
+      {
+        $em = $this->getDoctrine()->getManager();
+        $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+                     'idPersona' => $var
+        ));
+      }
+      else
+      {
+          $var2=$request->request->get("idPersona2");
+          $em = $this->getDoctrine()->getManager();
+          $persona = $em->getRepository('BufeteBundle:Personas')->findOneBy(array(
+                       'idPersona' => $var2
+          ));
+      }
+
+        $pass = $persona->getpassPersona();
+
+        $edit_form = $this->createForm('BufeteBundle\Form\PersonasEditUserType', $persona, array(
+                 'PassPersona' => $pass,
+            ));
+
+        $edit_form->handleRequest($request);
+
+        $confirm = null;
+        $status=null;
+        if ($edit_form->isSubmitted() )
+        {
+        //if($edit_form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $persona_repo = $em->getRepository("BufeteBundle:Personas");
+            $pe = $persona_repo->findOneBy(array('usuarioPersona' => $edit_form->get("usuarioPersona")->getData()));
+            if(count($pe) == 0)
+            {
+              $em->persist($persona);
+              $flush = $em->flush();
+              if ($flush == null) {
+                  $this->session->getFlashBag()->add("status", $status);
+                  $status = "El usuario se ha creado correctamente";
+                  $confirm = true;
+              } else {
+                $status = "El usuario no se pudo registrar";
+              }
+            }else {
+              $status = "el nombre de usuario ya existe";
+            }
+        }
+          if ($confirm)
+          {
+
+            $rol = $persona->getRole();
+            $a = "ROLE_ASESOR";
+            $b = "ROLE_ADMIN";
+            $c = "ROLE_DIRECTOR";
+            $d = "ROLE_SECRETARIO";
+            $e = "ROLE_ESTUDIANTE";
+
+
+                return $this->redirectToRoute('personas_perfil',
+                   [
+                     'var' => $persona
+                   ], 307);
+              
+
+
+               $confirm=null;
+          }else {
+            $this->session->getFlashBag()->add("status", $status);
+          }
+        }
+
+        return $this->render('personas/editpassAdmin.html.twig', array(
+            'persona' => $persona,
+            'PassPersona' => $pass,
+            'edit_form' => $edit_form->createView(),
+        ));
+    }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+              /*                                                           *
+               *            EDITAR CONTRASEÑA DEL ESTUDIANTE               *
+               *                                                           */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////
-/*  EDITAR CONTRASEÑA DEL ESTUDIANTE */
      public function editpassestudianteAction(Request $request, Request $request2)
      {
        $var=$request2->request->get("idPersona");
