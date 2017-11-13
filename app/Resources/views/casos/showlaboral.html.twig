@@ -3,6 +3,16 @@
 {% if is_granted('ROLE_DIRECTOR')%}
   {% block act27 %} active {% endblock %}
   {% block ac37 %} active {% endblock %}
+{% endif %}
+
+{% if is_granted('ROLE_ASESOR') %}
+  {% block act23 %} active {% endblock %}
+  {% block ac26 %} active {% endblock %}
+{% endif %}
+
+{% if is_granted('ROLE_ESTUDIANTE')%}
+  {% block act20 %} active {% endblock %}
+  {% block ac21 %} active {% endblock %}
 {% else %}
   {% block act3 %} active {% endblock %}
   {% block ac9 %} active {% endblock %}

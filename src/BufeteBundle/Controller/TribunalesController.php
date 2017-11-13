@@ -34,8 +34,13 @@ class TribunalesController extends Controller
            $tribunales = $em->getRepository('BufeteBundle:Tribunales')->findAll();
          }
 
+         $paginator = $this->get('knp_paginator');
+         $tribunalespg = $paginator->paginate(
+             $tribunales,
+             $request->query->getInt('page', 1), 10 );
+
          return $this->render('tribunales/index.html.twig', array(
-             'tribunales' => $tribunales,
+             'tribunales' => $tribunalespg,
          ));
      }
     /**

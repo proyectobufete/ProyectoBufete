@@ -85,8 +85,13 @@ class PersonasController extends Controller
         }
       }
 
+      $paginator = $this->get('knp_paginator');
+      $asesorespg = $paginator->paginate(
+          $asesores,
+          $request->query->getInt('page', 1), 10 );
+
         return $this->render('personas/indexAsesores.html.twig', array(
-          'asesores' => $asesores,
+          'asesores' => $asesorespg,
         ));
   }
 
@@ -130,8 +135,13 @@ class PersonasController extends Controller
         $casos = $query->getResult();
       }
 
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
+
       return $this->render('casos/laboralesestudiante.html.twig', array(
-          'casos' => $casos,
+          'casos' => $casospg,
       ));
   }
 
@@ -141,20 +151,47 @@ class PersonasController extends Controller
                *   LISTA DE CASOS CIVILES SEGÚN EL ASESOR LOGUEADO         *
                *                                                           */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  public function civilesAsesorAction()
+  public function civilesAsesorAction(Request $request)
   {
       $idAsesor = $this->getUser()->getIdPersona();
       $em = $this->getDoctrine()->getManager();
-      $query = $em->createQuery(
-        "SELECT c FROM BufeteBundle:Casos c
-        INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
-        WHERE c.idPersona = :id
-        ORDER BY c.fechaCaso DESC"
-      )->setParameter('id', $idAsesor);
-      $casos = $query->getResult();
+
+      $searchQuery = $request->get('query');
+      $casos = null;
+
+      if (!empty($searchQuery)) {
+        $repo = $em->getRepository("BufeteBundle:Casos");
+        $query = $repo->createQueryBuilder('c')
+        ->innerJoin('BufeteBundle:Civiles', 'ci', 'WITH', 'c.idCaso = ci.idCaso')
+        ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+        ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = c.idEstudiante')
+        ->orWhere('c.noCaso LIKE :param')
+        ->orWhere('d.nombreDemandante LIKE :param')
+        ->orWhere('c.nombreDemandado LIKE :param')
+        ->orWhere('e.carneEstudiante LIKE :param')
+        ->andWhere('c.idPersona = :id')
+        ->setParameter('id', $idAsesor)
+        ->setParameter('param', '%'.$searchQuery.'%')
+        ->orderBy('c.fechaCaso', 'DESC')
+        ->getQuery();
+        $casos = $query->getResult();
+      } else {
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+          WHERE c.idPersona = :id
+          ORDER BY c.fechaCaso DESC"
+        )->setParameter('id', $idAsesor);
+        $casos = $query->getResult();
+      }
+
+      $paginator = $this->get('knp_paginator');
+      $casospg = $paginator->paginate(
+          $casos,
+          $request->query->getInt('page', 1), 10 );
 
       return $this->render('casos/civilesestudiante.html.twig', array(
-          'casos' => $casos,
+          'casos' => $casospg,
       ));
   }
 
@@ -187,8 +224,14 @@ class PersonasController extends Controller
         );
         $estudiantes = $query->getResult();
     }
+
+    $paginator = $this->get('knp_paginator');
+    $estudiantespg = $paginator->paginate(
+        $estudiantes,
+        $request->query->getInt('page', 1), 8 );
+
     return $this->render('personas/indexEstudiantes.html.twig', array(
-        'estudiantes' => $estudiantes,
+        'estudiantes' => $estudiantespg,
     ));
   }
 
@@ -513,8 +556,13 @@ die();
         $personas = $query->getResult();
       }
 
+      $paginator = $this->get('knp_paginator');
+      $personaspg = $paginator->paginate(
+          $personas,
+          $request->query->getInt('page', 1), 8 );
+
       return $this->render('personas/index.html.twig', array(
-          'personas' => $personas,
+          'personas' => $personaspg,
       ));
   }
 
@@ -725,8 +773,13 @@ die();
            }
          }
 
+         $paginator = $this->get('knp_paginator');
+         $asesorespg = $paginator->paginate(
+             $asesores,
+             $request->query->getInt('page', 1), 8 );
+
            return $this->render('personas/indexAsesorDir.html.twig', array(
-             'asesores' => $asesores,
+             'asesores' => $asesorespg,
              'bufetes' => $bufetes,
            ));
      }
