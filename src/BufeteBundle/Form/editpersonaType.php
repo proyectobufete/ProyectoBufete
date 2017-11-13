@@ -28,7 +28,7 @@ class editpersonaType extends AbstractType
             ->add('dpiPersona')
             ->add('direccionPersona')
             ->add('emailPersona')
-            ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
+            //->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
             ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
