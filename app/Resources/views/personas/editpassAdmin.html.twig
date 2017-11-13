@@ -62,17 +62,24 @@
         </div>
         {{ form_end(edit_form) }}
 
-        {% if persona.role == 'ROLE_SECRETARIO' or  persona.role == 'ROLE_ADMIN'  or persona.role == 'ROLE_ASESOR' or  persona.role == 'ROLE_DIRECTOR' %}
+        {% if app.user.role == 'ROLE_SECRETARIO' %}
+
+          <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
+              <button type="submit" name="buscar" class="btn grey">Cancelar</button>
+              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+          </form>
+
+        {% elseif app.user.role =='ROLE_ADMIN' %}
 
         <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
             <button type="submit" name="buscar" class="btn grey">Cancelar</button>
             <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
         </form>
 
-        {% elseif persona.role == 'ROLE_ESTUDIANTE' %}
+        {% elseif app.user.role =='ROLE_ESTUDIANTE' %}
 
         <form method="post" action="{{ path('personas_editEstudiante')}}" class="form-inline" role="search">
-          <button type="submit" name="buscar" class="btn gray">Cancelar</button>
+          <button type="submit" name="buscar" class="btn gray">Cancelar Estudiante</button>
           <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
         </form>
 
