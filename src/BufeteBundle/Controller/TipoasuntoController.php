@@ -94,7 +94,7 @@ class TipoasuntoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tipoasunto_edit', array('idTipoasunto' => $tipoasunto->getIdtipoasunto()));
+            return $this->redirectToRoute('tipoasunto_show', array('idTipoasunto' => $tipoasunto->getIdtipoasunto()));
         }
 
         return $this->render('tipoasunto/edit.html.twig', array(

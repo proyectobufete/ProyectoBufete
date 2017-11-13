@@ -50,7 +50,7 @@
               <td><a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}">{{ ciudad.idCiudad }}</a></td>
               <td>{{ ciudad.postalCiudad }}</td>
               <td>{{ ciudad.ciudad }}</td>
-              <td>{% if ciudad.estadoCiudad %}Activo{% else %}No{% endif %}</td>
+              <td>{% if ciudad.estadoCiudad %}Activo{% else %}Inactivo{% endif %}</td>
               <td>
                   <a href="{{ path('ciudad_show', { 'idCiudad': ciudad.idCiudad }) }}" class="btn yellow" >Ver</a>
                   <a href="{{ path('ciudad_edit', { 'idCiudad': ciudad.idCiudad }) }}" class="btn blue">Editar</a>

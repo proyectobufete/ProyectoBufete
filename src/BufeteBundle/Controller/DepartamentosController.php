@@ -94,7 +94,7 @@ class DepartamentosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('departamentos_edit', array('idDepartamento' => $departamento->getIddepartamento()));
+            return $this->redirectToRoute('departamentos_show', array('idDepartamento' => $departamento->getIddepartamento()));
         }
 
         return $this->render('departamentos/edit.html.twig', array(

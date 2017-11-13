@@ -50,7 +50,7 @@
                   <td>{{ practica.idEstudiante }}</td>
                   <td>{% if practica.inicioPractica %}{{ practica.inicioPractica|date('Y-m-d') }}{% endif %}</td>
                   <td>{% if practica.fechaFin %}{{ practica.fechaFin|date('Y-m-d') }}{% endif %}</td>
-                  <td>{% if practica.estadoPractica %}Activo{% else %}No{% endif %}</td>
+                  <td>{% if practica.estadoPractica %}Activo{% else %}Inactivo{% endif %}</td>
                   <td>{{ practica.observaciones }}</td>
                   <td>
                     <a href="{{ path('practicas_show', { 'idPractica': practica.idPractica }) }}" class="btn yellow">Ver</a>

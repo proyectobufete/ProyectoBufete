@@ -118,7 +118,7 @@ class PracticasController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('practicas_edit', array('idPractica' => $practica->getIdpractica()));
+            return $this->redirectToRoute('practicas_show', array('idPractica' => $practica->getIdpractica()));
         }
 
         return $this->render('practicas/edit.html.twig', array(
