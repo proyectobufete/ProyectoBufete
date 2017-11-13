@@ -41,7 +41,13 @@
             <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
             <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
             <td>{{ clinica.observaciones }}</td>
-            <td>{{ clinica.estadoClinica }}</td>
+            <td>
+              {% if clinica.estadoClinica == 1 %}
+                Activa
+              {% elseif clinica.estadoClinica == 0 %}
+                Inactiva
+              {% endif %}
+            </td>
               <td>
                   <a href="{{ path('asignacionclinica_listClinicasEstAsesor', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
               </td>
