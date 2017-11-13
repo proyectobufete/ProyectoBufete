@@ -30,7 +30,7 @@ class editarestudianteType extends AbstractType
         ->add('dpiPersona')
         ->add('direccionPersona')
         ->add('emailPersona')
-        ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
+        //->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
         //->add('passPersona')
         ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",

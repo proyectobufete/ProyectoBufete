@@ -56,10 +56,7 @@
             </div>
             <div class="row">
 
-              <div class="col-md-3">
-                {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
-                {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
-              </div>
+
               <div class="col-md-3">
                 {{form_label(edit_form.idBufete,'Bufete')}}
                 {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
@@ -88,7 +85,7 @@
 
 
 
-
+              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
               <button type="submit" name="Create" class="btn green">Guardar</button>
 
 
@@ -99,13 +96,27 @@
 
 
 
-            <a href="{{ path('personas_index') }}">
-              <button type="button" name="cancelar" class="btn grey">Cancelar</button>
-            </a>
+
           </div>
         </div>
       </div>
     {{ form_end(edit_form) }}
+
+
+    <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
+        <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
+        <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+    </form>
+
+
+    {% if is_granted('ROLE_ADMIN') %}    <a href="{{ path('personas_index') }}">
+      <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+    </a>
+    {% elseif is_granted('ROLE_SECRETARIO') %}    <a href="{{ path('personas_index') }}">
+      <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+    </a>
+    {% endif %}
+
     </div>
   </div>
 

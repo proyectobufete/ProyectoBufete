@@ -24,6 +24,11 @@
               </tr>
               <tr>
                 <th>Teléfono</th>
+                <td>{{ persona.dpiPersona }}</td>
+              </tr>
+              <tr>
+              <tr>
+                <th>Teléfono</th>
                 <td>{{ persona.telefonoPersona }}</td>
               </tr>
               <tr>
@@ -53,22 +58,26 @@
           <table>
             <tr>
 
-              {% if persona.role == "ROLE_ESTUDIANTE" %}
-                <a href="{{ path('personas_indexEstudiantes') }}" class="btn grey">Regresar</a>
-              {% elseif persona.role == "ROLE_ASESOR" %}
-                <a href="{{ path('personas_indexAsesores') }}" class="btn grey">Regresar</a>
-              {% endif %}
-            </tr>
-            <tr>
-              {% if persona.role == "ROLE_ESTUDIANTE" %}
-                <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}" class="btn blue">Editar</a>
-              {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR"%}
-                <a href="{{ path('personas_index') }}" class="btn grey">Regresar</a>
-                <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
+
+
+              {% if app.user.role == 'ROLE_SECRETARIO' %}
+                <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
                     <button type="submit" name="buscar" class="btn blue">Editar</button>
                     <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
                 </form>
+                <a href="{{ path('personas_indexAsesores') }}" class="btn grey">Regresar secre</a>
+              {% elseif app.user.role == 'ROLE_ADMIN' %}
+                  <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
+                      <button type="submit" name="buscar" class="btn blue">Editar</button>
+                      <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+                  </form>
+                  <a href="{{ path('personas_index') }}" class="btn grey">Regresar admin</a>
               {% endif %}
+            </tr>
+            <tr>
+
+
+
             </tr>
             <tr>
               {% if persona.role == "ROLE_ESTUDIANTE" %}
