@@ -155,13 +155,35 @@ class PersonasController extends Controller
   {
       $idAsesor = $this->getUser()->getIdPersona();
       $em = $this->getDoctrine()->getManager();
-      $query = $em->createQuery(
-        "SELECT c FROM BufeteBundle:Casos c
-        INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
-        WHERE c.idPersona = :id
-        ORDER BY c.fechaCaso DESC"
-      )->setParameter('id', $idAsesor);
-      $casos = $query->getResult();
+
+      $searchQuery = $request->get('query');
+      $casos = null;
+
+      if (!empty($searchQuery)) {
+        $repo = $em->getRepository("BufeteBundle:Casos");
+        $query = $repo->createQueryBuilder('c')
+        ->innerJoin('BufeteBundle:Civiles', 'ci', 'WITH', 'c.idCaso = ci.idCaso')
+        ->innerJoin('BufeteBundle:Demandantes', 'd', 'WITH', 'c.idDemandante = d.idDemandante')
+        ->innerJoin('BufeteBundle:Estudiantes', 'e', 'WITH', 'e.idEstudiante = c.idEstudiante')
+        ->orWhere('c.noCaso LIKE :param')
+        ->orWhere('d.nombreDemandante LIKE :param')
+        ->orWhere('c.nombreDemandado LIKE :param')
+        ->orWhere('e.carneEstudiante LIKE :param')
+        ->andWhere('c.idPersona = :id')
+        ->setParameter('id', $idAsesor)
+        ->setParameter('param', '%'.$searchQuery.'%')
+        ->orderBy('c.fechaCaso', 'DESC')
+        ->getQuery();
+        $casos = $query->getResult();
+      } else {
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso
+          WHERE c.idPersona = :id
+          ORDER BY c.fechaCaso DESC"
+        )->setParameter('id', $idAsesor);
+        $casos = $query->getResult();
+      }
 
       $paginator = $this->get('knp_paginator');
       $casospg = $paginator->paginate(

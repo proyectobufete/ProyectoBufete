@@ -296,6 +296,7 @@ class CasosController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $caso->setFechaCaso(new \DateTime("now"));
             $tipocaso_repo = $em->getRepository("BufeteBundle:Tipocaso");
             $tipo = $tipocaso_repo->find(2);
             $caso->setIdTipo($tipo);
@@ -362,6 +363,7 @@ class CasosController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            $caso->setFechaCaso(new \DateTime("now"));
             $tipocaso_repo = $em->getRepository("BufeteBundle:Tipocaso");
             $tipo = $tipocaso_repo->find(1);
             $caso->setIdTipo($tipo);
@@ -444,7 +446,7 @@ class CasosController extends Controller
                     $mensaje = "No se puede transferir al mismo estudiante";
                 } else {
                   $caso->setNoCaso($casocivil->getNoCaso());
-                  $caso->setFechaCaso($casocivil->getFechaCaso());
+                  $caso->setFechaCaso(new \DateTime("now"));
                   $caso->setPruebasCaso($casocivil->getPruebasCaso());
                   $caso->setAsignatarioCaso($idasignatario);
                   $caso->setEstadoCaso($casocivil->getEstadoCaso());
@@ -556,7 +558,7 @@ class CasosController extends Controller
                     $mensaje = "No se puede transferir al mismo estudiante";
                 } else {
                   $caso->setNoCaso($casolaboral->getNoCaso());
-                  $caso->setFechaCaso($casolaboral->getFechaCaso());
+                  $caso->setFechaCaso(new \DateTime("now"));
                   $caso->setPruebasCaso($casolaboral->getPruebasCaso());
                   $caso->setAsignatarioCaso($idasignatario);
                   $caso->setEstadoCaso($casolaboral->getEstadoCaso());

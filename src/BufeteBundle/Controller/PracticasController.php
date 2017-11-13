@@ -5,7 +5,7 @@ namespace BufeteBundle\Controller;
 use BufeteBundle\Entity\Practicas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Practica controller.
  *
@@ -45,6 +45,26 @@ class PracticasController extends Controller
         return $this->render('practicas/index.html.twig', array(
             'practicas' => $practicaspg,
         ));
+    }
+
+    public function buscaAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $searchQuery = $request->get('query');
+        $practicas = null;
+
+          $repo = $em->getRepository("BufeteBundle:Practicas");
+          $query = $repo->createQueryBuilder('p')
+          ->where('p.idPractica = :param')
+          ->setParameter('param', $searchQuery)
+          ->getQuery();
+          $practicas = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+          return new JsonResponse($practicas);
+      /*  return $this->render('practicas/busca.html.twig', array(
+            'practicas' => $practicas,
+        ));*/
     }
 
     /**
