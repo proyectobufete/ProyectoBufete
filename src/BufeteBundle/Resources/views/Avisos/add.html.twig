@@ -11,7 +11,7 @@
 
         {{ form_start(form,{'attr':{'role':'form'}}) }}
                     <label style="font-size:20px;"  for="">No. caso</label>
-                    {{form_widget(form.descripcion) }}
+                    {{form_widget(form.descripcion,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
              <a href="{{path('avisos_index')}}" class="btn btn-danger glyphicon glyphicon-arrow-left" onclick="return confirm('¿Está seguro que desea Salir?')"> Salir</a>
           {{ form_end(form) }}
                 {% if av is empty %}
