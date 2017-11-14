@@ -1,5 +1,5 @@
 demandantes_index:
-    path:     /
+    path:     /index
     defaults: { _controller: "BufeteBundle:Demandantes:index" }
     methods:  GET
 
