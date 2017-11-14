@@ -55,6 +55,7 @@ class AvisosController extends Controller
         $buf = $stmt->fetchAll();
 
 
+
         $pdf="prueba.pdf";
 
         $avi = new AvisoNotificacion();
@@ -62,11 +63,12 @@ class AvisosController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted($request))
+        if($form->isSubmitted())
         {
             $bandera=1;
             if($form->isValid())
             {
+
                 $caso = $form['descripcion']->getData();
                 $file = $form['pdf']->getData();
                 $ext = $file->guessExtension();
@@ -79,8 +81,6 @@ class AvisosController extends Controller
                                    p.nombre_persona, t.tipo from casos as c inner join demandantes as d on c.id_demandante=d.id_demandante inner join estudiantes as e on (c.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona=p.id_persona) inner join tipocaso as t on c.id_tipo=t.id_tipo where c.no_caso = '$caso' ";
 
                 $stmt = $db->prepare($query);
-              //  dump($query);
-              //  die();
                 $params = array();
                 $stmt->execute($params);
                 $buf = $stmt->fetchAll();
