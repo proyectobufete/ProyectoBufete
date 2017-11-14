@@ -55,6 +55,7 @@ class AvisosController extends Controller
         $buf = $stmt->fetchAll();
 
 
+
         $pdf="prueba.pdf";
 
         $avi = new AvisoNotificacion();
@@ -67,6 +68,7 @@ class AvisosController extends Controller
             $bandera=1;
             if($form->isValid())
             {
+
                 $caso = $form['descripcion']->getData();
                 $file = $form['pdf']->getData();
                 $ext = $file->guessExtension();

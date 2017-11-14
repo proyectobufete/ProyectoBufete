@@ -3,15 +3,23 @@
 
 
 {% block body %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    {% if error|length > 0 %}
+    <div class="alert alert-danger display-hide">
+      <button class="close" data-close="alert"></button>
+      <span>
+      Datos erróneos. Por favor, inténtelo otra vez. </span>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<div class="row">
+<div class="col-md-5 push-md-1">
+
 <form class="login-form" action="{{path("login_check")}}" method="post">
   <h3 class="form-title">Ingresar</h3>
-  {% if error|length > 0 %}
-  <div class="alert alert-danger display-hide">
-    <button class="close" data-close="alert"></button>
-    <span>
-    El nombre de usuario o contraseña no son correctos </span>
-  </div>
-  {% endif %}
+
   <div class="form-group">
     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
     <label class="control-label visible-ie8 visible-ie9">Nombre de Usuario</label>
@@ -26,4 +34,13 @@
     <input type="hidden" name="_target_path" value="/home" />
   </div>
 </form>
+</div>
+<div class="col-md-5 push-md-1">
+  <div class="logo">
+  	<a href="#">
+    <img src="{{asset('asst/img/logo3.jpeg')}}" width="400em" height="200em" alt="logo">
+  	</a>
+  </div>
+</div>
+</div>
 {% endblock %}
