@@ -1,6 +1,4 @@
 {% extends "layout.html.twig" %}
-
-
 {% block title %}
                 <h2 class="title">Creando Aviso</h2>
 {% endblock %}
@@ -9,17 +7,13 @@
 <div class="portlet-body">
 <div class="row">
 
-
-
 <div class="col-lg-12">
 
-          {{form_start(form)}}
+        {{ form_start(form,{'attr':{'role':'form'}}) }}
                     <label style="font-size:20px;"  for="">No. caso</label>
-                    {{form_widget(form.descripcion,{'attr':{'data-live-search' :'true',  'class' : 'selectpicker form-control'},'placeholder':'Ninguno seleccionado', 'required':'true'}) }}
-                    {{form_end(form)}}
+                    {{form_widget(form.descripcion) }}
              <a href="{{path('avisos_index')}}" class="btn btn-danger glyphicon glyphicon-arrow-left" onclick="return confirm('¿Está seguro que desea Salir?')"> Salir</a>
-
-
+          {{ form_end(form) }}
                 {% if av is empty %}
                     <hr/>
                     <p class="text-center alert alert-danger">¡Error! El caso no existe</p>
