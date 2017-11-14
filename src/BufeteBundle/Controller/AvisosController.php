@@ -62,7 +62,7 @@ class AvisosController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted($request))
+        if($form->isSubmitted())
         {
             $bandera=1;
             if($form->isValid())
