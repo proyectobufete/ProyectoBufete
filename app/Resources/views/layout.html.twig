@@ -116,17 +116,14 @@
                     </li>
                     <li class="has-submenu {% block act28 %}{% endblock %}"><a href="#"><i class="glyphicon glyphicon-bell"></i> <span class="nav-label">Notificaciones</span></a>
                         <ul class="list-unstyled">
-                            <li class="has-submenu"><a href="{{path("avisos_index")}}"><i class="glyphicon glyphicon-bell"></i><span class="nav-label">Ver</span></a>
+                            <li class=""><a href="{{path("avisos_index")}}"><i class="glyphicon glyphicon-bell"></i><span class="nav-label">Ver</span></a></li>
                             <li class=""><a href="{{path("avisos_buscar")}}"><i class="glyphicon glyphicon-plus"></i>Crear</a></li>
-                        <ul class="list-unstyled">
                             <li class=""><a href="{{path("avisos_indexbuscar")}}"><i class=""></i>Estudiante</a></li>
                             <li class=""><a href="{{path("avisos_casobuscar")}}"><i class=""></i>Caso</a></li>
                             <li class=""><a href="{{path("avisos_fechabuscar")}}"><i class=""></i>Fecha</a></li>
                             <li class=""><a href="{{path("avisos_dembuscar")}}"><i class=""></i>Demandante</a></li>
                             <li class=""><a href="{{path("avisos_demandadobuscar")}}"><i class=""></i>Demandado</a></li>
-                        </ul>
-                   </li>
-                        </ul>
+                          </ul>
                     </li>
                   {% endif %}
                   {% if is_granted('ROLE_ESTUDIANTE')%}
