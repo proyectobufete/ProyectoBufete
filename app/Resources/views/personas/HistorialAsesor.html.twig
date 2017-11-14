@@ -56,7 +56,23 @@
                                 {{ caso.idEstudiante.idPersona.nombrePersona }}
                               {% endif %}
                           </td>
-                          <td>{{ caso.estadoCaso }}</td>
+                          <td>
+                            {% if caso.estadoCaso == 1 %}
+                             No asignado
+                            {% endif %}
+                            {% if caso.estadoCaso == 2 %}
+                             Asignado
+                            {% endif %}
+                            {% if caso.estadoCaso == 3 %}
+                             Descargado
+                            {% endif %}
+                            {% if caso.estadoCaso == 4 %}
+                             Fenecido
+                            {% endif %}
+                            {% if caso.estadoCaso == 5 %}
+                             Transferido
+                            {% endif %}
+                          </td>
                           <td>
                             <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
                                 <button type="submit" name="buscar" class="btn yellow">Ver</button>
@@ -124,7 +140,23 @@
                              {{ caso.idEstudiante.idPersona.nombrePersona }}
                            {% endif %}
                        </td>
-                       <td>{{ caso.estadoCaso }}</td>
+                       <td>
+                         {% if caso.estadoCaso == 1 %}
+                          No asignado
+                         {% endif %}
+                         {% if caso.estadoCaso == 2 %}
+                          Asignado
+                         {% endif %}
+                         {% if caso.estadoCaso == 3 %}
+                          Descargado
+                         {% endif %}
+                         {% if caso.estadoCaso == 4 %}
+                          Fenecido
+                         {% endif %}
+                         {% if caso.estadoCaso == 5 %}
+                          Transferido
+                         {% endif %}
+                       </td>
                        <td>
                          <form method="post" action="{{ path('casos_showlaboral')}}" class="form-inline" role="search">
                              <button type="submit" name="buscar" class="btn yellow">Ver</button>
@@ -185,7 +217,14 @@
                       <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
                       <td>{{ clinica.idPersona }}</td>
                       <td>{{ clinica.observaciones }}</td>
-                      <td>{{ clinica.estadoClinica }}</td>
+                      <td>
+                        {% if clinica.estadoClinica == 1 %}
+                          Activo
+                        {% endif %}
+                        {% if clinica.estadoClinica == 0 %}
+                          Inactivo
+                        {% endif %}
+                      </td>
                         <td>
 
                               <a href="{{ path('asignacionclinica_listEstudiantes', { 'idAsignacion': clinica.idClinica }) }}" class="btn yellow" >Listado</a>
