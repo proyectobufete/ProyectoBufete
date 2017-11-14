@@ -79,8 +79,6 @@ class AvisosController extends Controller
                                    p.nombre_persona, t.tipo from casos as c inner join demandantes as d on c.id_demandante=d.id_demandante inner join estudiantes as e on (c.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona=p.id_persona) inner join tipocaso as t on c.id_tipo=t.id_tipo where c.no_caso = '$caso' ";
 
                 $stmt = $db->prepare($query);
-              //  dump($query);
-              //  die();
                 $params = array();
                 $stmt->execute($params);
                 $buf = $stmt->fetchAll();
@@ -92,7 +90,7 @@ class AvisosController extends Controller
             {
                 $status = "La Entrada no se ha creado porque el formulario no es válido";
             }
-            $this->session->getFlashBag()->add("status", $status);
+            //$this->session->getFlashBag()->add("status", $status);
             return $this->redirectToRoute("avisos_index");
         }
             return $this->render("BufeteBundle:Avisos:add.html.twig", array(
@@ -176,7 +174,7 @@ class AvisosController extends Controller
 		$status ="Error al añadir el Aviso!!";
 	    }
 
-        $this->session->getFlashBag()->add("status", $status);
+        //$this->session->getFlashBag()->add("status", $status);
 
         $db = $em->getConnection();
         $query = "SELECT id_aviso, c.no_caso, p.nombre_persona, d.nombre_demandante, fecha_visita, hora_visita, vista, descripcion, t.tipo, c.nombre_demandado from aviso_notificacion as a inner join casos as c on (a.id_caso=c.id_caso) inner join tipocaso as t on (c.id_tipo=t.id_tipo) inner join demandantes as d on a.id_demandante=d.id_demandante inner join estudiantes as e on (a.id_estudiante=e.id_estudiante) inner join personas as p on (e.id_persona=p.id_persona) where c.id_caso=$idcaso";
