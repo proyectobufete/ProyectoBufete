@@ -64,7 +64,7 @@
                 <td>{{ persona.idBufete }}</td>
                   <td>
                     <form method="post" action="{{ path('personas_perfil')}}" class="form-inline" role="search">
-                        <button type="submit" name="buscar" class="btn yellow">Ver</button>
+                        <button type="submit" name="buscar" class="btn blue">Ver</button>
                         <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
                     </form>
                     <a href="{{ path('personas_HistorialAsesor', { 'id': persona.idPersona })}}" class="btn yellow">Historial</a>
