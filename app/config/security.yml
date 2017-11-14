@@ -52,7 +52,36 @@ security:
         - { path: ^/tipoasunto, roles: ROLE_SECRETARIO}
         - { path: ^/tipopracticante, roles: ROLE_SECRETARIO}
         - { path: ^/practicas, roles: ROLE_SECRETARIO}
-        - { path: ^/demandantes, roles: ROLE_SECRETARIO}
+
+        - { path: ^/avisos/avisos, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/busqueda, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/busquedacaso, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/busquedafecha, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/busquedademandante, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/busquedademandado, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/add/([0-9]+)/([0-9]+)/([0-9]+)/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/edit/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/buscar, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/pdf, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/pdfest/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/pdfcaso/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/pdfec/([0-9]+)/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/pdfdema/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/pdfdemdo/([0-9]+), roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/bus, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/redirection, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/sendMail, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/probar, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/javas, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/form, roles: ROLE_SECRETARIO}
+        - { path: ^/avisos/avisos/del/([0-9]+), roles: ROLE_SECRETARIO}
+
+        - { path: ^/demandantes/index, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/newdemandante, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/([0-9]+)/show, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/([0-9]+)/editar, roles: ROLE_SECRETARIO}
+
+        - { path: ^/demandantes/new, roles: ROLE_ADMIN}
 
         - { path: ^/casos/civiles, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/casos/newcivil, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}

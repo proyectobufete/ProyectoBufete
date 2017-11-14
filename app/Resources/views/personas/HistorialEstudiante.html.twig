@@ -55,7 +55,23 @@
                                 {{ caso.idEstudiante.idPersona.nombrePersona }}
                               {% endif %}
                           </td>
-                          <td>{{ caso.estadoCaso }}</td>
+                          <td>
+                            {% if caso.estadoCaso == 1 %}
+                             No asignado
+                            {% endif %}
+                            {% if caso.estadoCaso == 2 %}
+                             Asignado
+                            {% endif %}
+                            {% if caso.estadoCaso == 3 %}
+                             Descargado
+                            {% endif %}
+                            {% if caso.estadoCaso == 4 %}
+                             Fenecido
+                            {% endif %}
+                            {% if caso.estadoCaso == 5 %}
+                             Transferido
+                            {% endif %}
+                          </td>
                           <tr>
                             {% set idcasoEstudiante = caso.idEstudiante.idEstudiante %}
                           </tr>
@@ -129,7 +145,23 @@
                              {{ caso.idEstudiante.idPersona.nombrePersona }}
                            {% endif %}
                        </td>
-                       <td>{{ caso.estadoCaso }}</td>
+                       <td>
+                         {% if caso.estadoCaso == 1 %}
+                          No asignado
+                         {% endif %}
+                         {% if caso.estadoCaso == 2 %}
+                          Asignado
+                         {% endif %}
+                         {% if caso.estadoCaso == 3 %}
+                          Descargado
+                         {% endif %}
+                         {% if caso.estadoCaso == 4 %}
+                          Fenecido
+                         {% endif %}
+                         {% if caso.estadoCaso == 5 %}
+                          Transferido
+                         {% endif %}
+                       </td>
                        <td>{{ caso.estadoCaso }}</td>
                        <tr>
                          {% set idcasoEstudiante = caso.idEstudiante.idEstudiante %}
@@ -198,7 +230,7 @@
                         <td>{{asignacionclinica.idClinica.idPersona}}</td>
                         <td>{{ asignacionclinica.observacionesClinica }}</td>
                         <td>{{ asignacionclinica.notaClinica }}</td>
-                        <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+                        <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}Inactivo{% endif %}</td>
                     </tr>
                     <tr>
 

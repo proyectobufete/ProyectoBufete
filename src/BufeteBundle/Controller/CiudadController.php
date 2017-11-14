@@ -20,7 +20,7 @@ class CiudadController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $searchQuery = $request->get('query');
-        $ciudads = null;
+        $ciudads1 = null;
         if (!empty($searchQuery)) {
           $repo = $em->getRepository("BufeteBundle:Ciudad");
           $query = $repo->createQueryBuilder('c')
@@ -29,10 +29,14 @@ class CiudadController extends Controller
           ->orWhere('d.departamento LIKE :param')
           ->setParameter('param', '%'.$searchQuery.'%')
           ->getQuery();
-          $ciudads = $query->getResult();
+          $ciudads1 = $query->getResult();
         } else {
-          $ciudads = $em->getRepository('BufeteBundle:Ciudad')->findAll();
+          $ciudads1 = $em->getRepository('BufeteBundle:Ciudad')->findAll();
         }
+              $paginator = $this->get('knp_paginator');
+              $ciudads = $paginator->paginate(
+                  $ciudads1,
+                  $request->query->getInt('page', 1), 5 );
 
         return $this->render('ciudad/index.html.twig', array(
             'ciudads' => $ciudads,
@@ -90,7 +94,7 @@ class CiudadController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ciudad_edit', array('idCiudad' => $ciudad->getIdciudad()));
+            return $this->redirectToRoute('ciudad_show', array('idCiudad' => $ciudad->getIdciudad()));
         }
 
         return $this->render('ciudad/edit.html.twig', array(

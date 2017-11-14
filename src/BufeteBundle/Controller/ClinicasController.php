@@ -66,8 +66,13 @@ class ClinicasController extends Controller
 
           }
 
+          $paginator = $this->get('knp_paginator');
+          $clinicaspg = $paginator->paginate(
+              $clinicas,
+              $request->query->getInt('page', 1), 10 );
+
         return $this->render('clinicas/index.html.twig', array(
-            'clinicas' => $clinicas,
+            'clinicas' => $clinicaspg,
         ));
     }
 
@@ -124,7 +129,7 @@ class ClinicasController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('clinicas_edit', array('idClinica' => $clinica->getIdclinica()));
+            return $this->redirectToRoute('clinicas_show', array('idClinica' => $clinica->getIdclinica()));
         }
 
         return $this->render('clinicas/edit.html.twig', array(

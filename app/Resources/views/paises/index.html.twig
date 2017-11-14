@@ -53,7 +53,7 @@
                 <tr>
                   <td>{{ paise.pais }}</td>
                   <td>
-                    {% if paise.estadoPais %}Activo{% else %}No{% endif %}
+                    {% if paise.estadoPais %}Activo{% else %}Inactivo{% endif %}
                   </td>
                   <td>
                     <a href="{{ path('paises_show', { 'idPais': paise.idPais }) }}" class="btn yellow">Ver</a>
@@ -64,6 +64,9 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="pagination m-b-5">
+          {{ knp_pagination_render(paises) }}
       </div>
     </div>
   </div>

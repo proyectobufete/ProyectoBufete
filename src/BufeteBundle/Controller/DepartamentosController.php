@@ -33,8 +33,13 @@ class DepartamentosController extends Controller
           $departamentos = $em->getRepository('BufeteBundle:Departamentos')->findAll();
         }
 
+        $paginator = $this->get('knp_paginator');
+        $departamentospg = $paginator->paginate(
+            $departamentos,
+            $request->query->getInt('page', 1), 5 );
+
         return $this->render('departamentos/index.html.twig', array(
-            'departamentos' => $departamentos,
+            'departamentos' => $departamentospg,
         ));
     }
 
@@ -89,7 +94,7 @@ class DepartamentosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('departamentos_edit', array('idDepartamento' => $departamento->getIddepartamento()));
+            return $this->redirectToRoute('departamentos_show', array('idDepartamento' => $departamento->getIddepartamento()));
         }
 
         return $this->render('departamentos/edit.html.twig', array(

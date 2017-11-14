@@ -21,10 +21,10 @@ class CasocivilType extends AbstractType
         $this->idciudad = $options['idciudad'];
         $builder
         ->add('noCaso')
-        ->add('fechaCaso', DateType::class, array(
+        /*->add('fechaCaso', DateType::class, array(
           "data" => new \DateTime("now"),
           'widget' => 'single_text'
-        ))
+        ))*/
         ->add('pruebasCaso')
         //->add('asignatarioCaso')
         ->add('estadoCaso', ChoiceType::class,array(
@@ -34,6 +34,7 @@ class CasocivilType extends AbstractType
             "En tramite" => 2,
             "Descargado" => 3,
             "Fenecido" => 4,
+            "Transferido" => 5,
           )
         ))
         ->add('nombreDemandado')

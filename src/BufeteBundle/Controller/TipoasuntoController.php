@@ -33,8 +33,13 @@ class TipoasuntoController extends Controller
            $tipoasuntos = $em->getRepository('BufeteBundle:Tipoasunto')->findAll();
          }
 
+         $paginator = $this->get('knp_paginator');
+         $tipoasuntospg = $paginator->paginate(
+             $tipoasuntos,
+             $request->query->getInt('page', 1), 10 );
+
          return $this->render('tipoasunto/index.html.twig', array(
-             'tipoasuntos' => $tipoasuntos,
+             'tipoasuntos' => $tipoasuntospg,
          ));
      }
 
@@ -89,7 +94,7 @@ class TipoasuntoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tipoasunto_edit', array('idTipoasunto' => $tipoasunto->getIdtipoasunto()));
+            return $this->redirectToRoute('tipoasunto_show', array('idTipoasunto' => $tipoasunto->getIdtipoasunto()));
         }
 
         return $this->render('tipoasunto/edit.html.twig', array(

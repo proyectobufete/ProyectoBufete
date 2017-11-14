@@ -38,7 +38,7 @@
                   </div>
               </div>
             </div>
-
+  
 
             <div class="row">
               <div class="form-group ">
@@ -56,21 +56,18 @@
         <div class="form-actions">
           <div class="row">
             <div class="col-md-offset-4 col-md-9">
-              <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
-              <button type="submit" name="Create" class="btn green">Editar</button>
-
-
-
+              <div class="col-md-1">
+                <input type="hidden" name="idRevision" value="{{revisione.idRevision}}"/>
+                <button type="submit" name="Create" class="btn green">Editar</button>
+              </div>
+        {{ form_end(edit_form) }}
+        <form method="post" action="{{ path('revisiones_indexLinkCaso') }}" class="form-inline" role="search">
+            <button type="submit" name="buscar" class="btn grey">Cancelar</button>
+            <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
+        </form>
             </div>
           </div>
         </div>
-        {{ form_end(edit_form) }}
-
-        <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-            <button type="submit" name="buscar" class="button button1 ">Entregas del Caso</button>
-            <input type="hidden" name="idCaso" value="{{revisione.idCaso}}"/>
-        </form>
-
       </div>
     </div>
 {% endblock %}

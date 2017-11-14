@@ -7,10 +7,10 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-        <meta name="author" content="Coderthemes">
+        <meta name="description" content="Sistema de gestion de casos para el Bufete Popular adscrito al Centro Universitario de Occidente">
+        <meta name="author" content="Jimmy Barrios, Pablo Cifuentes, Adder Orozco, Fernando Reyes">
         <link href="{{asset('asst/style.css')}}" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" href="img/favicon_1.ico">
+      <!--  <link rel="shortcut icon" href="img/favicon_1.ico">-->
 
         <title>Bufete Popular </title>
         <link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css')}} " />
@@ -52,8 +52,8 @@
 
             <!-- brand -->
             <div class="logo">
-                <a href="index.html" class="logo-expanded">
-                    <img src="{{asset('asst/img/logo3.jpeg')}}" width="200px" height="80px" alt="logo">
+                <a href="{{path("bufete_homepage")}}" class="logo-expanded">
+                    <img src="{{asset('asst/img/logo2.png')}}" width="175em" height="80em" alt="logo">
                     <span class="nav-label"></span>
                 </a>
             </div>
@@ -82,7 +82,6 @@
                     </li>
                     <li class="has-submenu  {% block act12 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Practicas</span></a>
                         <ul class="list-unstyled">
-                          <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
                           <li class="{% block ac28 %}{% endblock %}"><a href="{{path("practicas_index")}}">Prácticas</a></li>
                         </ul>
                     </li>
@@ -112,21 +111,19 @@
                             {% endif %}
                             <li class="{% block ac7 %}{% endblock %}"><a href="{{path("estadosciviles_index")}}">Estado Civil</a></li>
                             <li class="{% block ac23 %}{% endblock %}"><a href="{{path("tipoasunto_index")}}">Asunto</a></li>
+                            <li class="{% block ac24 %}{% endblock %}"><a href="{{path("tipoparcticante_index")}}">Tipo de Prácticas</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu {% block act28 %}{% endblock %}"><a href="#"><i class="glyphicon glyphicon-bell"></i> <span class="nav-label">Notificaciones</span></a>
                         <ul class="list-unstyled">
-                            <li class="has-submenu"><a href="{{path("avisos_index")}}"><i class="glyphicon glyphicon-bell"></i><span class="nav-label">Ver</span></a>
+                            <li class=""><a href="{{path("avisos_index")}}"><i class="glyphicon glyphicon-bell"></i><span class="nav-label">Ver</span></a></li>
                             <li class=""><a href="{{path("avisos_buscar")}}"><i class="glyphicon glyphicon-plus"></i>Crear</a></li>
-                        <ul class="list-unstyled">
                             <li class=""><a href="{{path("avisos_indexbuscar")}}"><i class=""></i>Estudiante</a></li>
                             <li class=""><a href="{{path("avisos_casobuscar")}}"><i class=""></i>Caso</a></li>
                             <li class=""><a href="{{path("avisos_fechabuscar")}}"><i class=""></i>Fecha</a></li>
                             <li class=""><a href="{{path("avisos_dembuscar")}}"><i class=""></i>Demandante</a></li>
                             <li class=""><a href="{{path("avisos_demandadobuscar")}}"><i class=""></i>Demandado</a></li>
-                        </ul>
-                   </li>
-                        </ul>
+                          </ul>
                     </li>
                   {% endif %}
                   {% if is_granted('ROLE_ESTUDIANTE')%}

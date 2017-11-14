@@ -55,8 +55,13 @@ class DemandantesController extends Controller
           }
         }
 
+        $paginator = $this->get('knp_paginator');
+        $demandantespg = $paginator->paginate(
+            $demandantes,
+            $request->query->getInt('page', 1), 10 );
+
         return $this->render('demandantes/index.html.twig', array(
-            'demandantes' => $demandantes,
+            'demandantes' => $demandantespg,
         ));
     }
 
@@ -139,7 +144,7 @@ class DemandantesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('demandantes_edit', array('idDemandante' => $demandante->getIddemandante()));
+            return $this->redirectToRoute('demandantes_show', array('idDemandante' => $demandante->getIddemandante()));
         }
 
         return $this->render('demandantes/edit.html.twig', array(
@@ -162,7 +167,7 @@ class DemandantesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('demandantesecre_edit', array('idDemandante' => $demandante->getIddemandante()));
+            return $this->redirectToRoute('demandantes_show', array('idDemandante' => $demandante->getIddemandante()));
         }
 
         return $this->render('demandantes/editdemandante.html.twig', array(

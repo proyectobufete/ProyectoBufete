@@ -41,11 +41,11 @@
 
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.telefonoPersona,'Teléfono 1')}}
                 {{form_widget(edit_form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.tel2Persona,'Teléfono 2')}}
                 {{form_widget(edit_form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
               </div>
@@ -70,10 +70,7 @@
 
             </div>
             <div class="row">
-              <div class="col-md-3">
-                {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
-                {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
-              </div>
+
               <div class="col-md-3">
                 {{form_label(edit_form.estadoPersona,'Estado')}}
                 {{form_widget(edit_form.estadoPersona) }}
@@ -87,7 +84,7 @@
             </div>
 <br>
             <div class="row">
-              <div class="col-md-6 col-md-offset-3">
+              <div class="col-md-6 col-md-offset-2">
                 <label for="">
                   <h4>
                     <b>Datos Académicos</b>
@@ -118,29 +115,32 @@
         </div>
         </div>
         <div class="form-actions">
+          <div class="col-md-offset-3 col-md-9">
           <div class="row">
-            <div class="col-md-offset-3 col-md-9">
-
-
-
-
+              <div class="col-md-1">
               <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
-              <button type="submit" name="Create" class="btn green">Editar</button>
-
-
-
-
-              {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
-              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-
-
-              <a href="{{ path('personas_indexEstudiantes') }}">
-                <button type="button" name="cancelar" class="btn default">Cancelar</button>
-              </a>
-            </div>
-          </div>
-        </div>
+              <button type="submit" name="Create" class="btn green">Guardar</button>
+              </div>
+              <div class="col-md-1">
+                <a href="{{ path('personas_indexEstudiantes') }}">
+                  <button type="button" name="cancelar" class="btn default">Cancelar</button>
+                </a>
+              </div>
+              <div class="col-md-2">
+                {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
+                <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+              </div>
+                </div>
         {{ form_end(edit_form) }}
+        <div class="">
+          <form method="post" action="{{ path('personas_edituserAdmin')}}"  class="form-inline" role="search">
+            <button type="submit" name="buscar" class="btn yellow w-xs m-b-5">Cambiar Usuario</button>
+            <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+          </form>
+        </div>
+
+      </div>
+  </div>
       </div>
     </div>
 

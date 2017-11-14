@@ -1,0 +1,91 @@
+{% extends 'layout.html.twig' %}
+{% block act5 %} active {% endblock %}
+{% block ac12 %} active {% endblock %}
+      {% block title %}
+        <h1>Editar Usuario</h1>
+      {% endblock %}
+
+{% block body %}
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(edit_form, {'enctype':'multipart/form-data'}) }}
+        <div class="form-body colorform">
+
+          <div class="col-md-offset-3">
+
+
+            {% for message in app.session.flashbag().get('status') %}
+              <div class="alert alert-danger text-center">
+                <strong>¡Error! </strong>{{message}}
+              </div>
+            {% endfor %}
+
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
+                {{form_widget(edit_form.usuarioPersona,{'attr':{'write':'readonly','class' : 'form-control'}}) }}
+              </div>
+
+              <div class="col-md-3">
+
+              </div>
+              <br>
+
+            </div>
+
+
+<br>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <label for="">
+                  <h4>
+
+                  </h4>
+                </label>
+              </div>
+            </div>
+
+
+        </div>
+
+
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <div class="col-md-1">
+                <input type="hidden" name="idPersona2" value="{{persona.idPersona}}"/>
+                <button type="submit" name="Create" class="btn green">Guardar</button>
+              </div>
+        {{ form_end(edit_form) }}
+
+        {% if app.user.role == 'ROLE_SECRETARIO' %}
+
+          <form method="post" action="{{ path('personas_editPersonal')}}" class="form-inline" role="search">
+              <button type="submit" name="buscar" class="btn grey">Cancelar</button>
+              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+          </form>
+
+        {% elseif app.user.role =='ROLE_ADMIN' %}
+
+        <form method="post" action="{{ path('personas_editPersona')}}" class="form-inline" role="search">
+            <button type="submit" name="buscar" class="btn grey">Cancelar</button>
+            <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+        </form>
+
+        {% elseif app.user.role =='ROLE_ESTUDIANTE' %}
+
+        <form method="post" action="{{ path('personas_editEstudiante')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="btn gray">Cancelar Estudiante</button>
+          <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+        </form>
+
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+
+{% endblock %}

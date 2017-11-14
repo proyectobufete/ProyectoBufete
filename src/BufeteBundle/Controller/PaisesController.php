@@ -16,14 +16,19 @@ class PaisesController extends Controller
      * Lists all paise entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $paises = $em->getRepository('BufeteBundle:Paises')->findAll();
 
+        $paginator = $this->get('knp_paginator');
+        $paisespg = $paginator->paginate(
+            $paises,
+            $request->query->getInt('page', 1), 5 );
+
         return $this->render('paises/index.html.twig', array(
-            'paises' => $paises,
+            'paises' => $paisespg,
         ));
     }
 
@@ -78,7 +83,7 @@ class PaisesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('paises_edit', array('idPais' => $paise->getIdpais()));
+            return $this->redirectToRoute('paises_show', array('idPais' => $paise->getIdpais()));
         }
 
         return $this->render('paises/edit.html.twig', array(

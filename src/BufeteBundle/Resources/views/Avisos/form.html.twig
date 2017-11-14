@@ -1,5 +1,6 @@
 {% extends "layout.html.twig" %}
 
+{% block act28 %} active {% endblock %}
 
 {% block title %}
                 <h2 class="title">Buscando</h2>
@@ -19,7 +20,7 @@
 <select name = "bus" id="bus" method="POST" class="selectpicker" data-live-search="true">
 <option value="" selected>SELECCIONE UN ESTUDIANTE</option>
   {% for aviso in av %}
-                <option value="{{aviso.nombre_persona}}" class="btn">{{aviso.nombre_persona}}</option>
+                <option value="{{aviso.carne_estudiante}}" class="btn">{{aviso.carne_estudiante}}</option>
             {% endfor %}
 </select>
 <input title="Clic para buscar" type="submit" value="Buscar" class="btn btn-success">
@@ -95,6 +96,6 @@
 {% endif %}
 
      </div>
-     </div>  
+     </div>
 </div>
 {% endblock %}

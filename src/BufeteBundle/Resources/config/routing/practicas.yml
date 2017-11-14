@@ -22,3 +22,8 @@ practicas_delete:
     path:     /{idPractica}/delete
     defaults: { _controller: "BufeteBundle:Practicas:delete" }
     methods:  DELETE
+
+practicas_busca:
+    path:     /busca
+    defaults: { _controller: "BufeteBundle:Practicas:busca" }
+    methods:  GET

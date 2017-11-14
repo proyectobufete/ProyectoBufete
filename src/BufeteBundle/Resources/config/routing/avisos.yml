@@ -92,3 +92,59 @@ avisos_prueba1:
 avisos_eliminar:
     path: /avisos/del/{id}
     defaults: {_controller: BufeteBundle:Avisos:eliminar}
+
+avisos_obEstu:
+    path: /estudiante/{id}
+    defaults: {_controller: BufeteBundle:Avisos:obtenerEstu}
+
+avisos_valEstudiante:
+    path: /validacionEstudiante/{carne}
+    defaults: {_controller: BufeteBundle:Avisos:valEstudiante}
+
+avisos_casosEstudiante:
+    path: /casos/{id_estudiante}
+    defaults: {_controller: BufeteBundle:Avisos:casosEstudiante}
+
+avisos_notifEstudiante:
+    path: /notificacionesEstudiante/{id_estudiante}
+    defaults: {_controller: BufeteBundle:Avisos:notifEstudiante}
+
+avisos_notifVistasEstudiante:
+    path: /notificacionesVistasEstudiante/{id_estudiante}
+    defaults: {_controller: BufeteBundle:Avisos:notifVistasEstudiante}
+
+avisos_notifNoVistasEstudiante:
+    path: /notificacionesNoVistasEstudiante/{id_estudiante}
+    defaults: {_controller: BufeteBundle:Avisos:notifNoVistasEstudiante}
+
+avisos_detalleNotifEstudiante:
+    path: /detalleNotificacion/{id}
+    defaults: {_controller: BufeteBundle:Avisos:detalleNotifEstudiante}
+
+avisos_detalleCaso:
+    path: /detalleCaso/{id}
+    defaults: {_controller: BufeteBundle:Avisos:detalleCaso}
+
+avisos_actualizaNotificacion:
+    path: /cambiarNotificacionVista/{id}
+    defaults: {_controller: BufeteBundle:Avisos:actualizaNotificacion}
+
+avisos_asesor:
+    path: /asesor/{id}
+    defaults: {_controller: BufeteBundle:Avisos:asesor}
+
+avisos_valAsesor:
+    path: /validacionAsesor/{usuario}
+    defaults: {_controller: BufeteBundle:Avisos:valAsesor}
+
+avisos_casosAsesor:
+    path: /listaCasosAsesor/{id_persona}
+    defaults: {_controller: BufeteBundle:Avisos:casosAsesor}
+
+avisos_estusAsesor:
+    path: /listaEstudiantesAsesor/{id_persona}
+    defaults: {_controller: BufeteBundle:Avisos:estusAsesor}
+
+avisos_notifAsesor:
+    path: /notificacionesAsesor/{id_persona}
+    defaults: {_controller: BufeteBundle:Avisos:notifAsesor}

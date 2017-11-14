@@ -12,9 +12,9 @@
         {{ form_start(form, {'enctype':'multipart/form-data'}) }}
 
         <div class="form-body colorform">
-          <div class="col-md-offset-2">
+          <div class="col-md-offset-3">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(form.nombrePersona,'Nombre')}}
                 {{form_errors(form) }}
                 {{form_widget(form.nombrePersona,{'attr':{ 'class' : 'form-control'}}) }}
@@ -22,45 +22,51 @@
 
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                   {{form_label(form.telefonoPersona,'Teléfono')}}
                   {{form_errors(form) }}
                   {{form_widget(form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                   {{form_label(form.tel2Persona,'Teléfono')}}
                   {{form_widget(form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.dpiPersona,'DPI')}}
                 {{form_widget(form.dpiPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.emailPersona,'Correo Electrónico')}}
                 {{form_widget(form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(form.direccionPersona,'Dirección')}}
                 {{form_widget(form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
 
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.usuarioPersona,'Nombre de Usuario')}}
                 {{form_widget(form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.passPersona,'Contraseña')}}
                 {{form_widget(form.passPersona,{'attr':{'readonly':'readonly','class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-5">
+                {{form_label(form.foto,'Foto de perfil')}}
+                {{form_widget(form.foto) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
                 {{form_label(form.idBufete,'Bufete')}}
                 {{form_widget(form.idBufete,{'attr':{'class' : 'form-control'}}) }}
               </div>
@@ -83,7 +89,7 @@
         </div>
         <div class="form-actions">
           <div class="row">
-            <div class="col-md-offset-2 col-md-9">
+            <div class="col-md-offset-3 col-md-9">
               <button type="submit" name="Create" class="btn green">Crear</button>
               <a href="{{ path('personas_index') }}"><button type="button" name="cancelar" class="btn grey">Cancelar</button></a>
             </div>

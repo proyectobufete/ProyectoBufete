@@ -2,7 +2,7 @@
 {% block act5 %} active {% endblock %}
 {% block ac29 %} active {% endblock %}
       {% block title %}
-        <h1>Editar usuario</h1>
+        <h1>Editar uasuario</h1>
       {% endblock %}
 
 {% block body %}
@@ -11,9 +11,9 @@
       <div id="form_sample_1" class="form-horizontal" >
         {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
         <div class="form-body colorform">
-          <div class="col-md-offset-2">
+          <div class="col-md-offset-3">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {% for message in app.session.flashbag().get('status') %}
                   <div class="alert alert-danger text-center">
                     <strong>¡Error! </strong>{{message}}
@@ -22,60 +22,64 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(edit_form.nombrePersona,'Nombre')}}
                 {{form_widget(edit_form.nombrePersona,{'attr':{ 'class' : 'form-control'}}) }}
               </div>
 
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                   {{form_label(edit_form.telefonoPersona,'Teléfono')}}
                   {{form_widget(edit_form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                   {{form_label(edit_form.tel2Persona,'Teléfono')}}
                   {{form_widget(edit_form.tel2Persona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.dpiPersona,'DPI')}}
                 {{form_widget(edit_form.dpiPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(edit_form.emailPersona,'Correo Electrónico')}}
                 {{form_widget(edit_form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 {{form_label(edit_form.direccionPersona,'Dirección')}}
                 {{form_widget(edit_form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
 
-              <div class="col-md-2">
-                {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
-                {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-              <div class="col-md-2">
+
+              <div class="col-md-3">
                 {{form_label(edit_form.idBufete,'Bufete')}}
                 {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
 
                 {{form_widget(edit_form.role)}}
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="">
                   {{form_label(edit_form.estadoPersona,'Estado')}}
                   {{form_widget(edit_form.estadoPersona)}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="">
+                  {{form_widget(edit_form.idPersona,{'attr':{'class' : 'form-control'},'type' : 'hidden'}) }}
                 </div>
               </div>
             </div>
@@ -84,29 +88,35 @@
 
       <div class="form-actions">
         <div class="row">
-          <div class="col-md-offset-2 col-md-9">
-
-
-
-
+          <div class="col-md-offset-3 col-md-9">
+            <div class="col-md-1">
+              <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
               <button type="submit" name="Create" class="btn green">Guardar</button>
+            </div>
+              <div class="col-md-1">
+                {% if is_granted('ROLE_ADMIN') %}    <a href="{{ path('personas_index') }}">
+                  <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+                </a>
+                {% elseif is_granted('ROLE_SECRETARIO') %}    <a href="{{ path('personas_index') }}">
+                  <button type="button" name="cancelar" class="btn grey">Cancelar</button>
+                </a>
+                {% endif %}
+              </div>
 
-
-
+            <div class="col-md-2">
               {{ form_widget(edit_form.save, { 'label': 'Editar Constraseña','attr':{'class' : 'btn blue'} }) }}
               <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
-
-
-
-
-            <a href="{{ path('personas_index') }}">
-              <button type="button" name="cancelar" class="btn grey">Cancelar</button>
-            </a>
-          </div>
-        </div>
-      </div>
+            </div>
     {{ form_end(edit_form) }}
+    <div class="">
+      <form method="post" action="{{ path('personas_edituserAdmin')}}" class="form-inline" role="search">
+          <button type="submit" name="buscar" class="btn yellow ">Cambiar Usuario</button>
+          <input type="hidden" name="idPersona" value="{{persona.idPersona}}"/>
+      </form>
+    </div>
     </div>
   </div>
-
+</div>
+</div>
+</div>
 {% endblock %}

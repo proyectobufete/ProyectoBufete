@@ -33,8 +33,13 @@ class EstadoscivilesController extends Controller
            $estadosciviles = $em->getRepository('BufeteBundle:Estadosciviles')->findAll();
          }
 
+         $paginator = $this->get('knp_paginator');
+         $estadoscivilespg = $paginator->paginate(
+             $estadosciviles,
+             $request->query->getInt('page', 1), 5 );
+
          return $this->render('estadosciviles/index.html.twig', array(
-             'estadosciviles' => $estadosciviles,
+             'estadosciviles' => $estadoscivilespg,
          ));
      }
 
@@ -90,7 +95,7 @@ class EstadoscivilesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('estadosciviles_edit', array('idEstadocivil' => $estadoscivile->getIdestadocivil()));
+            return $this->redirectToRoute('estadosciviles_show', array('idEstadocivil' => $estadoscivile->getIdestadocivil()));
         }
 
         return $this->render('estadosciviles/edit.html.twig', array(

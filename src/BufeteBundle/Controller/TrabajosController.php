@@ -33,8 +33,13 @@ class TrabajosController extends Controller
           $trabajos = $em->getRepository('BufeteBundle:Trabajos')->findAll();
         }
 
+        $paginator = $this->get('knp_paginator');
+        $trabajospg = $paginator->paginate(
+            $trabajos,
+            $request->query->getInt('page', 1), 10 );
+
         return $this->render('trabajos/index.html.twig', array(
-            'trabajos' => $trabajos,
+            'trabajos' => $trabajospg,
         ));
     }
 
@@ -89,7 +94,7 @@ class TrabajosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('trabajos_edit', array('idTrabajo' => $trabajo->getIdtrabajo()));
+            return $this->redirectToRoute('trabajos_show', array('idTrabajo' => $trabajo->getIdtrabajo()));
         }
 
         return $this->render('trabajos/edit.html.twig', array(

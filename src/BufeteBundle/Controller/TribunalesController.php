@@ -34,8 +34,13 @@ class TribunalesController extends Controller
            $tribunales = $em->getRepository('BufeteBundle:Tribunales')->findAll();
          }
 
+         $paginator = $this->get('knp_paginator');
+         $tribunalespg = $paginator->paginate(
+             $tribunales,
+             $request->query->getInt('page', 1), 10 );
+
          return $this->render('tribunales/index.html.twig', array(
-             'tribunales' => $tribunales,
+             'tribunales' => $tribunalespg,
          ));
      }
     /**
@@ -89,7 +94,7 @@ class TribunalesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tribunales_edit', array('idTribunal' => $tribunale->getIdtribunal()));
+            return $this->redirectToRoute('tribunales_show', array('idTribunal' => $tribunale->getIdtribunal()));
         }
 
         return $this->render('tribunales/edit.html.twig', array(

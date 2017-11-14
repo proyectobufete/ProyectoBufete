@@ -43,7 +43,14 @@
           </tr>
           <tr>
             <th>Estado</th>
-            <td>{{ clinica.estadoClinica }}</td>
+            <td>
+              {% if clinica.estadoClinica == 1 %}
+                Activo
+              {% endif %}
+              {% if clinica.estadoClinica == 0 %}
+                Inactivo
+              {% endif %}
+            </td>
           </tr>
         </tbody>
       </table>

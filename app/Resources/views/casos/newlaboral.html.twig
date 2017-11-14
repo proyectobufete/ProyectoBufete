@@ -23,10 +23,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
-              {{form_label(form.fechaCaso,'Fecha')}}
-              {{form_widget(form.fechaCaso,{'attr':{'class' : 'form-control'}}) }}
-            </div>
+
             <div class="col-md-3">
               {{form_label(form.noCaso,'Número de Caso')}}
               {{form_widget(form.noCaso,{'attr':{'class' : 'form-control'}}) }}
@@ -58,8 +55,12 @@
             <div class="col-md-6">
               {{form_widget(form.idDemandante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
-            <div class="col-md-2">
-              <a href="{{ path('demandantes_new') }}"><button type="button" name="cancelar" class="btn btn-purple">Registrar</button></a>
+            <div class="col-md-3">
+              {% if is_granted('ROLE_ADMIN')%}
+                <a href="{{ path('demandantes_new') }}" class="btn btn-purple w-xs m-b-5">Registrar</a>
+              {% else %}
+                <a href="{{ path('demandantesecre_new') }}" class="btn btn-purple w-xs m-b-5">Registrar</a>
+              {% endif %}
             </div>
           </div>
           <div class="row">
