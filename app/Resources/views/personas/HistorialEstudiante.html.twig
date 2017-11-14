@@ -39,6 +39,7 @@
                           <th>Direccion Demandado</th>
                           <th>Nombre Estudiante</th>
                           <th>Estado</th>
+                          {% set idcasoEstudiante= null %}
                         </tr>
                       </thead>
                       <tbody>
@@ -72,18 +73,19 @@
                             {% endif %}
                           </td>
                           <tr>
-                            <div class="col-md-2">
-                                <div class="btn-group">
-                                  <a href="{{ path('personas_HistorialEstudianteCivil', { 'id': caso.idEstudiante.idEstudiante }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
-                                    <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Civil a PDF</i>
-                                  </a>
-                                </div>
-                            </div>
-
+                            {% set idcasoEstudiante = caso.idEstudiante.idEstudiante %}
                           </tr>
                         </tr>
                         {% endfor %}
-
+                        {% if idcasoEstudiante != null %}
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                              <a href="{{ path('personas_HistorialEstudianteCivil', { 'id': idcasoEstudiante}) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
+                                <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Civil a PDF</i>
+                              </a>
+                            </div>
+                            {% endif %}
+                        </div>
                       </tbody>
                     </table>
                     </div>
@@ -127,6 +129,7 @@
                        <th>Direccion Demandado</th>
                        <th>Nombre Estudiante</th>
                        <th>Estado</th>
+                       {% set idcasoEstudiante= null %}
                      </tr>
                    </thead>
                    <tbody>
@@ -161,16 +164,19 @@
                        </td>
                        <td>{{ caso.estadoCaso }}</td>
                        <tr>
-                         <div class="col-md-2">
-                             <div class="btn-group">
-                               <a href="{{ path('personas_HistorialEstudianteLaboral', { 'id': caso.idEstudiante.idEstudiante }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
-                                 <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Laboral a PDF</i>
-                               </a>
-                             </div>
-                         </div>
+                         {% set idcasoEstudiante = caso.idEstudiante.idEstudiante %}
                        </tr>
                      </tr>
                      {% endfor %}
+                     {% if idcasoEstudiante != null %}
+                     <div class="col-md-2">
+                         <div class="btn-group">
+                           <a href="{{ path('personas_HistorialEstudianteLaboral', { 'id': idcasoEstudiante}) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
+                             <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Laboral a PDF</i>
+                           </a>
+                         </div>
+                     </div>
+                     {% endif %}
                    </tbody>
                  </table>
                </div>
@@ -212,6 +218,8 @@
                         <th>Observaciones</th>
                         <th>Nota</th>
                         <th>Estado</th>
+                        {% set idclinc= null %}
+
                     </tr>
                   </thead>
                   <tbody>
@@ -225,16 +233,19 @@
                         <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}Inactivo{% endif %}</td>
                     </tr>
                     <tr>
-                      <div class="col-md-2">
-                        <div class="btn-group">
-                          <a href="{{ path('personas_HistorialEstudianteClinicas', { 'id': asignacionclinica.idAsignacion }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
-                            <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Laboral a PDF</i>
-                          </a>
-                        </div>
-                      </div>
+
+                      {% set idclinc = asignacionclinica.idEstudiante.idEstudiante %}
                     </tr>
                     {% endfor %}
-
+                    {% if idclinc != null %}
+                    <div class="col-md-2">
+                      <div class="btn-group">
+                        <a href="{{ path('personas_HistorialEstudianteClinicas', { 'id': idclinc }) }}" target="_blank" class="btn btn-purple w-xs m-b-5">
+                          <i class="fa fa-file-pdf-o" target="_blank" > Exportar Historial Laboral a PDF</i>
+                        </a>
+                      </div>
+                    </div>
+                    {% endif %}
                   </tbody>
                 </table>
               </div>
