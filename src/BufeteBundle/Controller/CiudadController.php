@@ -94,7 +94,7 @@ class CiudadController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ciudad_edit', array('idCiudad' => $ciudad->getIdciudad()));
+            return $this->redirectToRoute('ciudad_show', array('idCiudad' => $ciudad->getIdciudad()));
         }
 
         return $this->render('ciudad/edit.html.twig', array(

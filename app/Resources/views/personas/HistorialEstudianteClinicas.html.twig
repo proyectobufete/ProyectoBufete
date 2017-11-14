@@ -30,28 +30,35 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
                 <table class="table table-bordered ">
                   <thead>
                     <tr role="row" class="">
+                      <th>Nombre Clínica</th>
+                      <th>Tipo Clínica</th>
+                      <th>Estudiante</th>
                       <th>Fecha Asignacion</th>
                       <th>Fecha Fin</th>
-                      <th>Demandante</th>
-                      <th>Dirección Demandante</th>
-                      <th>Nombre de demandado</th>
-                      <th>Direccion Demandado</th>
-                      <th>Nombre Estudiante</th>
                       <th>Estado</th>
+                      <th>Observaciones</th>
+                      <th>Nota Clinica</th>
+                      <th>Asesor</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for asignacionclinica in clinicas %}
                     <tr>
-                        <td>{{asignacionclinica.fechaAsignacion}}</td>
-                        <td>{{asignacionclinica.fechafin}}</td>
-                        <td>{{asignacionclinica.fecha}}</td>
                         <td>{{asignacionclinica.idClinica}}</td>
+                        <td>{{asignacionclinica.idClinica.idTipo}}</td>
                         <td>{{asignacionclinica.idEstudiante}}</td>
-                        <td>{{asignacionclinica.idClinica.idPersona}}</td>
-                        <td>{{ asignacionclinica.observacionesClinica }}</td>
+                        <td>{{asignacionclinica.idClinica.fechaAsignacion|localizeddate('long', 'none', 'es')}}</td>
+                        <td>{{asignacionclinica.idClinica.fechafin|localizeddate('long', 'none', 'es')}}</td>
+                        <td>
+                          {% if asignacionclinica.idClinica.estadoClinica == 1 %}
+                              Activo
+                          {% elseif asignacionclinica.idClinica.estadoClinica == 0 %}
+                              Inactivo
+                          {% endif %}
+                        </td>
+                        <td>{{asignacionclinica.idClinica.Observaciones}}</td>
                         <td>{{ asignacionclinica.notaClinica }}</td>
-                        <td>{% if asignacionclinica.estadoAsignacionest %}Activo{% else %}No{% endif %}</td>
+                        <td>{{asignacionclinica.idClinica.idPersona}}</td>
                     </tr>
                     <tr>
 

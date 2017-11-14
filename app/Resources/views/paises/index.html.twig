@@ -53,7 +53,7 @@
                 <tr>
                   <td>{{ paise.pais }}</td>
                   <td>
-                    {% if paise.estadoPais %}Activo{% else %}No{% endif %}
+                    {% if paise.estadoPais %}Activo{% else %}Inactivo{% endif %}
                   </td>
                   <td>
                     <a href="{{ path('paises_show', { 'idPais': paise.idPais }) }}" class="btn yellow">Ver</a>

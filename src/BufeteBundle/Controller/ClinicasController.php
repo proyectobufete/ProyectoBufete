@@ -129,7 +129,7 @@ class ClinicasController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('clinicas_edit', array('idClinica' => $clinica->getIdclinica()));
+            return $this->redirectToRoute('clinicas_show', array('idClinica' => $clinica->getIdclinica()));
         }
 
         return $this->render('clinicas/edit.html.twig', array(

@@ -51,7 +51,7 @@
                 <tr>
                   <td>{{ estadoscivile.estadocivil }}</td>
                   <td>
-                    {% if estadoscivile.estadoEstadocivil %}Activo{% else %}No{% endif %}
+                    {% if estadoscivile.estadoEstadocivil %}Activo{% else %}Inactivo{% endif %}
                   </td>
                   <td>
                     <a href="{{ path('estadosciviles_show', { 'idEstadocivil': estadoscivile.idEstadocivil }) }}" class="btn yellow">Ver</a>

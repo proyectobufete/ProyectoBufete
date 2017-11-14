@@ -83,7 +83,7 @@ class BufetesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('bufetes_edit', array('idBufete' => $bufete->getIdbufete()));
+            return $this->redirectToRoute('bufetes_show', array('idBufete' => $bufete->getIdbufete()));
         }
 
         return $this->render('bufetes/edit.html.twig', array(

@@ -44,7 +44,7 @@
           {% for tribunale in tribunales %}
               <tr>
                   <td>{{ tribunale.tribunal }}</td>
-                  <td>{% if tribunale.estadoTribunal %}Activo{% else %}No{% endif %}</td>
+                  <td>{% if tribunale.estadoTribunal %}Activo{% else %}Inactivo{% endif %}</td>
                   <td>
                     <a href="{{ path('tribunales_show', { 'idTribunal': tribunale.idTribunal }) }}" class="btn yellow" >Ver</a>
                     <a href="{{ path('tribunales_edit', { 'idTribunal': tribunale.idTribunal }) }}" class="btn blue ">Editar</a>

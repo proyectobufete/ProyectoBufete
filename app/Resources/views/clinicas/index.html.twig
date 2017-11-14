@@ -61,7 +61,14 @@
             <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
             <td>{{ clinica.idPersona }}</td>
             <td>{{ clinica.observaciones }}</td>
-            <td>{{ clinica.estadoClinica }}</td>
+            <td>
+              {% if clinica.estadoClinica == 1 %}
+                Activo
+              {% endif %}
+              {% if clinica.estadoClinica == 0 %}
+                Inactivo
+              {% endif %}
+            </td>
               <td>
                   <a href="{{ path('clinicas_show', { 'idClinica': clinica.idClinica }) }}" class="btn yellow" >Ver</a>
                   <a href="{{ path('clinicas_edit', { 'idClinica': clinica.idClinica }) }}" class="btn blue">Editar</a>
