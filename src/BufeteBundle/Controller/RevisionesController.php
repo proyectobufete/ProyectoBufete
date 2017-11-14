@@ -322,11 +322,13 @@ class RevisionesController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
+
+
+
           $revisione->setTituloEntrega($editForm->get("tituloEntrega")->getData());
           $revisione->setComentarios($editForm->get("comentarios")->getData());
 
           $file =$editForm['rutaArchivo']->getData();
-
 
 
           if (!empty($file) && $file!=null)
@@ -350,9 +352,9 @@ class RevisionesController extends Controller
                 $revisione->setRutaArchivo($fileName);
               }
           }
-          else {
-            $revisione->setRutaArchivo(null);
-          }
+
+          $em->persist($revisione);
+          $flush = $em->flush();
 
           return $this->redirectToRoute('revisiones_showInforme',
            [
