@@ -52,7 +52,7 @@ class AvisosController extends Controller
         $params = array();
         $stmt->execute($params);
 
-        $buf = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $buf = $stmt->fetchAll();
 
 
         $pdf="prueba.pdf";
@@ -83,7 +83,7 @@ class AvisosController extends Controller
               //  die();
                 $params = array();
                 $stmt->execute($params);
-                $buf = $stmt->fetchAll(PDO::FETCH_OBJ);
+                $buf = $stmt->fetchAll();
                 return $this->render('BufeteBundle:Avisos:add.html.twig', array(
                 "av"=>$buf, "form"=>$form->createView(),"pdf"=>$file_name, "flag"=>$bandera, "id"=>$caso
             ));
