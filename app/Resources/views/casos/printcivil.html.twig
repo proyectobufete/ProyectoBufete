@@ -26,7 +26,7 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
             </div>
               <div class="col-md-9 col-sm-9 col-xs-9">
               <label for="" class=" control-label"><h5><b>Lugar y Fecha</b></h5></label>
-                <input   type="text" style="font-size:15px;"  class="form-control  " value="{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{(caso.fechaCaso|localizeddate('long', 'none', 'mx'))}}{% endif %}">
+                <input   type="text" style="font-size:15px;"  class="form-control  " value="{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{( caso.fechaCaso|localizeddate('long', 'none', 'mx'))}}{% endif %}">
               </div>
           </div>
           <div class="row">
