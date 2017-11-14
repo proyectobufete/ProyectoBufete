@@ -55,21 +55,22 @@
         <div class="form-actions">
           <div class="row">
             <div class="col-md-offset-4 col-md-9">
-              <button type="submit" name="Create" class="btn green">Editar</button>
+              <div class="col-md-1">
+                <button type="submit" name="Create" class="btn green">Editar</button>
+              </div>
 
-            </div>
-          </div>
-        </div>
         {{ form_end(edit_form) }}
 
 
         <tr>
           <form method="post" action="{{ path('revisiones_indexLinkCaso')}}" class="form-inline" role="search">
-              <button type="submit" name="buscar" class="btn btn-default w-xs m-b-5">Regresar</button>
+              <button type="submit" name="buscar" class="btn grey">Cancelar</button>
               <input type="hidden" name="idCaso" value="{{revisione.idCaso.idCaso}}"/>
           </form>
         </tr>
-
+      </div>
+    </div>
+    </div>
       </div>
     </div>
 

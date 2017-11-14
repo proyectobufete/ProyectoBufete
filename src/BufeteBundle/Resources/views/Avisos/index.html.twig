@@ -24,10 +24,10 @@
   <br/>
       {% endif %}
 
-      <a title="Clic para agregar un nuevo aviso" href="{{path("avisos_buscar")}}" class="btn btn-danger">Añadir Notificación</a>
+      <a title="Clic para agregar un nuevo aviso" href="{{path("avisos_buscar")}}" class="btn btn-success">Añadir Notificación</a>
 
           {% if flag == 1%}
-            <a title="Imprimir Informe PDF" href="{{path("avisos_pdf")}}" target="_blank"  class="btn btn-success">Imprimir</a>
+            <a title="Imprimir Informe PDF" href="{{path("avisos_pdf")}}" target="_blank"  class="btn btn-default">Imprimir</a>
 
           {% endif %}
 
@@ -36,7 +36,7 @@
              {% set break = false %}
             {% for av in avisos if not break%}
 
-              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfest", {"estu":av.carne_estudiante})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfest", {"estu":av.carne_estudiante})}}" target="_blank" class="btn btn-default">Imprimir</a>
               {% set break = true %}
               {% endfor %}
 
@@ -46,7 +46,7 @@
           {% set break = false %}
             {% for av in avisos if not break%}
 
-              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfcaso", {"caso":av.no_caso})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfcaso", {"caso":av.no_caso})}}" target="_blank" class="btn btn-default">Imprimir</a>
                {% set break = true %}
               {% endfor %}
           {% endif %}
@@ -54,7 +54,7 @@
           {% if flag == 4%}
               {% set break = false %}
             {% for av in avisos if not break%}
-              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfec", {"fec1":fec1, "fec2":fec2})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfec", {"fec1":fec1, "fec2":fec2})}}" target="_blank" class="btn btn-default">Imprimir</a>
   {% set break = true %}
               {% endfor %}
           {% endif %}
@@ -63,7 +63,7 @@
            {% set break = false %}
             {% for av in avisos if not break%}
 
-              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfdema", {"dem":av.nombre_demandante})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfdema", {"dem":av.nombre_demandante})}}" target="_blank" class="btn btn-default">Imprimir</a>
 
                {% set break = true %}
               {% endfor %}
@@ -72,14 +72,14 @@
           {% if flag == 6%}
                {% set break = false %}
             {% for av in avisos if not break%}
-              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfdemdo", {"demo":av.nombre_demandado})}}" target="_blank" class="btn btn-success">Imprimir</a>
+              <a title="Imprimir Informe PDF" href="{{path("avisos_pdfdemdo", {"demo":av.nombre_demandado})}}" target="_blank" class="btn btn-default">Imprimir</a>
                {% set break = true %}
               {% endfor %}
 
           {% endif %}
 
           {% if flag == 7%}
-            <a title="Imprimir Informe PDF" href="{{path("avisos_pdf")}}" class="btn btn-success">Imprimir</a>
+            <a title="Imprimir Informe PDF" href="{{path("avisos_pdf")}}" class="btn btn-default">Imprimir</a>
           {% endif %}
   <hr/>
 
@@ -126,7 +126,7 @@
               {% endfor %}
           </table>
           {% if flag !=1 %}
-          <a href="{{path('avisos_index')}}" title="Pulsa para ir al Menú Principal" class="btn btn-danger glyphicon glyphicon-arrow-left"> Salir</a>
+          <a href="{{path('avisos_index')}}" title="Pulsa para ir al Menú Principal" class="btn btn-primary glyphicon glyphicon-arrow-left"> Salir</a>
           {% endif %}
           {% endif %}
       </div>
