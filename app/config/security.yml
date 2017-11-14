@@ -76,7 +76,12 @@ security:
         - { path: ^/avisos/avisos/form, roles: ROLE_SECRETARIO}
         - { path: ^/avisos/avisos/del/([0-9]+), roles: ROLE_SECRETARIO}
 
-        - { path: ^/demandantes, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/index, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/newdemandante, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/([0-9]+)/show, roles: ROLE_SECRETARIO}
+        - { path: ^/demandantes/([0-9]+)/editar, roles: ROLE_SECRETARIO}
+
+        - { path: ^/demandantes/new, roles: ROLE_ADMIN}
 
         - { path: ^/casos/civiles, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
         - { path: ^/casos/newcivil, roles: [ROLE_SECRETARIO,ROLE_DIRECTOR]}
