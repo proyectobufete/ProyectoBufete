@@ -36,13 +36,17 @@
         </div>
         <div class="form-actions">
           <div class="row">
-            <div class="col-md-offset-3 col-md-9">
-              <button type="submit" name="Create" class="btn green">Transferir</button>
+            <div class="col-md-offset-3 ">
+              <div class="col-md-1 col-lg-1 col-xs-1">
+                  <button type="submit" name="Create" class="btn green">Transferir</button>
+              </div>
               {{ form_end(form) }}
-              <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
-                  <button type="submit" name="buscar" class="btn grey">Cancelar</button>
-                  <input type="hidden" name="id" value="{{casocivil.idCaso}}"/>
-              </form>
+              <div class="col-md-2 col-lg-2 col-xs-2">
+                <form method="post" action="{{ path('casos_showcivil')}}" class="form-inline" role="search">
+                    <button type="submit" name="buscar" class="btn grey">Cancelar</button>
+                    <input type="hidden" name="id" value="{{casocivil.idCaso}}"/>
+                </form>
+              </div>
             </div>
           </div>
         </div>
