@@ -755,7 +755,7 @@ class AvisosController extends Controller
     				inner join `tribunales` as trib on (trib.Id_Tribunal=c.Id_Tribunal)
     				inner join `personas` as ase on(ase.Id_Persona=c.Id_Persona)
     				inner join `personas` as estu on(estu.Id_Persona=c.Id_Estudiante)
-    				inner join `tipoasunto`as asunto on(asunto.Id_TipoAsunto=c.Id_TipoAsunto) WHERE No_Caso='$id'");
+    				inner join `TipoAsunto`as asunto on(asunto.Id_TipoAsunto=c.Id_TipoAsunto) WHERE No_Caso='$id'");
                     $stmt = $db->prepare($query);
                     $params = array();
                     $stmt->execute($params);
@@ -833,22 +833,29 @@ class AvisosController extends Controller
         }
 
         public function estusAsesorAction($id_persona)
-        {
-                    $em = $this->getDoctrine()->getEntityManager();
-                    $db = $em->getConnection();
-                    $query=("SELECT No_Caso as Caso,estu.Nombre_Persona as Estudiante,es.Id_Estudiante,es.Carne_estudiante as Carne
-    				FROM `casos` as c
-    				inner join `personas` AS estu on(estu.id_persona=c.id_estudiante)
-    				inner join `personas` AS ases on(ases.id_persona=c.id_persona)
-    				inner join `estudiantes` as es on(es.id_estudiante=c.id_estudiante)
-    				WHERE ases.role='ROLE_ASESOR' AND  c.id_persona='$id_persona' Group by es.Carne_estudiante  ");
+    {
+                $em = $this->getDoctrine()->getEntityManager();
+                $db = $em->getConnection();
 
-                    $stmt = $db->prepare($query);
-                    $params = array();
-                    $stmt->execute($params);
-                    $buf = $stmt->fetchAll(PDO::FETCH_OBJ);
-                    return new JsonResponse($buf);
-        }
+
+
+
+
+        $query=("SELECT No_Caso as Casos,estu.Nombre_Persona as Estudiante,ases.Nombre_Persona as Asesor,es.Id_Estudiante,es.Carne_Estudiante as Carne
+		FROM casos as c
+		INNER JOIN personas as estu on (estu.Id_Persona=c.Id_Estudiante)
+		INNER JOIN personas as ases on(ases.Id_Persona=c.Id_Persona)
+        inner join estudiantes as es on(es.Id_Estudiante=c.Id_Estudiante)
+		WHERE ases.role='ROLE_ASESOR' AND c.Id_Persona='$id_persona' Limit 1");
+
+
+
+                $stmt = $db->prepare($query);
+                $params = array();
+                $stmt->execute($params);
+                $buf = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return new JsonResponse($buf);
+    }
 
         public function notifAsesorAction($id_persona)
         {
